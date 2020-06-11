@@ -1,3 +1,3 @@
 from xendit.models import *
 
-api_key = ''
+api_key = ""
