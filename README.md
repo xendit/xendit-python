@@ -33,4 +33,4 @@ To start developing on this repository, you need to have Poetry installed for pa
 
 Make sure the the code passes all tests.
 
-```pytest```
+`pytest`
