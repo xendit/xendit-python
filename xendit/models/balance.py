@@ -12,11 +12,9 @@ class Balance:
         return str({"balance": self.balance})
 
     @staticmethod
-    def get(account_type):
+    def get(account_type="CASH"):
         url = f"/balance?account_type={account_type}"
         resp = APIRequestor.get(url)
-        print("resp:", resp)
-        print("resp status code:", resp.status_code)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)
         else:
