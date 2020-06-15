@@ -2,10 +2,14 @@ import xendit
 
 
 def ask_input():
-    print("Please output one of the number below")
+    print("Please type one of the number below")
     print("0. Exit")
     print("1. Balance")
-    return input()
+    try:
+        return int(input())
+    except ValueError:
+        print("Invalid input. Please type a number")
+        return ask_input()
 
 
 def balance_example():
@@ -15,11 +19,10 @@ def balance_example():
 
 if __name__ == "__main__":
     xendit.api_key = input("Please paste your SECRET KEY here: ")
-    user_choice = int(ask_input())
+    user_choice = ask_input()
     while user_choice != 0:
-        print(user_choice)
         if user_choice == 1:
             balance_example()
         else:
             print("Wrong input, please output number in range [0,1]")
-        ask_input()
+        user_choice = ask_input()

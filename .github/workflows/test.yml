@@ -18,5 +18,4 @@ jobs:
       with:
         python_version: 3.7
         poetry_version: 1.0
-        working_directory: ./tests
         args: run python -m pytest --cov=src --cov-branch
