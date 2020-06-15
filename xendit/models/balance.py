@@ -7,7 +7,6 @@ class Balance:
 
     def __init__(self, xendit_response):
         self.balance = xendit_response["balance"]
-        print(self.balance)
 
     def __repr__(self):
         return str({"balance": self.balance})
@@ -16,6 +15,8 @@ class Balance:
     def get(account_type):
         url = f"/balance?account_type={account_type}"
         resp = APIRequestor.get(url)
+        print("resp:", resp)
+        print("resp status code:", resp.status_code)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)
         else:
