@@ -1,17 +1,22 @@
-from xendit.apirequestor import APIRequestor
+from xendit.api_requestor import APIRequestor
+from xendit.xendit_error import XenditError
 
 
 class Balance:
     accepted_account_type = ["CASH", "HOLDING", "TAX"]
 
-    @staticmethod
-    def get(account_type):
-        Balance._validate_get_params(account_type)
-        url = f"/balance?account_type={account_type}"
-        return APIRequestor.get(url)
+    def __init__(self, xendit_response):
+        self.balance = xendit_response["balance"]
+        print(self.balance)
+
+    def __repr__(self):
+        return str({"balance": self.balance})
 
     @staticmethod
-    def _validate_get_params(account_type):
-        if account_type not in Balance.accepted_account_type:
-            msg = f"Account type {account_type} is invalid. Available types: CASH, TAX, HOLDING"
-            raise ValueError(msg)
+    def get(account_type):
+        url = f"/balance?account_type={account_type}"
+        resp = APIRequestor.get(url)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return Balance(resp.body)
+        else:
+            raise XenditError(resp)
