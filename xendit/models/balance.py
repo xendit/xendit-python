@@ -13,6 +13,11 @@ class Balance:
 
     @staticmethod
     def get(account_type="CASH"):
+        """
+        URL: /balance
+        Method: GET
+        Params: Account Type (optional)
+        """
         url = f"/balance?account_type={account_type}"
         resp = APIRequestor.get(url)
         if resp.status_code >= 200 and resp.status_code < 300:
