@@ -10,7 +10,7 @@ class APIRequestor:
         url = xendit._base_url + url
         headers = APIRequestor._get_headers()
         resp = requests.get(url, headers=headers)
-        return APIRequestor._parse_response(resp)
+        return XenditResponse(resp)
 
     @staticmethod
     def _get_headers():
@@ -26,7 +26,3 @@ class APIRequestor:
         auth_pair = xendit.api_key + ":"
         auth_base64 = base64.b64encode(auth_pair.encode())
         return auth_base64.decode("utf-8")
-
-    @staticmethod
-    def _parse_response(resp):
-        return XenditResponse(resp)
