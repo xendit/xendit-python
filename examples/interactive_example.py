@@ -23,14 +23,16 @@ def get_balance(params):
     except xendit.XenditError as e:
         print("Error status code:", e.status_code)
         print("Error message:", e)
+    except ValueError as e:
+        print("Error message:", e)
 
 
 def balance_example():
-    print('Running Balance example using "CASH" parameter:')
-    get_balance("CASH")
+    print("Running xendit.Balance.get(xendit.Balance.AccountType.CASH):")
+    get_balance(xendit.Balance.AccountType.CASH)
 
-    print('Running Balance example using "money" parameter:')
-    get_balance("money")
+    print('Running xendit.Balance.get("CASH"):')
+    get_balance("CASH")
 
 
 if __name__ == "__main__":
