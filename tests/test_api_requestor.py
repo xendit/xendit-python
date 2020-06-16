@@ -10,4 +10,4 @@ def test_get_call_correct_api():
 
     responses.add(responses.GET, url, json={"balance": 1000})
 
-    APIRequestor.get(section)
+    APIRequestor.get(section, base_url=base_url)

@@ -1,12 +1,12 @@
-from xendit.api_requestor import APIRequestor
-from xendit.xendit_error import XenditError
 from enum import Enum
+from xendit.xendit_error import XenditError
+from xendit.api_requestor import APIRequestor
 
 
 class Balance:
     class AccountType(Enum):
-        CASH = ("CASH",)
-        HOLDING = ("HOLDING",)
+        CASH = "CASH"
+        HOLDING = "HOLDING"
         TAX = "TAX"
 
     def __init__(self, xendit_response):
@@ -15,16 +15,19 @@ class Balance:
     def __repr__(self):
         return str({"balance": self.balance})
 
+    def temp(self):
+        pass
+
     @staticmethod
-    def get(account_type=AccountType.CASH):
+    def get(account_type=AccountType.CASH, *args, **kwargs):
         """
         URL: /balance
         Method: GET
         Params: Account Type (optional)
         """
-        Balance._parse_value(account_type)
+        account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
-        resp = APIRequestor.get(url)
+        resp = APIRequestor.get(url, *args, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)
         else:

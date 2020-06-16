@@ -1,5 +1,5 @@
 import pytest
-from xendit import Balance, XenditError
+from xendit import XenditError, Xendit
 from xendit.api_requestor import APIRequestor
 
 
@@ -21,12 +21,16 @@ def substitute_incorrect_get(mocker):
 
 
 def test_return_balance_on_correct_params(mocker, substitute_correct_get):
+    xendit = Xendit(api_key="mock_key")
+    Balance = xendit.Balance
     mocker.patch.object(APIRequestor, "get")
     APIRequestor.get.return_value = substitute_correct_get
     assert Balance.get(Balance.AccountType.CASH).balance == 1000
 
 
 def test_raise_xendit_error_on_response_error(mocker, substitute_incorrect_get):
+    xendit = Xendit(api_key="mock_key")
+    Balance = xendit.Balance
     mocker.patch.object(APIRequestor, "get")
     APIRequestor.get.return_value = substitute_incorrect_get
     with pytest.raises(XenditError):

@@ -4,3 +4,4 @@ ignore = E501, W503
 max-line-length = 88
 per-file-ignores =
     xendit/__init__.py: F401, F403, E402
+    xendit/models/__init__.py: F401
