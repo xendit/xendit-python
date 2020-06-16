@@ -40,17 +40,31 @@ To use the package, run ```pip install xendit-python```
 The `account_type` parameter is optional.
 
 ```python
+from xendit import Balance
 Balance.get()
 
-Balance.get(account_type)
+Balance.get(Balance.AccountType)
 ```
 
 Usage example:
 
 ```python
-Balance balance = Balance.get("CASH")
+from xendit import Balance
+Balance balance = Balance.get(Balance.AccountType.CASH)
+
+# To get the JSON view
 print(balance)
+
+# To get only the value
+print(balance.balance)
 ``` 
+
+Will return
+
+```
+{'balance': 1000000000}
+1000000000
+```
 
 ## Contributing
 
