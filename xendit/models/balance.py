@@ -22,18 +22,17 @@ class Balance:
         Method: GET
         Params: Account Type (optional)
         """
-        if isinstance(account_type, Balance.AccountType):
-            return Balance._process_get_balance(account_type.name)
-        else:
-            raise ValueError(
-                "Please input the correct params with type Balance.AccountType"
-            )
-
-    @staticmethod
-    def _process_get_balance(account_type):
+        Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
         resp = APIRequestor.get(url)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)
         else:
             raise XenditError(resp)
+
+    @staticmethod
+    def _parse_value(account_type):
+        try:
+            return account_type.name
+        except AttributeError:
+            return account_type
