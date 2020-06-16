@@ -1,13 +1,14 @@
 import requests
 import base64
+import xendit
 from xendit.xendit_response import XenditResponse
 
 
 class APIRequestor:
     @staticmethod
     def get(url, *args, **kwargs):
-        api_key = kwargs.get("api_key", "")
-        url = kwargs.get("base_url", "") + url
+        api_key = kwargs.get("api_key", xendit.api_key)
+        url = kwargs.get("base_url", xendit.base_url) + url
         headers = APIRequestor._get_headers(api_key)
         resp = requests.get(url, headers=headers)
         return XenditResponse(resp)

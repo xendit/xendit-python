@@ -15,9 +15,6 @@ class Balance:
     def __repr__(self):
         return str({"balance": self.balance})
 
-    def temp(self):
-        pass
-
     @staticmethod
     def get(account_type=AccountType.CASH, *args, **kwargs):
         """
