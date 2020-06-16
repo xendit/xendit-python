@@ -13,6 +13,9 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Requirements](#requirements)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [API Key](#api-key)
+      - [Global Variable](#global-variable)
+      - [Use Xendit Instance](#use-xendit-instance)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
   - [Contributing](#contributing)
@@ -32,6 +35,31 @@ Python 3.7 or later
 To use the package, run ```pip install xendit-python```
 
 ## Usage
+
+### API Key
+
+To add API Key, you have 2 option: Use global variable or use Xendit instance
+
+#### Global Variable
+
+```python
+import xendit
+xendit.api_key = "test-key123"
+
+# Then just run each class as static
+from xendit import Balance
+Balance.get()
+```
+
+#### Use Xendit Instance
+```python
+import xendit
+x = xendit.Xendit(api_key="test-key123")
+
+# Then access each class from x attribute
+b = x.Balance
+b.get()
+```
 
 ### Balance Service
 
