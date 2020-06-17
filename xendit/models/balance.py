@@ -4,13 +4,24 @@ from xendit._api_requestor import _APIRequestor
 
 
 class Balance:
-    """ Balance class (API Reference: Balance)
+    """Balance class (API Reference: Balance)
+
+    Related Enums:
+    - Balance.AccountType
 
     Static Methods:
-    - Balance.get (API Reference: Balance/Get Balance)
+    - Balance.get (API Reference: Get Balance)
     """
 
     class AccountType(Enum):
+        """Account Type for Get Balance
+
+        Member:
+        - AccountType.CASH
+        - AccountType.HOLDING
+        - AccountType.TAX
+        """
+
         CASH = "CASH"
         HOLDING = "HOLDING"
         TAX = "TAX"
@@ -25,8 +36,8 @@ class Balance:
     def get(account_type=AccountType.CASH, **kwargs):
         """Send GET request to retrieve balance (API Reference: Balance/Get Balance)
 
-        Params:
-        - account_type: Balance.AccountType (optional)
+        Optional Params:
+        - account_type: Balance.AccountType
 
         Returns:
         - Balance class
