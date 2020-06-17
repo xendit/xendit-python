@@ -1,5 +1,5 @@
 class XenditResponse:
-    def __init__(self, response):
-        self.status_code = response.status_code
-        self.headers = response.headers
-        self.body = response.json()
+    def __init__(self, status_code, headers, body):
+        self.status_code = status_code
+        self.headers = headers
+        self.body = body
