@@ -122,7 +122,7 @@ python -m pytest tests/ --cov=xendit/
 
 #### Creating Custom HTTP Client
 
-To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
+To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/_xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
 
 ```python
 import xendit

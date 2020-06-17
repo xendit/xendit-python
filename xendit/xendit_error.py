@@ -1,6 +1,5 @@
 class XenditError(Exception):
     """Error that will be given when status code != 200.
-
     """
 
     def __init__(self, xendit_response):

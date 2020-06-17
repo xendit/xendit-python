@@ -1,4 +1,4 @@
-from xendit.xendit_param_injector import XenditParamInjector
+from xendit._xendit_param_injector import _XenditParamInjector
 
 
 class SampleMockClass:
@@ -12,7 +12,7 @@ def test_method_correctly_injected(mocker):
     base_url = "https://mock-url.xendit.co"
     http_client = mocker.Mock()
 
-    MockInjectedClass = XenditParamInjector(
+    MockInjectedClass = _XenditParamInjector(
         SampleMockClass, api_key=api_key, base_url=base_url, http_client=http_client
     )
 

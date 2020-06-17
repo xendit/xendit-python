@@ -2,9 +2,9 @@ import base64
 import pytest
 import xendit
 
-from xendit.api_requestor import APIRequestor
+from xendit._api_requestor import _APIRequestor
 from xendit.network import RequestMethod
-from xendit.network import XenditHTTPClient
+from xendit.network import _XenditHTTPClient
 
 
 def generate_auth(api_key):
@@ -19,9 +19,9 @@ def substitute_http_client_request(method, url, **kwargs):
 
 @pytest.fixture
 def mocked_http_client(mocker):
-    mocker.patch.object(XenditHTTPClient, "request")
-    XenditHTTPClient.request = substitute_http_client_request
-    return XenditHTTPClient
+    mocker.patch.object(_XenditHTTPClient, "request")
+    _XenditHTTPClient.request = substitute_http_client_request
+    return _XenditHTTPClient
 
 
 @pytest.fixture
@@ -37,7 +37,7 @@ def default_params(mocked_http_client):
 def test_get_call_get_method(default_params):
     api_key, base_url, section, http_client, url = default_params
 
-    method_received, url_received, kwargs_received = APIRequestor.get(
+    method_received, url_received, kwargs_received = _APIRequestor.get(
         section, api_key=api_key, base_url=base_url, http_client=http_client,
     )
     assert method_received == RequestMethod.GET
@@ -46,7 +46,7 @@ def test_get_call_get_method(default_params):
 def test_post_call_post_method(default_params):
     api_key, base_url, section, http_client, url = default_params
 
-    method_received, url_received, kwargs_received = APIRequestor.post(
+    method_received, url_received, kwargs_received = _APIRequestor.post(
         section, api_key=api_key, base_url=base_url, http_client=http_client,
     )
     assert method_received == RequestMethod.POST
@@ -55,7 +55,7 @@ def test_post_call_post_method(default_params):
 def test_patch_call_patch_method(default_params):
     api_key, base_url, section, http_client, url = default_params
 
-    method_received, url_received, kwargs_received = APIRequestor.patch(
+    method_received, url_received, kwargs_received = _APIRequestor.patch(
         section, api_key=api_key, base_url=base_url, http_client=http_client,
     )
     assert method_received == RequestMethod.PATCH
@@ -64,7 +64,7 @@ def test_patch_call_patch_method(default_params):
 def test_request_send_correct_params_on_given_params(default_params):
     api_key, base_url, section, http_client, url = default_params
 
-    method_received, url_received, kwargs_received = APIRequestor._request(
+    method_received, url_received, kwargs_received = _APIRequestor._request(
         RequestMethod.GET,
         section,
         api_key=api_key,
@@ -80,7 +80,7 @@ def test_request_send_default_config_on_empty_params(default_params):
     xendit.api_key = api_key
     xendit.base_url = base_url
 
-    method_received, url_received, kwargs_received = APIRequestor._request(
+    method_received, url_received, kwargs_received = _APIRequestor._request(
         RequestMethod.GET, section, http_client=http_client,
     )
     assert url_received == url
@@ -90,7 +90,7 @@ def test_request_send_default_config_on_empty_params(default_params):
 def test_request_header_have_custom_header_when_inserted(default_params):
     api_key, base_url, section, http_client, url = default_params
 
-    method_received, url_received, kwargs_received = APIRequestor._request(
+    method_received, url_received, kwargs_received = _APIRequestor._request(
         RequestMethod.POST,
         section,
         api_key=api_key,

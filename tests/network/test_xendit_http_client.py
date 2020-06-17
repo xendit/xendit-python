@@ -1,6 +1,6 @@
 import responses
 from xendit.network import RequestMethod
-from xendit.network import XenditHTTPClient
+from xendit.network import _XenditHTTPClient
 
 
 @responses.activate
@@ -8,4 +8,4 @@ def test_request_correct_params():
     url = "https://mock-url.xendit.co"
     responses.add("GET", url, body="{}")
 
-    XenditHTTPClient.request(RequestMethod.GET, url)
+    _XenditHTTPClient.request(RequestMethod.GET, url)

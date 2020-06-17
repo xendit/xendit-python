@@ -1,6 +1,6 @@
 from enum import Enum
 from xendit.xendit_error import XenditError
-from xendit.api_requestor import APIRequestor
+from xendit._api_requestor import _APIRequestor
 
 
 class Balance:
@@ -36,7 +36,7 @@ class Balance:
         """
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
-        resp = APIRequestor.get(url, **kwargs)
+        resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)
         else:

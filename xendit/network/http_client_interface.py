@@ -3,6 +3,9 @@ from . import RequestMethod, XenditResponse
 
 
 class HTTPClientInterface(metaclass=abc.ABCMeta):
+    """Interface for HTTP Client. Inject it to your xendit instance to use it
+    """
+
     @staticmethod
     def request(method: RequestMethod, url, **kwargs) -> XenditResponse:
         """
