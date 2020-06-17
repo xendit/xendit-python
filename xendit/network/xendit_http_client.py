@@ -3,6 +3,10 @@ from . import HTTPClientInterface, RequestMethod, XenditResponse
 
 
 class XenditHTTPClient(HTTPClientInterface):
+    """Xendit wrapper on responses library that adhere to HTTPClientInterface
+
+    """
+
     @staticmethod
     def request(method, url, **kwargs):
         method_name = XenditHTTPClient._parse_request_method(method)

@@ -4,6 +4,9 @@ from .network import HTTPClientInterface, XenditHTTPClient
 
 
 class Xendit:
+    """Xendit instance. Initialize this with your API Key
+    """
+
     def __init__(
         self,
         api_key,

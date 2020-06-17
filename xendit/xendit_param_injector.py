@@ -11,12 +11,11 @@ class XenditParamInjector:
         self.__dict__.update(injected_class.__dict__)
 
     def __getattribute__(self, name):
-        """
-        We need to check whether the passed attribute/method are for APIKeyInjector or the injected class static method.
-        The injected class static method are stored on `static_method_list`, so we can check whether name is contained inside it.
-        To handle infinite loop with attribute checking (Because every attribute access will arrive here),
-        we need to also check whether `name` equals to `static_method_list`.
-        """
+        # We need to check whether the passed attribute/method are for APIKeyInjector or the injected class static method.
+        # The injected class static method are stored on `static_method_list`, so we can check whether name is contained inside it.
+        # To handle infinite loop with attribute checking (Because every attribute access will arrive here),
+        # we need to also check whether `name` equals to `static_method_list`.
+
         if name == "static_method_list" or name not in self.static_method_list:
             attr = object.__getattribute__(self, name)
             return attr

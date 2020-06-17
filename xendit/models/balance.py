@@ -4,6 +4,12 @@ from xendit.api_requestor import APIRequestor
 
 
 class Balance:
+    """ Balance class (API Reference: Balance)
+
+    Static Methods:
+    - Balance.get (API Reference: Balance/Get Balance)
+    """
+
     class AccountType(Enum):
         CASH = "CASH"
         HOLDING = "HOLDING"
@@ -16,16 +22,21 @@ class Balance:
         return str({"balance": self.balance})
 
     @staticmethod
-    def get(account_type=AccountType.CASH, *args, **kwargs):
-        """
-        URL: /balance
-        Method: GET
+    def get(account_type=AccountType.CASH, **kwargs):
+        """Send GET request to retrieve balance (API Reference: Balance/Get Balance)
+
         Params:
         - account_type: Balance.AccountType (optional)
+
+        Returns:
+        - Balance class
+
+        Raises:
+        - XenditError Exception
         """
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
-        resp = APIRequestor.get(url, *args, **kwargs)
+        resp = APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)
         else:
