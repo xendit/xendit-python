@@ -40,7 +40,6 @@ def test_get_call_get_method(default_params):
     method_received, url_received, kwargs_received = APIRequestor.get(
         section, api_key=api_key, base_url=base_url, http_client=http_client,
     )
-    print(kwargs_received)
     assert method_received == RequestMethod.GET
 
 
@@ -86,3 +85,20 @@ def test_request_send_default_config_on_empty_params(default_params):
     )
     assert url_received == url
     assert kwargs_received["headers"]["Authorization"] == generate_auth(api_key)
+
+
+def test_request_header_have_custom_header_when_inserted(default_params):
+    api_key, base_url, section, http_client, url = default_params
+
+    method_received, url_received, kwargs_received = APIRequestor._request(
+        RequestMethod.POST,
+        section,
+        api_key=api_key,
+        base_url=base_url,
+        http_client=http_client,
+        x_idempotency_key="key-123",
+        for_user_id="id-123",
+    )
+
+    assert kwargs_received["headers"]["X-IDEMPOTENCY-KEY"] == "key-123"
+    assert kwargs_received["headers"]["for-user-id"] == "id-123"

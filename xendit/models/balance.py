@@ -20,7 +20,8 @@ class Balance:
         """
         URL: /balance
         Method: GET
-        Params: Account Type (optional)
+        Params:
+        - account_type: Balance.AccountType (optional)
         """
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
