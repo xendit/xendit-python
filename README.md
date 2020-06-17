@@ -20,6 +20,8 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Get Balance](#get-balance)
   - [Contributing](#contributing)
     - [Tests](#tests)
+      - [Running the Test](#running-the-test)
+      - [Creating Custom HTTP Client](#creating-custom-http-client)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -102,6 +104,8 @@ To start developing on this repository, you need to have Poetry installed for pa
 
 ### Tests
 
+#### Running the Test
+
 Make sure the the code passes all tests.
 
 Run the test:
@@ -114,4 +118,14 @@ Run with coverage:
 
 ```
 python -m pytest tests/ --cov=xendit/
+```
+
+#### Creating Custom HTTP Client
+
+To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
+
+```python
+import xendit
+
+xendit_instance =  xendit.Xendit(api_key='', http_client=YourHTTPClientClass)
 ```
