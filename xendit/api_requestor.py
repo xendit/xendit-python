@@ -7,18 +7,18 @@ from xendit.network import XenditHTTPClient
 class APIRequestor:
     @staticmethod
     def get(url, **kwargs):
-        return APIRequestor.request(RequestMethod.GET, url, **kwargs)
+        return APIRequestor._request(RequestMethod.GET, url, **kwargs)
 
     @staticmethod
     def post(url, **kwargs):
-        return APIRequestor.request(RequestMethod.POST, url, **kwargs)
+        return APIRequestor._request(RequestMethod.POST, url, **kwargs)
 
     @staticmethod
     def patch(url, **kwargs):
-        return APIRequestor.request(RequestMethod.PATCH, url, **kwargs)
+        return APIRequestor._request(RequestMethod.PATCH, url, **kwargs)
 
     @staticmethod
-    def request(method, url, **kwargs):
+    def _request(method, url, **kwargs):
         """
         Optional params list:
         api_key -> API Key from xendit instance
@@ -30,7 +30,7 @@ class APIRequestor:
         http_client = kwargs.get("http_client", XenditHTTPClient)
 
         headers = APIRequestor._get_headers(api_key)
-        return http_client.request(RequestMethod.GET, url, headers=headers)
+        return http_client.request(method, url, headers=headers)
 
     @staticmethod
     def _get_headers(api_key):

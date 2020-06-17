@@ -1,4 +1,4 @@
-class APIKeyInjector:
+class XenditParamInjector:
     def __init__(self, injected_class, api_key, base_url, http_client):
         self.api_key = api_key
         self.base_url = base_url

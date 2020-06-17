@@ -1,4 +1,4 @@
-from .api_key_injector import APIKeyInjector
+from .xendit_param_injector import XenditParamInjector
 from .models import Balance
 from .network import HTTPClientInterface, XenditHTTPClient
 
@@ -10,4 +10,4 @@ class Xendit:
         base_url="https://api.xendit.co/",
         http_client: HTTPClientInterface = XenditHTTPClient,
     ):
-        self.Balance = APIKeyInjector(Balance, api_key, base_url, http_client)
+        self.Balance = XenditParamInjector(Balance, api_key, base_url, http_client)
