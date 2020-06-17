@@ -1,4 +1,6 @@
-from xendit import config
-from xendit.xendit_error import XenditError
-from xendit.xendit import Xendit
-from xendit.models import *
+from .models import *
+from .network import *
+
+from . import config
+from .xendit_error import XenditError
+from .xendit import Xendit
