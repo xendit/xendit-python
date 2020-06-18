@@ -4,7 +4,7 @@ from .network import HTTPClientInterface, _XenditHTTPClient
 
 
 class Xendit:
-    """Xendit instance. Initialize this with your API Key"""
+    """Xendit instance. Initialize this with your API Key."""
 
     def __init__(
         self,

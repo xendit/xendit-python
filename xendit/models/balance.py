@@ -1,3 +1,4 @@
+from xendit._init_from_response import _init_from_response
 from enum import Enum
 from xendit.xendit_error import XenditError
 from xendit._api_requestor import _APIRequestor
@@ -11,6 +12,9 @@ class Balance:
 
     Static Methods:
       - Balance.get (API Reference: /Get Balance)
+
+    Attributes:
+      - balance (int)
     """
 
     class AccountType(Enum):
@@ -20,8 +24,9 @@ class Balance:
         HOLDING = "HOLDING"
         TAX = "TAX"
 
+    @_init_from_response(required=["balance"])
     def __init__(self, xendit_response):
-        self.balance = xendit_response["balance"]
+        pass
 
     def __repr__(self):
         return str({"balance": self.balance})
@@ -33,9 +38,11 @@ class Balance:
         Args:
           - account_type (Balance.AccountType)
 
-        Returns: Balance
+        Returns
+          Balance
 
-        Raises: XenditError
+        Raises
+          XenditError
         """
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
