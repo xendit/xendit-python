@@ -10,7 +10,7 @@ class Balance:
       - Balance.AccountType
 
     Static Methods:
-      - Balance.get (API Reference: Get Balance)
+      - Balance.get (API Reference: /Get Balance)
     """
 
     class AccountType(Enum):
@@ -32,9 +32,6 @@ class Balance:
 
         Args:
           - account_type (Balance.AccountType)
-          - **api_key (str)
-          - **base_url (str)
-          - **http_client (HTTPClientInterface)
 
         Returns: Balance
 
