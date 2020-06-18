@@ -3,14 +3,17 @@ from . import RequestMethod, XenditResponse
 
 
 class HTTPClientInterface(metaclass=abc.ABCMeta):
-    """Interface for HTTP Client. Inject it to your xendit instance to use it
-    """
+    """Interface for HTTP Client. Inject it to your xendit instance to use it."""
 
     @staticmethod
     def request(method: RequestMethod, url, **kwargs) -> XenditResponse:
         """
-        Optional params list:
-        - headers (Dictionary): HTTP Headers to send with the request
-        - body (Dictionary): Body that will be send with the request
+        Args:
+          - method (RequestMethod): HTTP Method that will be sent
+          - url (str): URL for the request
+          - **headers (dict): HTTP Headers to send with the request
+          - **body (dict): Body that will be send with the request
+
+        Returns: XenditResponse
         """
         raise NotImplementedError

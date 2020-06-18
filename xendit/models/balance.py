@@ -7,20 +7,14 @@ class Balance:
     """Balance class (API Reference: Balance)
 
     Related Enums:
-    - Balance.AccountType
+      - Balance.AccountType
 
     Static Methods:
-    - Balance.get (API Reference: Get Balance)
+      - Balance.get (API Reference: Get Balance)
     """
 
     class AccountType(Enum):
-        """Account Type for Get Balance
-
-        Member:
-        - AccountType.CASH
-        - AccountType.HOLDING
-        - AccountType.TAX
-        """
+        """Account Type for Get Balance"""
 
         CASH = "CASH"
         HOLDING = "HOLDING"
@@ -36,14 +30,15 @@ class Balance:
     def get(account_type=AccountType.CASH, **kwargs):
         """Send GET request to retrieve balance (API Reference: Balance/Get Balance)
 
-        Optional Params:
-        - account_type: Balance.AccountType
+        Args:
+          - account_type (Balance.AccountType)
+          - **api_key (str)
+          - **base_url (str)
+          - **http_client (HTTPClientInterface)
 
-        Returns:
-        - Balance class
+        Returns: Balance
 
-        Raises:
-        - XenditError Exception
+        Raises: XenditError
         """
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
