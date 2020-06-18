@@ -1,46 +1,46 @@
 import base64
+import requests
 import xendit
-from xendit.network import RequestMethod
-from xendit.network import _XenditHTTPClient
+from xendit.network import XenditResponse
 
 
 class _APIRequestor:
     @staticmethod
     def get(url, **kwargs):
-        return _APIRequestor._request(RequestMethod.GET, url, **kwargs)
+        return _APIRequestor._request("GET", url, **kwargs)
 
     @staticmethod
     def post(url, **kwargs):
-        return _APIRequestor._request(RequestMethod.POST, url, **kwargs)
+        return _APIRequestor._request("POST", url, **kwargs)
 
     @staticmethod
     def patch(url, **kwargs):
-        return _APIRequestor._request(RequestMethod.PATCH, url, **kwargs)
+        return _APIRequestor._request("PATCH", url, **kwargs)
 
     @staticmethod
     def _request(method, url, **kwargs):
         """Send HTTP Method to given url
 
         Args:
-        - url (string): URL Directory that will be searched (not including base_url)
-
-        Optional Args:
-        - api_key (string): API Key from xendit instance. Default to config if not provided
-        - base_url (string): Base url of the API. Default to config if not provided
-        - http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
-        - x_idempotency_key (string): X-IDEMPOTENCY-KEY header that will be used
-        - for_user_id (string): for-user-id header that will be used
+          - method (str): HTTP Method that will be send
+          - url (str): URL Directory that will be searched (not including base_url)
+          - **api_key (string): API Key from xendit instance. Default to config if not provided
+          - **base_url (string): Base url of the API. Default to config if not provided
+          - **http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
+          - **x_idempotency_key (string): X-IDEMPOTENCY-KEY header that will be used
+          - **for_user_id (string): for-user-id header that will be used
         """
         api_key = kwargs.get("api_key", xendit.api_key)
         url = kwargs.get("base_url", xendit.base_url) + url
-        http_client = kwargs.get("http_client", _XenditHTTPClient)
+        http_client = kwargs.get("http_client", requests)
         x_idempotency_key_header = kwargs.get("x_idempotency_key", None)
         for_user_id_header = kwargs.get("for_user_id", None)
 
         headers = _APIRequestor._get_headers(
             api_key, x_idempotency_key_header, for_user_id_header
         )
-        return http_client.request(method, url, headers=headers)
+        resp = http_client.request(method, url, headers=headers)
+        return XenditResponse(resp.status_code, resp.headers, resp.json())
 
     @staticmethod
     def _get_headers(api_key, x_idempotency_key_header=None, for_user_id_header=None):

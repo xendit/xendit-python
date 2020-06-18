@@ -29,7 +29,7 @@ def get_balance(xendit_instance, params):
 
 def balance_example(xendit_instance):
     print("Running xendit.Balance.get(xendit.Balance.AccountType.CASH):")
-    get_balance(xendit_instance, xendit.Balance.AccountType.CASH)
+    get_balance(xendit_instance, xendit.BalanceAccountType.CASH)
 
     print('Running xendit.Balance.get("cash"):')
     get_balance(xendit_instance, "cash")
