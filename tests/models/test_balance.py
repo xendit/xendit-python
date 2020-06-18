@@ -1,5 +1,6 @@
 import pytest
-from xendit import XenditError, Xendit, Balance
+from xendit import XenditError, Xendit
+from xendit.models import Balance, BalanceAccountType
 from xendit._api_requestor import _APIRequestor
 
 
@@ -25,7 +26,7 @@ def test_return_balance_on_correct_params(mocker, substitute_correct_get):
     Balance = xendit.Balance
     mocker.patch.object(_APIRequestor, "get")
     _APIRequestor.get.return_value = substitute_correct_get
-    assert Balance.get(Balance.AccountType.CASH).balance == 1000
+    assert Balance.get(BalanceAccountType.CASH).balance == 1000
 
 
 def test_raise_xendit_error_on_response_error(mocker, substitute_incorrect_get):
@@ -34,7 +35,7 @@ def test_raise_xendit_error_on_response_error(mocker, substitute_incorrect_get):
     mocker.patch.object(_APIRequestor, "get")
     _APIRequestor.get.return_value = substitute_incorrect_get
     with pytest.raises(XenditError):
-        print(Balance.get(Balance.AccountType.CASH).balance)
+        print(Balance.get(BalanceAccountType.CASH).balance)
 
 
 def test_return_balance_on_correct_params_and_global_xendit(
@@ -42,7 +43,7 @@ def test_return_balance_on_correct_params_and_global_xendit(
 ):
     mocker.patch.object(_APIRequestor, "get")
     _APIRequestor.get.return_value = substitute_correct_get
-    assert Balance.get(Balance.AccountType.CASH).balance == 1000
+    assert Balance.get(BalanceAccountType.CASH).balance == 1000
 
 
 def test_raise_xendit_error_on_response_error_and_global_xendit(
@@ -51,4 +52,4 @@ def test_raise_xendit_error_on_response_error_and_global_xendit(
     mocker.patch.object(_APIRequestor, "get")
     _APIRequestor.get.return_value = substitute_incorrect_get
     with pytest.raises(XenditError):
-        print(Balance.get(Balance.AccountType.CASH).balance)
+        print(Balance.get(BalanceAccountType.CASH).balance)

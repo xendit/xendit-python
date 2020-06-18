@@ -1,7 +1,7 @@
 import functools
 
 
-def _init_from_response(required, optional=[]):
+def _init_from_xendit_response(required, optional=[]):
     """Decorator to initialize class from XenditResponse
 
     Args:
@@ -19,7 +19,9 @@ def _init_from_response(required, optional=[]):
             for optional_attr in optional:
                 try:
                     setattr(
-                        wrapped_object, optional_attr, xendit_response[optional_attr]
+                        wrapped_object,
+                        optional_attr,
+                        xendit_response.get(optional_attr, None),
                     )
                 except KeyError:
                     pass
