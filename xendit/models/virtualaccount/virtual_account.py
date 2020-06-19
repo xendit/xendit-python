@@ -1,6 +1,6 @@
 import json
 
-from .virtual_acount_banks import VirtualAccountBanks
+from .virtual_acount_bank import VirtualAccountBank
 from .virtual_account_payment import VirtualAccountPayment
 
 from xendit._api_requestor import _APIRequestor
@@ -112,7 +112,10 @@ class VirtualAccount:
         url = "/available_virtual_account_banks"
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return VirtualAccountBanks(resp.body)
+            virtual_account_banks = []
+            for bank in resp.body:
+                virtual_account_banks.append(VirtualAccountBank(bank))
+            return virtual_account_banks
         else:
             raise XenditError(resp)
 
