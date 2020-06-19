@@ -9,7 +9,6 @@ class _XenditParamInjector:
             if isinstance(value, staticmethod):
                 self.static_method_list.append(attr_name)
         self.__dict__.update(injected_class.__dict__)
-        print(self.static_method_list)
 
     def __getattribute__(self, name):
         # We need to check whether the passed attribute/method are for APIKeyInjector or the injected class static method.

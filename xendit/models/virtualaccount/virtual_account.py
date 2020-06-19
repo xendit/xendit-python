@@ -103,7 +103,7 @@ class VirtualAccount:
         """Get available banks (API Reference: Virtual Account/Get Virtual Account Banks)
 
         Returns:
-          VirtualAccountBanks
+          List of VirtualAccountBank
 
         Raises:
           XenditError
@@ -178,6 +178,7 @@ class VirtualAccount:
           XenditError
         """
         url = f"/callback_virtual_account_payments/payment_id={payment_id}"
+        print(url)
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccountPayment(resp.body)
