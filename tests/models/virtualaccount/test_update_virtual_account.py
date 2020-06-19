@@ -5,7 +5,7 @@ from xendit.models import VirtualAccount
 
 
 # fmt: off
-class TestCreateVirtualAccount(BaseModelTest):
+class TestUpdateVirtualAccount(BaseModelTest):
     @pytest.fixture
     def default_virtual_account_data(self):
         tested_class = VirtualAccount
