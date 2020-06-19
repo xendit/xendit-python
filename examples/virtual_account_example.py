@@ -70,12 +70,33 @@ class GetVirtualAccount:
         GetVirtualAccount.run(xendit_instance, "random-id")
 
 
+class UpdateVirtualAccount:
+    @staticmethod
+    def run(xendit_instance, id, **kwargs):
+        try:
+            virtual_account = xendit_instance.VirtualAccount.update(id, **kwargs)
+            print(virtual_account)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        print('Running xendit.VirtualAccount.update("5eec3a3e8dd9ea2fc97d6728"):')
+        UpdateVirtualAccount.run(xendit_instance, "5eec3a3e8dd9ea2fc97d6728")
+
+        print('Running xendit.VirtualAccount.update("random-id"):')
+        UpdateVirtualAccount.run(xendit_instance, "random-id")
+
+
 def ask_virtual_account_input():
     print("Input the action that you want to use")
     print("0. Exit")
     print("1. Create Virtual Account")
     print("2. Get Virtual Account Banks")
     print("3. Get Virtual Account")
+    print("4. Update Virtual Account")
+    print("5. Get Virtual Account Payment")
     try:
         return int(input())
     except ValueError:
@@ -95,4 +116,7 @@ def virtual_account_example(xendit_instance):
         elif virtual_account_input == 3:
             print("Running example of Get Virtual Account")
             GetVirtualAccount.example(xendit_instance)
+        elif virtual_account_input == 4:
+            print("Running example of Update Virtual Account")
+            UpdateVirtualAccount.example(xendit_instance)
         virtual_account_input = ask_virtual_account_input()
