@@ -1,18 +1,18 @@
 import pytest
 from ..base_model_test import BaseModelTest
-from .sample_response import virtual_account_response
+from .sample_response import virtual_account_banks_response
 from xendit.models import VirtualAccount
 
 
-class TestCreateVirtualAccount(BaseModelTest):
+class TestGetVirtualAccountBanks(BaseModelTest):
     @pytest.fixture
     def default_virtual_account_data(self):
         tested_class = VirtualAccount
         class_name = "VirtualAccount"
-        method_name = "create"
-        http_method_name = "post"
-        params = ("demo_1475459775872", "BNI", "Rika Sutanto")
-        expected_correct_result = virtual_account_response()
+        method_name = "get_banks"
+        http_method_name = "get"
+        params = ()
+        expected_correct_result = virtual_account_banks_response()
         return (
             tested_class,
             class_name,
@@ -23,9 +23,9 @@ class TestCreateVirtualAccount(BaseModelTest):
         )
 
     @pytest.mark.parametrize(
-        "mock_correct_response", [virtual_account_response()], indirect=True
+        "mock_correct_response", [virtual_account_banks_response()], indirect=True
     )
-    def test_return_virtual_account_on_correct_params(
+    def test_return_virtual_account_banks_on_correct_params(
         self, mocker, mock_correct_response, default_virtual_account_data
     ):
         self.run_success_return_test_on_xendit_instance(
@@ -40,9 +40,9 @@ class TestCreateVirtualAccount(BaseModelTest):
         )
 
     @pytest.mark.parametrize(
-        "mock_correct_response", [virtual_account_response()], indirect=True
+        "mock_correct_response", [virtual_account_banks_response()], indirect=True
     )
-    def test_return_virtual_account_on_correct_params_and_global_xendit(
+    def test_return_virtual_account_banks_on_correct_params_and_global_xendit(
         self, mocker, mock_correct_response, default_virtual_account_data
     ):
         self.run_success_return_test_on_global_config(
