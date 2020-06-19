@@ -11,11 +11,24 @@ class _APIRequestor:
 
     @staticmethod
     def post(url, **kwargs):
+        body, kwargs = _APIRequestor._extract_body(**kwargs)
+
         return _APIRequestor._request("POST", url, **kwargs)
 
     @staticmethod
     def patch(url, **kwargs):
+        body, kwargs = _APIRequestor._extract_body(**kwargs)
+
         return _APIRequestor._request("PATCH", url, **kwargs)
+
+    @staticmethod
+    def _extract_body(**kwargs):
+        body = kwargs.copy()
+        body.pop("api_key", None)
+        body.pop("base_url", None)
+        body.pop("http_client", None)
+        kwargs["json"] = body
+        return body, kwargs
 
     @staticmethod
     def _request(method, url, **kwargs):
@@ -39,7 +52,12 @@ class _APIRequestor:
         headers = _APIRequestor._get_headers(
             api_key, x_idempotency_key_header, for_user_id_header
         )
-        resp = http_client.request(method, url, headers=headers)
+        if method == "GET":
+            resp = http_client.request(method, url, headers=headers)
+        else:
+            resp = http_client.request(
+                method, url, headers=headers, json=kwargs.get("json")
+            )
         return XenditResponse(resp.status_code, resp.headers, resp.json())
 
     @staticmethod

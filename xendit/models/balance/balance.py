@@ -1,3 +1,5 @@
+import json
+
 from .balance_account_type import BalanceAccountType
 
 from xendit._init_from_xendit_response import _init_from_xendit_response
@@ -23,7 +25,7 @@ class Balance:
         pass
 
     def __repr__(self):
-        return str({"balance": self.balance})
+        return json.dumps(vars(self), indent=4)
 
     @staticmethod
     def get(account_type=BalanceAccountType.CASH, **kwargs):
