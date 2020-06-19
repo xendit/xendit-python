@@ -8,9 +8,10 @@ xendit = loader.load_module("xendit")
 
 class GetBalance:
     @staticmethod
-    def run(func, account_type):
+    def run(xendit_instance, account_type):
         try:
-            print(func(account_type))
+            balance = xendit_instance.Balance.get(account_type)
+            print(balance)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
             print("Error message:", e)
@@ -18,10 +19,10 @@ class GetBalance:
     @staticmethod
     def example(xendit_instance):
         print("Running xendit.Balance.get(xendit.Balance.AccountType.CASH):")
-        GetBalance.run(xendit_instance.Balance.get, xendit.BalanceAccountType.CASH)
+        GetBalance.run(xendit_instance, xendit.BalanceAccountType.CASH)
 
         print('Running xendit.Balance.get("cash"):')
-        GetBalance.run(xendit_instance.Balance.get, "cash")
+        GetBalance.run(xendit_instance, "cash")
 
 
 def ask_balance_input():
