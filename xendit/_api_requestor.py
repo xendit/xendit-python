@@ -19,13 +19,7 @@ class _APIRequestor:
 
     @staticmethod
     def _request(
-        method,
-        url,
-        api_key=None,
-        base_url=None,
-        http_client=requests,
-        x_idempotency_key=None,
-        for_user_id=None,
+        method, url, api_key=None, base_url=None, http_client=requests, headers={}
     ):
         """Send HTTP Method to given url
 
@@ -44,25 +38,18 @@ class _APIRequestor:
             base_url = xendit.base_url
         url = base_url + url
 
-        headers = _APIRequestor._get_headers(api_key, x_idempotency_key, for_user_id)
+        headers = _APIRequestor._add_default_headers(api_key, headers)
         resp = http_client.request(method, url, headers=headers)
         return XenditResponse(resp.status_code, resp.headers, resp.json())
 
     @staticmethod
-    def _get_headers(api_key, x_idempotency_key=None, for_user_id=None):
-        default_headers = {
-            "Content-type": "application/json",
-            "Authorization": f"Basic {_APIRequestor._generate_auth(api_key)}",
-            "xendit-lib": "python",
-            "xendit-lib-ver": "0.1.0",
-        }
-        if x_idempotency_key is not None:
-            default_headers["X-IDEMPOTENCY-KEY"] = x_idempotency_key
+    def _add_default_headers(api_key, headers):
+        headers["Content-type"] = "application/json"
+        headers["Authorization"] = f"Basic {_APIRequestor._generate_auth(api_key)}"
+        headers["xendit-lib"] = "python"
+        headers["xendit-lib-ver"] = "0.1.0"
 
-        if for_user_id is not None:
-            default_headers["for-user-id"] = for_user_id
-
-        return default_headers
+        return headers
 
     @staticmethod
     def _generate_auth(api_key):

@@ -40,7 +40,8 @@ class Balance:
           XenditError
         """
         if for_user_id is not None:
-            kwargs["for_user_id"] = for_user_id
+            headers = {"for-user-id": for_user_id}
+            kwargs["headers"] = headers
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
 

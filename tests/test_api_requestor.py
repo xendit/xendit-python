@@ -98,8 +98,7 @@ def test_request_header_have_custom_header_when_inserted(default_params):
         api_key=api_key,
         base_url=base_url,
         http_client=http_client,
-        x_idempotency_key=custom_headers["X-IDEMPOTENCY-KEY"],
-        for_user_id=custom_headers["for-user-id"],
+        headers=custom_headers,
     )
 
     assert (
