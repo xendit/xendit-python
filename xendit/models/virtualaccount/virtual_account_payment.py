@@ -20,21 +20,19 @@ class VirtualAccountPayment:
       - sender_name (str)
     """
 
-    required_attr = [
-        "id",
-        "payment_id",
-        "callback_virtual_account_id",
-        "external_id",
-        "merchant_code",
-        "account_number",
-        "bank_code",
-        "amount",
-        "transaction_timestamp",
-    ]
-    optional_attr = ["sender_name"]
-
     @_init_from_xendit_response(
-        required=required_attr, optional=optional_attr,
+        required=[
+            "id",
+            "payment_id",
+            "callback_virtual_account_id",
+            "external_id",
+            "merchant_code",
+            "account_number",
+            "bank_code",
+            "amount",
+            "transaction_timestamp",
+        ],
+        optional=["sender_name"],
     )
     def __init__(self, xendit_response):
         pass

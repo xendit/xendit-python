@@ -35,8 +35,8 @@ class _APIRequestor:
           - **api_key (string): API Key from xendit instance. Default to config if not provided
           - **base_url (string): Base url of the API. Default to config if not provided
           - **http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
-          - **x_idempotency_key (string): X-IDEMPOTENCY-KEY header that will be used
-          - **for_user_id (string): for-user-id header that will be used
+          - **headers: Headers of the request
+          - **body: Body of the request. Only used on POST and PATCH request
         """
         if api_key is None:
             api_key = xendit.api_key

@@ -5,6 +5,7 @@ from .balance_account_type import BalanceAccountType
 from xendit._init_from_xendit_response import _init_from_xendit_response
 from xendit.xendit_error import XenditError
 from xendit._api_requestor import _APIRequestor
+from xendit._extract_params import _extract_params
 
 
 class Balance:
@@ -41,9 +42,10 @@ class Balance:
         Raises
           XenditError
         """
-        if for_user_id is not None:
-            headers = {"for-user-id": for_user_id}
-            kwargs["headers"] = headers
+        headers, _ = _extract_params(
+            locals(), func_object=Balance.get, headers_params=["for-user-id"]
+        )
+        kwargs["headers"] = headers
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
 

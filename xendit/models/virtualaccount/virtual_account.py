@@ -5,7 +5,7 @@ from .virtual_account_payment import VirtualAccountPayment
 
 from xendit._api_requestor import _APIRequestor
 from xendit._init_from_xendit_response import _init_from_xendit_response
-from xendit._wrap_body import _wrap_body
+from xendit._extract_params import _extract_params
 
 from xendit.xendit_error import XenditError
 
@@ -44,23 +44,21 @@ class VirtualAccount:
 
     """
 
-    required_attr = [
-        "owner_id",
-        "external_id",
-        "bank_code",
-        "merchant_code",
-        "name",
-        "account_number",
-        "is_single_use",
-        "status",
-        "expiration_date",
-        "is_closed",
-        "id",
-    ]
-    optional_attr = ["suggested_amount", "expected_amount", "description"]
-
     @_init_from_xendit_response(
-        required=required_attr, optional=optional_attr,
+        required=[
+            "owner_id",
+            "external_id",
+            "bank_code",
+            "merchant_code",
+            "name",
+            "account_number",
+            "is_single_use",
+            "status",
+            "expiration_date",
+            "is_closed",
+            "id",
+        ],
+        optional=["suggested_amount", "expected_amount", "description"],
     )
     def __init__(self, xendit_response):
         pass
@@ -97,6 +95,8 @@ class VirtualAccount:
           - **expiration_date (str) (ISO 8601 Date)
           - **is_single_use (bool)
           - **description (str)
+          - **for_user_id (str) (headers)
+          - **x_idempotency_key (str) (headers)
 
         Returns:
           VirtualAccount
@@ -106,7 +106,12 @@ class VirtualAccount:
 
         """
         url = "/callback_virtual_accounts"
-        body = _wrap_body(locals(), VirtualAccount)
+        headers, body = _extract_params(
+            locals(),
+            func_object=VirtualAccount.create,
+            headers_params=["for_user_id", "x_idempotency_key"],
+        )
+        kwargs["headers"] = headers
         kwargs["body"] = body
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
@@ -163,6 +168,7 @@ class VirtualAccount:
         expiration_date=None,
         is_single_user=None,
         description=None,
+        x_idempotency_key=None,
         **kwargs,
     ):
         """Update Virtual Account detail (API Reference: Virtual Account/Update Virtual Account
@@ -174,6 +180,7 @@ class VirtualAccount:
           - **expiration_date (str) (ISO 8601 Date)
           - **is_single_use (bool)
           - **description (str)
+          - **x_idempotency_key (str)
 
         Returns:
           VirtualAccount
@@ -182,6 +189,11 @@ class VirtualAccount:
           XenditError
         """
         url = f"/callback_virtual_accounts/{id}"
+        headers, body = _extract_params(
+            locals(),
+            func_object=VirtualAccount.update,
+            headers_params=["x_idempotency_key"],
+        )
         resp = _APIRequestor.patch(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccount(resp.body)
@@ -202,7 +214,6 @@ class VirtualAccount:
           XenditError
         """
         url = f"/callback_virtual_account_payments/payment_id={payment_id}"
-        print(url)
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccountPayment(resp.body)
