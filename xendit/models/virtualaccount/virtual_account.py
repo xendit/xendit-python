@@ -5,6 +5,7 @@ from .virtual_account_payment import VirtualAccountPayment
 
 from xendit._api_requestor import _APIRequestor
 from xendit._init_from_xendit_response import _init_from_xendit_response
+from xendit._wrap_body import _wrap_body
 
 from xendit.xendit_error import XenditError
 
@@ -43,21 +44,23 @@ class VirtualAccount:
 
     """
 
+    required_attr = [
+        "owner_id",
+        "external_id",
+        "bank_code",
+        "merchant_code",
+        "name",
+        "account_number",
+        "is_single_use",
+        "status",
+        "expiration_date",
+        "is_closed",
+        "id",
+    ]
+    optional_attr = ["suggested_amount", "expected_amount", "description"]
+
     @_init_from_xendit_response(
-        required=[
-            "owner_id",
-            "external_id",
-            "bank_code",
-            "merchant_code",
-            "name",
-            "account_number",
-            "is_single_use",
-            "status",
-            "expiration_date",
-            "is_closed",
-            "id",
-        ],
-        optional=["suggested_amount", "expected_amount", "description"],
+        required=required_attr, optional=optional_attr,
     )
     def __init__(self, xendit_response):
         pass
@@ -66,7 +69,21 @@ class VirtualAccount:
         return json.dumps(vars(self), indent=4)
 
     @staticmethod
-    def create(external_id, bank_code, name, **kwargs):
+    def create(
+        external_id,
+        bank_code,
+        name,
+        virtual_account_number=None,
+        suggested_amount=None,
+        is_closed=None,
+        expected_amount=None,
+        expiration_date=None,
+        is_single_use=None,
+        description=None,
+        for_user_id=None,
+        x_idempotency_key=None,
+        **kwargs,
+    ):
         """Send POST Request to create VirtualAccount (API Reference: Virtual Account/Create Virtual Account)
 
         Args:
@@ -89,9 +106,8 @@ class VirtualAccount:
 
         """
         url = "/callback_virtual_accounts"
-        kwargs["external_id"] = external_id
-        kwargs["bank_code"] = bank_code
-        kwargs["name"] = name
+        body = _wrap_body(locals(), VirtualAccount)
+        kwargs["body"] = body
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccount(resp.body)
@@ -140,7 +156,15 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def update(id, **kwargs):
+    def update(
+        id,
+        suggested_amount=None,
+        expected_amount=None,
+        expiration_date=None,
+        is_single_user=None,
+        description=None,
+        **kwargs,
+    ):
         """Update Virtual Account detail (API Reference: Virtual Account/Update Virtual Account
 
         Args:
