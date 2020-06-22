@@ -26,11 +26,12 @@ class Balance:
         return str({"balance": self.balance})
 
     @staticmethod
-    def get(account_type=BalanceAccountType.CASH, **kwargs):
+    def get(account_type=BalanceAccountType.CASH, for_user_id=None, **kwargs):
         """Send GET request to retrieve balance (API Reference: Balance/Get Balance)
 
         Args:
           - account_type (Balance.AccountType)
+          - **for_user_id (str) (XenPlatform only)
 
         Returns
           Balance
@@ -38,8 +39,11 @@ class Balance:
         Raises
           XenditError
         """
+        if for_user_id is not None:
+            kwargs["for_user_id"] = for_user_id
         account_type = Balance._parse_value(account_type)
         url = f"/balance?account_type={account_type}"
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Balance(resp.body)

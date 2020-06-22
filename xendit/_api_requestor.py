@@ -18,7 +18,15 @@ class _APIRequestor:
         return _APIRequestor._request("PATCH", url, **kwargs)
 
     @staticmethod
-    def _request(method, url, **kwargs):
+    def _request(
+        method,
+        url,
+        api_key=None,
+        base_url=None,
+        http_client=requests,
+        x_idempotency_key=None,
+        for_user_id=None,
+    ):
         """Send HTTP Method to given url
 
         Args:
@@ -30,31 +38,29 @@ class _APIRequestor:
           - **x_idempotency_key (string): X-IDEMPOTENCY-KEY header that will be used
           - **for_user_id (string): for-user-id header that will be used
         """
-        api_key = kwargs.get("api_key", xendit.api_key)
-        url = kwargs.get("base_url", xendit.base_url) + url
-        http_client = kwargs.get("http_client", requests)
-        x_idempotency_key_header = kwargs.get("x_idempotency_key", None)
-        for_user_id_header = kwargs.get("for_user_id", None)
+        if api_key is None:
+            api_key = xendit.api_key
+        if base_url is None:
+            base_url = xendit.base_url
+        url = base_url + url
 
-        headers = _APIRequestor._get_headers(
-            api_key, x_idempotency_key_header, for_user_id_header
-        )
+        headers = _APIRequestor._get_headers(api_key, x_idempotency_key, for_user_id)
         resp = http_client.request(method, url, headers=headers)
         return XenditResponse(resp.status_code, resp.headers, resp.json())
 
     @staticmethod
-    def _get_headers(api_key, x_idempotency_key_header=None, for_user_id_header=None):
+    def _get_headers(api_key, x_idempotency_key=None, for_user_id=None):
         default_headers = {
             "Content-type": "application/json",
             "Authorization": f"Basic {_APIRequestor._generate_auth(api_key)}",
             "xendit-lib": "python",
             "xendit-lib-ver": "0.1.0",
         }
-        if x_idempotency_key_header is not None:
-            default_headers["X-IDEMPOTENCY-KEY"] = x_idempotency_key_header
+        if x_idempotency_key is not None:
+            default_headers["X-IDEMPOTENCY-KEY"] = x_idempotency_key
 
-        if for_user_id_header is not None:
-            default_headers["for-user-id"] = for_user_id_header
+        if for_user_id is not None:
+            default_headers["for-user-id"] = for_user_id
 
         return default_headers
 

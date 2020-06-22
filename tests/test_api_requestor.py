@@ -102,5 +102,8 @@ def test_request_header_have_custom_header_when_inserted(default_params):
         for_user_id=custom_headers["for-user-id"],
     )
 
-    assert xendit_response.headers["X-IDEMPOTENCY-KEY"] == "key-123"
-    assert xendit_response.headers["for-user-id"] == "id-123"
+    assert (
+        xendit_response.headers["X-IDEMPOTENCY-KEY"]
+        == custom_headers["X-IDEMPOTENCY-KEY"]
+    )
+    assert xendit_response.headers["for-user-id"] == custom_headers["for-user-id"]
