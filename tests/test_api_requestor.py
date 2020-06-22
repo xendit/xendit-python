@@ -26,12 +26,16 @@ def default_params():
     section = "/balance"
     http_client = requests
     url = base_url + section
-    return api_key, base_url, section, http_client, url
+    custom_headers = {
+        "X-IDEMPOTENCY-KEY": "key-123",
+        "for-user-id": "id-123",
+    }
+    return api_key, base_url, section, http_client, url, custom_headers
 
 
 @responses.activate
 def test_get_call_get_method(default_params):
-    api_key, base_url, section, http_client, url = default_params
+    api_key, base_url, section, http_client, url, custom_headers = default_params
     responses.add_callback(method="GET", url=url, callback=substitute_callback)
 
     _APIRequestor.get(
@@ -41,7 +45,7 @@ def test_get_call_get_method(default_params):
 
 @responses.activate
 def test_post_call_post_method(default_params):
-    api_key, base_url, section, http_client, url = default_params
+    api_key, base_url, section, http_client, url, custom_headers = default_params
     responses.add_callback(method="POST", url=url, callback=substitute_callback)
 
     _APIRequestor.post(
@@ -51,7 +55,7 @@ def test_post_call_post_method(default_params):
 
 @responses.activate
 def test_patch_call_patch_method(default_params):
-    api_key, base_url, section, http_client, url = default_params
+    api_key, base_url, section, http_client, url, custom_headers = default_params
     responses.add_callback(method="PATCH", url=url, callback=substitute_callback)
 
     _APIRequestor.patch(
@@ -61,7 +65,7 @@ def test_patch_call_patch_method(default_params):
 
 @responses.activate
 def test_request_send_correct_params_on_given_params(default_params):
-    api_key, base_url, section, http_client, url = default_params
+    api_key, base_url, section, http_client, url, custom_headers = default_params
     responses.add_callback(method="GET", url=url, callback=substitute_callback)
 
     xendit_response = _APIRequestor._request(
@@ -73,7 +77,7 @@ def test_request_send_correct_params_on_given_params(default_params):
 
 @responses.activate
 def test_request_send_default_config_on_empty_params(default_params):
-    api_key, base_url, section, http_client, url = default_params
+    api_key, base_url, section, http_client, url, custom_headers = default_params
     xendit.api_key = api_key
     xendit.base_url = base_url
     responses.add_callback(method="GET", url=url, callback=substitute_callback)
@@ -85,7 +89,7 @@ def test_request_send_default_config_on_empty_params(default_params):
 
 @responses.activate
 def test_request_header_have_custom_header_when_inserted(default_params):
-    api_key, base_url, section, http_client, url = default_params
+    api_key, base_url, section, http_client, url, custom_headers = default_params
 
     responses.add_callback(method="POST", url=url, callback=substitute_callback)
     xendit_response = _APIRequestor._request(
@@ -94,9 +98,11 @@ def test_request_header_have_custom_header_when_inserted(default_params):
         api_key=api_key,
         base_url=base_url,
         http_client=http_client,
-        x_idempotency_key="key-123",
-        for_user_id="id-123",
+        headers=custom_headers,
     )
 
-    assert xendit_response.headers["X-IDEMPOTENCY-KEY"] == "key-123"
-    assert xendit_response.headers["for-user-id"] == "id-123"
+    assert (
+        xendit_response.headers["X-IDEMPOTENCY-KEY"]
+        == custom_headers["X-IDEMPOTENCY-KEY"]
+    )
+    assert xendit_response.headers["for-user-id"] == custom_headers["for-user-id"]
