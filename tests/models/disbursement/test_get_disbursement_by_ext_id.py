@@ -1,26 +1,26 @@
 import pytest
 from ..base_model_test import BaseModelTest
-from .sample_response import disbursement_response
+from .sample_response import multi_disbursement_response
 from xendit.models import Disbursement
 from xendit._api_requestor import _APIRequestor
 
 
 # fmt: off
-class TestGetDisbursement(BaseModelTest):
+class TestGetDisbursementByExtId(BaseModelTest):
     @pytest.fixture
     def default_disbursement_data(self):
         tested_class = Disbursement
         class_name = "Disbursement"
-        method_name = "get"
+        method_name = "get_by_ext_id"
         http_method_name = "get"
-        args = ("5ef1befeecb16100179e1d05",)
+        args = ("demo_1475459775872",)
         kwargs = {}
         params = (args, kwargs)
-        url = f"/disbursements/{args[0]}"
-        expected_correct_result = disbursement_response()
+        url = f"/disbursements?external_id={args[0]}"
+        expected_correct_result = multi_disbursement_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
-    @pytest.mark.parametrize("mock_correct_response", [disbursement_response()], indirect=True)
+    @pytest.mark.parametrize("mock_correct_response", [multi_disbursement_response()], indirect=True)
     def test_return_disbursement_on_correct_params(
         self, mocker, mock_correct_response, default_disbursement_data
     ):
@@ -31,7 +31,7 @@ class TestGetDisbursement(BaseModelTest):
     ):
         self.run_raises_error_test_on_xendit_instance(mocker, mock_error_request_response, default_disbursement_data)
 
-    @pytest.mark.parametrize("mock_correct_response", [disbursement_response()], indirect=True)
+    @pytest.mark.parametrize("mock_correct_response", [multi_disbursement_response()], indirect=True)
     def test_return_disbursement_on_correct_params_and_global_xendit(
         self, mocker, mock_correct_response, default_disbursement_data
     ):
@@ -42,7 +42,7 @@ class TestGetDisbursement(BaseModelTest):
     ):
         self.run_raises_error_test_on_global_config(mocker, mock_error_request_response, default_disbursement_data)
 
-    @pytest.mark.parametrize("mock_correct_response", [disbursement_response()], indirect=True)
+    @pytest.mark.parametrize("mock_correct_response", [multi_disbursement_response()], indirect=True)
     def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, default_disbursement_data):
         """It should send correct request to API Requestor
 
@@ -65,6 +65,6 @@ class TestGetDisbursement(BaseModelTest):
         tested_method = getattr(_APIRequestor, http_method_name)
         setattr(tested_method, "return_value", mock_correct_response)
 
-        Disbursement.get(*args, **kwargs)
+        Disbursement.get_by_ext_id(*args, **kwargs)
         tested_method.assert_called_with(url)
 # fmt: on

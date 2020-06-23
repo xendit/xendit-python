@@ -150,7 +150,6 @@ class Disbursement:
             for disbursement in resp.body:
                 disbursements.append(Disbursement(disbursement))
             return disbursements
-            return Disbursement(resp.body)
         else:
             raise XenditError(resp)
 

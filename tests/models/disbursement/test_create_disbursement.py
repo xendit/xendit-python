@@ -6,9 +6,9 @@ from xendit._api_requestor import _APIRequestor
 
 
 # fmt: off
-class TestCreateVirtualAccount(BaseModelTest):
+class TestCreateDisbursement(BaseModelTest):
     @pytest.fixture
-    def default_virtual_account_data(self):
+    def default_disbursement_data(self):
         tested_class = Disbursement
         class_name = "Disbursement"
         method_name = "create"
@@ -21,29 +21,29 @@ class TestCreateVirtualAccount(BaseModelTest):
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
     @pytest.mark.parametrize("mock_correct_response", [disbursement_response()], indirect=True)
-    def test_return_virtual_account_on_correct_params(
-        self, mocker, mock_correct_response, default_virtual_account_data
+    def test_return_disbursement_on_correct_params(
+        self, mocker, mock_correct_response, default_disbursement_data
     ):
-        self.run_success_return_test_on_xendit_instance(mocker, mock_correct_response, default_virtual_account_data)
+        self.run_success_return_test_on_xendit_instance(mocker, mock_correct_response, default_disbursement_data)
 
     def test_raise_xendit_error_on_response_error(
-        self, mocker, mock_error_request_response, default_virtual_account_data
+        self, mocker, mock_error_request_response, default_disbursement_data
     ):
-        self.run_raises_error_test_on_xendit_instance(mocker, mock_error_request_response, default_virtual_account_data)
+        self.run_raises_error_test_on_xendit_instance(mocker, mock_error_request_response, default_disbursement_data)
 
     @pytest.mark.parametrize("mock_correct_response", [disbursement_response()], indirect=True)
-    def test_return_virtual_account_on_correct_params_and_global_xendit(
-        self, mocker, mock_correct_response, default_virtual_account_data
+    def test_return_disbursement_on_correct_params_and_global_xendit(
+        self, mocker, mock_correct_response, default_disbursement_data
     ):
-        self.run_success_return_test_on_global_config(mocker, mock_correct_response, default_virtual_account_data)
+        self.run_success_return_test_on_global_config(mocker, mock_correct_response, default_disbursement_data)
 
     def test_raise_xendit_error_on_response_error_and_global_xendit(
-        self, mocker, mock_error_request_response, default_virtual_account_data
+        self, mocker, mock_error_request_response, default_disbursement_data
     ):
-        self.run_raises_error_test_on_global_config(mocker, mock_error_request_response, default_virtual_account_data)
+        self.run_raises_error_test_on_global_config(mocker, mock_error_request_response, default_disbursement_data)
 
     @pytest.mark.parametrize("mock_correct_response", [disbursement_response()], indirect=True)
-    def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, default_virtual_account_data):
+    def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, default_disbursement_data):
         """It should send correct request to API Requestor
 
         Args:
@@ -58,7 +58,7 @@ class TestCreateVirtualAccount(BaseModelTest):
             - params (tuple): Params with format (args, kwargs)
             - expected_correct_result (dict): Expected Correct Result
         """
-        _, _, _, http_method_name, url, params, expected_correct_result = default_virtual_account_data
+        _, _, _, http_method_name, url, params, expected_correct_result = default_disbursement_data
         args, kwargs = params
         headers = {}
         body = {
