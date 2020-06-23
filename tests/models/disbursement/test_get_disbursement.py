@@ -11,12 +11,12 @@ class TestCreateVirtualAccount(BaseModelTest):
     def default_virtual_account_data(self):
         tested_class = Disbursement
         class_name = "Disbursement"
-        method_name = "create"
-        http_method_name = "post"
-        args = ("demo_1475459775872", "BCA", "Bob Jones", "1231242311", "Reimbursement for shoes", 17000,)
+        method_name = "get"
+        http_method_name = "get"
+        args = ("5ef1befeecb16100179e1d05",)
         kwargs = {}
         params = (args, kwargs)
-        url = "/disbursements"
+        url = f"/disbursements/{args[0]}"
         expected_correct_result = disbursement_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
@@ -60,23 +60,11 @@ class TestCreateVirtualAccount(BaseModelTest):
         """
         _, _, _, http_method_name, url, params, expected_correct_result = default_virtual_account_data
         args, kwargs = params
-        headers = {}
-        body = {
-            "external_id": "demo_1475459775872",
-            "bank_code": "BCA",
-            "account_holder_name": "Bob Jones",
-            "account_number": "1231242311",
-            "description": "Reimbursement for shoes",
-            "amount": 17000,
-            "email_bcc": [],
-            "email_cc": [],
-            "email_to": [],
-        }
 
         mocker.patch.object(_APIRequestor, http_method_name)
         tested_method = getattr(_APIRequestor, http_method_name)
         setattr(tested_method, "return_value", mock_correct_response)
 
-        Disbursement.create(*args, **kwargs)
-        tested_method.assert_called_with(url, headers=headers, body=body)
+        Disbursement.get(*args, **kwargs)
+        tested_method.assert_called_with(url)
 # fmt: on

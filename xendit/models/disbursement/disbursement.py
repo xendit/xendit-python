@@ -122,7 +122,7 @@ class Disbursement:
           XenditError
 
         """
-        url = f"disbursements/{id}"
+        url = f"/disbursements/{id}"
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Disbursement(resp.body)
