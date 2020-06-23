@@ -9,9 +9,10 @@ class BaseModelTest:
         self, tested_class_name, tested_method_name, params, expected_result
     ):
         xendit = Xendit(api_key="mock_key")
+        args, kwargs = params
         tested_object = getattr(xendit, tested_class_name)
         tested_method = getattr(tested_object, tested_method_name)
-        returned_object = tested_method(*params)
+        returned_object = tested_method(*args, **kwargs)
         try:
             assert vars(returned_object) == expected_result
         except TypeError:
@@ -22,13 +23,28 @@ class BaseModelTest:
         self, tested_class_name, tested_method_name, params
     ):
         xendit = Xendit(api_key="mock_key")
+        args, kwargs = params
         tested_object = getattr(xendit, tested_class_name)
         tested_method = getattr(tested_object, tested_method_name)
         with pytest.raises(XenditError):
-            print(tested_method(*params))
+            print(tested_method(*args, **kwargs))
 
     def run_success_return_test_on_xendit_instance(self, mocker, mock_correct_response, default_tested_class_data):
-        tested_class, class_name, method_name, http_method_name, params, expected_correct_result = default_tested_class_data
+        """Using xendit instance for API key and receive result from API, it should return correct result
+
+        Args:
+            mocker (fixture): Default mocker fixture
+            mock_correct_response (function): Mock correct response that sent by APIRequestor
+            default_tested_class_data (tuple): Tuple with 6 item that contain:
+            - tested_class (class): Class that will be tested
+            - class_name (str): String representation for the class
+            - method_name (str): Method name that will be tested
+            - http_method_name (str): HTTP Method name that will be used in the API Requestor
+            - url (str): URL for the request
+            - params (tuple): Params with format (args, kwargs)
+            - expected_correct_result (dict): Expected Correct Result
+        """
+        tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result = default_tested_class_data
         mocker.patch.object(_APIRequestor, http_method_name)
         api_requestor_used_method = getattr(_APIRequestor, http_method_name)
         setattr(api_requestor_used_method, "return_value", mock_correct_response)
@@ -40,7 +56,21 @@ class BaseModelTest:
         )
 
     def run_raises_error_test_on_xendit_instance(self, mocker, mock_error_request_response, default_tested_class_data):
-        tested_class, class_name, method_name, http_method_name, params, expected_correct_result = default_tested_class_data
+        """Using xendit instance for API key and receive error from API, it should return XenditError
+
+        Args:
+            mocker (fixture): Default mocker fixture
+            mock_correct_response (function): Mock correct response that sent by APIRequestor
+            default_tested_class_data (tuple): Tuple with 6 item that contain:
+            - tested_class (class): Class that will be tested
+            - class_name (str): String representation for the class
+            - method_name (str): Method name that will be tested
+            - http_method_name (str): HTTP Method name that will be used in the API Requestor
+            - url (str): URL for the request
+            - params (tuple): Params with format (args, kwargs)
+            - expected_correct_result (dict): Expected Correct Result
+        """
+        tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result = default_tested_class_data
         mocker.patch.object(_APIRequestor, http_method_name)
         api_requestor_used_method = getattr(_APIRequestor, http_method_name)
         setattr(api_requestor_used_method, "return_value", mock_error_request_response)
@@ -51,11 +81,26 @@ class BaseModelTest:
         )
 
     def run_success_return_test_on_global_config(self, mocker, mock_correct_response, default_tested_class_data):
-        tested_class, class_name, method_name, http_method_name, params, expected_correct_result = default_tested_class_data
+        """Using global config for API key and receive result from API, it should return the correct result
+
+        Args:
+            mocker (fixture): Default mocker fixture
+            mock_correct_response (function): Mock correct response that sent by APIRequestor
+            default_tested_class_data (tuple): Tuple with 6 item that contain:
+            - tested_class (class): Class that will be tested
+            - class_name (str): String representation for the class
+            - method_name (str): Method name that will be tested
+            - http_method_name (str): HTTP Method name that will be used in the API Requestor
+            - url (str): URL for the request
+            - params (tuple): Params with format (args, kwargs)
+            - expected_correct_result (dict): Expected Correct Result
+        """
+        tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result = default_tested_class_data
+        args, kwargs = params
         mocker.patch.object(_APIRequestor, http_method_name)
         api_requestor_used_method = getattr(_APIRequestor, http_method_name)
         setattr(api_requestor_used_method, "return_value", mock_correct_response)
-        returned_object = getattr(tested_class, method_name)(*params)
+        returned_object = getattr(tested_class, method_name)(*args, **kwargs)
         try:
             assert vars(returned_object) == expected_correct_result
         except TypeError:
@@ -63,11 +108,26 @@ class BaseModelTest:
                 assert vars(singular_data) == expected_correct_result[idx]
 
     def run_raises_error_test_on_global_config(self, mocker, mock_error_request_response, default_tested_class_data):
-        tested_class, class_name, method_name, http_method_name, params, expected_correct_result = default_tested_class_data
+        """Using global config for API key and receive error from API, it should return XenditError
+
+        Args:
+            mocker (fixture): Default mocker fixture
+            mock_correct_response (function): Mock correct response that sent by APIRequestor
+            default_tested_class_data (tuple): Tuple with 6 item that contain:
+            - tested_class (class): Class that will be tested
+            - class_name (str): String representation for the class
+            - method_name (str): Method name that will be tested
+            - http_method_name (str): HTTP Method name that will be used in the API Requestor
+            - url (str): URL for the request
+            - params (tuple): Params with format (args, kwargs)
+            - expected_correct_result (dict): Expected Correct Result
+        """
+        tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result = default_tested_class_data
+        args, kwargs = params
         mocker.patch.object(_APIRequestor, http_method_name)
         api_requestor_used_method = getattr(_APIRequestor, http_method_name)
         setattr(api_requestor_used_method, "return_value", mock_error_request_response)
         with pytest.raises(XenditError):
-            returned_object = getattr(tested_class, method_name)(*params)
+            returned_object = getattr(tested_class, method_name)(*args, **kwargs)
             print(returned_object)
 # fmt: on

@@ -1,7 +1,7 @@
 import inspect
 
 
-def _extract_params(function_locals, func_object, headers_params=[]):
+def _extract_params(function_locals, func_object, headers_params=[], ignore_params=[]):
     """Extract data from function_locals to headers and body of the request
 
     Args:
@@ -20,7 +20,7 @@ def _extract_params(function_locals, func_object, headers_params=[]):
     }
     for param in inspect.getfullargspec(func_object)[0]:
         value = function_locals.get(param, None)
-        if value is not None:
+        if value is not None and param not in ignore_params:
             if param in headers_params:
                 mapped_param = map_headers_key[param]
                 headers[mapped_param] = function_locals[param]

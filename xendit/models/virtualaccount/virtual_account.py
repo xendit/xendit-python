@@ -193,7 +193,10 @@ class VirtualAccount:
             locals(),
             func_object=VirtualAccount.update,
             headers_params=["x_idempotency_key"],
+            ignore_params=["id"],
         )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
         resp = _APIRequestor.patch(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccount(resp.body)
