@@ -18,6 +18,12 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Use Xendit Instance](#use-xendit-instance)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
+    - [Virtual Account Service](#virtual-account-service)
+      - [Create Virtual Account](#create-virtual-account)
+      - [Get Virtual Account Banks](#get-virtual-account-banks)
+      - [Get Virtual Account](#get-virtual-account)
+      - [Update Virtual Account](#update-virtual-account)
+      - [Get Virtual Account Payment](#get-virtual-account-payment)
   - [Contributing](#contributing)
     - [Tests](#tests)
       - [Running the Test](#running-the-test)
@@ -94,6 +100,143 @@ Will return
 ```
 {'balance': 1000000000}
 1000000000
+```
+
+### Virtual Account Service
+
+#### Create Virtual Account
+
+```python
+from xendit import VirtualAccount
+
+virtual_account = xendit.VirtualAccount.create("demo_1475459775872", "BNI", "Rika Sutanto")
+print(virtual_account)
+```
+
+Will return
+
+```
+{
+    "owner_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_1475459775872",
+    "bank_code": "BNI",
+    "merchant_code": "8808",
+    "name": "Rika Sutanto",
+    "account_number": "8808999956275653",
+    "is_single_use": false,
+    "status": "PENDING",
+    "expiration_date": "2051-06-22T17:00:00.000Z",
+    "is_closed": false,
+    "id": "5ef174c48dd9ea2fc97d6a1e"
+}
+```
+
+#### Get Virtual Account Banks
+```python
+from xendit import VirtualAccount
+
+virtual_account_banks = xendit.VirtualAccount.get_banks()
+print(virtual_account_banks)
+```
+
+Will return
+
+```
+[{
+    "name": "Bank Mandiri",
+    "code": "MANDIRI"
+}, {
+    "name": "Bank Negara Indonesia",
+    "code": "BNI"
+}, {
+    "name": "Bank Rakyat Indonesia",
+    "code": "BRI"
+}, {
+    "name": "Bank Permata",
+    "code": "PERMATA"
+}, {
+    "name": "Bank Central Asia",
+    "code": "BCA"
+}]
+```
+#### Get Virtual Account
+
+```python
+from xendit import VirtualAccount
+
+virtual_account = xendit.VirtualAccount.get("5eec3a3e8dd9ea2fc97d6728")
+print(virtual_account)
+```
+
+Will return
+
+```
+{
+    "owner_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_1475459775872",
+    "bank_code": "BNI",
+    "merchant_code": "8808",
+    "name": "Rika Sutanto",
+    "account_number": "8808999917965673",
+    "is_single_use": true,
+    "status": "ACTIVE",
+    "expiration_date": "2051-06-18T17:00:00.000Z",
+    "is_closed": false,
+    "id": "5eec3a3e8dd9ea2fc97d6728"
+}
+```
+
+#### Update Virtual Account
+
+```python
+from xendit import VirtualAccount
+
+virtual_account = xendit.VirtualAccount.update("5eec3a3e8dd9ea2fc97d6728", is_single_use=True)
+print(virtual_account)
+```
+
+Will return
+
+```
+{
+    "owner_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_1475459775872",
+    "bank_code": "BNI",
+    "merchant_code": "8808",
+    "name": "Rika Sutanto",
+    "account_number": "8808999917965673",
+    "is_single_use": true,
+    "status": "PENDING",
+    "expiration_date": "2051-06-18T17:00:00.000Z",
+    "is_closed": false,
+    "id": "5eec3a3e8dd9ea2fc97d6728"
+}
+```
+
+#### Get Virtual Account Payment
+
+```python
+from xendit import VirtualAccount
+
+virtual_account_payment = xendit.VirtualAccount.get_payment("1502450097080")
+print(virtual_account)
+```
+
+Will return
+
+```
+{
+    "id": "598d91b1191029596846047f",
+    "payment_id": "1502450097080",
+    "callback_virtual_account_id": "598d5f71bf64853820c49a18",
+    "external_id": "demo-1502437214715",
+    "merchant_code": "77517",
+    "account_number": "1000016980",
+    "bank_code": "BNI",
+    "amount": 5000,
+    "sender_name": "JOHN DOE",
+    "transaction_timestamp": "2017-08-11T11:14:57.080Z"
+}
 ```
 
 ## Contributing

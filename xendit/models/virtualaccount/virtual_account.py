@@ -166,7 +166,7 @@ class VirtualAccount:
         suggested_amount=None,
         expected_amount=None,
         expiration_date=None,
-        is_single_user=None,
+        is_single_use=None,
         description=None,
         x_idempotency_key=None,
         **kwargs,
