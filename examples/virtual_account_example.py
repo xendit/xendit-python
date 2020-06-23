@@ -105,8 +105,8 @@ class GetVirtualAccountPayment:
 
     @staticmethod
     def example(xendit_instance):
-        print('Running xendit.VirtualAccount.get_payment("1502450097080"):')
-        GetVirtualAccountPayment.run(xendit_instance, "1502450097080")
+        print('Running xendit.VirtualAccount.get_payment("5ef18efca7d10d1b4d61fb52"):')
+        GetVirtualAccountPayment.run(xendit_instance, "5ef18efca7d10d1b4d61fb52")
 
         print('Running xendit.VirtualAccount.get_payment("random-id"):')
         GetVirtualAccountPayment.run(xendit_instance, "random-id")

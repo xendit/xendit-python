@@ -13,7 +13,7 @@ class TestGetVirtualAccountPayment(BaseModelTest):
         class_name = "VirtualAccount"
         method_name = "get_payment"
         http_method_name = "get"
-        args = ("1502450097080",)
+        args = ("5ef18efca7d10d1b4d61fb52",)
         kwargs = {}
         params = (args, kwargs)
         url = f"/callback_virtual_account_payments/payment_id={args[0]}"

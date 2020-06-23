@@ -218,7 +218,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account_payment = xendit.VirtualAccount.get_payment("1502450097080")
+virtual_account_payment = xendit.VirtualAccount.get_payment("5ef18efca7d10d1b4d61fb52")
 print(virtual_account)
 ```
 
@@ -226,16 +226,15 @@ Will return
 
 ```
 {
-    "id": "598d91b1191029596846047f",
-    "payment_id": "1502450097080",
-    "callback_virtual_account_id": "598d5f71bf64853820c49a18",
-    "external_id": "demo-1502437214715",
-    "merchant_code": "77517",
-    "account_number": "1000016980",
-    "bank_code": "BNI",
-    "amount": 5000,
-    "sender_name": "JOHN DOE",
-    "transaction_timestamp": "2017-08-11T11:14:57.080Z"
+    "id": "5ef18efcf9ce3b5f8e188ee4",
+    "payment_id": "5ef18efca7d10d1b4d61fb52",
+    "callback_virtual_account_id": "5ef18ece8dd9ea2fc97d6a84",
+    "external_id": "VA_fixed-1592889038",
+    "merchant_code": "88608",
+    "account_number": "9999317837",
+    "bank_code": "MANDIRI",
+    "amount": 50000,
+    "transaction_timestamp": "2020-06-23T05:11:24.000Z"
 }
 ```
 
