@@ -8,6 +8,7 @@ def _extract_params(function_locals, func_object, headers_params=[], ignore_para
         - function_locals (dict): locals() of the function
         - func_object (function): Function that will be analyzed the parameter list
         - **headers_params (list): List of headers parameter. Defaults to [].
+        - **ignore_params (list): List of params that won't be used on headers and body. Default to []
 
     Returns:
         dict, dict: headers and body of the request
