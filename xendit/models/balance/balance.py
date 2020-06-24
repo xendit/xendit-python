@@ -43,7 +43,7 @@ class Balance:
           XenditError
         """
         headers, _ = _extract_params(
-            locals(), func_object=Balance.get, headers_params=["for-user-id"]
+            locals(), func_object=Balance.get, headers_params=["for_user_id"]
         )
         kwargs["headers"] = headers
         account_type = Balance._parse_value(account_type)
