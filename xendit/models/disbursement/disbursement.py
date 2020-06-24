@@ -16,10 +16,10 @@ class Disbursement:
       - DisbursementBank
 
     Static Methods:
-      - Disbursement.create (API Reference: Disbursement/Create Disbursement)
-      - Disbursement.get (API Reference: Disbursement/Get Disbursement by ID)
-      - Disbursement.get_by_ext_id (API Reference: Disbursement/Get Disbursement by External ID)
-      - Disbursement.get_available_banks (API Reference: Disbursement/Get Available Banks)
+      - Disbursement.create (API Reference: /Create Disbursement)
+      - Disbursement.get (API Reference: /Get Disbursement by ID)
+      - Disbursement.get_by_ext_id (API Reference: /Get Disbursement by External ID)
+      - Disbursement.get_available_banks (API Reference: /Get Available Banks)
 
     Attributes:
       - user_id
