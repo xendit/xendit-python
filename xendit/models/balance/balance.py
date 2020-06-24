@@ -33,7 +33,7 @@ class Balance:
         """Send GET request to retrieve balance (API Reference: Balance/Get Balance)
 
         Args:
-          - account_type (Balance.AccountType)
+          - account_type (BalanceAccountType)
           - **for_user_id (str) (XenPlatform only)
 
         Returns
