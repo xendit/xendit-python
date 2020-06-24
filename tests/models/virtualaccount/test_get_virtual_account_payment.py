@@ -49,7 +49,7 @@ class TestGetVirtualAccountPayment(BaseModelTest):
         Args:
             mocker (fixture): Default mocker fixture
             mock_correct_response (function): Mock correct response that sent by APIRequestor
-            default_tested_class_data (tuple): Tuple with 6 item that contain:
+            default_tested_class_data (tuple): Tuple with 7 item that contain:
             - tested_class (class): Class that will be tested
             - class_name (str): String representation for the class
             - method_name (str): Method name that will be tested
