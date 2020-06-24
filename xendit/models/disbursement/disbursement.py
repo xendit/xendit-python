@@ -10,7 +10,7 @@ from xendit.xendit_error import XenditError
 
 
 class Disbursement:
-    """Disbursement class (API Reference: Disbursement and Batch Disbursement)
+    """Disbursement class (API Reference: Disbursement)
 
     Related Classes:
       - DisbursementBank
