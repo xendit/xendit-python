@@ -60,11 +60,11 @@ class TestGetBalance(BaseModelTest):
         """
         _, _, _, http_method_name, url, params, expected_correct_result = default_balance_data
         args, kwargs = params
-
+        headers = {"for-user-id": "test-123"}
         mocker.patch.object(_APIRequestor, http_method_name)
         tested_method = getattr(_APIRequestor, http_method_name)
         setattr(tested_method, "return_value", mock_correct_response)
 
         Balance.get(*args, **kwargs)
-        tested_method.assert_called_with(url, headers={})
+        tested_method.assert_called_with(url, headers=headers)
 # fmt: on
