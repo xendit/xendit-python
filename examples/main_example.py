@@ -1,5 +1,6 @@
 from balance_example import balance_example
 from disbursement_example import disbursement_example
+from retail_outlet_example import retail_outlet_example
 from virtual_account_example import virtual_account_example
 
 # Hackish method to import from another directory
@@ -15,6 +16,7 @@ def ask_input():
     print("0. Exit")
     print("1. Balance")
     print("8. VirtualAccount")
+    print("9. Retail Outlets")
     print("13. Disbursement")
     try:
         return int(input())
@@ -33,6 +35,8 @@ if __name__ == "__main__":
             balance_example(xendit_instance)
         elif user_choice == 8:
             virtual_account_example(xendit_instance)
+        elif user_choice == 9:
+            retail_outlet_example(xendit_instance)
         elif user_choice == 13:
             disbursement_example(xendit_instance)
         else:
