@@ -1,6 +1,7 @@
 import json
 
 from .batch_disbursement_item import BatchDisbursementItem
+from ..disbursement import Disbursement
 
 from xendit._init_from_xendit_response import _init_from_xendit_response
 from xendit.xendit_error import XenditError
@@ -13,6 +14,7 @@ class BatchDisbursement:
 
     Related Classes:
       - BatchDisbursementItem
+      - DisbursementBank
 
     Static Methods:
       - BatchDisbursement.create_batch (API Reference: /Create Batch Disbursement)
@@ -74,3 +76,16 @@ class BatchDisbursement:
             return BatchDisbursementItem(resp.body)
         else:
             raise XenditError(resp)
+
+    @staticmethod
+    def get_available_banks(**kwargs):
+        """Get Available Banks (API Reference: Batch Disbursement/Get Available Banks)
+
+        Returns:
+          List of DisbursementBank
+
+        Raises:
+          XenditError
+
+        """
+        return Disbursement.get_available_banks()

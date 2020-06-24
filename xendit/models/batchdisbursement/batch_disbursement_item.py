@@ -1,4 +1,19 @@
 class BatchDisbursementItem:
+    """Item to be sent for Batch Disbursement (API Reference: BatchDisbursement)
+
+    Attributes:
+      - amount (int)
+      - bank_code (str)
+      - bank_account_name (str)
+      - bank_account_number (str)
+      - description (str)
+      - external_id (str)
+      - email_to (str[])
+      - email_cc (str[])
+      - email_bcc (str[])
+
+    """
+
     def __init__(
         self,
         amount,
