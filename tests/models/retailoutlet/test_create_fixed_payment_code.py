@@ -14,7 +14,7 @@ class TestCreateFixedPaymentCode(BaseModelTest):
         method_name = "create_fixed_payment_code"
         http_method_name = "post"
         args = ("demo_fixed_payment_code_123", "ALFAMART", "Rika Sutanto", 10000,)
-        kwargs = {}
+        kwargs = {"x_idempotency_key": "test-idemp_123"}
         params = (args, kwargs)
         url = "/fixed_payment_code"
         expected_correct_result = retail_outlet_response()
@@ -60,7 +60,7 @@ class TestCreateFixedPaymentCode(BaseModelTest):
         """
         _, _, _, http_method_name, url, params, expected_correct_result = default_retail_outlet_data
         args, kwargs = params
-        headers = {}
+        headers = {"X-IDEMPOTENCY-KEY": "test-idemp_123"}
         body = {
             "expected_amount": 10000,
             "external_id": "demo_fixed_payment_code_123",
