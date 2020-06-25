@@ -70,6 +70,7 @@ class Disbursement:
         email_bcc=[],
         x_idempotency_key=None,
         for_user_id=None,
+        x_api_version=None,
         **kwargs,
     ):
         """Send POST Request to create Disbursement (API Reference: Disbursement/Create Disbursement)
@@ -84,8 +85,9 @@ class Disbursement:
           - **email_to (str[])
           - **email_cc (str[])
           - **email_bcc (str[])
-          - **x_idempotency_key (str)
           - **for_user_id (str)
+          - **x_idempotency_key (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           Disbursement
@@ -98,7 +100,7 @@ class Disbursement:
         headers, body = _extract_params(
             locals(),
             func_object=Disbursement.create,
-            headers_params=["for_user_id", "x_idempotency_key"],
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
@@ -109,11 +111,13 @@ class Disbursement:
             raise XenditError(resp)
 
     @staticmethod
-    def get(id, **kwargs):
+    def get(id, for_user_id=None, x_api_version=None, **kwargs):
         """Get Disbursement detail by ID (API Reference: Disbursement/Get Disbursement by ID)
 
         Args:
           - id (str)
+          - **for_user_id (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           Disbursement
@@ -123,6 +127,14 @@ class Disbursement:
 
         """
         url = f"/disbursements/{id}"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=Disbursement.get,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["id"],
+        )
+        kwargs["headers"] = headers
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Disbursement(resp.body)
@@ -130,11 +142,13 @@ class Disbursement:
             raise XenditError(resp)
 
     @staticmethod
-    def get_by_ext_id(external_id, **kwargs):
+    def get_by_ext_id(external_id, for_user_id=None, x_api_version=None, **kwargs):
         """Get Disbursement detail by external ID (API Reference: Disbursement/Get Disbursement by External ID)
 
         Args:
           - external_id (str)
+          - **for_user_id (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           Disbursement
@@ -144,6 +158,14 @@ class Disbursement:
 
         """
         url = f"/disbursements?external_id={external_id}"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=Disbursement.get_by_ext_id,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["external_id"],
+        )
+        kwargs["headers"] = headers
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             disbursements = []
@@ -154,8 +176,12 @@ class Disbursement:
             raise XenditError(resp)
 
     @staticmethod
-    def get_available_banks(**kwargs):
+    def get_available_banks(for_user_id=None, x_api_version=None, **kwargs):
         """Get Available Banks (API Reference: Disbursement/Get Available Banks)
+
+        Args:
+          - **for_user_id (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           List of DisbursementBank
@@ -165,6 +191,13 @@ class Disbursement:
 
         """
         url = "/available_disbursements_banks"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=Disbursement.get_available_banks,
+            headers_params=["for_user_id", "x_api_version"],
+        )
+        kwargs["headers"] = headers
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             disbursement_banks = []

@@ -40,7 +40,7 @@ class Balance:
         Args:
           - account_type (BalanceAccountType)
           - **for_user_id (str) (XenPlatform only)
-          - **api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns
           Balance
