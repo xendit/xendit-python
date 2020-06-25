@@ -80,6 +80,7 @@ class VirtualAccount:
         description=None,
         for_user_id=None,
         x_idempotency_key=None,
+        x_api_version=None,
         **kwargs,
     ):
         """Send POST Request to create VirtualAccount (API Reference: Virtual Account/Create Virtual Account)
@@ -95,8 +96,9 @@ class VirtualAccount:
           - **expiration_date (str) (ISO 8601 Date)
           - **is_single_use (bool)
           - **description (str)
-          - **for_user_id (str) (headers)
-          - **x_idempotency_key (str) (headers)
+          - **for_user_id (str) (XenPlatforms only)
+          - **x_idempotency_key (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           VirtualAccount
@@ -109,10 +111,11 @@ class VirtualAccount:
         headers, body = _extract_params(
             locals(),
             func_object=VirtualAccount.create,
-            headers_params=["for_user_id", "x_idempotency_key"],
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
+
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccount(resp.body)
@@ -120,8 +123,12 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get_banks(**kwargs):
+    def get_banks(for_user_id=None, x_api_version=None, **kwargs):
         """Get available banks (API Reference: Virtual Account/Get Virtual Account Banks)
+
+        Args:
+          - **for_user_id (str) (XenPlatforms only)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           List of VirtualAccountBank
@@ -131,6 +138,14 @@ class VirtualAccount:
 
         """
         url = "/available_virtual_account_banks"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=VirtualAccount.get_banks,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["id"],
+        )
+        kwargs["headers"] = headers
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             virtual_account_banks = []
@@ -141,11 +156,13 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get(id, **kwargs):
+    def get(id, for_user_id=None, x_api_version=None, **kwargs):
         """Get the detail of Virtual Account (API Reference: Virtual Account/Get Virtual Account
 
         Args:
           - id (str)
+          - **for_user_id (str) (XenPlatforms only)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           VirtualAccount
@@ -154,6 +171,14 @@ class VirtualAccount:
           XenditError
         """
         url = f"/callback_virtual_accounts/{id}"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=VirtualAccount.get,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["id"],
+        )
+        kwargs["headers"] = headers
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccount(resp.body)
@@ -168,7 +193,9 @@ class VirtualAccount:
         expiration_date=None,
         is_single_use=None,
         description=None,
+        for_user_id=None,
         x_idempotency_key=None,
+        x_api_version=None,
         **kwargs,
     ):
         """Update Virtual Account detail (API Reference: Virtual Account/Update Virtual Account
@@ -180,7 +207,9 @@ class VirtualAccount:
           - **expiration_date (str) (ISO 8601 Date)
           - **is_single_use (bool)
           - **description (str)
+          - **for_user_id (str) (XenPlatforms only)
           - **x_idempotency_key (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           VirtualAccount
@@ -192,11 +221,12 @@ class VirtualAccount:
         headers, body = _extract_params(
             locals(),
             func_object=VirtualAccount.update,
-            headers_params=["x_idempotency_key"],
+            headers_params=["x_idempotency_key", "for_user_id", "x_api_version"],
             ignore_params=["id"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
+
         resp = _APIRequestor.patch(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccount(resp.body)
@@ -204,7 +234,7 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get_payment(payment_id, **kwargs):
+    def get_payment(payment_id, for_user_id=None, x_api_version=None, **kwargs):
         """Get payment from virtual account (API Reference: Virtual Account/Get Virtual Account Payment
 
         Args:
@@ -217,6 +247,14 @@ class VirtualAccount:
           XenditError
         """
         url = f"/callback_virtual_account_payments/payment_id={payment_id}"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=VirtualAccount.get_payment,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["payment_id"],
+        )
+        kwargs["headers"] = headers
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return VirtualAccountPayment(resp.body)
