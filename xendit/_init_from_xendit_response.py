@@ -17,14 +17,9 @@ def _init_from_xendit_response(required, optional=[]):
             for required_attr in required:
                 setattr(wrapped_object, required_attr, xendit_response[required_attr])
             for optional_attr in optional:
-                try:
-                    setattr(
-                        wrapped_object,
-                        optional_attr,
-                        xendit_response.get(optional_attr, None),
-                    )
-                except KeyError:
-                    pass
+                value = xendit_response.get(optional_attr, None)
+                if value is not None:
+                    setattr(wrapped_object, optional_attr, value)
             return func(*args)
 
         return internal_wrapper

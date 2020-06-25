@@ -19,7 +19,13 @@ class _APIRequestor:
 
     @staticmethod
     def _request(
-        method, url, api_key=None, base_url=None, http_client=requests, headers={}
+        method,
+        url,
+        api_key=None,
+        base_url=None,
+        http_client=requests,
+        headers={},
+        body={},
     ):
         """Send HTTP Method to given url
 
@@ -29,8 +35,8 @@ class _APIRequestor:
           - **api_key (string): API Key from xendit instance. Default to config if not provided
           - **base_url (string): Base url of the API. Default to config if not provided
           - **http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
-          - **x_idempotency_key (string): X-IDEMPOTENCY-KEY header that will be used
-          - **for_user_id (string): for-user-id header that will be used
+          - **headers: Headers of the request
+          - **body: Body of the request. Only used on POST and PATCH request
         """
         if api_key is None:
             api_key = xendit.api_key
@@ -39,7 +45,10 @@ class _APIRequestor:
         url = base_url + url
 
         headers = _APIRequestor._add_default_headers(api_key, headers)
-        resp = http_client.request(method, url, headers=headers)
+        if method == "GET":
+            resp = http_client.request(method, url, headers=headers)
+        else:
+            resp = http_client.request(method, url, headers=headers, json=body)
         return XenditResponse(resp.status_code, resp.headers, resp.json())
 
     @staticmethod

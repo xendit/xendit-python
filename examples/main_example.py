@@ -1,3 +1,6 @@
+from balance_example import balance_example
+from virtual_account_example import virtual_account_example
+
 # Hackish method to import from another directory
 # Useful while xendit-python isn't released yet to the public
 import importlib.machinery
@@ -10,29 +13,12 @@ def ask_input():
     print("Please type one of the number below")
     print("0. Exit")
     print("1. Balance")
+    print("8. VirtualAccount")
     try:
         return int(input())
     except ValueError:
         print("Invalid input. Please type a number")
         return ask_input()
-
-
-def get_balance(xendit_instance, params):
-    try:
-        print(xendit_instance.Balance.get(params))
-    except xendit.XenditError as e:
-        print("Error status code:", e.status_code)
-        print("Error message:", e)
-    except ValueError as e:
-        print("Error message:", e)
-
-
-def balance_example(xendit_instance):
-    print("Running xendit.Balance.get(xendit.Balance.AccountType.CASH):")
-    get_balance(xendit_instance, xendit.BalanceAccountType.CASH)
-
-    print('Running xendit.Balance.get("cash"):')
-    get_balance(xendit_instance, "cash")
 
 
 if __name__ == "__main__":
@@ -43,6 +29,8 @@ if __name__ == "__main__":
         print()
         if user_choice == 1:
             balance_example(xendit_instance)
+        elif user_choice == 8:
+            virtual_account_example(xendit_instance)
         else:
             print("Wrong input, please output number in range [0,1]")
         print()
