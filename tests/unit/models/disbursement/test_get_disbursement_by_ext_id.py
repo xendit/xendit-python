@@ -1,6 +1,6 @@
 import pytest
 from ..base_model_test import BaseModelTest
-from .sample_response import multi_disbursement_response
+from tests.sampleresponse.disbursement import multi_disbursement_response
 from xendit.models import Disbursement
 
 
