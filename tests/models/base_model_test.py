@@ -130,4 +130,34 @@ class BaseModelTest:
         with pytest.raises(XenditError):
             returned_object = getattr(tested_class, method_name)(*args, **kwargs)
             print(returned_object)
+
+    def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, api_requestor_request_data):
+        """It should send correct request to API Requestor
+
+        Args:
+            mocker (fixture): Default mocker fixture
+            mock_correct_response (function): Mock correct response that sent by APIRequestor
+            api_requestor_request_data (tuple): Tuple with 8 items that contain:
+            - tested_class (class): Class that will be tested
+            - class_name (str): String representation for the class
+            - method_name (str): Method name that will be tested
+            - http_method_name (str): HTTP Method name that will be used in the API Requestor
+            - url (str): URL for the request
+            - params (tuple): Params with format (args, kwargs)
+            - headers (dict): headers that will be sent
+            - body (dict): body that will be sent
+        """
+        tested_class, class_name, method_name, http_method_name, url, params, headers, body = api_requestor_request_data
+        args, kwargs = params
+
+        mocker.patch.object(_APIRequestor, http_method_name)
+        tested_apirequestor_method = getattr(_APIRequestor, http_method_name)
+        setattr(tested_apirequestor_method, "return_value", mock_correct_response)
+
+        tested_method = getattr(tested_class, method_name)
+        tested_method(*args, **kwargs)
+        if(http_method_name == "get"):
+            tested_apirequestor_method.assert_called_with(url, headers=headers)
+        else:
+            tested_apirequestor_method.assert_called_with(url, headers=headers, body=body)
 # fmt: on

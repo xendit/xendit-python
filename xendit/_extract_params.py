@@ -17,6 +17,7 @@ def _extract_params(function_locals, func_object, headers_params=[], ignore_para
     headers = dict()
     map_headers_key = {
         "for_user_id": "for-user-id",
+        "x_api_version": "X-API-VERSION",
         "x_idempotency_key": "X-IDEMPOTENCY-KEY",
     }
     for param in inspect.getfullargspec(func_object)[0]:
