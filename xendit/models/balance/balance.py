@@ -29,12 +29,18 @@ class Balance:
         return json.dumps(vars(self), indent=4)
 
     @staticmethod
-    def get(account_type=BalanceAccountType.CASH, for_user_id=None, **kwargs):
+    def get(
+        account_type=BalanceAccountType.CASH,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
         """Send GET request to retrieve balance (API Reference: Balance/Get Balance)
 
         Args:
           - account_type (BalanceAccountType)
           - **for_user_id (str) (XenPlatform only)
+          - **api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns
           Balance
@@ -43,7 +49,9 @@ class Balance:
           XenditError
         """
         headers, _ = _extract_params(
-            locals(), func_object=Balance.get, headers_params=["for_user_id"]
+            locals(),
+            func_object=Balance.get,
+            headers_params=["for_user_id", "x_api_version"],
         )
         kwargs["headers"] = headers
         account_type = Balance._parse_value(account_type)

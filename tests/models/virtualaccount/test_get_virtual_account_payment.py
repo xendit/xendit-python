@@ -2,7 +2,6 @@ import pytest
 from ..base_model_test import BaseModelTest
 from .sample_response import virtual_account_payment_response
 from xendit.models import VirtualAccount
-from xendit._api_requestor import _APIRequestor
 
 
 # fmt: off
@@ -19,6 +18,13 @@ class TestGetVirtualAccountPayment(BaseModelTest):
         url = f"/callback_virtual_account_payments/payment_id={args[0]}"
         expected_correct_result = virtual_account_payment_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
+
+    @pytest.fixture
+    def api_requestor_request_data(self, default_virtual_account_data):
+        tested_class, class_name, method_name, http_method_name, url, params, _ = default_virtual_account_data
+        headers = {}
+        body = {}
+        return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 
     @pytest.mark.parametrize("mock_correct_response", [virtual_account_payment_response()], indirect=True)
     def test_return_virtual_account_on_correct_params(
@@ -43,28 +49,6 @@ class TestGetVirtualAccountPayment(BaseModelTest):
         self.run_raises_error_test_on_global_config(mocker, mock_error_request_response, default_virtual_account_data)
 
     @pytest.mark.parametrize("mock_correct_response", [virtual_account_payment_response()], indirect=True)
-    def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, default_virtual_account_data):
-        """It should send correct request to API Requestor
-
-        Args:
-            mocker (fixture): Default mocker fixture
-            mock_correct_response (function): Mock correct response that sent by APIRequestor
-            default_tested_class_data (tuple): Tuple with 7 item that contain:
-            - tested_class (class): Class that will be tested
-            - class_name (str): String representation for the class
-            - method_name (str): Method name that will be tested
-            - http_method_name (str): HTTP Method name that will be used in the API Requestor
-            - url (str): URL for the request
-            - params (tuple): Params with format (args, kwargs)
-            - expected_correct_result (dict): Expected Correct Result
-        """
-        _, _, _, http_method_name, url, params, expected_correct_result = default_virtual_account_data
-        args, kwargs = params
-
-        mocker.patch.object(_APIRequestor, http_method_name)
-        tested_method = getattr(_APIRequestor, http_method_name)
-        setattr(tested_method, "return_value", mock_correct_response)
-
-        VirtualAccount.get_payment(*args, **kwargs)
-        tested_method.assert_called_with(url)
+    def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, api_requestor_request_data):
+        super().test_send_correct_request_to_api_requestor(mocker, mock_correct_response, api_requestor_request_data)
 # fmt: on
