@@ -16,6 +16,7 @@ This library is the abstraction of Xendit API for access from applications writt
     - [API Key](#api-key)
       - [Global Variable](#global-variable)
       - [Use Xendit Instance](#use-xendit-instance)
+    - [Headers](#headers)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
     - [Virtual Account Service](#virtual-account-service)
@@ -72,6 +73,27 @@ x = xendit.Xendit(api_key="test-key123")
 # Then access each class from x attribute
 b = x.Balance
 b.get()
+```
+
+### Headers
+
+You can add headers by using the following keyword parameters
+- X-IDEMPOTENCY-KEY: `x_idempotency_key`
+
+```
+VirtualAccount.create(x_idempotency_key="your-idemp-key")
+```
+
+- for-user-id: `for_user_id`
+
+```
+Balance.get(for_user_id='subaccount-user-id')
+```
+
+- X-API-VERSION: `x_api_version`
+
+```
+Balance.get(x_api_version='2020-01-01')
 ```
 
 ### Balance Service

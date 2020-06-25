@@ -1,6 +1,6 @@
 import pytest
 from ..base_model_test import BaseModelTest
-from .sample_response import retail_outlet_response
+from tests.sampleresponse.retail_outlet import retail_outlet_response
 from xendit.models import RetailOutlet
 
 
