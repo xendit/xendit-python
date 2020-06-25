@@ -80,7 +80,7 @@ class VirtualAccount:
         description=None,
         for_user_id=None,
         x_idempotency_key=None,
-        api_version=None,
+        x_api_version=None,
         **kwargs,
     ):
         """Send POST Request to create VirtualAccount (API Reference: Virtual Account/Create Virtual Account)
@@ -98,7 +98,7 @@ class VirtualAccount:
           - **description (str)
           - **for_user_id (str) (XenPlatforms only)
           - **x_idempotency_key (str)
-          - **api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           VirtualAccount
@@ -111,7 +111,7 @@ class VirtualAccount:
         headers, body = _extract_params(
             locals(),
             func_object=VirtualAccount.create,
-            headers_params=["for_user_id", "x_idempotency_key", "api_version"],
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
@@ -123,12 +123,12 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get_banks(for_user_id=None, api_version=None, **kwargs):
+    def get_banks(for_user_id=None, x_api_version=None, **kwargs):
         """Get available banks (API Reference: Virtual Account/Get Virtual Account Banks)
 
         Args:
           - **for_user_id (str) (XenPlatforms only)
-          - **api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           List of VirtualAccountBank
@@ -141,7 +141,7 @@ class VirtualAccount:
         headers, _ = _extract_params(
             locals(),
             func_object=VirtualAccount.get_banks,
-            headers_params=["for_user_id", "api_version"],
+            headers_params=["for_user_id", "x_api_version"],
             ignore_params=["id"],
         )
         kwargs["headers"] = headers
@@ -156,13 +156,13 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get(id, for_user_id=None, api_version=None, **kwargs):
+    def get(id, for_user_id=None, x_api_version=None, **kwargs):
         """Get the detail of Virtual Account (API Reference: Virtual Account/Get Virtual Account
 
         Args:
           - id (str)
           - **for_user_id (str) (XenPlatforms only)
-          - **api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           VirtualAccount
@@ -174,7 +174,7 @@ class VirtualAccount:
         headers, _ = _extract_params(
             locals(),
             func_object=VirtualAccount.get,
-            headers_params=["for_user_id", "api_version"],
+            headers_params=["for_user_id", "x_api_version"],
             ignore_params=["id"],
         )
         kwargs["headers"] = headers
@@ -195,7 +195,7 @@ class VirtualAccount:
         description=None,
         for_user_id=None,
         x_idempotency_key=None,
-        api_version=None,
+        x_api_version=None,
         **kwargs,
     ):
         """Update Virtual Account detail (API Reference: Virtual Account/Update Virtual Account
@@ -209,7 +209,7 @@ class VirtualAccount:
           - **description (str)
           - **for_user_id (str) (XenPlatforms only)
           - **x_idempotency_key (str)
-          - **api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
         Returns:
           VirtualAccount
@@ -221,7 +221,7 @@ class VirtualAccount:
         headers, body = _extract_params(
             locals(),
             func_object=VirtualAccount.update,
-            headers_params=["x_idempotency_key", "for_user_id", "api_version"],
+            headers_params=["x_idempotency_key", "for_user_id", "x_api_version"],
             ignore_params=["id"],
         )
         kwargs["headers"] = headers
@@ -234,7 +234,7 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get_payment(payment_id, for_user_id=None, api_version=None, **kwargs):
+    def get_payment(payment_id, for_user_id=None, x_api_version=None, **kwargs):
         """Get payment from virtual account (API Reference: Virtual Account/Get Virtual Account Payment
 
         Args:
@@ -250,7 +250,7 @@ class VirtualAccount:
         headers, _ = _extract_params(
             locals(),
             func_object=VirtualAccount.get_payment,
-            headers_params=["for_user_id", "api_version"],
+            headers_params=["for_user_id", "x_api_version"],
             ignore_params=["payment_id"],
         )
         kwargs["headers"] = headers
