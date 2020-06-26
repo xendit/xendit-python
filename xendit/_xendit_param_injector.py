@@ -1,32 +1,39 @@
 class _XenditParamInjector:
-    def __init__(self, injected_class, api_key, base_url, http_client):
-        self.api_key = api_key
-        self.base_url = base_url
-        self.http_client = http_client
-        self.injected_class = injected_class
-        self.static_method_list = []
-        for attr_name, value in injected_class.__dict__.items():
-            if isinstance(value, staticmethod):
-                self.static_method_list.append(attr_name)
-        self.__dict__.update(injected_class.__dict__)
+    """Builder class to inject parameters (api_key, base_url, http_client) to feature class"""
 
-    def __getattribute__(self, name):
-        # We need to check whether the passed attribute/method are for APIKeyInjector or the injected class static method.
-        # The injected class static method are stored on `static_method_list`, so we can check whether name is contained inside it.
-        # To handle infinite loop with attribute checking (Because every attribute access will arrive here),
-        # we need to also check whether `name` equals to `static_method_list`.
+    @staticmethod
+    def instantiate(injected_class, params):
+        """Inject every static method in `injected_class` with provided parameters.
 
-        if name == "static_method_list" or name not in self.static_method_list:
-            attr = object.__getattribute__(self, name)
-            return attr
-        else:
-            attr = object.__getattribute__(self.injected_class, name).__func__
+        Args:
+          - injected_class (class): Class that will be injected
+          - params (tuple): Parameters that will be injected. Consist of (api_key, base_url, http_client)
 
-            def inject_func_with_api_key(*args, **kwargs):
-                kwargs["api_key"] = self.api_key
-                kwargs["base_url"] = self.base_url
-                kwargs["http_client"] = self.http_client
-                result = attr(*args, **kwargs)
-                return result
+        Return:
+          injected_class
+        """
 
-            return inject_func_with_api_key
+        class Inject(injected_class):
+            """Copy of the injected class. Need to use this to make sure that we do not inject a package-wide class"""
+
+            pass
+
+        for keys, value in vars(injected_class).items():
+            if type(value) == staticmethod and not keys.startswith("_"):
+                _XenditParamInjector._inject_function(Inject, params, keys, value)
+        return Inject
+
+    @staticmethod
+    def _inject_function(injected_class, params, func_name, func_value):
+        """Inject `func_name` function with params"""
+        api_key, base_url, http_client = params
+        attr = func_value.__func__
+
+        def inject_func_with_api_key(*args, **kwargs):
+            kwargs["api_key"] = api_key
+            kwargs["base_url"] = base_url
+            kwargs["http_client"] = http_client
+            result = attr(*args, **kwargs)
+            return result
+
+        setattr(injected_class, func_name, staticmethod(inject_func_with_api_key))
