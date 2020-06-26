@@ -25,6 +25,10 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Get Virtual Account](#get-virtual-account)
       - [Update Virtual Account](#update-virtual-account)
       - [Get Virtual Account Payment](#get-virtual-account-payment)
+    - [Retail Outlet Service](#retail-outlet-service)
+      - [Create Fixed Payment Code](#create-fixed-payment-code)
+      - [Update Fixed Payment Code](#update-fixed-payment-code)
+      - [Get Fixed Payment Code](#get-fixed-payment-code)
     - [Disbursement Service](#disbursement-service)
       - [Create Disbursement](#create-disbursement)
       - [Get Disbursement by ID](#get-disbursement-by-id)
@@ -71,8 +75,8 @@ import xendit
 x = xendit.Xendit(api_key="test-key123")
 
 # Then access each class from x attribute
-b = x.Balance
-b.get()
+Balance = x.Balance
+Balance.get()
 ```
 
 ### Headers
@@ -136,7 +140,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account = xendit.VirtualAccount.create("demo_1475459775872", "BNI", "Rika Sutanto")
+virtual_account = VirtualAccount.create("demo_1475459775872", "BNI", "Rika Sutanto")
 print(virtual_account)
 ```
 
@@ -162,7 +166,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account_banks = xendit.VirtualAccount.get_banks()
+virtual_account_banks = VirtualAccount.get_banks()
 print(virtual_account_banks)
 ```
 
@@ -191,7 +195,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account = xendit.VirtualAccount.get("5eec3a3e8dd9ea2fc97d6728")
+virtual_account = VirtualAccount.get("5eec3a3e8dd9ea2fc97d6728")
 print(virtual_account)
 ```
 
@@ -218,7 +222,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account = xendit.VirtualAccount.update("5eec3a3e8dd9ea2fc97d6728", is_single_use=True)
+virtual_account = VirtualAccount.update("5eec3a3e8dd9ea2fc97d6728", is_single_use=True)
 print(virtual_account)
 ```
 
@@ -245,7 +249,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account_payment = xendit.VirtualAccount.get_payment("5ef18efca7d10d1b4d61fb52")
+virtual_account_payment = VirtualAccount.get_payment("5ef18efca7d10d1b4d61fb52")
 print(virtual_account)
 ```
 
@@ -262,6 +266,90 @@ Will return
     "bank_code": "MANDIRI",
     "amount": 50000,
     "transaction_timestamp": "2020-06-23T05:11:24.000Z"
+}
+```
+
+### Retail Outlet Service
+
+#### Create Fixed Payment Code
+
+```python
+from xendit import RetailOutlet
+
+retail_outlet = RetailOutlet.create_fixed_payment_code(
+    "demo_fixed_payment_code_123", "ALFAMART", "Rika Sutanto", 10000
+)
+print(retail_outlet)
+```
+
+Will return
+
+```
+{
+    "owner_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_fixed_payment_code_123",
+    "retail_outlet_name": "ALFAMART",
+    "prefix": "TEST",
+    "name": "Rika Sutanto",
+    "payment_code": "TEST56147",
+    "expected_amount": 10000,
+    "is_single_use": False,
+    "expiration_date": "2051-06-23T17:00:00.000Z",
+    "id": "5ef2f0f8e7f5c14077275493",
+}
+```
+
+#### Update Fixed Payment Code
+
+```python
+from xendit import RetailOutlet
+
+retail_outlet = RetailOutlet.update_fixed_payment_code(
+    "5ef2f0f8e7f5c14077275493", name="Joe Contini"
+)
+print(retail_outlet)
+```
+
+Will return
+
+```
+{
+    "owner_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_fixed_payment_code_123",
+    "retail_outlet_name": "ALFAMART",
+    "prefix": "TEST",
+    "name": "Joe Contini",
+    "payment_code": "TEST56147",
+    "expected_amount": 10000,
+    "is_single_use": False,
+    "expiration_date": "2051-06-23T17:00:00.000Z",
+    "id": "5ef2f0f8e7f5c14077275493",
+}
+```
+
+#### Get Fixed Payment Code
+
+```python
+from xendit import RetailOutlet
+
+retail_outlet = RetailOutlet.get_fixed_payment_code("5ef2f0f8e7f5c14077275493")
+print(retail_outlet)
+```
+
+Will return
+
+```
+{
+    "owner_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_fixed_payment_code_123",
+    "retail_outlet_name": "ALFAMART",
+    "prefix": "TEST",
+    "name": "Rika Sutanto",
+    "payment_code": "TEST56147",
+    "expected_amount": 10000,
+    "is_single_use": False,
+    "expiration_date": "2051-06-23T17:00:00.000Z",
+    "id": "5ef2f0f8e7f5c14077275493",
 }
 ```
 
@@ -303,7 +391,7 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement = Running xendit.Disbursement.get("5ef1befeecb16100179e1d05")
+disbursement = xendit.Disbursement.get("5ef1befeecb16100179e1d05")
 print(disbursement)
 ```
 
@@ -324,11 +412,11 @@ Will return
 
 #### Get Disbursement by External ID
 
-```
+```python
 from xendit import Disbursement
 
-disbursement = xendit.Disbursement.get_by_ext_id("demo_1475459775872")
-print(disbursement)
+disbursement_list = xendit.Disbursement.get_by_ext_id("demo_1475459775872")
+print(disbursement_list)
 
 ```
 
