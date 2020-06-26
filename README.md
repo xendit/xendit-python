@@ -24,6 +24,11 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Get Virtual Account](#get-virtual-account)
       - [Update Virtual Account](#update-virtual-account)
       - [Get Virtual Account Payment](#get-virtual-account-payment)
+    - [Disbursement Service](#disbursement-service)
+      - [Create Disbursement](#create-disbursement)
+      - [Get Disbursement by ID](#get-disbursement-by-id)
+      - [Get Disbursement by External ID](#get-disbursement-by-external-id)
+      - [Get Available Banks](#get-available-banks)
   - [Contributing](#contributing)
     - [Tests](#tests)
       - [Running the Test](#running-the-test)
@@ -238,6 +243,128 @@ Will return
 }
 ```
 
+### Disbursement Service
+
+#### Create Disbursement
+
+```python
+from xendit import Disbursement
+
+disbursement = xendit.Disbursement.create(
+    external_id="demo_1475459775872",
+    bank_code="BCA",
+    account_holder_name="Bob Jones",
+    account_number="1231242311",
+    description="Reimbursement for shoes",
+    amount=17000,
+)
+print(disbursement)
+```
+
+Will return
+
+```
+{
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_1475459775872",
+    "amount": 17000,
+    "bank_code": "BCA",
+    "account_holder_name": "Bob Jones",
+    "disbursement_description": "Reimbursement for shoes",
+    "status": "PENDING",
+    "id": "5ef1c4f40c2e150017ce3b96",
+}
+```
+
+#### Get Disbursement by ID
+
+```python
+from xendit import Disbursement
+
+disbursement = Running xendit.Disbursement.get("5ef1befeecb16100179e1d05")
+print(disbursement)
+```
+
+Will return
+
+```
+{
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "demo_1475459775872",
+    "amount": 17000,
+    "bank_code": "BCA",
+    "account_holder_name": "Bob Jones",
+    "disbursement_description": "Disbursement from Postman",
+    "status": "PENDING",
+    "id": "5ef1befeecb16100179e1d05"
+}
+```
+
+#### Get Disbursement by External ID
+
+```
+from xendit import Disbursement
+
+disbursement = xendit.Disbursement.get_by_ext_id("demo_1475459775872")
+print(disbursement)
+
+```
+
+Will return
+
+```
+[
+    {
+        "user_id": "5ed75086a883856178afc12e",
+        "external_id": "demo_1475459775872",
+        "amount": 17000,
+        "bank_code": "BCA",
+        "account_holder_name": "Bob Jones",
+        "disbursement_description": "Reimbursement for shoes",
+        "status": "PENDING",
+        "id": "5ef1c4f40c2e150017ce3b96",
+    },
+    {
+        "user_id": "5ed75086a883856178afc12e",
+        "external_id": "demo_1475459775872",
+        "amount": 17000,
+        "bank_code": "BCA",
+        "account_holder_name": "Bob Jones",
+        "disbursement_description": "Disbursement from Postman",
+        "status": "PENDING",
+        "id": "5ef1befeecb16100179e1d05",
+    },
+    ...
+]
+```
+#### Get Available Banks
+
+```python
+from xendit import Disbursement
+
+disbursement_banks = xendit.Disbursement.get_available_banks()
+print(disbursement_banks)
+```
+
+Will return
+
+```
+[
+    ...
+    {
+        "name": "Mandiri Taspen Pos (formerly Bank Sinar Harapan Bali)",
+        "code": "MANDIRI_TASPEN",
+        "can_disburse": True,
+        "can_name_validate": True,
+    },
+    {
+        "name": "Bank QNB Indonesia (formerly Bank QNB Kesawan)",
+        "code": "QNB_INDONESIA",
+        "can_disburse": True,
+        "can_name_validate": True,
+    }
+]
+```
 ## Contributing
 
 For any requests, bugs, or comments, please open an [issue](https://github.com/xendit/xendit-python/issues) or [submit a pull request](https://github.com/xendit/xendit-python/pulls).
