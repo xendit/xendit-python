@@ -360,7 +360,7 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement = xendit.Disbursement.create(
+disbursement = Disbursement.create(
     external_id="demo_1475459775872",
     bank_code="BCA",
     account_holder_name="Bob Jones",
@@ -391,7 +391,7 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement = xendit.Disbursement.get("5ef1befeecb16100179e1d05")
+disbursement = Disbursement.get("5ef1befeecb16100179e1d05")
 print(disbursement)
 ```
 
@@ -415,7 +415,7 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement_list = xendit.Disbursement.get_by_ext_id("demo_1475459775872")
+disbursement_list = Disbursement.get_by_ext_id("demo_1475459775872")
 print(disbursement_list)
 
 ```
@@ -452,7 +452,7 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement_banks = xendit.Disbursement.get_available_banks()
+disbursement_banks = Disbursement.get_available_banks()
 print(disbursement_banks)
 ```
 
