@@ -20,7 +20,7 @@ class VirtualAccountPayment:
     """
 
     def __init__(self, xendit_response):
-        self.id = str(xendit_response["id"])
+        self.id = xendit_response["id"]
         self.payment_id = xendit_response["payment_id"]
         self.callback_virtual_account_id = xendit_response[
             "callback_virtual_account_id"
