@@ -1,7 +1,6 @@
 import json
 
 from xendit._api_requestor import _APIRequestor
-from xendit._init_from_xendit_response import _init_from_xendit_response
 from xendit._extract_params import _extract_params
 
 from xendit.xendit_error import XenditError
@@ -29,22 +28,17 @@ class RetailOutlet:
 
     """
 
-    @_init_from_xendit_response(
-        required=[
-            "owner_id",
-            "external_id",
-            "retail_outlet_name",
-            "prefix",
-            "name",
-            "payment_code",
-            "expected_amount",
-            "is_single_use",
-            "expiration_date",
-            "id",
-        ],
-    )
     def __init__(self, xendit_response):
-        pass
+        self.owner_id = xendit_response["owner_id"]
+        self.external_id = xendit_response["external_id"]
+        self.retail_outlet_name = xendit_response["retail_outlet_name"]
+        self.prefix = xendit_response["prefix"]
+        self.name = xendit_response["name"]
+        self.payment_code = xendit_response["payment_code"]
+        self.expected_amount = xendit_response["expected_amount"]
+        self.is_single_use = xendit_response["is_single_use"]
+        self.expiration_date = xendit_response["expiration_date"]
+        self.id = xendit_response["id"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)

@@ -1,5 +1,4 @@
 import json
-from xendit._init_from_xendit_response import _init_from_xendit_response
 
 
 class VirtualAccountBank:
@@ -10,9 +9,9 @@ class VirtualAccountBank:
       - code (str)
     """
 
-    @_init_from_xendit_response(required=["name", "code"])
     def __init__(self, xendit_response):
-        pass
+        self.name = xendit_response["name"]
+        self.code = xendit_response["code"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)

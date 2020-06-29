@@ -2,7 +2,6 @@ import json
 
 from .balance_account_type import BalanceAccountType
 
-from xendit._init_from_xendit_response import _init_from_xendit_response
 from xendit.xendit_error import XenditError
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
@@ -21,9 +20,8 @@ class Balance:
       - balance (int)
     """
 
-    @_init_from_xendit_response(required=["balance"])
     def __init__(self, xendit_response):
-        pass
+        self.balance = xendit_response["balance"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)
