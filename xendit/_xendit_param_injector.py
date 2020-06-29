@@ -1,3 +1,6 @@
+from inspect import signature
+
+
 class _XenditParamInjector:
     """Builder class to inject parameters (api_key, base_url, http_client) to feature class"""
 
@@ -12,16 +15,17 @@ class _XenditParamInjector:
         Return:
           injected_class
         """
-
-        class Inject(injected_class):
-            """Copy of the injected class. Need to use this to make sure that we do not inject a package-wide class"""
-
-            pass
-
+        injected_class = type(
+            injected_class.__name__,
+            injected_class.__bases__,
+            dict(injected_class.__dict__),
+        )
         for keys, value in vars(injected_class).items():
             if type(value) == staticmethod and not keys.startswith("_"):
-                _XenditParamInjector._inject_function(Inject, params, keys, value)
-        return Inject
+                _XenditParamInjector._inject_function(
+                    injected_class, params, keys, value
+                )
+        return injected_class
 
     @staticmethod
     def _inject_function(injected_class, params, func_name, func_value):
@@ -36,4 +40,5 @@ class _XenditParamInjector:
             result = attr(*args, **kwargs)
             return result
 
+        inject_func_with_api_key.__signature__ = signature(attr)
         setattr(injected_class, func_name, staticmethod(inject_func_with_api_key))
