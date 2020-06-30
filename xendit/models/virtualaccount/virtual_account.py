@@ -4,7 +4,6 @@ from .virtual_acount_bank import VirtualAccountBank
 from .virtual_account_payment import VirtualAccountPayment
 
 from xendit._api_requestor import _APIRequestor
-from xendit._init_from_xendit_response import _init_from_xendit_response
 from xendit._extract_params import _extract_params
 
 from xendit.xendit_error import XenditError
@@ -44,24 +43,25 @@ class VirtualAccount:
 
     """
 
-    @_init_from_xendit_response(
-        required=[
-            "owner_id",
-            "external_id",
-            "bank_code",
-            "merchant_code",
-            "name",
-            "account_number",
-            "is_single_use",
-            "status",
-            "expiration_date",
-            "is_closed",
-            "id",
-        ],
-        optional=["suggested_amount", "expected_amount", "description"],
-    )
     def __init__(self, xendit_response):
-        pass
+        self.owner_id = xendit_response["owner_id"]
+        self.external_id = xendit_response["external_id"]
+        self.bank_code = xendit_response["bank_code"]
+        self.merchant_code = xendit_response["merchant_code"]
+        self.name = xendit_response["name"]
+        self.account_number = xendit_response["account_number"]
+        self.is_single_use = xendit_response["is_single_use"]
+        self.status = xendit_response["status"]
+        self.expiration_date = xendit_response["expiration_date"]
+        self.is_closed = xendit_response["is_closed"]
+        self.id = xendit_response["id"]
+
+        if xendit_response.get("suggested_amount", None) is not None:
+            self.suggested_amount = xendit_response["suggested_amount"]
+        if xendit_response.get("expected_amount", None) is not None:
+            self.expected_amount = xendit_response["expected_amount"]
+        if xendit_response.get("description", None) is not None:
+            self.description = xendit_response["description"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)

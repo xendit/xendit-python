@@ -1,5 +1,4 @@
 import json
-from xendit._init_from_xendit_response import _init_from_xendit_response
 
 
 class VirtualAccountPayment:
@@ -20,22 +19,21 @@ class VirtualAccountPayment:
       - sender_name (str)
     """
 
-    @_init_from_xendit_response(
-        required=[
-            "id",
-            "payment_id",
-            "callback_virtual_account_id",
-            "external_id",
-            "merchant_code",
-            "account_number",
-            "bank_code",
-            "amount",
-            "transaction_timestamp",
-        ],
-        optional=["sender_name"],
-    )
     def __init__(self, xendit_response):
-        pass
+        self.id = xendit_response["id"]
+        self.payment_id = xendit_response["payment_id"]
+        self.callback_virtual_account_id = xendit_response[
+            "callback_virtual_account_id"
+        ]
+        self.external_id = xendit_response["external_id"]
+        self.merchant_code = xendit_response["merchant_code"]
+        self.account_number = xendit_response["account_number"]
+        self.bank_code = xendit_response["bank_code"]
+        self.amount = xendit_response["amount"]
+        self.transaction_timestamp = xendit_response["transaction_timestamp"]
+
+        if xendit_response.get("transaction_timestamp", None) is not None:
+            self.transaction_timestamp = xendit_response["transaction_timestamp"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)

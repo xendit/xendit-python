@@ -3,7 +3,6 @@ import json
 from .disbursement_bank import DisbursementBank
 
 from xendit._api_requestor import _APIRequestor
-from xendit._init_from_xendit_response import _init_from_xendit_response
 from xendit._extract_params import _extract_params
 
 from xendit.xendit_error import XenditError
@@ -38,21 +37,22 @@ class Disbursement:
 
     """
 
-    @_init_from_xendit_response(
-        required=[
-            "user_id",
-            "external_id",
-            "amount",
-            "bank_code",
-            "account_holder_name",
-            "disbursement_description",
-            "status",
-            "id",
-        ],
-        optional=["email_to", "email_cc", "email_bcc"],
-    )
     def __init__(self, xendit_response):
-        pass
+        self.user_id = xendit_response["user_id"]
+        self.external_id = xendit_response["external_id"]
+        self.amount = xendit_response["amount"]
+        self.bank_code = xendit_response["bank_code"]
+        self.account_holder_name = xendit_response["account_holder_name"]
+        self.disbursement_description = xendit_response["disbursement_description"]
+        self.status = xendit_response["status"]
+        self.id = xendit_response["id"]
+
+        if xendit_response.get("email_to", None) is not None:
+            self.email_to = xendit_response["email_to"]
+        if xendit_response.get("email_cc", None) is not None:
+            self.email_cc = xendit_response["email_cc"]
+        if xendit_response.get("email_bcc", None) is not None:
+            self.email_bcc = xendit_response["email_bcc"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)

@@ -4,6 +4,7 @@ from ._xendit_param_injector import _XenditParamInjector
 
 from .models import Balance
 from .models import Disbursement
+from .models import RetailOutlet
 from .models import VirtualAccount
 
 from .network import HTTPClientInterface
@@ -18,10 +19,14 @@ class Xendit:
         base_url="https://api.xendit.co/",
         http_client: HTTPClientInterface = requests,
     ):
-        self.Balance = _XenditParamInjector(Balance, api_key, base_url, http_client)
-        self.Disbursement = _XenditParamInjector(
-            Disbursement, api_key, base_url, http_client
+        injected_params = (api_key, base_url, http_client)
+        self.Balance = _XenditParamInjector.instantiate(Balance, injected_params)
+        self.Disbursement = _XenditParamInjector.instantiate(
+            Disbursement, injected_params
         )
-        self.VirtualAccount = _XenditParamInjector(
-            VirtualAccount, api_key, base_url, http_client
+        self.RetailOutlet = _XenditParamInjector.instantiate(
+            RetailOutlet, injected_params
+        )
+        self.VirtualAccount = _XenditParamInjector.instantiate(
+            VirtualAccount, injected_params
         )

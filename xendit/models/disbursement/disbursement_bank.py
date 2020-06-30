@@ -1,5 +1,4 @@
 import json
-from xendit._init_from_xendit_response import _init_from_xendit_response
 
 
 class DisbursementBank:
@@ -12,11 +11,11 @@ class DisbursementBank:
       - can_name_validate (bool)
     """
 
-    @_init_from_xendit_response(
-        required=["name", "code", "can_disburse", "can_name_validate"]
-    )
     def __init__(self, xendit_response):
-        pass
+        self.name = xendit_response["name"]
+        self.code = xendit_response["code"]
+        self.can_disburse = xendit_response["can_disburse"]
+        self.can_name_validate = xendit_response["can_name_validate"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)
