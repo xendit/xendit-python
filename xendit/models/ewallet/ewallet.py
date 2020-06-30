@@ -67,7 +67,7 @@ class EWallet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return OVOPayment(resp.body)
+            return OVOPayment(resp.body, x_api_version)
         else:
             raise XenditError(resp)
 
@@ -114,7 +114,7 @@ class EWallet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return DANAPayment(resp.body)
+            return DANAPayment(resp.body, x_api_version)
         else:
             raise XenditError(resp)
 
@@ -137,7 +137,7 @@ class EWallet:
           - external_id (str)
           - phone (str)
           - amount (int)
-          - items (LinkAjaItem)
+          - items (LinkAjaItem[])
           - callback_url (str)
           - redirect_url (str)
           - **for_user_id (str) (XenPlatforms only)
@@ -163,12 +163,12 @@ class EWallet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return LinkAjaPayment(resp.body)
+            return LinkAjaPayment(resp.body, x_api_version)
         else:
             raise XenditError(resp)
 
     @staticmethod
-    def get_payment_statis(
+    def get_payment_status(
         external_id, ewallet_type, for_user_id=None, x_api_version=None, **kwargs
     ):
         """Send POST Request to create LinkAja Payment (API Reference: eWallets/Create Payment)

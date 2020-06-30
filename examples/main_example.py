@@ -1,5 +1,6 @@
 from balance_example import balance_example
 from disbursement_example import disbursement_example
+from ewallet_example import ewallet_example
 from retail_outlet_example import retail_outlet_example
 from virtual_account_example import virtual_account_example
 
@@ -15,6 +16,7 @@ def ask_input():
     print("Please type one of the number below")
     print("0. Exit")
     print("1. Balance")
+    print("4. eWallet")
     print("8. VirtualAccount")
     print("9. Retail Outlets")
     print("13. Disbursement")
@@ -33,6 +35,8 @@ if __name__ == "__main__":
         print()
         if user_choice == 1:
             balance_example(xendit_instance)
+        elif user_choice == 4:
+            ewallet_example(xendit_instance)
         elif user_choice == 8:
             virtual_account_example(xendit_instance)
         elif user_choice == 9:

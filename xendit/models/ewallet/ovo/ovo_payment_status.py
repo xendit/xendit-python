@@ -17,6 +17,7 @@ class OVOPaymentStatus:
         self.amount = xendit_response["amount"]
         self.business_id = xendit_response["business_id"]
         self.ewallet_type = xendit_response["ewallet_type"]
+        self.external_id = xendit_response["external_id"]
         self.status = xendit_response["status"]
         self.transaction_date = xendit_response["transaction_date"]
 

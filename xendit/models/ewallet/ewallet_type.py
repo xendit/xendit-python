@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class BalanceAccountType(Enum):
+class EWalletType(Enum):
     """eWallet Type"""
 
     OVO = "OVO"

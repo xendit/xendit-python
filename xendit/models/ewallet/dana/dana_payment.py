@@ -11,7 +11,7 @@ class DANAPayment:
       - ewallet_type (str)
     """
 
-    def __init__(self, xendit_response):
+    def __init__(self, xendit_response, x_api_version=None):
         self.external_id = xendit_response["external_id"]
         self.checkout_url = xendit_response["checkout_url"]
         self.amount = xendit_response["amount"]

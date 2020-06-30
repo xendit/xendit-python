@@ -10,7 +10,7 @@ class DANAPaymentStatus:
       - checkout_url (str)
       - external_id (str)
       - status (str)
-      - expiration_at (str)
+      - expiration_date (str)
     """
 
     def __init__(self, xendit_response):
@@ -18,7 +18,8 @@ class DANAPaymentStatus:
         self.business_id = xendit_response["business_id"]
         self.checkout_url = xendit_response["checkout_url"]
         self.external_id = xendit_response["external_id"]
-        self.expiration_at = xendit_response["expiration_at"]
+        self.status = xendit_response["status"]
+        self.expiration_date = xendit_response["expiration_date"]
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)

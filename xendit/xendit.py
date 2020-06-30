@@ -4,6 +4,7 @@ from ._xendit_param_injector import _XenditParamInjector
 
 from .models import Balance
 from .models import Disbursement
+from .models import EWallet
 from .models import RetailOutlet
 from .models import VirtualAccount
 
@@ -24,6 +25,7 @@ class Xendit:
         self.Disbursement = _XenditParamInjector.instantiate(
             Disbursement, injected_params
         )
+        self.EWallet = _XenditParamInjector.instantiate(EWallet, injected_params)
         self.RetailOutlet = _XenditParamInjector.instantiate(
             RetailOutlet, injected_params
         )
