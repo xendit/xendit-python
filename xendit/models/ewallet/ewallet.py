@@ -171,7 +171,7 @@ class EWallet:
     def get_payment_status(
         external_id, ewallet_type, for_user_id=None, x_api_version=None, **kwargs
     ):
-        """Send POST Request to create LinkAja Payment (API Reference: eWallets/Create Payment)
+        """Get payment status of given external id (API Reference: eWallets/Get Payment Status)
 
         Args:
           - external_id (str)

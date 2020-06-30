@@ -5,12 +5,12 @@ class DANAPaymentStatus:
     """Payment Status for DANA (API Reference: eWallets)
 
     Attributes:
-      - amount (int)
-      - business_id (str)
-      - checkout_url (str)
       - external_id (str)
-      - status (str)
+      - business_id (str)
+      - amount (int)
       - expiration_date (str)
+      - checkout_url (str)
+      - status (str)
     """
 
     def __init__(self, xendit_response):

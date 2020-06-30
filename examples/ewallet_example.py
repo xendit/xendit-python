@@ -120,7 +120,7 @@ class GetOVOPaymentStatus:
         ewallet_type = xendit.EWalletType.OVO
         external_id = "ovo-ewallet-testing-id-1234"
         print(
-            f"Running xendit.EWallet.get_payment_status({external_id}, {ewallet_type}):"
+            f"Running xendit.EWallet.get_payment_status('{external_id}', {ewallet_type}):"
         )
         GetOVOPaymentStatus.run(xendit_instance, external_id, ewallet_type)
 
@@ -142,7 +142,7 @@ class GetDANAPaymentStatus:
         ewallet_type = xendit.EWalletType.DANA
         external_id = "dana-ewallet-test-1234"
         print(
-            f"Running xendit.EWallet.get_payment_status({external_id}, {ewallet_type}):"
+            f"Running xendit.EWallet.get_payment_status('{external_id}', {ewallet_type}):"
         )
         GetDANAPaymentStatus.run(xendit_instance, external_id, ewallet_type)
 
@@ -164,7 +164,7 @@ class GetLinkAjaPaymentStatus:
         ewallet_type = xendit.EWalletType.LINKAJA
         external_id = "linkaja-ewallet-test-123"
         print(
-            f"Running xendit.EWallet.get_payment_status({external_id}, {ewallet_type}):"
+            f"Running xendit.EWallet.get_payment_status('{external_id}', {ewallet_type}):"
         )
         GetLinkAjaPaymentStatus.run(xendit_instance, external_id, ewallet_type)
 
