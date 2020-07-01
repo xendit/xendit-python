@@ -1,13 +1,24 @@
-def ovo_payment_response():
-    return {
-        "amount": 80001,
-        "business_id": "5ed75086a883856178afc12e",
-        "created": "2020-06-30T10:58:08.648Z",
-        "ewallet_type": "OVO",
-        "external_id": "ovo-ewallet-testing-id-123321131114",
-        "phone": "08183123123",
-        "status": "PENDING",
-    }
+def ovo_payment_response(x_api_version="2020-02-01"):
+    if x_api_version == "2020-02-01":
+        return {
+            "amount": 80001,
+            "business_id": "5ed75086a883856178afc12e",
+            "created": "2020-06-30T10:58:08.648Z",
+            "ewallet_type": "OVO",
+            "external_id": "ovo-ewallet-testing-id-123321131114",
+            "phone": "08183123123",
+            "status": "PENDING",
+        }
+    elif x_api_version == "2019-02-04":
+        return {
+            "amount": 80001,
+            "business_id": "5ed75086a883856178afc12e",
+            "ewallet_type": "OVO",
+            "external_id": "ovo-ewallet-testing-id-123321131114",
+            "phone": "08183123123",
+            "transaction_date": "2020-07-01T04:40:43.000Z",
+            "ewallet_transaction_id": "cea4a665-0c91-408b-93a8-7855d2b7ac45",
+        }
 
 
 def ovo_payment_status_response():

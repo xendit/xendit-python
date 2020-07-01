@@ -23,7 +23,7 @@ class CreateOVOPayment:
     @staticmethod
     def example(xendit_instance):
         external_id = f"ovo-ewallet-testing-id-{int(time.time())}"
-        amount = "8888"
+        amount = "80001"
         phone = "08123123123"
         print(
             f'Running xendit.EWallet.create_ovo_payment("{external_id}", "{amount}", "{phone}"):'

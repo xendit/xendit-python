@@ -22,7 +22,7 @@ class TestEWallet(BaseIntegrationTest):
 
     def test_create_ovo_payment_return_correct_keys(self, EWallet):
         ovo_payment = EWallet.create_ovo_payment(
-            f"ovo-ewallet-testing-id-{int(time.time())}", "8888", "08123123123"
+            f"ovo-ewallet-testing-id-{int(time.time())}", "80001", "08123123123",
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             ovo_payment, ovo_payment_response()
