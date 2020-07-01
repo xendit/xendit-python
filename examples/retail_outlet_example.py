@@ -1,3 +1,5 @@
+from print_running_function import print_running_function
+
 # Hackish method to import from another directory
 # Useful while xendit-python isn't released yet to the public
 import importlib.machinery
@@ -14,11 +16,14 @@ class CreateFixedPaymentCode:
         retail_outlet_name,
         name,
         expected_amount,
-        **kwargs
+        **kwargs,
     ):
         try:
             retail_outlet = xendit_instance.RetailOutlet.create_fixed_payment_code(
-                external_id, retail_outlet_name, name, expected_amount,
+                external_id=external_id,
+                retail_outlet_name=retail_outlet_name,
+                name=name,
+                expected_amount=expected_amount,
             )
             print(retail_outlet)
         except xendit.XenditError as e:
@@ -27,16 +32,14 @@ class CreateFixedPaymentCode:
 
     @staticmethod
     def example(xendit_instance):
-        print(
-            'Running xendit.RetailOutlet.create_fixed_payment_code("demo_fixed_payment_code_123", "ALFAMART", "Rika Sutanto", 10000):'
-        )
-        CreateFixedPaymentCode.run(
-            xendit_instance,
-            "demo_fixed_payment_code_123",
-            "ALFAMART",
-            "Rika Sutanto",
-            10000,
-        )
+        args = {
+            "external_id": "demo_fixed_payment_code_123",
+            "retail_outlet_name": "ALFAMART",
+            "name": "Rika Sutanto",
+            "expected_amount": 10000,
+        }
+        print_running_function("xendit.RetailOutlet.create_fixed_payment_code", args)
+        CreateFixedPaymentCode.run(xendit_instance, **args)
 
 
 class UpdateFixedPaymentCode:
@@ -44,7 +47,7 @@ class UpdateFixedPaymentCode:
     def run(xendit_instance, fixed_payment_code_id, **kwargs):
         try:
             retail_outlet = xendit_instance.RetailOutlet.update_fixed_payment_code(
-                fixed_payment_code_id, **kwargs
+                fixed_payment_code_id=fixed_payment_code_id, **kwargs
             )
             print(retail_outlet)
         except xendit.XenditError as e:
@@ -53,12 +56,12 @@ class UpdateFixedPaymentCode:
 
     @staticmethod
     def example(xendit_instance):
-        print(
-            'Running xendit.RetailOutlet.update_fixed_payment_code("5ef2f0f8e7f5c14077275493", name="Joe Contini"):'
-        )
-        UpdateFixedPaymentCode.run(
-            xendit_instance, "5ef2f0f8e7f5c14077275493", name="Joe Contini"
-        )
+        args = {
+            "fixed_payment_code_id": "5ef2f0f8e7f5c14077275493",
+            "name": "Joe Contini",
+        }
+        print_running_function("xendit.RetailOutlet.update_fixed_payment_code", args)
+        UpdateFixedPaymentCode.run(xendit_instance, **args)
 
 
 class GetFixedPaymentCode:
@@ -66,7 +69,7 @@ class GetFixedPaymentCode:
     def run(xendit_instance, fixed_payment_code_id, **kwargs):
         try:
             retail_outlet = xendit_instance.RetailOutlet.get_fixed_payment_code(
-                fixed_payment_code_id, **kwargs
+                fixed_payment_code_id=fixed_payment_code_id, **kwargs
             )
             print(retail_outlet)
         except xendit.XenditError as e:
