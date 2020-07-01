@@ -19,6 +19,11 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Headers](#headers)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
+    - [eWallets](#ewallets)
+      - [Create OVO Payment](#create-ovo-payment)
+      - [Create DANA Payment](#create-dana-payment)
+      - [Create LinkAja Payment](#create-linkaja-payment)
+      - [Get Payment Status](#get-payment-status)
     - [Virtual Account Service](#virtual-account-service)
       - [Create Virtual Account](#create-virtual-account)
       - [Get Virtual Account Banks](#get-virtual-account-banks)
@@ -131,6 +136,96 @@ Will return
 ```
 {'balance': 1000000000}
 1000000000
+```
+
+### eWallets
+
+#### Create OVO Payment
+
+```python
+from xendit import EWallet
+
+ovo_payment = EWallet.create_ovo_payment("ovo-ewallet-testing-id-1593583779", "80001", "08123123123")
+print(ovo_payment)
+```
+
+Will return
+
+```
+{
+    "amount": 80001,
+    "business_id": "5ed75086a883856178afc12e",
+    "external_id": "ovo-ewallet-testing-id-1593583779",
+    "ewallet_type": "OVO",
+    "phone": "08123123123",
+    "created": "2020-07-01T06:09:47.610Z",
+    "status": "PENDING"
+}
+```
+
+#### Create DANA Payment
+
+```python
+from xendit import EWallet
+
+dana_payment = EWallet.create_dana_payment("dana-ewallet-test-1593583817", "1001", "https://my-shop.com/callbacks", "https://my-shop.com/home")
+print(dana_payment)
+```
+
+Will return
+
+```
+{
+    "external_id": "dana-ewallet-test-1593583817",
+    "amount": 1001,
+    "checkout_url": "https://sandbox.m.dana.id/m/portal/cashier/checkout?bizNo=20200701111212800110166367100513589&timestamp=1593583818552&mid=216620000000261692328&sign=a0WQ2g2PktDQ1oZdO4dzLUIIcD%2FhakqLIVo6Z8D87WNPwfV5JKEeZT%2F7XmR50XUrvKSDwJQMpfdAPi2UYbuV2Cqwxy494FDp%2BVyz69gvQ5R7SyQSxyeqfpy6%2ByE7OFPtJTHu%2BzDtD95DVNssSfz0GmUvBO4ykF3Rwu8qbLP2nchvh7URslKH9cmtisE%2BXfBcP45UyeQndDDG4DdF16d%2FeR2C8uPhS5thMt1mDZKRsw41QZS4gZ%2BSjhvpCWfkfLoUVOymtzE3Q7KuC%2FzLxsI5Kd7BnxE3GhkKbOw7dNpacqfctXpGGO08jNwrdqsptUKYnF87bzX8kUAEvJif6Hu9Gw%3D%3D",
+    "ewallet_type": "DANA"
+}
+```
+
+#### Create LinkAja Payment
+
+```python
+from xendit import EWallet, LinkAjaItem
+
+items = []
+items.append(LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1))
+linkaja_payment = EWallet.create_linkaja_payment("linkaja-ewallet-test-1593583880", "089911111111", 300000, items, "https://my-shop.com/callbacks", "https://xendit.co/")
+print(linkaja_payment)
+```
+
+Will return
+
+```
+{
+    "checkout_url": "https://ewallet-linkaja-dev.xendit.co/checkouts/c631e9a1-b460-4f22-98a2-b481e6feda10",
+    "transaction_date": "2020-07-01T06:11:22.335Z",
+    "amount": 300000,
+    "external_id": "linkaja-ewallet-test-1593583880",
+    "ewallet_type": "LINKAJA"
+}
+```
+
+#### Get Payment Status
+
+```python
+from xendit import EWallet
+
+ovo_payment_status = EWallet.get_payment_status('ovo-ewallet-testing-id-1234', EWalletType.OVO)
+print(ovo_payment_status)
+```
+
+Will return
+
+```
+{
+    "amount": "8888",
+    "business_id": "5ed75086a883856178afc12e",
+    "ewallet_type": "OVO",
+    "external_id": "ovo-ewallet-testing-id-1234",
+    "status": "COMPLETED",
+    "transaction_date": "2020-06-30T01:32:28.267Z"
+}
 ```
 
 ### Virtual Account Service
