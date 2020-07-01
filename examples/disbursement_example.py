@@ -1,3 +1,5 @@
+from print_running_function import print_running_function
+
 # Hackish method to import from another directory
 # Useful while xendit-python isn't released yet to the public
 import importlib.machinery
@@ -16,17 +18,17 @@ class CreateDisbursement:
         account_number,
         description,
         amount,
-        **kwargs
+        **kwargs,
     ):
         try:
             disbursement = xendit_instance.Disbursement.create(
-                external_id,
-                bank_code,
-                account_holder_name,
-                account_number,
-                description,
-                amount,
-                **kwargs
+                external_id=external_id,
+                bank_code=bank_code,
+                account_holder_name=account_holder_name,
+                account_number=account_number,
+                description=description,
+                amount=amount,
+                **kwargs,
             )
             print(disbursement)
         except xendit.XenditError as e:
@@ -35,25 +37,23 @@ class CreateDisbursement:
 
     @staticmethod
     def example(xendit_instance):
-        print(
-            'Running xendit.Disbursement.create("demo_1475459775872", "BCA", "Bob Jones", "1231242311", "Reimbursement for shoes", 17000):'
-        )
-        CreateDisbursement.run(
-            xendit_instance,
-            external_id="demo_1475459775872",
-            bank_code="BCA",
-            account_holder_name="Bob Jones",
-            account_number="1231242311",
-            description="Reimbursement for shoes",
-            amount=17000,
-        )
+        args = {
+            "external_id": "demo_1475459775872",
+            "bank_code": "BCA",
+            "account_holder_name": "Bob Jones",
+            "account_number": "1231242311",
+            "description": "Reimbursement for shoes",
+            "amount": 17000,
+        }
+        print_running_function("xendit.Disbursement.create", args)
+        CreateDisbursement.run(xendit_instance, **args)
 
 
 class GetDisbursementByID:
     @staticmethod
     def run(xendit_instance, id, **kwargs):
         try:
-            disbursement = xendit_instance.Disbursement.get(id, **kwargs)
+            disbursement = xendit_instance.Disbursement.get(id=id, **kwargs)
             print(disbursement)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -61,8 +61,9 @@ class GetDisbursementByID:
 
     @staticmethod
     def example(xendit_instance):
-        print('Running xendit.Disbursement.get("5ef1befeecb16100179e1d05"):')
-        GetDisbursementByID.run(xendit_instance, "5ef1befeecb16100179e1d05")
+        args = {"id": "5ef1befeecb16100179e1d05"}
+        print_running_function("xendit.Disbursement.get", args)
+        GetDisbursementByID.run(xendit_instance, **args)
 
 
 class GetDisbursementByExternalID:
@@ -70,7 +71,7 @@ class GetDisbursementByExternalID:
     def run(xendit_instance, external_id, **kwargs):
         try:
             disbursement = xendit_instance.Disbursement.get_by_ext_id(
-                external_id, **kwargs
+                external_id=external_id, **kwargs
             )
             print(disbursement)
         except xendit.XenditError as e:
@@ -79,8 +80,9 @@ class GetDisbursementByExternalID:
 
     @staticmethod
     def example(xendit_instance):
-        print('Running xendit.Disbursement.get_by_ext_id("demo_1475459775872"):')
-        GetDisbursementByExternalID.run(xendit_instance, "demo_1475459775872")
+        args = {"external_id": "demo_1475459775872"}
+        print_running_function("xendit.Disbursement.get_by_ext_id", args)
+        GetDisbursementByExternalID.run(xendit_instance, **args)
 
 
 class GetDisbursementBanks:

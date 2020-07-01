@@ -10,7 +10,7 @@ class GetBalance:
     @staticmethod
     def run(xendit_instance, account_type):
         try:
-            balance = xendit_instance.Balance.get(account_type)
+            balance = xendit_instance.Balance.get(account_type=account_type)
             print(balance)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -18,10 +18,12 @@ class GetBalance:
 
     @staticmethod
     def example(xendit_instance):
-        print("Running xendit.Balance.get(xendit.Balance.AccountType.CASH):")
+        print(
+            "Running xendit.Balance.get(account_type=xendit.Balance.AccountType.CASH):"
+        )
         GetBalance.run(xendit_instance, xendit.BalanceAccountType.CASH)
 
-        print('Running xendit.Balance.get("cash"):')
+        print('Running xendit.Balance.get(account_type="cash"):')
         GetBalance.run(xendit_instance, "cash")
 
 

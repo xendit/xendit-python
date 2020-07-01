@@ -59,6 +59,7 @@ class Disbursement:
 
     @staticmethod
     def create(
+        *,
         external_id,
         bank_code,
         account_holder_name,
@@ -104,6 +105,7 @@ class Disbursement:
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
+        print(body, headers, locals())
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Disbursement(resp.body)
@@ -111,7 +113,7 @@ class Disbursement:
             raise XenditError(resp)
 
     @staticmethod
-    def get(id, for_user_id=None, x_api_version=None, **kwargs):
+    def get(*, id, for_user_id=None, x_api_version=None, **kwargs):
         """Get Disbursement detail by ID (API Reference: Disbursement/Get Disbursement by ID)
 
         Args:
@@ -142,7 +144,7 @@ class Disbursement:
             raise XenditError(resp)
 
     @staticmethod
-    def get_by_ext_id(external_id, for_user_id=None, x_api_version=None, **kwargs):
+    def get_by_ext_id(*, external_id, for_user_id=None, x_api_version=None, **kwargs):
         """Get Disbursement detail by external ID (API Reference: Disbursement/Get Disbursement by External ID)
 
         Args:
@@ -176,7 +178,7 @@ class Disbursement:
             raise XenditError(resp)
 
     @staticmethod
-    def get_available_banks(for_user_id=None, x_api_version=None, **kwargs):
+    def get_available_banks(*, for_user_id=None, x_api_version=None, **kwargs):
         """Get Available Banks (API Reference: Disbursement/Get Available Banks)
 
         Args:

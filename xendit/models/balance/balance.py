@@ -28,6 +28,7 @@ class Balance:
 
     @staticmethod
     def get(
+        *,
         account_type=BalanceAccountType.CASH,
         for_user_id=None,
         x_api_version=None,

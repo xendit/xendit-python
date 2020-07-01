@@ -45,6 +45,7 @@ class RetailOutlet:
 
     @staticmethod
     def create_fixed_payment_code(
+        *,
         external_id,
         retail_outlet_name,
         name,
@@ -95,6 +96,7 @@ class RetailOutlet:
 
     @staticmethod
     def update_fixed_payment_code(
+        *,
         fixed_payment_code_id,
         name=None,
         expected_amount=None,
@@ -139,7 +141,7 @@ class RetailOutlet:
 
     @staticmethod
     def get_fixed_payment_code(
-        fixed_payment_code_id, for_user_id=None, x_api_version=None, **kwargs
+        *, fixed_payment_code_id, for_user_id=None, x_api_version=None, **kwargs
     ):
         """Get the detail of given Fixed Payment Code (API Reference: Retail Outlets/Get Fixed Payment Code)
 
