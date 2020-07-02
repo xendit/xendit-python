@@ -1,3 +1,5 @@
+from print_running_function import print_running_function
+
 import time
 
 # Hackish method to import from another directory
@@ -13,7 +15,7 @@ class CreateOVOPayment:
     def run(xendit_instance, external_id, amount, phone, **kwargs):
         try:
             ewallet = xendit_instance.EWallet.create_ovo_payment(
-                external_id, amount, phone
+                external_id=external_id, amount=amount, phone=phone,
             )
             print(ewallet)
         except xendit.XenditError as e:
@@ -22,13 +24,13 @@ class CreateOVOPayment:
 
     @staticmethod
     def example(xendit_instance):
-        external_id = f"ovo-ewallet-testing-id-{int(time.time())}"
-        amount = "80001"
-        phone = "08123123123"
-        print(
-            f'Running xendit.EWallet.create_ovo_payment("{external_id}", "{amount}", "{phone}"):'
-        )
-        CreateOVOPayment.run(xendit_instance, external_id, amount, phone)
+        args = {
+            "external_id": f"ovo-ewallet-testing-id-{int(time.time())}",
+            "amount": "80001",
+            "phone": "08123123123",
+        }
+        print_running_function("xendit.EWallet.create_ovo_payment", args)
+        CreateOVOPayment.run(xendit_instance, **args)
 
 
 class CreateDANAPayment:
@@ -36,7 +38,11 @@ class CreateDANAPayment:
     def run(xendit_instance, external_id, amount, callback_url, redirect_url, **kwargs):
         try:
             ewallet = xendit_instance.EWallet.create_dana_payment(
-                external_id, amount, callback_url, redirect_url, **kwargs
+                external_id=external_id,
+                amount=amount,
+                callback_url=callback_url,
+                redirect_url=redirect_url,
+                **kwargs,
             )
             print(ewallet)
         except xendit.XenditError as e:
@@ -45,16 +51,14 @@ class CreateDANAPayment:
 
     @staticmethod
     def example(xendit_instance):
-        external_id = f"dana-ewallet-test-{int(time.time())}"
-        amount = "1001"
-        callback_url = "https://my-shop.com/callbacks"
-        redirect_url = "https://my-shop.com/home"
-        print(
-            f'Running xendit.EWallet.create_dana_payment("{external_id}", "{amount}", "{callback_url}", "{redirect_url}"):'
-        )
-        CreateDANAPayment.run(
-            xendit_instance, external_id, amount, callback_url, redirect_url
-        )
+        args = {
+            "external_id": f"dana-ewallet-test-{int(time.time())}",
+            "amount": "1001",
+            "callback_url": "https://my-shop.com/callbacks",
+            "redirect_url": "https://my-shop.com/home",
+        }
+        print_running_function("xendit.EWallet.create_dana_payment", args)
+        CreateDANAPayment.run(xendit_instance, **args)
 
 
 class CreateLinkAjaPayment:
@@ -71,7 +75,13 @@ class CreateLinkAjaPayment:
     ):
         try:
             ewallet = xendit_instance.EWallet.create_linkaja_payment(
-                external_id, phone, amount, items, callback_url, redirect_url, **kwargs
+                external_id=external_id,
+                phone=phone,
+                amount=amount,
+                items=items,
+                callback_url=callback_url,
+                redirect_url=redirect_url,
+                **kwargs,
             )
             print(ewallet)
         except xendit.XenditError as e:
@@ -80,27 +90,20 @@ class CreateLinkAjaPayment:
 
     @staticmethod
     def example(xendit_instance):
-        external_id = f"linkaja-ewallet-test-{int(time.time())}"
-        phone = "089911111111"
-        amount = 300000
         items = []
         items.append(
             xendit.LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1)
         )
-        callback_url = "https://my-shop.com/callbacks"
-        redirect_url = "https://xendit.co/"
-        print(
-            f'Running xendit.EWallet.create_linkaja_payment("{external_id}", "{phone}", {amount}, {items}, "{callback_url}", "{redirect_url}"):'
-        )
-        CreateLinkAjaPayment.run(
-            xendit_instance,
-            external_id,
-            phone,
-            amount,
-            items,
-            callback_url,
-            redirect_url,
-        )
+        args = {
+            "external_id": f"linkaja-ewallet-test-{int(time.time())}",
+            "phone": "089911111111",
+            "item": items,
+            "amount": 300000,
+            "callback_url": "https://my-shop.com/callbacks",
+            "redirect_url": "https://xendit.co/",
+        }
+        print_running_function("xendit.EWallet.create_linkaja_payment", args)
+        CreateLinkAjaPayment.run(xendit_instance, **args)
 
 
 class GetOVOPaymentStatus:
@@ -108,7 +111,7 @@ class GetOVOPaymentStatus:
     def run(xendit_instance, external_id, ewallet_type, **kwargs):
         try:
             ewallet = xendit_instance.EWallet.get_payment_status(
-                external_id, ewallet_type, **kwargs
+                external_id=external_id, ewallet_type=ewallet_type, **kwargs,
             )
             print(ewallet)
         except xendit.XenditError as e:
@@ -117,12 +120,12 @@ class GetOVOPaymentStatus:
 
     @staticmethod
     def example(xendit_instance):
-        ewallet_type = xendit.EWalletType.OVO
-        external_id = "ovo-ewallet-testing-id-1234"
-        print(
-            f"Running xendit.EWallet.get_payment_status('{external_id}', {ewallet_type}):"
-        )
-        GetOVOPaymentStatus.run(xendit_instance, external_id, ewallet_type)
+        args = {
+            "ewallet_type": xendit.EWalletType.OVO,
+            "external_id": "ovo-ewallet-testing-id-1234",
+        }
+        print_running_function("xendit.EWallet.get_payment_status", args)
+        GetOVOPaymentStatus.run(xendit_instance, **args)
 
 
 class GetDANAPaymentStatus:
@@ -130,7 +133,7 @@ class GetDANAPaymentStatus:
     def run(xendit_instance, external_id, ewallet_type, **kwargs):
         try:
             ewallet = xendit_instance.EWallet.get_payment_status(
-                external_id, ewallet_type, **kwargs
+                external_id=external_id, ewallet_type=ewallet_type, **kwargs,
             )
             print(ewallet)
         except xendit.XenditError as e:
@@ -139,12 +142,12 @@ class GetDANAPaymentStatus:
 
     @staticmethod
     def example(xendit_instance):
-        ewallet_type = xendit.EWalletType.DANA
-        external_id = "dana-ewallet-test-1234"
-        print(
-            f"Running xendit.EWallet.get_payment_status('{external_id}', {ewallet_type}):"
-        )
-        GetDANAPaymentStatus.run(xendit_instance, external_id, ewallet_type)
+        args = {
+            "ewallet_type": xendit.EWalletType.DANA,
+            "external_id": "dana-ewallet-test-1234",
+        }
+        print_running_function("xendit.EWallet.get_payment_status", args)
+        GetDANAPaymentStatus.run(xendit_instance, **args)
 
 
 class GetLinkAjaPaymentStatus:
@@ -152,7 +155,7 @@ class GetLinkAjaPaymentStatus:
     def run(xendit_instance, external_id, ewallet_type, **kwargs):
         try:
             ewallet = xendit_instance.EWallet.get_payment_status(
-                external_id, ewallet_type, **kwargs
+                external_id=external_id, ewallet_type=ewallet_type, **kwargs,
             )
             print(ewallet)
         except xendit.XenditError as e:
@@ -161,12 +164,12 @@ class GetLinkAjaPaymentStatus:
 
     @staticmethod
     def example(xendit_instance):
-        ewallet_type = xendit.EWalletType.LINKAJA
-        external_id = "linkaja-ewallet-test-123"
-        print(
-            f"Running xendit.EWallet.get_payment_status('{external_id}', {ewallet_type}):"
-        )
-        GetLinkAjaPaymentStatus.run(xendit_instance, external_id, ewallet_type)
+        args = {
+            "ewallet_type": xendit.EWalletType.LINKAJA,
+            "external_id": "linkaja-ewallet-test-123",
+        }
+        print_running_function("xendit.EWallet.get_payment_status", args)
+        GetLinkAjaPaymentStatus.run(xendit_instance, **args)
 
 
 def ask_ewallet_input():

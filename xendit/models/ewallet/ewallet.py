@@ -30,6 +30,7 @@ class EWallet:
 
     @staticmethod
     def create_ovo_payment(
+        *,
         external_id,
         amount,
         phone,
@@ -73,6 +74,7 @@ class EWallet:
 
     @staticmethod
     def create_dana_payment(
+        *,
         external_id,
         amount,
         callback_url,
@@ -120,6 +122,7 @@ class EWallet:
 
     @staticmethod
     def create_linkaja_payment(
+        *,
         external_id,
         phone,
         amount,
@@ -169,7 +172,7 @@ class EWallet:
 
     @staticmethod
     def get_payment_status(
-        external_id, ewallet_type, for_user_id=None, x_api_version=None, **kwargs
+        *, external_id, ewallet_type, for_user_id=None, x_api_version=None, **kwargs
     ):
         """Get payment status of given external id (API Reference: eWallets/Get Payment Status)
 

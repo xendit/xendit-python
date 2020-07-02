@@ -10,7 +10,7 @@ class TestDisbursement(BaseIntegrationTest):
     def Disbursement(self, xendit_instance):
         return xendit_instance.Disbursement
 
-    def test_create_virtual_account_return_correct_keys(self, Disbursement):
+    def test_create_disbursement_return_correct_keys(self, Disbursement):
         disbursement = Disbursement.create(
             external_id="demo_1475459775872",
             bank_code="BCA",
