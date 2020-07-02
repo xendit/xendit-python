@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.retail_outlet import retail_outlet_response
 from xendit.models import RetailOutlet
 
 
 # fmt: off
-class TestCreateFixedPaymentCode(BaseModelTest):
+class TestCreateFixedPaymentCode(ModelBaseTest):
     @pytest.fixture
     def default_retail_outlet_data(self):
         tested_class = RetailOutlet

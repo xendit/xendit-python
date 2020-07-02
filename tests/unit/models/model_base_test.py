@@ -4,7 +4,7 @@ from xendit._api_requestor import _APIRequestor
 
 
 # fmt: off
-class BaseModelTest:
+class ModelBaseTest:
     def base_test_return_class_on_correct_params(
         self, tested_class_name, tested_method_name, params, expected_result
     ):

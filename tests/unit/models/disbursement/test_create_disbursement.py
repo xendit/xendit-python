@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.disbursement import disbursement_response
 from xendit.models import Disbursement
 
 
 # fmt: off
-class TestCreateDisbursement(BaseModelTest):
+class TestCreateDisbursement(ModelBaseTest):
     @pytest.fixture
     def default_disbursement_data(self):
         tested_class = Disbursement
