@@ -11,6 +11,7 @@ def virtual_account_response():
         "expiration_date": "2051-06-18T17:00:00.000Z",
         "is_closed": False,
         "id": "5eec6cdc787210324084cff8",
+        "currency": "IDR",
     }
 
 
@@ -35,4 +36,5 @@ def virtual_account_payment_response():
         "bank_code": "BNI",
         "amount": 5000,
         "transaction_timestamp": "2017-08-11T11:14:57.080Z",
+        "currency": "IDR",
     }
