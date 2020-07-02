@@ -12,8 +12,14 @@ class TestCreateDANAPayment(BaseModelTest):
         class_name = "EWallet"
         method_name = "create_dana_payment"
         http_method_name = "post"
-        args = ("dana-ewallet-test-123", "1001", "https://my-shop.com/callbacks", "https://my-shop.com/home")
-        kwargs = {"x_idempotency_key": "test-idemp_123"}
+        args = ()
+        kwargs = {
+            "external_id": "dana-ewallet-test-123",
+            "amount": "1001",
+            "callback_url": "https://my-shop.com/callbacks",
+            "redirect_url": "https://my-shop.com/home",
+            "x_idempotency_key": "test-idemp_123",
+        }
         params = (args, kwargs)
         url = "/ewallets"
         expected_correct_result = dana_payment_response()

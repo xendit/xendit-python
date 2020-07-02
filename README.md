@@ -149,7 +149,11 @@ Will return
 ```python
 from xendit import EWallet
 
-ovo_payment = EWallet.create_ovo_payment("ovo-ewallet-testing-id-1593583779", "80001", "08123123123")
+ovo_payment = EWallet.create_ovo_payment(
+    external_id="ovo-ewallet-testing-id-1593663430",
+    amount="80001",
+    phone="08123123123",
+)
 print(ovo_payment)
 ```
 
@@ -159,10 +163,10 @@ Will return
 {
     "amount": 80001,
     "business_id": "5ed75086a883856178afc12e",
-    "external_id": "ovo-ewallet-testing-id-1593583779",
+    "external_id": "ovo-ewallet-testing-id-1593663430",
     "ewallet_type": "OVO",
     "phone": "08123123123",
-    "created": "2020-07-01T06:09:47.610Z",
+    "created": "2020-07-02T04:17:12.979Z",
     "status": "PENDING"
 }
 ```
@@ -172,7 +176,12 @@ Will return
 ```python
 from xendit import EWallet
 
-dana_payment = EWallet.create_dana_payment("dana-ewallet-test-1593583817", "1001", "https://my-shop.com/callbacks", "https://my-shop.com/home")
+dana_payment = EWallet.create_dana_payment(
+    external_id="dana-ewallet-test-1593663447",
+    amount="1001",
+    callback_url="https://my-shop.com/callbacks",
+    redirect_url="https://my-shop.com/home",
+)
 print(dana_payment)
 ```
 
@@ -180,9 +189,9 @@ Will return
 
 ```
 {
-    "external_id": "dana-ewallet-test-1593583817",
+    "external_id": "dana-ewallet-test-1593663447",
     "amount": 1001,
-    "checkout_url": "https://sandbox.m.dana.id/m/portal/cashier/checkout?bizNo=20200701111212800110166367100513589&timestamp=1593583818552&mid=216620000000261692328&sign=a0WQ2g2PktDQ1oZdO4dzLUIIcD%2FhakqLIVo6Z8D87WNPwfV5JKEeZT%2F7XmR50XUrvKSDwJQMpfdAPi2UYbuV2Cqwxy494FDp%2BVyz69gvQ5R7SyQSxyeqfpy6%2ByE7OFPtJTHu%2BzDtD95DVNssSfz0GmUvBO4ykF3Rwu8qbLP2nchvh7URslKH9cmtisE%2BXfBcP45UyeQndDDG4DdF16d%2FeR2C8uPhS5thMt1mDZKRsw41QZS4gZ%2BSjhvpCWfkfLoUVOymtzE3Q7KuC%2FzLxsI5Kd7BnxE3GhkKbOw7dNpacqfctXpGGO08jNwrdqsptUKYnF87bzX8kUAEvJif6Hu9Gw%3D%3D",
+    "checkout_url": "https://sandbox.m.dana.id/m/portal/cashier/checkout?bizNo=20200702111212800110166820100550620&timestamp=1593663450389&mid=216620000000261692328&sign=XS3FMKj1oZHkTWu0EXk8PBwzjR1VtwSedqbKX%2BgMF6CyZvbA5xhAmMUR%2FlhD4QkBODbbTPcju1YDFnHmSdzmjbqPfGcQGtkCPgLwVOZo1ERPmoUhhGJIbQXkfZ1Z8eA1w1RSqDzdmDB%2B%2FlvHaTbYPiUlvjzs%2BfgkM33YFFEl0BG1kUFz0%2FKb9OoT1QKyoHxw6ge4SWPF3Po6BwNtjqUZe2n43s7y0CvSrcNiNLHT3k2XHSlIdguwCGjNHh2zClgtv9XbSCecnD96nuIuohYARX8Ai%2BaYo%2FEDO1VEch4XditfIXvyBhL0TocxhYxda7yKNNjkZj56Rl9ds8u7Wyv1eQ%3D%3D",
     "ewallet_type": "DANA"
 }
 ```
@@ -194,7 +203,14 @@ from xendit import EWallet, LinkAjaItem
 
 items = []
 items.append(LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1))
-linkaja_payment = EWallet.create_linkaja_payment("linkaja-ewallet-test-1593583880", "089911111111", 300000, items, "https://my-shop.com/callbacks", "https://xendit.co/")
+linkaja_payment = EWallet.create_linkaja_payment(
+    external_id="linkaja-ewallet-test-1593663498",
+    phone="089911111111",
+    items=items,
+    amount=300000,
+    callback_url="https://my-shop.com/callbacks",
+    redirect_url="https://xendit.co/",
+)
 print(linkaja_payment)
 ```
 
@@ -202,10 +218,10 @@ Will return
 
 ```
 {
-    "checkout_url": "https://ewallet-linkaja-dev.xendit.co/checkouts/c631e9a1-b460-4f22-98a2-b481e6feda10",
-    "transaction_date": "2020-07-01T06:11:22.335Z",
+    "checkout_url": "https://ewallet-linkaja-dev.xendit.co/checkouts/c627cf1f-0470-420f-a0f4-3931ef384bf4",
+    "transaction_date": "2020-07-02T04:18:21.729Z",
     "amount": 300000,
-    "external_id": "linkaja-ewallet-test-1593583880",
+    "external_id": "linkaja-ewallet-test-1593663498",
     "ewallet_type": "LINKAJA"
 }
 ```
@@ -215,7 +231,10 @@ Will return
 ```python
 from xendit import EWallet
 
-ovo_payment_status = EWallet.get_payment_status('ovo-ewallet-testing-id-1234', EWalletType.OVO)
+ovo_payment_status = EWallet.get_payment_status(
+    ewallet_type=EWalletType.OVO,
+    external_id="ovo-ewallet-testing-id-1234",
+)
 print(ovo_payment_status)
 ```
 

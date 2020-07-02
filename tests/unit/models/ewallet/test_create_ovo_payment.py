@@ -12,8 +12,13 @@ class TestCreateOVOPayment(BaseModelTest):
         class_name = "EWallet"
         method_name = "create_ovo_payment"
         http_method_name = "post"
-        args = ("ovo-ewallet-testing-id-123321131114", "8888", "08123123123")
-        kwargs = {"x_idempotency_key": "test-idemp_123"}
+        args = ()
+        kwargs = {
+            "external_id": "ovo-ewallet-testing-id-123321131114",
+            "amount": "8888",
+            "phone": "08123123123",
+            "x_idempotency_key": "test-idemp_123",
+        }
         params = (args, kwargs)
         url = "/ewallets"
         expected_correct_result = ovo_payment_response()

@@ -12,10 +12,13 @@ class TestGetDANAPaymentStatus(BaseModelTest):
         class_name = "EWallet"
         method_name = "get_payment_status"
         http_method_name = "get"
-        args = ("dana-ewallet-test-33312", EWalletType.DANA)
-        kwargs = {}
+        args = ()
+        kwargs = {
+            "external_id": "dana-ewallet-test-33312",
+            "ewallet_type": EWalletType.DANA,
+        }
         params = (args, kwargs)
-        url = f"/ewallets?external_id={args[0]}&ewallet_type={args[1].name}"
+        url = f"/ewallets?external_id={kwargs['external_id']}&ewallet_type={kwargs['ewallet_type'].name}"
         expected_correct_result = dana_payment_status_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

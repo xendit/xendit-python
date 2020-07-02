@@ -16,15 +16,16 @@ class TestCreateLinkAjaPayment(BaseModelTest):
         items.append(
             LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1)
         )
-        args = (
-            "linkaja-ewallet-test-1593505247",
-            "089911111111",
-            300000,
-            items,
-            "https://my-shop.com/callbacks",
-            "https://xendit.co/",
-        )
-        kwargs = {"x_idempotency_key": "test-idemp_123"}
+        args = ()
+        kwargs = {
+            "external_id": "linkaja-ewallet-test-1593505247",
+            "phone": "089911111111",
+            "amount": 300000,
+            "items": items,
+            "callback_url": "https://my-shop.com/callbacks",
+            "redirect_url": "https://xendit.co/",
+            "x_idempotency_key": "test-idemp_123",
+        }
         params = (args, kwargs)
         url = "/ewallets"
         expected_correct_result = linkaja_payment_response()

@@ -97,7 +97,7 @@ class CreateLinkAjaPayment:
         args = {
             "external_id": f"linkaja-ewallet-test-{int(time.time())}",
             "phone": "089911111111",
-            "item": items,
+            "items": items,
             "amount": 300000,
             "callback_url": "https://my-shop.com/callbacks",
             "redirect_url": "https://xendit.co/",
