@@ -12,10 +12,13 @@ class TestGetBalance(BaseModelTest):
         class_name = "Balance"
         method_name = "get"
         http_method_name = "get"
-        args = (BalanceAccountType.CASH,)
-        kwargs = {'for_user_id': 'test-123'}
+        args = ()
+        kwargs = {
+            'account_type': BalanceAccountType.CASH,
+            'for_user_id': 'test-123',
+        }
         params = (args, kwargs)
-        url = f"/balance?account_type={args[0].name}"
+        url = f"/balance?account_type={kwargs['account_type'].value}"
         expected_correct_result = balance_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

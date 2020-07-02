@@ -12,10 +12,10 @@ class TestGetVirtualAccountPayment(BaseModelTest):
         class_name = "VirtualAccount"
         method_name = "get_payment"
         http_method_name = "get"
-        args = ("5ef18efca7d10d1b4d61fb52",)
-        kwargs = {}
+        args = ()
+        kwargs = {"payment_id": "5ef18efca7d10d1b4d61fb52"}
         params = (args, kwargs)
-        url = f"/callback_virtual_account_payments/payment_id={args[0]}"
+        url = f"/callback_virtual_account_payments/payment_id={kwargs['payment_id']}"
         expected_correct_result = virtual_account_payment_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

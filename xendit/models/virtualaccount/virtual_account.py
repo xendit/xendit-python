@@ -68,6 +68,7 @@ class VirtualAccount:
 
     @staticmethod
     def create(
+        *,
         external_id,
         bank_code,
         name,
@@ -123,7 +124,7 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get_banks(for_user_id=None, x_api_version=None, **kwargs):
+    def get_banks(*, for_user_id=None, x_api_version=None, **kwargs):
         """Get available banks (API Reference: Virtual Account/Get Virtual Account Banks)
 
         Args:
@@ -156,7 +157,7 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get(id, for_user_id=None, x_api_version=None, **kwargs):
+    def get(*, id, for_user_id=None, x_api_version=None, **kwargs):
         """Get the detail of Virtual Account (API Reference: Virtual Account/Get Virtual Account
 
         Args:
@@ -187,6 +188,7 @@ class VirtualAccount:
 
     @staticmethod
     def update(
+        *,
         id,
         suggested_amount=None,
         expected_amount=None,
@@ -234,7 +236,7 @@ class VirtualAccount:
             raise XenditError(resp)
 
     @staticmethod
-    def get_payment(payment_id, for_user_id=None, x_api_version=None, **kwargs):
+    def get_payment(*, payment_id, for_user_id=None, x_api_version=None, **kwargs):
         """Get payment from virtual account (API Reference: Virtual Account/Get Virtual Account Payment
 
         Args:

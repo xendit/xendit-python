@@ -12,10 +12,10 @@ class TestGetDisbursementByExtId(BaseModelTest):
         class_name = "Disbursement"
         method_name = "get_by_ext_id"
         http_method_name = "get"
-        args = ("demo_1475459775872",)
-        kwargs = {}
+        args = ()
+        kwargs = {"external_id": "demo_1475459775872"}
         params = (args, kwargs)
-        url = f"/disbursements?external_id={args[0]}"
+        url = f"/disbursements?external_id={kwargs['external_id']}"
         expected_correct_result = multi_disbursement_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

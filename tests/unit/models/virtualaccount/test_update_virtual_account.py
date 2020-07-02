@@ -12,10 +12,13 @@ class TestUpdateVirtualAccount(BaseModelTest):
         class_name = "VirtualAccount"
         method_name = "update"
         http_method_name = "patch"
-        args = ("5eec3a3e8dd9ea2fc97d6728",)
-        kwargs = {"x_idempotency_key": "test-idemp_123"}
+        args = ()
+        kwargs = {
+            "id": "5eec3a3e8dd9ea2fc97d6728",
+            "x_idempotency_key": "test-idemp_123",
+        }
         params = (args, kwargs)
-        url = f"/callback_virtual_accounts/{args[0]}"
+        url = f"/callback_virtual_accounts/{kwargs['id']}"
         expected_correct_result = virtual_account_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
