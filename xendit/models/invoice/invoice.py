@@ -1,12 +1,17 @@
 import json
 
+from typing import List
+from dataclasses import dataclass
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
 
 from xendit.xendit_error import XenditError
 
+from .invoice_bank import InvoiceBank
 
+
+@dataclass
 class Invoice:
     """Invoice class (API Reference: Invoice)
 
@@ -38,27 +43,24 @@ class Invoice:
 
     """
 
-    def __init__(self, xendit_response):
-        self.id = xendit_response["id"]
-        self.external_id = xendit_response["external_id"]
-        self.user_id = xendit_response["user_id"]
-        self.status = xendit_response["status"]
-        self.merchant_name = xendit_response["merchant_name"]
-        self.merchant_profile_picture_url = xendit_response[
-            "merchant_profile_picture_url"
-        ]
-        self.amount = xendit_response["amount"]
-        self.payer_email = xendit_response["payer_email"]
-        self.description = xendit_response["description"]
-        self.expiry_date = xendit_response["expiry_date"]
-        self.invoice_url = xendit_response["invoice_url"]
-        self.available_banks = xendit_response["available_banks"]
-        self.available_ewallets = xendit_response["available_ewallets"]
-        self.should_exclude_credit_card = xendit_response["should_exclude_credit_card"]
-        self.should_send_email = xendit_response["should_send_email"]
-        self.created = xendit_response["created"]
-        self.updated = xendit_response["updated"]
-        self.currency = xendit_response["currency"]
+    id: str
+    external_id: str
+    user_id: str
+    status: str
+    merchant_name: str
+    merchant_profile_picture_url: str
+    amount: int
+    payer_email: str
+    description: str
+    invoice_url: str
+    expiry_date: str
+    available_banks: List[InvoiceBank]
+    available_ewallets: List[None]
+    should_exclude_credit_card: bool
+    should_send_email: bool
+    created: str
+    updated: str
+    currency: str
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)
@@ -124,6 +126,6 @@ class Invoice:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return Invoice(resp.body)
+            return Invoice(**resp.body)
         else:
             raise XenditError(resp)
