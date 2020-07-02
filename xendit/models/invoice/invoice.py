@@ -9,9 +9,10 @@ from xendit._extract_params import _extract_params
 from xendit.xendit_error import XenditError
 
 from .invoice_bank import InvoiceBank
+from .invoice_retail_outlet import InvoiceRetailOutlet
 
 
-@dataclass
+@dataclass(init=False)
 class Invoice:
     """Invoice class (API Reference: Invoice)
 
@@ -59,11 +60,16 @@ class Invoice:
     expiry_date: str
     available_banks: List[InvoiceBank]
     available_ewallets: List[None]
+    available_retail_outlets: List[InvoiceRetailOutlet]
     should_exclude_credit_card: bool
     should_send_email: bool
     created: str
     updated: str
     currency: str
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
     def __repr__(self):
         return json.dumps(vars(self), indent=4)
@@ -190,7 +196,7 @@ class Invoice:
           XenditError
 
         """
-        url = "/invoices/{invoice_id}/expire!"
+        url = f"/invoices/{invoice_id}/expire!"
         headers, body = _extract_params(
             locals(),
             func_object=Invoice.expire,

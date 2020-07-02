@@ -39,11 +39,41 @@ class CreateInvoice:
 
 
 class GetInvoice:
-    pass
+    @staticmethod
+    def run(xendit_instance, invoice_id, **kwargs):
+        try:
+            invoice = xendit_instance.Invoice.get(invoice_id=invoice_id, **kwargs,)
+            print(invoice)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        args = {
+            "invoice_id": "5efda8a20425db620ec35f43",
+        }
+        print_running_function("xendit.Invoice.get", args)
+        GetInvoice.run(xendit_instance, **args)
 
 
 class ExpireInvoice:
-    pass
+    @staticmethod
+    def run(xendit_instance, invoice_id, **kwargs):
+        try:
+            invoice = xendit_instance.Invoice.expire(invoice_id=invoice_id, **kwargs,)
+            print(invoice)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        args = {
+            "invoice_id": "5efda8a20425db620ec35f43",
+        }
+        print_running_function("xendit.Invoice.expire", args)
+        ExpireInvoice.run(xendit_instance, **args)
 
 
 class ListAllInvoice:
