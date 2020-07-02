@@ -12,10 +12,14 @@ class TestUpdateFixedPaymentCode(BaseModelTest):
         class_name = "RetailOutlet"
         method_name = "update_fixed_payment_code"
         http_method_name = "patch"
-        args = ("5ef2f0f8e7f5c14077275493",)
-        kwargs = {"name": "Joe Contini", "x_idempotency_key": "test-idemp_123"}
+        args = ()
+        kwargs = {
+            "fixed_payment_code_id": "5ef2f0f8e7f5c14077275493",
+            "name": "Joe Contini",
+            "x_idempotency_key": "test-idemp_123",
+        }
         params = (args, kwargs)
-        url = f"/fixed_payment_code/{args[0]}"
+        url = f"/fixed_payment_code/{kwargs['fixed_payment_code_id']}"
         expected_correct_result = retail_outlet_update_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

@@ -12,8 +12,15 @@ class TestCreateDisbursement(BaseModelTest):
         class_name = "Disbursement"
         method_name = "create"
         http_method_name = "post"
-        args = ("demo_1475459775872", "BCA", "Bob Jones", "1231242311", "Reimbursement for shoes", 17000,)
-        kwargs = {}
+        args = ()
+        kwargs = {
+            "external_id": "demo_1475459775872",
+            "bank_code": "BCA",
+            "account_holder_name": "Bob Jones",
+            "account_number": "1231242311",
+            "description": "Reimbursement for shoes",
+            "amount": 17000,
+        }
         params = (args, kwargs)
         url = "/disbursements"
         expected_correct_result = disbursement_response()

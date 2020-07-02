@@ -12,10 +12,10 @@ class TestGetVirtualAccount(BaseModelTest):
         class_name = "VirtualAccount"
         method_name = "get"
         http_method_name = "get"
-        args = ("5eec3a3e8dd9ea2fc97d6728",)
-        kwargs = {}
+        args = ()
+        kwargs = {"id": "5eec3a3e8dd9ea2fc97d6728"}
         params = (args, kwargs)
-        url = f"/callback_virtual_accounts/{args[0]}"
+        url = f"/callback_virtual_accounts/{kwargs['id']}"
         expected_correct_result = virtual_account_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

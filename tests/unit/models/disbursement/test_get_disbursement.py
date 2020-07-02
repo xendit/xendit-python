@@ -12,10 +12,10 @@ class TestGetDisbursement(BaseModelTest):
         class_name = "Disbursement"
         method_name = "get"
         http_method_name = "get"
-        args = ("5ef1befeecb16100179e1d05",)
-        kwargs = {}
+        args = ()
+        kwargs = {"id": "5ef1befeecb16100179e1d05"}
         params = (args, kwargs)
-        url = f"/disbursements/{args[0]}"
+        url = f"/disbursements/{kwargs['id']}"
         expected_correct_result = disbursement_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
