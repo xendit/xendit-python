@@ -29,7 +29,7 @@ class CreateInvoice:
     @staticmethod
     def example(xendit_instance):
         args = {
-            "external_id": f"invoice-{time.time()}",
+            "external_id": f"invoice-{int(time.time())}",
             "amount": 20000,
             "payer_email": "customer@domain.com",
             "description": "Invoice Demo #123",
