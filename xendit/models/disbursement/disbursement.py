@@ -105,7 +105,7 @@ class Disbursement:
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
-        print(body, headers, locals())
+
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return Disbursement(resp.body)

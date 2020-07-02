@@ -69,7 +69,7 @@ class GetFixedPaymentCode:
     def run(xendit_instance, fixed_payment_code_id, **kwargs):
         try:
             retail_outlet = xendit_instance.RetailOutlet.get_fixed_payment_code(
-                fixed_payment_code_id=fixed_payment_code_id, **kwargs
+                fixed_payment_code_id=fixed_payment_code_id, **kwargs,
             )
             print(retail_outlet)
         except xendit.XenditError as e:
@@ -78,10 +78,11 @@ class GetFixedPaymentCode:
 
     @staticmethod
     def example(xendit_instance):
-        print(
-            'Running xendit.RetailOutlet.get_fixed_payment_code("5ef2f0f8e7f5c14077275493"):'
-        )
-        GetFixedPaymentCode.run(xendit_instance, "5ef2f0f8e7f5c14077275493")
+        args = {
+            "fixed_payment_code_id": "5ef2f0f8e7f5c14077275493",
+        }
+        print_running_function("xendit.RetailOutlet.get_fixed_payment_code", args)
+        GetFixedPaymentCode.run(xendit_instance, **args)
 
 
 def ask_retail_outlet_input():

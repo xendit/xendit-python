@@ -53,7 +53,7 @@ class GetDisbursementByID:
     @staticmethod
     def run(xendit_instance, id, **kwargs):
         try:
-            disbursement = xendit_instance.Disbursement.get(id=id, **kwargs)
+            disbursement = xendit_instance.Disbursement.get(id=id, **kwargs,)
             print(disbursement)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -61,7 +61,9 @@ class GetDisbursementByID:
 
     @staticmethod
     def example(xendit_instance):
-        args = {"id": "5ef1befeecb16100179e1d05"}
+        args = {
+            "id": "5ef1befeecb16100179e1d05",
+        }
         print_running_function("xendit.Disbursement.get", args)
         GetDisbursementByID.run(xendit_instance, **args)
 
@@ -71,7 +73,7 @@ class GetDisbursementByExternalID:
     def run(xendit_instance, external_id, **kwargs):
         try:
             disbursement = xendit_instance.Disbursement.get_by_ext_id(
-                external_id=external_id, **kwargs
+                external_id=external_id, **kwargs,
             )
             print(disbursement)
         except xendit.XenditError as e:
@@ -80,7 +82,9 @@ class GetDisbursementByExternalID:
 
     @staticmethod
     def example(xendit_instance):
-        args = {"external_id": "demo_1475459775872"}
+        args = {
+            "external_id": "demo_1475459775872",
+        }
         print_running_function("xendit.Disbursement.get_by_ext_id", args)
         GetDisbursementByExternalID.run(xendit_instance, **args)
 
@@ -99,7 +103,8 @@ class GetDisbursementBanks:
 
     @staticmethod
     def example(xendit_instance):
-        print("Running xendit.Disbursement.get_available_banks():")
+        args = {}
+        print_running_function("xendit.Disbursement.get_available_banks", args)
         GetDisbursementBanks.run(xendit_instance)
 
 
