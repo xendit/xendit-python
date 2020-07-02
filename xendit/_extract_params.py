@@ -20,7 +20,7 @@ def _extract_params(function_locals, func_object, headers_params=[], ignore_para
         "x_api_version": "X-API-VERSION",
         "x_idempotency_key": "X-IDEMPOTENCY-KEY",
     }
-    for param in inspect.getfullargspec(func_object)[0]:
+    for param in inspect.getfullargspec(func_object)[4]:
         value = function_locals.get(param, None)
         if value is not None and param not in ignore_params:
             if param in headers_params:

@@ -11,7 +11,7 @@ class TestBalance(BaseIntegrationTest):
         return xendit_instance.Balance
 
     def test_get_balance_return_correct_keys(self, Balance):
-        balance = Balance.get(BalanceAccountType.HOLDING)
+        balance = Balance.get(account_type=BalanceAccountType.HOLDING)
         self.assert_returned_object_has_same_key_as_sample_response(
             balance, balance_response()
         )

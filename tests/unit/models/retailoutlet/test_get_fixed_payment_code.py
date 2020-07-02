@@ -12,10 +12,10 @@ class TestGetFixedPaymentCode(BaseModelTest):
         class_name = "RetailOutlet"
         method_name = "get_fixed_payment_code"
         http_method_name = "get"
-        args = ("5ef2f0f8e7f5c14077275493",)
-        kwargs = {}
+        args = ()
+        kwargs = {"fixed_payment_code_id": "5ef2f0f8e7f5c14077275493"}
         params = (args, kwargs)
-        url = f"/fixed_payment_code/{args[0]}"
+        url = f"/fixed_payment_code/{kwargs['fixed_payment_code_id']}"
         expected_correct_result = retail_outlet_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

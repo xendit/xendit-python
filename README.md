@@ -115,14 +115,18 @@ The `account_type` parameter is optional.
 from xendit import Balance
 Balance.get()
 
-Balance.get(Balance.AccountType)
+Balance.AccountType(
+    account_type=BalanceAccountType.CASH,
+)
 ```
 
 Usage example:
 
 ```python
 from xendit import Balance
-Balance balance = Balance.get(Balance.AccountType.CASH)
+Balance balance = Balance.AccountType(
+    account_type=BalanceAccountType.CASH,
+)
 
 # To get the JSON view
 print(balance)
@@ -235,7 +239,11 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account = VirtualAccount.create("demo_1475459775872", "BNI", "Rika Sutanto")
+virtual_account = VirtualAccount.create(
+    external_id="demo_1475459775872",
+    bank_code="BNI",
+    name="Rika Sutanto",
+)
 print(virtual_account)
 ```
 
@@ -290,7 +298,9 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account = VirtualAccount.get("5eec3a3e8dd9ea2fc97d6728")
+virtual_account = VirtualAccount.get(
+    id="5eec3a3e8dd9ea2fc97d6728",
+)
 print(virtual_account)
 ```
 
@@ -317,7 +327,10 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account = VirtualAccount.update("5eec3a3e8dd9ea2fc97d6728", is_single_use=True)
+virtual_account = VirtualAccount.update(
+    id="5eec3a3e8dd9ea2fc97d6728",
+    is_single_use=True,
+)
 print(virtual_account)
 ```
 
@@ -344,7 +357,9 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account_payment = VirtualAccount.get_payment("5ef18efca7d10d1b4d61fb52")
+virtual_account_payment = VirtualAccount.get(
+    payment_id="5ef18efca7d10d1b4d61fb52",
+)
 print(virtual_account)
 ```
 
@@ -372,7 +387,10 @@ Will return
 from xendit import RetailOutlet
 
 retail_outlet = RetailOutlet.create_fixed_payment_code(
-    "demo_fixed_payment_code_123", "ALFAMART", "Rika Sutanto", 10000
+    external_id="demo_fixed_payment_code_123",
+    retail_outlet_name="ALFAMART",
+    name="Rika Sutanto",
+    expected_amount=10000,
 )
 print(retail_outlet)
 ```
@@ -400,7 +418,8 @@ Will return
 from xendit import RetailOutlet
 
 retail_outlet = RetailOutlet.update_fixed_payment_code(
-    "5ef2f0f8e7f5c14077275493", name="Joe Contini"
+    fixed_payment_code_id="5ef2f0f8e7f5c14077275493",
+    name="Joe Contini",
 )
 print(retail_outlet)
 ```
@@ -427,7 +446,9 @@ Will return
 ```python
 from xendit import RetailOutlet
 
-retail_outlet = RetailOutlet.get_fixed_payment_code("5ef2f0f8e7f5c14077275493")
+retail_outlet = RetailOutlet.get_fixed_payment_code(
+    fixed_payment_code_id="5ef2f0f8e7f5c14077275493",
+)
 print(retail_outlet)
 ```
 
@@ -486,7 +507,9 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement = Disbursement.get("5ef1befeecb16100179e1d05")
+disbursement = Disbursement.get(
+    id="5ef1befeecb16100179e1d05",
+)
 print(disbursement)
 ```
 
@@ -510,7 +533,9 @@ Will return
 ```python
 from xendit import Disbursement
 
-disbursement_list = Disbursement.get_by_ext_id("demo_1475459775872")
+disbursement_list = Disbursement.get_by_ext_id(
+    external_id="demo_1475459775872",
+)
 print(disbursement_list)
 
 ```

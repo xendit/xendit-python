@@ -12,8 +12,13 @@ class TestCreateVirtualAccount(BaseModelTest):
         class_name = "VirtualAccount"
         method_name = "create"
         http_method_name = "post"
-        args = ("demo_1475459775872", "BNI", "Rika Sutanto")
-        kwargs = {"x_idempotency_key": "test-idemp_123"}
+        args = ()
+        kwargs = {
+            "external_id": "demo_1475459775872",
+            "bank_code": "BNI",
+            "name": "Rika Sutanto",
+            "x_idempotency_key": "test-idemp_123"
+        }
         params = (args, kwargs)
         url = "/callback_virtual_accounts"
         expected_correct_result = virtual_account_response()

@@ -12,7 +12,10 @@ class TestRetailOutlet(BaseIntegrationTest):
 
     def test_create_fixed_payment_code_return_correct_keys(self, RetailOutlet):
         retail_outlet = RetailOutlet.create_fixed_payment_code(
-            "demo_fixed_payment_code_123", "ALFAMART", "Rika Sutanto", 10000
+            external_id="demo_fixed_payment_code_123",
+            retail_outlet_name="ALFAMART",
+            name="Rika Sutanto",
+            expected_amount=10000,
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             retail_outlet, retail_outlet_response()
@@ -20,14 +23,16 @@ class TestRetailOutlet(BaseIntegrationTest):
 
     def test_update_fixed_payment_code_return_correct_keys(self, RetailOutlet):
         retail_outlet = RetailOutlet.update_fixed_payment_code(
-            "5ef2f0f8e7f5c14077275493", name="Joe Contini"
+            fixed_payment_code_id="5ef2f0f8e7f5c14077275493", name="Joe Contini",
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             retail_outlet, retail_outlet_update_response()
         )
 
     def test_get_fixed_payment_code_return_correct_keys(self, RetailOutlet):
-        retail_outlet = RetailOutlet.get_fixed_payment_code("5ef2f0f8e7f5c14077275493")
+        retail_outlet = RetailOutlet.get_fixed_payment_code(
+            fixed_payment_code_id="5ef2f0f8e7f5c14077275493"
+        )
         self.assert_returned_object_has_same_key_as_sample_response(
             retail_outlet, retail_outlet_response()
         )
