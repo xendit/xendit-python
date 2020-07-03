@@ -712,6 +712,69 @@ Will return
 
 #### List All Invoice
 
+```python
+from xendit import Invoice
+
+invoices = Invoice.list_all(
+    limit=3,
+)
+print(invoices)
+```
+
+Will return
+
+```
+[
+    ...
+    {
+        "id": "5efda8a20425db620ec35f43",
+        "external_id": "invoice-1593682080",
+        "user_id": "5ed75086a883856178afc12e",
+        "status": "EXPIRED",
+        "merchant_name": "Xendit&amp;#x27;s Intern",
+        "merchant_profile_picture_url": "https://xnd-companies.s3.amazonaws.com/prod/1591169469152_279.png",
+        "amount": 20000,
+        "payer_email": "customer@domain.com",
+        "description": "Invoice Demo #123",
+        "expiry_date": "2020-07-02T09:55:47.794Z",
+        "invoice_url": "https://invoice-staging.xendit.co/web/invoices/5efda8a20425db620ec35f43",
+        "available_banks": [
+            {
+                "bank_code": "MANDIRI",
+                "collection_type": "POOL",
+                "bank_account_number": "8860846853111",
+                "transfer_amount": 20000,
+                "bank_branch": "Virtual Account",
+                "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+                "identity_amount": 0
+            },
+            {
+                "bank_code": "BRI",
+                "collection_type": "POOL",
+                "bank_account_number": "2621554806292",
+                "transfer_amount": 20000,
+                "bank_branch": "Virtual Account",
+                "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+                "identity_amount": 0
+            }
+        "available_retail_outlets": [
+            {
+                "retail_outlet_name": "ALFAMART",
+                "payment_code": "TEST34950",
+                "transfer_amount": 20000
+            }
+        ],
+        "available_ewallets": [],
+        "should_exclude_credit_card": false,
+        "should_send_email": false,
+        "created": "2020-07-02T09:28:02.191Z",
+        "updated": "2020-07-02T09:55:47.794Z",
+        "currency": "IDR"
+    }
+    ...
+]
+```
+
 ### Disbursement Service
 
 #### Create Disbursement
