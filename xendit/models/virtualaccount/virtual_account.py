@@ -55,6 +55,7 @@ class VirtualAccount(BaseModel):
     status: str
     expiration_date: str
 
+    # Optional
     suggested_amount: str
     expected_amount: str
     description: str

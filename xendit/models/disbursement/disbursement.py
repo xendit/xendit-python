@@ -47,6 +47,8 @@ class Disbursement(BaseModel):
     disbursement_description: str
     status: str
     id: str
+
+    # Optional
     email_to: List[str]
     email_cc: List[str]
     email_bcc: List[str]

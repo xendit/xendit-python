@@ -29,4 +29,5 @@ class VirtualAccountPayment(BaseModel):
     amount: int
     transaction_timestamp: str
 
+    # Optional
     sender_name: str
