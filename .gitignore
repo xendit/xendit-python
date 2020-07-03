@@ -148,3 +148,5 @@ cython_debug/
 .history/
 
 ### End of generation
+
+.idea/
