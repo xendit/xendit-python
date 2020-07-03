@@ -58,6 +58,13 @@ def invoice_response():
                 "identity_amount": 0,
             },
         ],
+        "available_retail_outlets": [
+            {
+                "retail_outlet_name": "ALFAMART",
+                "payment_code": "TEST35284",
+                "transfer_amount": 1000000,
+            }
+        ],
         "available_ewallets": [],
         "should_exclude_credit_card": False,
         "should_send_email": False,
