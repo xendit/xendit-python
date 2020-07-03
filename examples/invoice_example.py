@@ -77,7 +77,22 @@ class ExpireInvoice:
 
 
 class ListAllInvoice:
-    pass
+    @staticmethod
+    def run(xendit_instance, limit, **kwargs):
+        try:
+            invoices = xendit_instance.Invoice.list_all(limit=limit, **kwargs,)
+            print(invoices)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        args = {
+            "limit": 3,
+        }
+        print_running_function("xendit.Invoice.list_all", args)
+        ListAllInvoice.run(xendit_instance, **args)
 
 
 def ask_invoice_input():

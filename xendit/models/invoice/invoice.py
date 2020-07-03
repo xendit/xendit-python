@@ -249,17 +249,21 @@ class Invoice(BaseModel):
           XenditError
 
         """
-        url = "/invoices/{invoice_id}/expire!"
-        headers, _ = _extract_params(
+        url = "/v2/invoices"
+        headers, params = _extract_params(
             locals(),
-            func_object=Invoice.expire,
+            func_object=Invoice.list_all,
             headers_params=["for_user_id", "x_api_version"],
             ignore_params=[],
         )
         kwargs["headers"] = headers
+        kwargs["params"] = params
 
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return Invoice(**resp.body)
+            invoices = []
+            for invoice in resp.body:
+                invoices.append(Invoice(**invoice))
+            return invoices
         else:
             raise XenditError(resp)
