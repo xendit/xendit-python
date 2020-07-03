@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.balance import balance_response
 from xendit.models import Balance, BalanceAccountType
 
 
 # fmt: off
-class TestGetBalance(BaseModelTest):
+class TestGetBalance(ModelBaseTest):
     @pytest.fixture
     def default_balance_data(self):
         tested_class = Balance

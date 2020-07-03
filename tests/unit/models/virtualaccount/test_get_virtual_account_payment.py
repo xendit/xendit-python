@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.virtual_account import virtual_account_payment_response
 from xendit.models import VirtualAccount
 
 
 # fmt: off
-class TestGetVirtualAccountPayment(BaseModelTest):
+class TestGetVirtualAccountPayment(ModelBaseTest):
     @pytest.fixture
     def default_virtual_account_data(self):
         tested_class = VirtualAccount

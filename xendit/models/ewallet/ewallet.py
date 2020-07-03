@@ -68,7 +68,7 @@ class EWallet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return OVOPayment(resp.body, x_api_version)
+            return OVOPayment(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -116,7 +116,7 @@ class EWallet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return DANAPayment(resp.body, x_api_version)
+            return DANAPayment(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -166,7 +166,7 @@ class EWallet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return LinkAjaPayment(resp.body, x_api_version)
+            return LinkAjaPayment(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -203,11 +203,11 @@ class EWallet:
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             if ewallet_type == EWalletType.OVO:
-                return OVOPaymentStatus(resp.body)
+                return OVOPaymentStatus(**resp.body)
             elif ewallet_type == EWalletType.DANA:
-                return DANAPaymentStatus(resp.body)
+                return DANAPaymentStatus(**resp.body)
             elif ewallet_type == EWalletType.LINKAJA:
-                return LinkAjaPaymentStatus(resp.body)
+                return LinkAjaPaymentStatus(**resp.body)
         else:
             raise XenditError(resp)
 

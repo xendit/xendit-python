@@ -1,5 +1,4 @@
-import json
-
+from xendit.models._base_model import BaseModel
 from .balance_account_type import BalanceAccountType
 
 from xendit.xendit_error import XenditError
@@ -7,7 +6,7 @@ from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
 
 
-class Balance:
+class Balance(BaseModel):
     """Balance class (API Reference: Balance)
 
     Related Classes:
@@ -20,11 +19,7 @@ class Balance:
       - balance (int)
     """
 
-    def __init__(self, xendit_response):
-        self.balance = xendit_response["balance"]
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)
+    balance: int
 
     @staticmethod
     def get(
@@ -58,7 +53,7 @@ class Balance:
 
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return Balance(resp.body)
+            return Balance(**resp.body)
         else:
             raise XenditError(resp)
 

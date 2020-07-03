@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.ewallet import linkaja_payment_response
 from xendit.models import EWallet, LinkAjaItem
 
 
 # fmt: off
-class TestCreateLinkAjaPayment(BaseModelTest):
+class TestCreateLinkAjaPayment(ModelBaseTest):
     @pytest.fixture
     def default_linkaja_payment_data(self):
         tested_class = EWallet

@@ -1,6 +1,8 @@
-import json
+from typing import List
 
 from .disbursement_bank import DisbursementBank
+
+from xendit.models._base_model import BaseModel
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
@@ -8,7 +10,7 @@ from xendit._extract_params import _extract_params
 from xendit.xendit_error import XenditError
 
 
-class Disbursement:
+class Disbursement(BaseModel):
     """Disbursement class (API Reference: Disbursement)
 
     Related Classes:
@@ -21,41 +23,35 @@ class Disbursement:
       - Disbursement.get_available_banks (API Reference: /Get Available Banks)
 
     Attributes:
-      - user_id
-      - external_id
-      - amount
-      - bank-code
-      - account_holder_name
-      - disbursement_description
-      - status
-      - id
+      - user_id (str)
+      - external_id (str)
+      - amount (int)
+      - bank_code (str)
+      - account_holder_name (str)
+      - disbursement_description (str)
+      - status (str)
+      - id (str)
 
     Optional Attributes:
-      - email_to
-      - email_cc
-      - email_bcc
+      - email_to (str[])
+      - email_cc (str[])
+      - email_bcc (str[])
 
     """
 
-    def __init__(self, xendit_response):
-        self.user_id = xendit_response["user_id"]
-        self.external_id = xendit_response["external_id"]
-        self.amount = xendit_response["amount"]
-        self.bank_code = xendit_response["bank_code"]
-        self.account_holder_name = xendit_response["account_holder_name"]
-        self.disbursement_description = xendit_response["disbursement_description"]
-        self.status = xendit_response["status"]
-        self.id = xendit_response["id"]
+    user_id: str
+    external_id: str
+    amount: int
+    bank_code: str
+    account_holder_name: str
+    disbursement_description: str
+    status: str
+    id: str
 
-        if xendit_response.get("email_to", None) is not None:
-            self.email_to = xendit_response["email_to"]
-        if xendit_response.get("email_cc", None) is not None:
-            self.email_cc = xendit_response["email_cc"]
-        if xendit_response.get("email_bcc", None) is not None:
-            self.email_bcc = xendit_response["email_bcc"]
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)
+    # Optional
+    email_to: List[str]
+    email_cc: List[str]
+    email_bcc: List[str]
 
     @staticmethod
     def create(
@@ -108,7 +104,7 @@ class Disbursement:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return Disbursement(resp.body)
+            return Disbursement(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -139,7 +135,7 @@ class Disbursement:
 
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return Disbursement(resp.body)
+            return Disbursement(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -172,7 +168,7 @@ class Disbursement:
         if resp.status_code >= 200 and resp.status_code < 300:
             disbursements = []
             for disbursement in resp.body:
-                disbursements.append(Disbursement(disbursement))
+                disbursements.append(Disbursement(**disbursement))
             return disbursements
         else:
             raise XenditError(resp)
@@ -204,7 +200,7 @@ class Disbursement:
         if resp.status_code >= 200 and resp.status_code < 300:
             disbursement_banks = []
             for bank in resp.body:
-                disbursement_banks.append(DisbursementBank(bank))
+                disbursement_banks.append(DisbursementBank(**bank))
             return disbursement_banks
         else:
             raise XenditError(resp)

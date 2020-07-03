@@ -1,7 +1,7 @@
-import json
-
 from .virtual_acount_bank import VirtualAccountBank
 from .virtual_account_payment import VirtualAccountPayment
+
+from xendit.models._base_model import BaseModel
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
@@ -9,7 +9,7 @@ from xendit._extract_params import _extract_params
 from xendit.xendit_error import XenditError
 
 
-class VirtualAccount:
+class VirtualAccount(BaseModel):
     """Virtual Account class (API Reference: Virtual Account)
 
     Related Classes:
@@ -43,28 +43,22 @@ class VirtualAccount:
 
     """
 
-    def __init__(self, xendit_response):
-        self.owner_id = xendit_response["owner_id"]
-        self.external_id = xendit_response["external_id"]
-        self.bank_code = xendit_response["bank_code"]
-        self.merchant_code = xendit_response["merchant_code"]
-        self.name = xendit_response["name"]
-        self.account_number = xendit_response["account_number"]
-        self.is_single_use = xendit_response["is_single_use"]
-        self.status = xendit_response["status"]
-        self.expiration_date = xendit_response["expiration_date"]
-        self.is_closed = xendit_response["is_closed"]
-        self.id = xendit_response["id"]
+    owner_id: str
+    external_id: str
+    bank_code: str
+    merchant_code: str
+    name: str
+    account_number: str
+    is_closed: bool
+    id: str
+    is_single_use: bool
+    status: str
+    expiration_date: str
 
-        if xendit_response.get("suggested_amount", None) is not None:
-            self.suggested_amount = xendit_response["suggested_amount"]
-        if xendit_response.get("expected_amount", None) is not None:
-            self.expected_amount = xendit_response["expected_amount"]
-        if xendit_response.get("description", None) is not None:
-            self.description = xendit_response["description"]
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)
+    # Optional
+    suggested_amount: str
+    expected_amount: str
+    description: str
 
     @staticmethod
     def create(
@@ -119,7 +113,7 @@ class VirtualAccount:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return VirtualAccount(resp.body)
+            return VirtualAccount(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -151,7 +145,7 @@ class VirtualAccount:
         if resp.status_code >= 200 and resp.status_code < 300:
             virtual_account_banks = []
             for bank in resp.body:
-                virtual_account_banks.append(VirtualAccountBank(bank))
+                virtual_account_banks.append(VirtualAccountBank(**bank))
             return virtual_account_banks
         else:
             raise XenditError(resp)
@@ -182,7 +176,7 @@ class VirtualAccount:
 
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return VirtualAccount(resp.body)
+            return VirtualAccount(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -231,7 +225,7 @@ class VirtualAccount:
 
         resp = _APIRequestor.patch(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return VirtualAccount(resp.body)
+            return VirtualAccount(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -259,6 +253,6 @@ class VirtualAccount:
 
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return VirtualAccountPayment(resp.body)
+            return VirtualAccountPayment(**resp.body)
         else:
             raise XenditError(resp)
