@@ -1,16 +1,7 @@
-import json
-from dataclasses import dataclass
+from xendit.models._base_model import BaseModel
 
 
-@dataclass(init=False)
-class InvoiceRetailOutlet:
+class InvoiceRetailOutlet(BaseModel):
     retail_outlet_name: str
     payment_code: str
     transfer_amount: int
-
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)

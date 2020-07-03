@@ -1,7 +1,6 @@
-import json
-
 from typing import List
-from dataclasses import dataclass
+
+from xendit.models._base_model import BaseModel
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
@@ -12,8 +11,7 @@ from .invoice_bank import InvoiceBank
 from .invoice_retail_outlet import InvoiceRetailOutlet
 
 
-@dataclass(init=False)
-class Invoice:
+class Invoice(BaseModel):
     """Invoice class (API Reference: Invoice)
 
     Related Classes:
@@ -66,13 +64,6 @@ class Invoice:
     created: str
     updated: str
     currency: str
-
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)
 
     @staticmethod
     def create(

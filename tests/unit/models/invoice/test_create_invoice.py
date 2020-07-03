@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.invoice import invoice_response
 from xendit.models import Invoice
 
 
 # fmt: off
-class TestCreateInvoice(BaseModelTest):
+class TestCreateInvoice(ModelBaseTest):
     @pytest.fixture
     def default_invoice_data(self):
         tested_class = Invoice
