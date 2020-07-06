@@ -173,7 +173,7 @@ class CreditCard(BaseModel):
           XenditError
 
         """
-        url = "/credit_card_charge"
+        url = "/credit_card_charges"
         headers, body = _extract_params(
             locals(),
             func_object=CreditCard.create_authorization,

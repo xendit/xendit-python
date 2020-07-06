@@ -40,6 +40,6 @@ def balance_example(xendit_instance):
     balance_input = ask_balance_input()
     while balance_input != 0:
         if balance_input == 1:
-            print("Running example of Create Virtual Account")
+            print("Running example of Get Balance")
             GetBalance.example(xendit_instance)
         balance_input = ask_balance_input()
