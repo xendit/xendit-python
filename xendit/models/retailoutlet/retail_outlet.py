@@ -1,4 +1,4 @@
-import json
+from xendit.models._base_model import BaseModel
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
@@ -6,7 +6,7 @@ from xendit._extract_params import _extract_params
 from xendit.xendit_error import XenditError
 
 
-class RetailOutlet:
+class RetailOutlet(BaseModel):
     """RetailOutlet class (API Reference: Retail Outlets)
 
     Static Methods:
@@ -28,20 +28,18 @@ class RetailOutlet:
 
     """
 
-    def __init__(self, xendit_response):
-        self.owner_id = xendit_response["owner_id"]
-        self.external_id = xendit_response["external_id"]
-        self.retail_outlet_name = xendit_response["retail_outlet_name"]
-        self.prefix = xendit_response["prefix"]
-        self.name = xendit_response["name"]
-        self.payment_code = xendit_response["payment_code"]
-        self.expected_amount = xendit_response["expected_amount"]
-        self.is_single_use = xendit_response["is_single_use"]
-        self.expiration_date = xendit_response["expiration_date"]
-        self.id = xendit_response["id"]
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)
+    owner_id: str
+    external_id: str
+    retail_outlet_name: str
+    prefix: str
+    name: str
+    payment_code: str
+    expected_amount: int
+    is_single_use: bool
+    expiration_Date: str
+    id: str
+    status: str
+    type: str
 
     @staticmethod
     def create_fixed_payment_code(
@@ -90,7 +88,7 @@ class RetailOutlet:
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return RetailOutlet(resp.body)
+            return RetailOutlet(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -135,7 +133,7 @@ class RetailOutlet:
 
         resp = _APIRequestor.patch(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return RetailOutlet(resp.body)
+            return RetailOutlet(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -167,6 +165,6 @@ class RetailOutlet:
 
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return RetailOutlet(resp.body)
+            return RetailOutlet(**resp.body)
         else:
             raise XenditError(resp)

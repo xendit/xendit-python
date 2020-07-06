@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.ewallet import ovo_payment_response
 from xendit.models import EWallet
 
 
 # fmt: off
-class TestCreateOVOPayment(BaseModelTest):
+class TestCreateOVOPayment(ModelBaseTest):
     @pytest.fixture
     def default_ovo_payment_data(self):
         tested_class = EWallet

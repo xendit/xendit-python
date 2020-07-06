@@ -1,11 +1,11 @@
 import pytest
-from ..base_model_test import BaseModelTest
+from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.ewallet import dana_payment_status_response
 from xendit.models import EWallet, EWalletType
 
 
 # fmt: off
-class TestGetDANAPaymentStatus(BaseModelTest):
+class TestGetDANAPaymentStatus(ModelBaseTest):
     @pytest.fixture
     def default_dana_payment_status_data(self):
         tested_class = EWallet

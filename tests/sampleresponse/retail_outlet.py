@@ -10,6 +10,8 @@ def retail_outlet_response():
         "is_single_use": False,
         "expiration_date": "2051-06-23T17:00:00.000Z",
         "id": "5ef2f0f8e7f5c14077275493",
+        "status": "ACTIVE",
+        "type": "USER",
     }
 
 
@@ -25,4 +27,6 @@ def retail_outlet_update_response():
         "is_single_use": False,
         "expiration_date": "2051-06-23T17:00:00.000Z",
         "id": "5ef2f0f8e7f5c14077275493",
+        "status": "ACTIVE",
+        "type": "USER",
     }

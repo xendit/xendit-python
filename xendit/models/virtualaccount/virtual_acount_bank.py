@@ -1,7 +1,7 @@
-import json
+from xendit.models._base_model import BaseModel
 
 
-class VirtualAccountBank:
+class VirtualAccountBank(BaseModel):
     """Bank class for Virtual Account (API Reference: Virtual Account)
 
     Attributes:
@@ -9,9 +9,5 @@ class VirtualAccountBank:
       - code (str)
     """
 
-    def __init__(self, xendit_response):
-        self.name = xendit_response["name"]
-        self.code = xendit_response["code"]
-
-    def __repr__(self):
-        return json.dumps(vars(self), indent=4)
+    name: str
+    code: str
