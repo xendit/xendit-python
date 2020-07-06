@@ -14,3 +14,12 @@ class CreditCardPromotionCalculation(BaseModel):
       - discount_percent (float)
       - discount_amount (float)
     """
+
+    reference_id: str
+    original_amount: float
+    final_amount: float
+    description: str
+
+    # Optional
+    discount_percent: float
+    discount_amount: float

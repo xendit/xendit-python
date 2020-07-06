@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass(init=False)
-class BaseModel:
+class BaseModel(dict):
     """Abstract class for feature class. Useful for pretty print and automatically set attribute"""
 
     def __init__(self, **kwargs):
