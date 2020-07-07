@@ -145,7 +145,7 @@ class ModelBaseTest:
             - url (str): URL for the request
             - params (tuple): Params with format (args, kwargs)
             - headers (dict): headers that will be sent
-            - body (dict): body that will be sent
+            - body (dict): body that will be sent (if http_method_name == 'get' then it's parameters of the request)
         """
         tested_class, class_name, method_name, http_method_name, url, params, headers, body = api_requestor_request_data
         args, kwargs = params
@@ -156,8 +156,33 @@ class ModelBaseTest:
 
         tested_method = getattr(tested_class, method_name)
         tested_method(*args, **kwargs)
+        self.assert_apirequestor_method(tested_apirequestor_method, http_method_name, url, headers, body)
+
+    def assert_apirequestor_method(self, tested_apirequestor_method, http_method_name, url, headers, body):
+        """Assert that tested_apirequestor_method is called with the specified parameters.
+        If the body is empty, we should give the freedom to not attach the body in the parameters
+
+        Args:
+            tested_apirequestor_method (Mock function): Function that will be tested
+            http_method_name (str): HTTP Method
+            url (str): URL for the request
+            headers (dict): Headers for the request
+            body (dict): Body/params of the request
+        """
         if(http_method_name == "get"):
-            tested_apirequestor_method.assert_called_with(url, headers=headers)
+            if(body != {} and '?' not in url):
+                tested_apirequestor_method.assert_called_with(url, headers=headers, params=body)
+            else:
+                try:
+                    tested_apirequestor_method.assert_called_with(url, headers=headers)
+                except AssertionError:
+                    tested_apirequestor_method.assert_called_with(url, headers=headers, params=body)
         else:
-            tested_apirequestor_method.assert_called_with(url, headers=headers, body=body)
+            if(body != {}):
+                tested_apirequestor_method.assert_called_with(url, headers=headers, body=body)
+            else:
+                try:
+                    tested_apirequestor_method.assert_called_with(url, headers=headers)
+                except AssertionError:
+                    tested_apirequestor_method.assert_called_with(url, headers=headers, body=body)
 # fmt: on

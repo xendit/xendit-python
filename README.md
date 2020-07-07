@@ -34,6 +34,11 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Create Fixed Payment Code](#create-fixed-payment-code)
       - [Update Fixed Payment Code](#update-fixed-payment-code)
       - [Get Fixed Payment Code](#get-fixed-payment-code)
+    - [Invoice Service](#invoice-service)
+      - [Create Invoice](#create-invoice)
+      - [Get Invoice](#get-invoice)
+      - [Expire Invoice](#expire-invoice)
+      - [List All Invoice](#list-all-invoice)
     - [Disbursement Service](#disbursement-service)
       - [Create Disbursement](#create-disbursement)
       - [Get Disbursement by ID](#get-disbursement-by-id)
@@ -486,6 +491,288 @@ Will return
     "expiration_date": "2051-06-23T17:00:00.000Z",
     "id": "5ef2f0f8e7f5c14077275493",
 }
+```
+
+### Invoice Service
+
+#### Create Invoice
+
+```python
+from xendit import Invoice
+
+invoice = Invoice.create(
+    external_id="invoice-1593684000",
+    amount=20000,
+    payer_email="customer@domain.com",
+    description="Invoice Demo #123",
+)
+print(invoice)
+```
+
+Will return
+
+```
+{
+    "id": "5efdb0210425db620ec35fb3",
+    "external_id": "invoice-1593684000",
+    "user_id": "5ed75086a883856178afc12e",
+    "status": "PENDING",
+    "merchant_name": "Xendit&amp;#x27;s Intern",
+    "merchant_profile_picture_url": "https://xnd-companies.s3.amazonaws.com/prod/1591169469152_279.png",
+    "amount": 20000,
+    "payer_email": "customer@domain.com",
+    "description": "Invoice Demo #123",
+    "expiry_date": "2020-07-03T10:00:01.148Z",
+    "invoice_url": "https://invoice-staging.xendit.co/web/invoices/5efdb0210425db620ec35fb3",
+    "available_banks": [
+        {
+            "bank_code": "MANDIRI",
+            "collection_type": "POOL",
+            "bank_account_number": "8860846854335",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        },
+        {
+            "bank_code": "BRI",
+            "collection_type": "POOL",
+            "bank_account_number": "2621554807492",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        },
+        {
+            "bank_code": "BNI",
+            "collection_type": "POOL",
+            "bank_account_number": "880854597383",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        },
+        {
+            "bank_code": "PERMATA",
+            "collection_type": "POOL",
+            "bank_account_number": "821456659745",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        },
+        {
+            "bank_code": "BCA",
+            "collection_type": "POOL",
+            "bank_account_number": "1076619844859",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        }
+    ],
+    "available_retail_outlets": [
+        {
+            "retail_outlet_name": "ALFAMART",
+            "payment_code": "TEST34956",
+            "transfer_amount": 20000
+        }
+    ],
+    "available_ewallets": [],
+    "should_exclude_credit_card": false,
+    "should_send_email": false,
+    "created": "2020-07-02T10:00:01.285Z",
+    "updated": "2020-07-02T10:00:01.285Z",
+    "currency": "IDR"
+}
+```
+
+#### Get Invoice
+
+```python
+from xendit import Invoice
+
+invoice = Invoice.get(
+    invoice_id="5efda8a20425db620ec35f43",
+)
+print(invoice)
+```
+
+Will return
+
+```
+{
+    "id": "5efda8a20425db620ec35f43",
+    "external_id": "invoice-1593682080",
+    "user_id": "5ed75086a883856178afc12e",
+    "status": "EXPIRED",
+    "merchant_name": "Xendit&amp;#x27;s Intern",
+    "merchant_profile_picture_url": "https://xnd-companies.s3.amazonaws.com/prod/1591169469152_279.png",
+    "amount": 20000,
+    "payer_email": "customer@domain.com",
+    "description": "Invoice Demo #123",
+    "expiry_date": "2020-07-02T09:55:47.794Z",
+    "invoice_url": "https://invoice-staging.xendit.co/web/invoices/5efda8a20425db620ec35f43",
+    "available_banks": [
+        {
+            "bank_code": "MANDIRI",
+            "collection_type": "POOL",
+            "bank_account_number": "8860846853111",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        },
+        {
+            "bank_code": "BRI",
+            "collection_type": "POOL",
+            "bank_account_number": "2621554806292",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        }
+    ],
+    "available_retail_outlets": [
+        {
+            "retail_outlet_name": "ALFAMART",
+            "payment_code": "TEST34950",
+            "transfer_amount": 20000
+        }
+    ],
+    "available_ewallets": [],
+    "should_exclude_credit_card": false,
+    "should_send_email": false,
+    "created": "2020-07-02T09:28:02.191Z",
+    "updated": "2020-07-02T09:55:47.794Z",
+    "currency": "IDR"
+}
+```
+
+#### Expire Invoice
+
+```python
+from xendit import Invoice
+
+invoice = Invoice.expire(
+    invoice_id="5efda8a20425db620ec35f43",
+)
+print(invoice)
+```
+
+Will return
+
+```
+{
+    "id": "5efda8a20425db620ec35f43",
+    "external_id": "invoice-1593682080",
+    "user_id": "5ed75086a883856178afc12e",
+    "status": "EXPIRED",
+    "merchant_name": "Xendit&amp;#x27;s Intern",
+    "merchant_profile_picture_url": "https://xnd-companies.s3.amazonaws.com/prod/1591169469152_279.png",
+    "amount": 20000,
+    "payer_email": "customer@domain.com",
+    "description": "Invoice Demo #123",
+    "expiry_date": "2020-07-02T09:55:47.794Z",
+    "invoice_url": "https://invoice-staging.xendit.co/web/invoices/5efda8a20425db620ec35f43",
+    "available_banks": [
+        {
+            "bank_code": "MANDIRI",
+            "collection_type": "POOL",
+            "bank_account_number": "8860846853111",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        },
+        {
+            "bank_code": "BRI",
+            "collection_type": "POOL",
+            "bank_account_number": "2621554806292",
+            "transfer_amount": 20000,
+            "bank_branch": "Virtual Account",
+            "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+            "identity_amount": 0
+        }
+    "available_retail_outlets": [
+        {
+            "retail_outlet_name": "ALFAMART",
+            "payment_code": "TEST34950",
+            "transfer_amount": 20000
+        }
+    ],
+    "available_ewallets": [],
+    "should_exclude_credit_card": false,
+    "should_send_email": false,
+    "created": "2020-07-02T09:28:02.191Z",
+    "updated": "2020-07-02T09:55:47.794Z",
+    "currency": "IDR"
+}
+```
+
+#### List All Invoice
+
+```python
+from xendit import Invoice
+
+invoices = Invoice.list_all(
+    limit=3,
+)
+print(invoices)
+```
+
+Will return
+
+```
+[
+    ...
+    {
+        "id": "5efda8a20425db620ec35f43",
+        "external_id": "invoice-1593682080",
+        "user_id": "5ed75086a883856178afc12e",
+        "status": "EXPIRED",
+        "merchant_name": "Xendit&amp;#x27;s Intern",
+        "merchant_profile_picture_url": "https://xnd-companies.s3.amazonaws.com/prod/1591169469152_279.png",
+        "amount": 20000,
+        "payer_email": "customer@domain.com",
+        "description": "Invoice Demo #123",
+        "expiry_date": "2020-07-02T09:55:47.794Z",
+        "invoice_url": "https://invoice-staging.xendit.co/web/invoices/5efda8a20425db620ec35f43",
+        "available_banks": [
+            {
+                "bank_code": "MANDIRI",
+                "collection_type": "POOL",
+                "bank_account_number": "8860846853111",
+                "transfer_amount": 20000,
+                "bank_branch": "Virtual Account",
+                "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+                "identity_amount": 0
+            },
+            {
+                "bank_code": "BRI",
+                "collection_type": "POOL",
+                "bank_account_number": "2621554806292",
+                "transfer_amount": 20000,
+                "bank_branch": "Virtual Account",
+                "account_holder_name": "XENDIT&AMP;#X27;S INTERN",
+                "identity_amount": 0
+            }
+        "available_retail_outlets": [
+            {
+                "retail_outlet_name": "ALFAMART",
+                "payment_code": "TEST34950",
+                "transfer_amount": 20000
+            }
+        ],
+        "available_ewallets": [],
+        "should_exclude_credit_card": false,
+        "should_send_email": false,
+        "created": "2020-07-02T09:28:02.191Z",
+        "updated": "2020-07-02T09:55:47.794Z",
+        "currency": "IDR"
+    }
+    ...
+]
 ```
 
 ### Disbursement Service
