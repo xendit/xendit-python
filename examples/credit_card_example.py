@@ -142,27 +142,6 @@ class CreateRefund:
         CreateRefund.run(xendit_instance, **args)
 
 
-class GetChargeOption:
-    @staticmethod
-    def run(xendit_instance, **kwargs):
-        try:
-            charge_option = xendit_instance.CreditCard.get_charge_option(**kwargs)
-            print(charge_option)
-        except xendit.XenditError as e:
-            print("Error status code:", e.status_code)
-            print("Error message:", e)
-
-    @staticmethod
-    def example(xendit_instance):
-        bin = input("Please input your bin: ")
-        args = {
-            "bin": bin,
-            "amount": 100000,
-        }
-        print_running_function("xendit.CreditCard.get_charge_option", args)
-        GetChargeOption.run(xendit_instance, **args)
-
-
 class CreatePromotion:
     @staticmethod
     def run(xendit_instance, **kwargs):
@@ -186,46 +165,6 @@ class CreatePromotion:
         CreatePromotion.run(xendit_instance, **args)
 
 
-class GetPromotion:
-    @staticmethod
-    def run(xendit_instance, **kwargs):
-        try:
-            credit_card = xendit_instance.CreditCard.get_promotion(**kwargs)
-            print(credit_card)
-        except xendit.XenditError as e:
-            print("Error status code:", e.status_code)
-            print("Error message:", e)
-
-    @staticmethod
-    def example(xendit_instance):
-        from xendit import CreditCardPromotionStatus
-
-        args = {
-            "status": CreditCardPromotionStatus.ACTIVE,
-        }
-        print_running_function("xendit.CreditCard.get_promotion", args)
-        GetPromotion.run(xendit_instance, **args)
-
-
-class GetPromotionCalculation:
-    @staticmethod
-    def run(xendit_instance, **kwargs):
-        try:
-            credit_card = xendit_instance.CreditCard.get_promotion_calculation(**kwargs)
-            print(credit_card)
-        except xendit.XenditError as e:
-            print("Error status code:", e.status_code)
-            print("Error message:", e)
-
-    @staticmethod
-    def example(xendit_instance):
-        args = {
-            "amount": 200000,
-        }
-        print_running_function("xendit.CreditCard.get_promotion_calculation", args)
-        GetPromotionCalculation.run(xendit_instance, **args)
-
-
 def ask_credit_card_input():
     print("Input the action that you want to use")
     print("0. Exit")
@@ -235,10 +174,7 @@ def ask_credit_card_input():
     print("4. Capture Charge")
     print("5. Get Charge")
     print("6. Create Refund")
-    print("7. Get Charge Option")
-    print("8. Create Promotion")
-    print("9. Get Promotion")
-    print("10. Get Promotion Calculation")
+    print("7. Create Promotion")
     try:
         return int(input())
     except ValueError:
@@ -268,15 +204,6 @@ def credit_card_example(xendit_instance):
             print("Running example of Create Refund")
             CreateRefund.example(xendit_instance)
         elif credit_card_input == 7:
-            print("Running example of Get Charge Option")
-            GetChargeOption.example(xendit_instance)
-        elif credit_card_input == 8:
             print("Running example of Create Promotion")
             CreatePromotion.example(xendit_instance)
-        elif credit_card_input == 9:
-            print("Running example of Get Promotion")
-            GetPromotion.example(xendit_instance)
-        elif credit_card_input == 10:
-            print("Running example of Get Promotion Calculation")
-            GetPromotionCalculation.example(xendit_instance)
         credit_card_input = ask_credit_card_input()

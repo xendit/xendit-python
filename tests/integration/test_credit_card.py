@@ -5,9 +5,7 @@ from tests.sampleresponse.credit_card import (
     reverse_auth_response,
     charge_response,
     refund_response,
-    charge_option_response,
     promotion_response,
-    promotion_calculation_response,
 )
 
 
@@ -40,18 +38,6 @@ class TestCreditCard(BaseIntegrationTest):
         refund_response()
         pass
 
-    def test_get_charge_option_return_correct_keys(self, CreditCard):
-        charge_option_response()
-        pass
-
     def test_create_promotion_return_correct_keys(self, CreditCard):
         promotion_response()
-        pass
-
-    def test_get_promotion_return_correct_keys(self, CreditCard):
-        promotion_response()
-        pass
-
-    def test_get_promotion_calculation_return_correct_keys(self, CreditCard):
-        promotion_calculation_response()
         pass

@@ -1,7 +1,7 @@
-from .charge import CreditCardCharge, CreditCardChargeOption
+from .credit_card_charge import CreditCardCharge
 from .credit_card_reverse_authorization import CreditCardReverseAuthorization
 from .credit_card_refund import CreditCardRefund
-from .promotion import CreditCardPromotion, CreditCardPromotionCalculation
+from .credit_card_promotion import CreditCardPromotion
 
 from xendit.models._base_model import BaseModel
 
@@ -29,8 +29,6 @@ class CreditCard(BaseModel):
       - CreditCard.get_charge (API Reference: /Get Charge)
       - CreditCard.create_refund (API Reference: /Create Refund)
       - CreditCard.create_promotion (API Reference: /Create Promotion)
-      - CreditCard.get_promotion (API Reference: /Get Prmotion)
-      - CreditCard.get_promotion_calculation (API Reference: /Get Promotion Calculation)
 
     Static Methods for Object Creation:
       - CreditCard.helper_create_installment (For Installment in create_authorization and create_charge)
@@ -413,50 +411,6 @@ class CreditCard(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def get_charge_option(
-        *,
-        bin=None,
-        amount,
-        currency=None,
-        promo_code=None,
-        token_id=None,
-        for_user_id=None,
-        x_api_version=None,
-        **kwargs,
-    ):
-        """Send POST Request to get options for Credit Card Charge (API Reference: Credit Card/Get Charge Option)
-
-        Args:
-          - **bin (str) (Optional if token_id is entered, but required otherwise)
-          - amount (int)
-          - **currency (str)
-          - **promo_code (str)
-          - **token_id (str)
-          - **for_user_id (str)
-          - **x_api_version (str)
-
-        Returns:
-          CreditCardChargeOption
-
-        Raises:
-          XenditError
-
-        """
-        url = "/credit_card_charges/option"
-        headers, _ = _extract_params(
-            locals(),
-            func_object=CreditCard.get_charge_option,
-            headers_params=["for_user_id", "x_api_version"],
-        )
-        kwargs["headers"] = headers
-
-        resp = _APIRequestor.get(url, **kwargs)
-        if resp.status_code >= 200 and resp.status_code < 300:
-            return CreditCardChargeOption(**resp.body)
-        else:
-            raise XenditError(resp)
-
-    @staticmethod
     def create_promotion(
         *,
         reference_id,
@@ -511,102 +465,3 @@ class CreditCard(BaseModel):
             return CreditCardPromotion(**resp.body)
         else:
             raise XenditError(resp)
-
-    @staticmethod
-    def get_promotion(
-        *,
-        status,
-        reference_id=None,
-        bin=None,
-        channel_code=None,
-        currency=None,
-        for_user_id=None,
-        x_api_version=None,
-        **kwargs,
-    ):
-        """Get Promotion list (API Reference: Credit Card/Get Promotions)
-
-        Args:
-          - status (CreditCardPromotionStatus)
-          - **reference_id (str)
-          - **bin (str)
-          - **channel_code (str)
-          - **currency (str)
-          - **for_user_id (str)
-          - **x_api_version (str)
-
-        Returns:
-          CreditCardPromotion
-
-        Raises:
-          XenditError
-
-        """
-        status = CreditCard._parse_value(status)
-        url = "/promotions"
-        headers, params = _extract_params(
-            locals(),
-            func_object=CreditCard.get_promotion,
-            headers_params=["for_user_id", "x_api_version"],
-        )
-        kwargs["headers"] = headers
-        kwargs["params"] = params
-
-        resp = _APIRequestor.get(url, **kwargs)
-        if resp.status_code >= 200 and resp.status_code < 300:
-            promotions = []
-            for promotion in resp.body:
-                promotions.append(CreditCardPromotion(**promotion))
-            return promotions
-        else:
-            raise XenditError(resp)
-
-    @staticmethod
-    def get_promotion_calulation(
-        *,
-        amount,
-        bin=None,
-        promo_code=None,
-        currency=None,
-        token_id=None,
-        for_user_id=None,
-        x_api_version=None,
-        **kwargs,
-    ):
-        """Get Promotion Calculation (API Reference: Credit Card/Get Promotions Calculation)
-
-        Args:
-          - amount (int)
-          - **bin (str)
-          - **promo_code (str)
-          - **currency (str)
-          - **token_id (str)
-
-        Returns:
-          CreditCardPromotionCalculation
-
-        Raises:
-          XenditError
-
-        """
-        url = "/promotions/calculate"
-        headers, params = _extract_params(
-            locals(),
-            func_object=CreditCard.get_promotion_calculation,
-            headers_params=["for_user_id", "x_api_version"],
-        )
-        kwargs["headers"] = headers
-        kwargs["params"] = params
-
-        resp = _APIRequestor.get(url, **kwargs)
-        if resp.status_code >= 200 and resp.status_code < 300:
-            return CreditCardPromotionCalculation
-        else:
-            raise XenditError(resp)
-
-    @staticmethod
-    def _parse_value(promotion_status):
-        try:
-            return promotion_status.name
-        except AttributeError:
-            return promotion_status

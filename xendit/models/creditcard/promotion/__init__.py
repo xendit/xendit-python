@@ -1,2 +1,3 @@
 from .credit_card_promotion import CreditCardPromotion
 from .credit_card_promotion_calculation import CreditCardPromotionCalculation
+from .credit_card_promotion_status import CreditCardPromotionStatus
