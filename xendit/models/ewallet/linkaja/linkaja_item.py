@@ -16,5 +16,6 @@ class LinkAjaItem(BaseModel):
     price: int
     quantity: int
 
-    def __init__(self, id, name, price, quantity):
-        dict.__init__(self, id=id, name=name, price=price, quantity=quantity)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.initialize_dict(**kwargs)

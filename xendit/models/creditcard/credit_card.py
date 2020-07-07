@@ -1,7 +1,14 @@
-from .credit_card_charge import CreditCardCharge
-from .credit_card_reverse_authorization import CreditCardReverseAuthorization
-from .credit_card_refund import CreditCardRefund
+from .charge import (
+    CreditCardCharge,
+    CreditCardChargeAddress,
+    CreditCardChargeBillingDetails,
+    CreditCardChargeInstallment,
+    CreditCardChargePromotion,
+)
+
 from .credit_card_promotion import CreditCardPromotion
+from .credit_card_refund import CreditCardRefund
+from .credit_card_reverse_authorization import CreditCardReverseAuthorization
 
 from xendit.models._base_model import BaseModel
 
@@ -46,12 +53,12 @@ class CreditCard(BaseModel):
           - **interval (str)
 
         Return:
-          - CreditCardCharge.Installment
+          - CreditCardChargeInstallment
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardCharge.Installment(**params)
+        return CreditCardChargeInstallment(**params)
 
     @staticmethod
     def helper_create_charge_promotion(
@@ -64,17 +71,17 @@ class CreditCard(BaseModel):
           - **original_amount (float)
 
         Return:
-          - CreditCardCharge.Promotion
+          - CreditCardChargePromotion
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardCharge.Promotion(**params)
+        return CreditCardChargePromotion(**params)
 
     @staticmethod
     def helper_create_billing_details(
         *,
-        given_name,
+        given_names,
         address,
         middle_name=None,
         surname=None,
@@ -86,7 +93,7 @@ class CreditCard(BaseModel):
         """Construct Billing Details Object for Charge
 
         Args:
-          - given_name (str)
+          - given_names (str)
           - address (CreditCardCharge.Address)
           - **middle_name (str)
           - **surname (str)
@@ -95,12 +102,12 @@ class CreditCard(BaseModel):
           - **phone_number (str)
 
         Return:
-          - CreditCardCharge.BillingDetails
+          - CreditCardChargeBillingDetails
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardCharge.BillingDetails(**params)
+        return CreditCardChargeBillingDetails(**params)
 
     @staticmethod
     def helper_create_address(
@@ -128,12 +135,12 @@ class CreditCard(BaseModel):
           - **description (str)
 
         Return:
-          - CreditCardCharge.Address
+          - CreditCardChargeAddress
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardCharge.Address(**params)
+        return CreditCardChargeAddress(**params)
 
     @staticmethod
     def create_authorization(
@@ -280,7 +287,7 @@ class CreditCard(BaseModel):
         headers, body = _extract_params(
             locals(),
             func_object=CreditCard.create_charge,
-            headers_params=["for_user_id", "x_api_version"],
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
