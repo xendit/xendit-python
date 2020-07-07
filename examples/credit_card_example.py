@@ -22,12 +22,12 @@ class CreateAuthorization:
 
     @staticmethod
     def example(xendit_instance):
-        token_id = input("Please input your token_id:")
+        token_id = input("Please input your token_id: ")
         args = {
             "token_id": token_id,
             "external_id": f"card_preAuth-{int(time.time())}",
             "amount": 75000,
-            "card_cvn": "cde",
+            "card_cvn": "123",
         }
         print_running_function("xendit.CreditCard.create_authorization", args)
         CreateAuthorization.run(xendit_instance, **args)
@@ -47,10 +47,10 @@ class ReverseAuthorization:
 
     @staticmethod
     def example(xendit_instance):
-        credit_card_charge_id = input("Please input your credit_card_charge_id:")
+        credit_card_charge_id = input("Please input your credit_card_charge_id: ")
         args = {
             "credit_card_charge_id": credit_card_charge_id,
-            "token_id": f"reverse-authorization-{int(time.time())}",
+            "external_id": f"reverse-authorization-{int(time.time())}",
         }
         print_running_function("xendit.CreditCard.reverse_authorizatiton", args)
         ReverseAuthorization.run(xendit_instance, **args)
@@ -68,12 +68,12 @@ class CreateCharge:
 
     @staticmethod
     def example(xendit_instance):
-        token_id = input("Please input your token_id:")
+        token_id = input("Please input your token_id: ")
         args = {
             "token_id": token_id,
             "external_id": f"card_charge-{int(time.time())}",
             "amount": 75000,
-            "card_cvn": "cde",
+            "card_cvn": "123",
         }
         print_running_function("xendit.CreditCard.create_charge", args)
         CreateCharge.run(xendit_instance, **args)
@@ -91,7 +91,7 @@ class CaptureCharge:
 
     @staticmethod
     def example(xendit_instance):
-        credit_card_charge_id = input("Please input your credit_card_charge_id:")
+        credit_card_charge_id = input("Please input your credit_card_charge_id: ")
         args = {
             "credit_card_charge_id": credit_card_charge_id,
             "amount": 75000,
@@ -112,7 +112,7 @@ class GetCharge:
 
     @staticmethod
     def example(xendit_instance):
-        credit_card_charge_id = input("Please input your credit_card_charge_id:")
+        credit_card_charge_id = input("Please input your credit_card_charge_id: ")
         args = {
             "credit_card_charge_id": credit_card_charge_id,
         }
@@ -132,7 +132,7 @@ class CreateRefund:
 
     @staticmethod
     def example(xendit_instance):
-        credit_card_charge_id = input("Please input your credit_card_charge_id:")
+        credit_card_charge_id = input("Please input your credit_card_charge_id: ")
         args = {
             "credit_card_charge_id": credit_card_charge_id,
             "amount": 10000,
@@ -154,7 +154,7 @@ class GetChargeOption:
 
     @staticmethod
     def example(xendit_instance):
-        bin = input("Please input your bin:")
+        bin = input("Please input your bin: ")
         args = {
             "bin": bin,
             "amount": 100000,
@@ -254,29 +254,29 @@ def credit_card_example(xendit_instance):
             CreateAuthorization.example(xendit_instance)
         elif credit_card_input == 2:
             print("Running example of Reverse Authorization")
-            CreateAuthorization.example(xendit_instance)
+            ReverseAuthorization.example(xendit_instance)
         elif credit_card_input == 3:
             print("Running example of Create Charge")
-            CreateAuthorization.example(xendit_instance)
+            CreateCharge.example(xendit_instance)
         elif credit_card_input == 4:
             print("Running example of Capture Charge")
-            CreateAuthorization.example(xendit_instance)
+            CaptureCharge.example(xendit_instance)
         elif credit_card_input == 5:
             print("Running example of Get Charge")
-            CreateAuthorization.example(xendit_instance)
+            GetCharge.example(xendit_instance)
         elif credit_card_input == 6:
             print("Running example of Create Refund")
-            CreateAuthorization.example(xendit_instance)
+            CreateRefund.example(xendit_instance)
         elif credit_card_input == 7:
             print("Running example of Get Charge Option")
             GetChargeOption.example(xendit_instance)
         elif credit_card_input == 8:
             print("Running example of Create Promotion")
-            CreateAuthorization.example(xendit_instance)
+            CreatePromotion.example(xendit_instance)
         elif credit_card_input == 9:
             print("Running example of Get Promotion")
-            CreateAuthorization.example(xendit_instance)
+            GetPromotion.example(xendit_instance)
         elif credit_card_input == 10:
             print("Running example of Get Promotion Calculation")
-            CreateAuthorization.example(xendit_instance)
+            GetPromotionCalculation.example(xendit_instance)
         credit_card_input = ask_credit_card_input()

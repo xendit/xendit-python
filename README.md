@@ -19,6 +19,17 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Headers](#headers)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
+    - [Credit Card](#credit-card)
+      - [Create Authorization](#create-authorization)
+      - [Reverse Authorization](#reverse-authorization)
+      - [Create Charge](#create-charge)
+      - [Capture Charge](#capture-charge)
+      - [Get Charge](#get-charge)
+      - [Create Refund](#create-refund)
+      - [Get Charge Option](#get-charge-option)
+      - [Create Promotion](#create-promotion)
+      - [Get Promotion](#get-promotion)
+      - [Get Promotion Calculation](#get-promotion-calculation)
     - [eWallets](#ewallets)
       - [Create OVO Payment](#create-ovo-payment)
       - [Create DANA Payment](#create-dana-payment)
@@ -146,6 +157,90 @@ Will return
 {'balance': 1000000000}
 1000000000
 ```
+
+### Credit Card
+
+#### Create Authorization
+
+```python
+from xendit import CreditCard
+
+charge = CreditCard.create_authorization(
+    token_id="5f0338e800406a0019a8cfac",
+    external_id="card_preAuth-1594047446",
+    amount=75000,
+    card_cvn="123",
+)
+print(charge)
+```
+
+Will return
+
+```
+{
+    "status": "AUTHORIZED",
+    "authorized_amount": 75000,
+    "capture_amount": 0,
+    "currency": "IDR",
+    "business_id": "5ed75086a883856178afc12e",
+    "merchant_id": "xendit_ctv_agg",
+    "merchant_reference_code": "5f0338e8a5f876f0f4cad03f",
+    "external_id": "card_preAuth-1594047446",
+    "eci": "05",
+    "charge_type": "SINGLE_USE_TOKEN",
+    "masked_card_number": "400000XXXXXX0002",
+    "card_brand": "VISA",
+    "card_type": "CREDIT",
+    "descriptor": "XENDIT*XENDIT&AMP;#X27;S INTERN",
+    "bank_reconciliation_id": "5940474534726103203010",
+    "approval_code": "831000",
+    "created": "2020-07-06T14:57:33.509Z",
+    "id": "5f033bdd00406a0019a8cfc0"
+}
+```
+
+#### Reverse Authorization
+
+```python
+from xendit import CreditCard
+
+reverse_authorization = CreditCard.reverse_authorizatiton(
+    credit_card_charge_id="5f033bdd00406a0019a8cfc0",
+    external_id="reverse-authorization-1594047638",
+)
+print(reverse_authorization)
+```
+
+Will return
+
+```
+{
+    "status": "SUCCEEDED",
+    "currency": "IDR",
+    "credit_card_charge_id": "5f033bdd00406a0019a8cfc0",
+    "business_id": "5ed75086a883856178afc12e",
+    "external_id": "card_preAuth-1594047446",
+    "amount": 75000,
+    "created": "2020-07-06T15:00:41.313Z",
+    "id": "5f033c9900406a0019a8cfc4"
+}
+```
+
+#### Create Charge
+
+#### Capture Charge
+
+#### Get Charge
+
+#### Create Refund
+
+#### Get Charge Option
+
+#### Create Promotion
+
+#### Get Promotion
+
+#### Get Promotion Calculation
 
 ### eWallets
 

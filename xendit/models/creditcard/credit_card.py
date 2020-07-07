@@ -181,6 +181,8 @@ class CreditCard(BaseModel):
 
         """
         params = locals()
+        params = {**params, **kwargs}
+        del params["kwargs"]
 
         return CreditCard.create_charge(**params)
 
