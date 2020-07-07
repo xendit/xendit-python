@@ -1,7 +1,7 @@
 import pytest
 from ..model_base_test import ModelBaseTest
 from tests.sampleresponse.ewallet import linkaja_payment_response
-from xendit.models import EWallet, LinkAjaItem
+from xendit.models import EWallet
 
 
 # fmt: off
@@ -13,9 +13,11 @@ class TestCreateLinkAjaPayment(ModelBaseTest):
         method_name = "create_linkaja_payment"
         http_method_name = "post"
         items = []
-        items.append(
-            LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1)
+        item = EWallet.helper_create_linkaja_item(
+            id="123123", name="Phone Case", price=100000, quantity=1
         )
+        items.append(item)
+
         args = ()
         kwargs = {
             "external_id": "linkaja-ewallet-test-1593505247",

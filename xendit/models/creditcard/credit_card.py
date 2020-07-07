@@ -51,6 +51,7 @@ class CreditCard(BaseModel):
           - CreditCardCharge.Installment
         """
         params = locals()
+        del params["kwargs"]
 
         return CreditCardCharge.Installment(**params)
 
@@ -68,6 +69,7 @@ class CreditCard(BaseModel):
           - CreditCardCharge.Promotion
         """
         params = locals()
+        del params["kwargs"]
 
         return CreditCardCharge.Promotion(**params)
 
@@ -98,6 +100,7 @@ class CreditCard(BaseModel):
           - CreditCardCharge.BillingDetails
         """
         params = locals()
+        del params["kwargs"]
 
         return CreditCardCharge.BillingDetails(**params)
 
@@ -130,6 +133,7 @@ class CreditCard(BaseModel):
           - CreditCardCharge.Address
         """
         params = locals()
+        del params["kwargs"]
 
         return CreditCardCharge.Address(**params)
 

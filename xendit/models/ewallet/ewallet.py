@@ -6,7 +6,7 @@ from xendit.xendit_error import XenditError
 from .ewallet_type import EWalletType
 from .ovo import OVOPayment, OVOPaymentStatus
 from .dana import DANAPayment, DANAPaymentStatus
-from .linkaja import LinkAjaPayment, LinkAjaPaymentStatus
+from .linkaja import LinkAjaPayment, LinkAjaPaymentStatus, LinkAjaItem
 
 
 class EWallet:
@@ -26,7 +26,27 @@ class EWallet:
       - EWallet.create_linkaja_payment (API Reference: /Create Payment)
       - EWallet.get_payment_statis (API Reference: /Get Payment Status)
 
+    Static Methods for Object Creation:
+      - CreditCard.helper_create_linkaja_item (For create_linkaja_payment)
     """
+
+    @staticmethod
+    def helper_create_linkaja_item(*, id, name, price, quantity, **kwargs):
+        """Construct Installments Object for Charge
+
+        Args:
+          - id (str)
+          - name (str)
+          - price (int)
+          - quantity (int)
+
+        Return:
+          - LinkajaItem
+        """
+        params = locals()
+        del params["kwargs"]
+
+        return LinkAjaItem(**params)
 
     @staticmethod
     def create_ovo_payment(

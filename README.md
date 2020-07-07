@@ -15,6 +15,7 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Usage](#usage)
     - [API Key](#api-key)
       - [Global Variable](#global-variable)
+    - [Object Creation](#object-creation)
       - [Use Xendit Instance](#use-xendit-instance)
     - [Headers](#headers)
     - [Balance Service](#balance-service)
@@ -88,6 +89,44 @@ xendit.api_key = "test-key123"
 # Then just run each class as static
 from xendit import Balance
 Balance.get()
+```
+
+### Object Creation
+
+If an API need an object as its parameter, you can use either dictionary for that class or a helper method e.g:
+
+```python
+items = []
+item = xendit.EWallet.helper_create_linkaja_item(
+    id="123123", name="Phone Case", price=100000, quantity=1
+)
+items.append(item)
+EWallet.create_linkaja_payment(
+    external_id="linkaja-ewallet-test-1593663498",
+    phone="089911111111",
+    items=items,
+    amount=300000,
+    callback_url="https://my-shop.com/callbacks",
+    redirect_url="https://xendit.co/",
+)
+```
+
+is equivalent with
+
+```python
+items = []
+item = xendit.EWallet.helper_create_linkaja_item(
+    id="123123", name="Phone Case", price=100000, quantity=1
+)
+items.append(item)
+EWallet.create_linkaja_payment(
+    external_id="linkaja-ewallet-test-1593663498",
+    phone="089911111111",
+    items=items,
+    amount=300000,
+    callback_url="https://my-shop.com/callbacks",
+    redirect_url="https://xendit.co/",
+)
 ```
 
 #### Use Xendit Instance

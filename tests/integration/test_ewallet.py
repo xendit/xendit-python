@@ -42,15 +42,33 @@ class TestEWallet(BaseIntegrationTest):
         )
 
     def test_create_linkaja_payment_return_correct_keys(self, EWallet):
+        # Object Creation Test
         items = []
-        items.append(
-            xendit.LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1)
+        item = xendit.EWallet.helper_create_linkaja_item(
+            id="123123", name="Phone Case", price=100000, quantity=1
         )
+        items.append(item)
+
         linkaja_payment = EWallet.create_linkaja_payment(
             external_id=f"linkaja-ewallet-test-{time.time()}",
             phone="089911111111",
             amount=300000,
             items=items,
+            callback_url="https://my-shop.com/callbacks",
+            redirect_url="https://xendit.co/",
+        )
+        self.assert_returned_object_has_same_key_as_sample_response(
+            linkaja_payment, linkaja_payment_response()
+        )
+
+        # Dictionary Creation Test
+        linkaja_payment = EWallet.create_linkaja_payment(
+            external_id=f"linkaja-ewallet-test-{time.time()}",
+            phone="089911111111",
+            amount=300000,
+            items=[
+                {"id": "123123", "name": "Phone Case", "price": 100000, "quantity": 1}
+            ],
             callback_url="https://my-shop.com/callbacks",
             redirect_url="https://xendit.co/",
         )
