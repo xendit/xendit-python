@@ -10,10 +10,10 @@ xendit = loader.load_module("xendit")
 
 class CreateRecurringPayment:
     @staticmethod
-    def run(xendit_instance, account_type):
+    def run(xendit_instance, **kwargs):
         try:
             recurring_payment = xendit_instance.RecurringPayment.create_recurring_payment(
-                account_type=account_type
+                **kwargs
             )
             print(recurring_payment)
         except xendit.XenditError as e:
@@ -22,17 +22,24 @@ class CreateRecurringPayment:
 
     @staticmethod
     def example(xendit_instance):
-        args = {}
+        args = {
+            "external_id": "recurring_12345",
+            "payer_email": "test@x.co",
+            "description": "Test Curring Payment",
+            "amount": 100000,
+            "interval": "MONTH",
+            "interval_count": 1,
+        }
         print_running_function("xendit.RecurringPayment.create_recurring_payment", args)
         CreateRecurringPayment.run(xendit_instance, **args)
 
 
 class GetRecurringPayment:
     @staticmethod
-    def run(xendit_instance, account_type):
+    def run(xendit_instance, **kwargs):
         try:
             recurring_payment = xendit_instance.RecurringPayment.get_recurring_payment(
-                account_type=account_type
+                **kwargs
             )
             print(recurring_payment)
         except xendit.XenditError as e:
@@ -48,10 +55,10 @@ class GetRecurringPayment:
 
 class EditRecurringPayment:
     @staticmethod
-    def run(xendit_instance, account_type):
+    def run(xendit_instance, **kwargs):
         try:
             recurring_payment = xendit_instance.RecurringPayment.edit_recurring_payment(
-                account_type=account_type
+                **kwargs
             )
             print(recurring_payment)
         except xendit.XenditError as e:
@@ -67,10 +74,10 @@ class EditRecurringPayment:
 
 class StopRecurringPayment:
     @staticmethod
-    def run(xendit_instance, account_type):
+    def run(xendit_instance, **kwargs):
         try:
             recurring_payment = xendit_instance.RecurringPayment.stop_recurring_payment(
-                account_type=account_type
+                **kwargs
             )
             print(recurring_payment)
         except xendit.XenditError as e:
@@ -86,10 +93,10 @@ class StopRecurringPayment:
 
 class PauseRecurringPayment:
     @staticmethod
-    def run(xendit_instance, account_type):
+    def run(xendit_instance, **kwargs):
         try:
             recurring_payment = xendit_instance.RecurringPayment.pause_recurring_payment(
-                account_type=account_type
+                **kwargs
             )
             print(recurring_payment)
         except xendit.XenditError as e:
@@ -105,10 +112,10 @@ class PauseRecurringPayment:
 
 class ResumeRecurringPayment:
     @staticmethod
-    def run(xendit_instance, account_type):
+    def run(xendit_instance, **kwargs):
         try:
             recurring_payment = xendit_instance.RecurringPayment.resume_recurring_payment(
-                account_type=account_type
+                **kwargs
             )
             print(recurring_payment)
         except xendit.XenditError as e:
