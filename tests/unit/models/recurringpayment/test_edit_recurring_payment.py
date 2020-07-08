@@ -5,7 +5,7 @@ from xendit.models import RecurringPayment
 
 
 # fmt: off
-class TestGetRecurringPayment(ModelBaseTest):
+class TestEditRecurringPayment(ModelBaseTest):
     @pytest.fixture
     def default_recurring_payment_data(self):
         tested_class = RecurringPayment

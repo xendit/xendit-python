@@ -5,19 +5,19 @@ from xendit.models import RecurringPayment
 
 
 # fmt: off
-class TestStopRecurringPayment(ModelBaseTest):
+class TestPauseRecurringPayment(ModelBaseTest):
     @pytest.fixture
     def default_recurring_payment_data(self):
         tested_class = RecurringPayment
         class_name = "RecurringPayment"
-        method_name = "stop_recurring_payment"
+        method_name = "pause_recurring_payment"
         http_method_name = "post"
         args = ()
         kwargs = {
             "id": "mock_id-123",
         }
         params = (args, kwargs)
-        url = f"/recurring_payments/{kwargs['id']}/stop!"
+        url = f"/recurring_payments/{kwargs['id']}/pause!"
         expected_correct_result = recurring_payment_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
