@@ -5,65 +5,31 @@ from xendit.models import CreditCard
 
 
 # fmt: off
-class TestCreateCharge(ModelBaseTest):
-    def helper(self):
-        address = CreditCard.helper_create_address(country="Indonesia")
-        billing_details = CreditCard.helper_create_billing_details(
-            given_names="Adyaksa", address=address
-        )
-        installment = CreditCard.helper_create_installment(count=1, interval="month")
-        promotion = CreditCard.helper_create_charge_promotion(
-            reference_id="Xendit-123", original_amount=75000
-        )
-        return billing_details, installment, promotion
-
+class TestCreateRefund(ModelBaseTest):
     @pytest.fixture
     def default_credit_card_data(self):
         tested_class = CreditCard
         class_name = "CreditCard"
-        method_name = "create_charge"
+        method_name = "create_refund"
         http_method_name = "post"
-        billing_details, installment, promotion = self.helper()
         args = ()
         kwargs = {
-            "token_id": "mock_token-id-123",
-            "external_id": "mock_card_charge-123",
-            "amount": 75000,
-            "card_cvn": "123",
-            "x_idempotency_key": "test-idemp_123",
-            "billing_details": billing_details,
-            "installment": installment,
-            "promotion": promotion,
+            "credit_card_charge_id": "mock-charge-id-123",
+            "amount": 10000,
+            "external_id": "mock_card_refund-123",
         }
         params = (args, kwargs)
-        url = "/credit_card_charges"
+        url = f"/credit_card_charges/{kwargs['credit_card_charge_id']}/refunds"
         expected_correct_result = charge_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
     @pytest.fixture
     def api_requestor_request_data(self, default_credit_card_data):
         tested_class, class_name, method_name, http_method_name, url, params, _ = default_credit_card_data
-        headers = {"X-IDEMPOTENCY-KEY": "test-idemp_123"}
+        headers = {}
         body = {
-            "token_id": "mock_token-id-123",
-            "capture": True,
-            "external_id": "mock_card_charge-123",
-            "amount": 75000,
-            "card_cvn": "123",
-            "billing_details": {
-                "given_names": "Adyaksa",
-                "address": {
-                    "country": "Indonesia"
-                }
-            },
-            "installment": {
-                "count": 1,
-                "interval": "month",
-            },
-            "promotion": {
-                "reference_id": "Xendit-123",
-                "original_amount": 75000
-            },
+            "amount": 10000,
+            "external_id": "mock_card_refund-123",
         }
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 
