@@ -155,11 +155,12 @@ class CreatePromotion:
     @staticmethod
     def example(xendit_instance):
         args = {
-            "reference_id": "BRI_20_JAN",
+            "reference_id": f"BRI_20_JAN-{int(time.time())}",
             "description": "20% discount applied for all BRI cards",
             "discount_amount": 10000,
-            "start_time": "2020-01-01 00:00:00.000Z",
-            "end_time": "2021-01-01 00:00:00.000Z",
+            "bin_list": ["400000", "460000"],
+            "start_time": "2020-01-01T00:00:00.000Z",
+            "end_time": "2021-01-01T00:00:00.000Z",
         }
         print_running_function("xendit.CreditCard.create_promotion", args)
         CreatePromotion.run(xendit_instance, **args)

@@ -50,4 +50,17 @@ def refund_response():
 
 
 def promotion_response():
-    return {}
+    return {
+        "business_id": "5ed75086a883856178afc12e",
+        "reference_id": "BRI_20_JAN-1594176600",
+        "description": "20% discount applied for all BRI cards",
+        "start_time": "2020-01-01T00:00:00.000Z",
+        "end_time": "2021-01-01T00:00:00.000Z",
+        "type": "CARD_BIN",
+        "discount_amount": 10000,
+        "bin_list": ["400000", "460000"],
+        "currency": "IDR",
+        "id": "c65a2ae7-ce75-4a15-bbec-55d076f46bd0",
+        "created": "2020-07-08T02:50:02.296Z",
+        "status": "ACTIVE",
+    }

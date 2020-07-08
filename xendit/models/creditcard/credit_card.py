@@ -460,12 +460,13 @@ class CreditCard(BaseModel):
 
         """
         url = "/promotions"
-        headers, _ = _extract_params(
+        headers, body = _extract_params(
             locals(),
             func_object=CreditCard.create_promotion,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
+        kwargs["body"] = body
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
