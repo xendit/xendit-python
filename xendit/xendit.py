@@ -7,6 +7,7 @@ from .models import CreditCard
 from .models import Disbursement
 from .models import EWallet
 from .models import Invoice
+from .models import RecurringPayment
 from .models import RetailOutlet
 from .models import VirtualAccount
 
@@ -30,6 +31,9 @@ class Xendit:
         )
         self.EWallet = _XenditParamInjector.instantiate(EWallet, injected_params)
         self.Invoice = _XenditParamInjector.instantiate(Invoice, injected_params)
+        self.RecurringPayment = _XenditParamInjector.instantiate(
+            RecurringPayment, injected_params
+        )
         self.RetailOutlet = _XenditParamInjector.instantiate(
             RetailOutlet, injected_params
         )

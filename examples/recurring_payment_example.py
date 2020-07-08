@@ -48,7 +48,10 @@ class GetRecurringPayment:
 
     @staticmethod
     def example(xendit_instance):
-        args = {}
+        id = input("Please input your id: ")
+        args = {
+            "id": id,
+        }
         print_running_function("xendit.RecurringPayment.get_recurring_payment", args)
         GetRecurringPayment.run(xendit_instance, **args)
 
@@ -67,7 +70,10 @@ class EditRecurringPayment:
 
     @staticmethod
     def example(xendit_instance):
-        args = {}
+        id = input("Please input your id: ")
+        args = {
+            "id": id,
+        }
         print_running_function("xendit.RecurringPayment.edit_recurring_payment", args)
         EditRecurringPayment.run(xendit_instance, **args)
 
@@ -86,7 +92,10 @@ class StopRecurringPayment:
 
     @staticmethod
     def example(xendit_instance):
-        args = {}
+        id = input("Please input your id: ")
+        args = {
+            "id": id,
+        }
         print_running_function("xendit.RecurringPayment.stop_recurring_payment", args)
         StopRecurringPayment.run(xendit_instance, **args)
 
@@ -105,7 +114,10 @@ class PauseRecurringPayment:
 
     @staticmethod
     def example(xendit_instance):
-        args = {}
+        id = input("Please input your id: ")
+        args = {
+            "id": id,
+        }
         print_running_function("xendit.RecurringPayment.pause_recurring_payment", args)
         PauseRecurringPayment.run(xendit_instance, **args)
 
@@ -124,7 +136,10 @@ class ResumeRecurringPayment:
 
     @staticmethod
     def example(xendit_instance):
-        args = {}
+        id = input("Please input your id: ")
+        args = {
+            "id": id,
+        }
         print_running_function("xendit.RecurringPayment.resume_recurring_payment", args)
         ResumeRecurringPayment.run(xendit_instance, **args)
 
