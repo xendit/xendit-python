@@ -1,6 +1,3 @@
-from collections import Counter
-
-
 class BaseIntegrationTest:
     def assert_returned_object_has_same_key_as_sample_response(
         self, returned_object, sample_response
@@ -11,4 +8,4 @@ class BaseIntegrationTest:
         """
         expected_key_list = [*sample_response]
         actual_key_list = [*(vars(returned_object))]
-        assert Counter(actual_key_list) == Counter(expected_key_list)
+        assert set(expected_key_list).issubset(actual_key_list)
