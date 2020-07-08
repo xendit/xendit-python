@@ -5,40 +5,27 @@ from xendit.models import RecurringPayment
 
 
 # fmt: off
-class TestCreateRecurringPayment(ModelBaseTest):
+class TestGetRecurringPayment(ModelBaseTest):
     @pytest.fixture
     def default_recurring_payment_data(self):
         tested_class = RecurringPayment
         class_name = "RecurringPayment"
-        method_name = "create_recurring_payment"
-        http_method_name = "post"
+        method_name = "get_recurring_payment"
+        http_method_name = "get"
         args = ()
         kwargs = {
-            "external_id": "recurring_12345",
-            "payer_email": "test@x.co",
-            "description": "Test Curring Payment",
-            "amount": 100000,
-            "interval": "MONTH",
-            "interval_count": 1,
-            "x_idempotency_key": "test-idemp_123",
+            "id": "mock_id-123",
         }
         params = (args, kwargs)
-        url = "/recurring_payments"
+        url = f"/recurring_payments/{kwargs['id']}"
         expected_correct_result = recurring_payment_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 
     @pytest.fixture
     def api_requestor_request_data(self, default_recurring_payment_data):
         tested_class, class_name, method_name, http_method_name, url, params, _ = default_recurring_payment_data
-        headers = {"X-IDEMPOTENCY-KEY": "test-idemp_123"}
-        body = {
-            "external_id": "recurring_12345",
-            "payer_email": "test@x.co",
-            "description": "Test Curring Payment",
-            "amount": 100000,
-            "interval": "MONTH",
-            "interval_count": 1,
-        }
+        headers = {}
+        body = {}
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 
     @pytest.mark.parametrize("mock_correct_response", [recurring_payment_response()], indirect=True)
