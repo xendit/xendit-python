@@ -73,6 +73,7 @@ class EditRecurringPayment:
         id = input("Please input your id: ")
         args = {
             "id": id,
+            "interval_count": 2,
         }
         print_running_function("xendit.RecurringPayment.edit_recurring_payment", args)
         EditRecurringPayment.run(xendit_instance, **args)

@@ -48,6 +48,13 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Get Invoice](#get-invoice)
       - [Expire Invoice](#expire-invoice)
       - [List All Invoice](#list-all-invoice)
+    - [Recurring Payment](#recurring-payment)
+      - [Create Recurring Payment](#create-recurring-payment)
+      - [Get Recurring Payment](#get-recurring-payment)
+      - [Edit Recurring Payment](#edit-recurring-payment)
+      - [Stop Recurring Payment](#stop-recurring-payment)
+      - [Pause Recurring Payment](#pause-recurring-payment)
+      - [Resume Recurring Payment](#resume-recurring-payment)
     - [Disbursement Service](#disbursement-service)
       - [Create Disbursement](#create-disbursement)
       - [Get Disbursement by ID](#get-disbursement-by-id)
@@ -1074,6 +1081,220 @@ Will return
     }
     ...
 ]
+```
+
+### Recurring Payment
+
+#### Create Recurring Payment
+
+```python
+from xendit import RecurringPayment
+
+recurring_payment = RecurringPayment.create_recurring_payment(
+    external_id="recurring_12345",
+    payer_email="test@x.co",
+    description="Test Curring Payment",
+    amount=100000,
+    interval="MONTH",
+    interval_count=1,
+)
+```
+
+Will return
+
+```
+{
+    "status": "ACTIVE",
+    "should_send_email": false,
+    "missed_payment_action": "IGNORE",
+    "recurrence_progress": 1,
+    "recharge": true,
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "recurring_12345",
+    "payer_email": "test@x.co",
+    "description": "Test Curring Payment",
+    "amount": 100000,
+    "interval": "MONTH",
+    "interval_count": 1,
+    "start_date": "2020-07-08T08:22:55.815Z",
+    "currency": "IDR",
+    "created": "2020-07-08T08:22:55.817Z",
+    "updated": "2020-07-08T08:22:55.994Z",
+    "id": "5f05825ff9f52d3ed204c687",
+    "last_created_invoice_url": "https://invoice-staging.xendit.co/web/invoices/5f05825ff9f52d3ed204c688"
+}
+```
+
+#### Get Recurring Payment
+
+```python
+from xendit import RecurringPayment
+
+recurring_payment = RecurringPayment.get_recurring_payment(
+    id="5f05825ff9f52d3ed204c687",
+)
+```
+
+Will return
+
+```
+{
+    "status": "ACTIVE",
+    "should_send_email": false,
+    "missed_payment_action": "IGNORE",
+    "recurrence_progress": 1,
+    "recharge": true,
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "recurring_12345",
+    "payer_email": "test@x.co",
+    "description": "Test Curring Payment",
+    "amount": 100000,
+    "interval": "MONTH",
+    "interval_count": 1,
+    "start_date": "2020-07-08T08:22:55.815Z",
+    "currency": "IDR",
+    "created": "2020-07-08T08:22:55.817Z",
+    "updated": "2020-07-08T08:22:55.994Z",
+    "id": "5f05825ff9f52d3ed204c687",
+    "last_created_invoice_url": "https://invoice-staging.xendit.co/web/invoices/5f05825ff9f52d3ed204c688"
+}
+```
+
+#### Edit Recurring Payment
+
+```python
+from xendit import RecurringPayment
+
+recurring_payment = RecurringPayment.edit_recurring_payment(
+    id="5f05825ff9f52d3ed204c687",
+    interval_count=2,
+)
+```
+
+Will return
+
+```
+{
+    "status": "ACTIVE",
+    "should_send_email": false,
+    "missed_payment_action": "IGNORE",
+    "recurrence_progress": 1,
+    "recharge": true,
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "recurring_12345",
+    "payer_email": "test@x.co",
+    "description": "Test Curring Payment",
+    "amount": 100000,
+    "interval": "MONTH",
+    "interval_count": 2,
+    "start_date": "2020-07-08T08:22:55.815Z",
+    "currency": "IDR",
+    "created": "2020-07-08T08:22:55.817Z",
+    "updated": "2020-07-08T08:24:58.295Z",
+    "id": "5f05825ff9f52d3ed204c687"
+}
+```
+
+#### Stop Recurring Payment
+
+```python
+from xendit import RecurringPayment
+
+recurring_payment = RecurringPayment.stop_recurring_payment(
+    id="5f05825ff9f52d3ed204c687",
+)
+```
+
+Will return
+
+```
+{
+    "status": "STOPPED",
+    "should_send_email": false,
+    "missed_payment_action": "IGNORE",
+    "recurrence_progress": 1,
+    "recharge": true,
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "recurring_12345",
+    "payer_email": "test@x.co",
+    "description": "Test Curring Payment",
+    "amount": 100000,
+    "interval": "MONTH",
+    "interval_count": 2,
+    "start_date": "2020-07-08T08:22:55.815Z",
+    "currency": "IDR",
+    "created": "2020-07-08T08:22:55.817Z",
+    "updated": "2020-07-08T08:26:32.464Z",
+    "id": "5f05825ff9f52d3ed204c687"
+}
+```
+
+#### Pause Recurring Payment
+
+```python
+from xendit import RecurringPayment
+
+recurring_payment = RecurringPayment.pause_recurring_payment(
+    id="5f05825ff9f52d3ed204c687",
+)
+```
+
+Will return
+
+```
+{
+    "status": "PAUSED",
+    "should_send_email": false,
+    "missed_payment_action": "IGNORE",
+    "recurrence_progress": 1,
+    "recharge": true,
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "recurring_12345",
+    "payer_email": "test@x.co",
+    "description": "Test Curring Payment",
+    "amount": 100000,
+    "interval": "MONTH",
+    "interval_count": 2,
+    "start_date": "2020-07-08T08:22:55.815Z",
+    "currency": "IDR",
+    "created": "2020-07-08T08:22:55.817Z",
+    "updated": "2020-07-08T08:25:44.580Z",
+    "id": "5f05825ff9f52d3ed204c687"
+}
+```
+
+#### Resume Recurring Payment
+
+```python
+from xendit import RecurringPayment
+
+recurring_payment = RecurringPayment.resume_recurring_payment(
+    id="5f05825ff9f52d3ed204c687",
+)
+```
+
+Will return
+
+```
+{
+    "status": "ACTIVE",
+    "should_send_email": false,
+    "missed_payment_action": "IGNORE",
+    "recurrence_progress": 1,
+    "recharge": true,
+    "user_id": "5ed75086a883856178afc12e",
+    "external_id": "recurring_12345",
+    "payer_email": "test@x.co",
+    "description": "Test Curring Payment",
+    "amount": 100000,
+    "interval": "MONTH",
+    "interval_count": 2,
+    "start_date": "2020-07-08T08:22:55.815Z",
+    "currency": "IDR",
+    "created": "2020-07-08T08:22:55.817Z",
+    "updated": "2020-07-08T08:26:03.082Z",
+    "id": "5f05825ff9f52d3ed204c687"
+}
 ```
 
 ### Disbursement Service
