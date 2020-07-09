@@ -210,7 +210,8 @@ class DirectDebit(BaseModel):
         x_api_version=None,
         **kwargs,
     ):
-        """Get Customer by Reference ID (API Reference: Direct Debit/Get Customer by Reference ID)
+        """Initialize Authorization Process and Account Token Creation
+        (API Reference: Direct Debit/Initialize Linked Account Tokenization)
 
         Args:
           - customer_id (str)
@@ -240,5 +241,45 @@ class DirectDebit(BaseModel):
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return DirectDebitToken(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def validate_token_otp(
+        *,
+        linked_account_token_id,
+        x_idempotency_key=None,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
+        """Validates the Linked Account Token OTP
+        (API Reference: Direct Debit/Validate OTP for Linked Account Token)
+
+        Args:
+          - linked_account_token_id (str)
+          - **x_idempotency_key (str)
+          - **for_user_id (str)
+          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+
+        Returns:
+          DirectDebitToken
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/linked_account_tokens/{linked_account_token_id}/validate_otp"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.validate_token_otp,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return
         else:
             raise XenditError(resp)
