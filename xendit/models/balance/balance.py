@@ -16,10 +16,10 @@ class Balance(BaseModel):
       - Balance.get (API Reference: /Get Balance)
 
     Attributes:
-      - balance (float)
+      - balance (int)
     """
 
-    balance: float
+    balance: int
 
     @staticmethod
     def get(
