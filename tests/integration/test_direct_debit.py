@@ -5,7 +5,7 @@ from .base_integration_test import BaseIntegrationTest
 from tests.sampleresponse.direct_debit import customer_response, multi_customer_response
 
 
-class TestDisbursement(BaseIntegrationTest):
+class TestDirectDebit(BaseIntegrationTest):
     @pytest.fixture
     def DirectDebit(self, xendit_instance):
         return xendit_instance.DirectDebit
