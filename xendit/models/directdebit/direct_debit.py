@@ -145,7 +145,7 @@ class DirectDebit(BaseModel):
         if resp.status_code >= 200 and resp.status_code < 300:
             customers = []
             for customer in resp.body:
-                customer.append(DirectDebitCustomer(**customer))
+                customers.append(DirectDebitCustomer(**customer))
             return customers
         else:
             raise XenditError(resp)

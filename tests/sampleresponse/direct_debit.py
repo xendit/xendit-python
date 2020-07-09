@@ -16,3 +16,7 @@ def customer_response():
         "source_of_wealth": None,
         "metadata": None,
     }
+
+
+def multi_customer_response():
+    return [customer_response(), customer_response()]
