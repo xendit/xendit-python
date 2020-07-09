@@ -33,6 +33,9 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Create DANA Payment](#create-dana-payment)
       - [Create LinkAja Payment](#create-linkaja-payment)
       - [Get Payment Status](#get-payment-status)
+    - [Direct Debit](#direct-debit)
+      - [Create Customer](#create-customer)
+      - [Get Customer by Reference ID](#get-customer-by-reference-id)
     - [Virtual Account Service](#virtual-account-service)
       - [Create Virtual Account](#create-virtual-account)
       - [Get Virtual Account Banks](#get-virtual-account-banks)
@@ -562,6 +565,76 @@ Will return
     "status": "COMPLETED",
     "transaction_date": "2020-06-30T01:32:28.267Z"
 }
+```
+
+### Direct Debit
+
+#### Create Customer
+
+```python
+from xendit import DirectDebit
+
+customer = DirectDebit.create_customer(
+    reference_id="merc-1594279037",
+    email="t@x.co",
+    given_names="Adyaksa",
+)
+print(customer)
+```
+
+Will return
+
+```
+{
+    "id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    "reference_id": "merc-1594279037",
+    "description": null,
+    "given_names": "Adyaksa",
+    "middle_name": null,
+    "surname": null,
+    "mobile_number": null,
+    "phone_number": null,
+    "email": "t@x.co",
+    "nationality": null,
+    "addresses": null,
+    "date_of_birth": null,
+    "employment": null,
+    "source_of_wealth": null,
+    "metadata": null
+}
+```
+
+#### Get Customer by Reference ID
+
+```python
+from xendit import DirectDebit
+
+customer = DirectDebit.get_customer_by_ref_id(
+    reference_id="merc-1594279037",
+)
+print(customer)
+```
+
+Will return
+
+```
+[{
+    "id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    "reference_id": "merc-1594279037",
+    "description": null,
+    "given_names": "Adyaksa",
+    "middle_name": null,
+    "surname": null,
+    "mobile_number": null,
+    "phone_number": null,
+    "email": "t@x.co",
+    "nationality": null,
+    "addresses": null,
+    "date_of_birth": null,
+    "employment": null,
+    "source_of_wealth": null,
+    "metadata": null
+}]
 ```
 
 ### Virtual Account Service
