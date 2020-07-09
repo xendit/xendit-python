@@ -20,6 +20,7 @@ class TestDisbursement(BaseIntegrationTest):
             customer, customer_response()
         )
 
+    @pytest.mark.skip(reason="Currently not implemented by Direct Debit")
     def test_get_customer_by_ref_id_return_correct_keys(self, DirectDebit):
         customer = DirectDebit.get_customer_by_ref_id(reference_id="merc-1594272368",)
         self.assert_returned_object_has_same_key_as_sample_response(
