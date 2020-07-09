@@ -22,11 +22,11 @@ class CreditCard(BaseModel):
     """CreditCard class (API Reference: CreditCard)
 
     Related Classes:
-      - CreditCardReverseAuthorization
       - CreditCardCharge
-      - CreditCardRefund
-      - CreditCardPromotion
-      - CreditCardPromotionCalculation
+      - CreditCardChargeAddress
+      - CreditCardChargeBillingDetails
+      - CreditCardChargeInstallment
+      - CreditCardChargePromotion
 
     Static Methods:
       - CreditCard.create_authorization (API Reference: /Create Authorization)
