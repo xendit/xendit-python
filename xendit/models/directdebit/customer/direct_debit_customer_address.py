@@ -7,15 +7,15 @@ class DirectDebitCustomerAddress(BaseModel):
     Use this to initialize create_customer
 
     Attributes:
-        - country (str)
+      - country (str)
 
     Optional Attributes:
-        - street_line1 (str)
-        - street_line2 (str)
-        - city (str)
-        - province (str)
-        - state (str)
-        - postal_code (str)
+      - street_line1 (str)
+      - street_line2 (str)
+      - city (str)
+      - province (str)
+      - state (str)
+      - postal_code (str)
     """
 
     country: str
