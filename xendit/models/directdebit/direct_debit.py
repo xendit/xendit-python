@@ -137,6 +137,7 @@ class DirectDebit(BaseModel):
             locals(),
             func_object=DirectDebit.get_customer_by_ref_id,
             headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["reference_id"],
         )
         kwargs["headers"] = headers
 
