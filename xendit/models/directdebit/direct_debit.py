@@ -1,4 +1,5 @@
 from .customer import DirectDebitCustomer, DirectDebitCustomerAddress
+from .paymentmethod import DirectDebitPaymentMethodProperties
 from .token import (
     DirectDebitCardLink,
     DirectDebitOnlineBankingLink,
@@ -105,6 +106,20 @@ class DirectDebit(BaseModel):
         del params["kwargs"]
 
         return DirectDebitCardLink.Query(**params)
+
+    def helper_create_payment_method_properties(*, id, **kwargs):
+        """Construct Properties Object for DirectDebit Payment Methods
+
+        Args:
+          - id (str)
+
+        Return:
+          - DirectDebitPaymentMethodProperties.Query
+        """
+        params = locals()
+        del params["kwargs"]
+
+        return DirectDebitPaymentMethodProperties.Query(**params)
 
     @staticmethod
     def create_customer(
