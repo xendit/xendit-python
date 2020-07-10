@@ -131,8 +131,7 @@ class ModelBaseTest:
             returned_object = getattr(tested_class, method_name)(*args, **kwargs)
             print(returned_object)
 
-    @pytest.mark.skip(reason="no way of currently testing this")
-    def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, api_requestor_request_data):
+    def run_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, api_requestor_request_data):
         """It should send correct request to API Requestor
 
         Args:
