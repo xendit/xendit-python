@@ -91,13 +91,15 @@ class CreateLinkAjaPayment:
     @staticmethod
     def example(xendit_instance):
         items = []
-        items.append(
-            xendit.LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1)
+        item = xendit.EWallet.helper_create_linkaja_item(
+            id="123123", name="Phone Case", price=100000, quantity=1
         )
+        items.append(item)
+
         args = {
             "external_id": f"linkaja-ewallet-test-{int(time.time())}",
             "phone": "089911111111",
-            "items": items,
+            "items": {items},
             "amount": 300000,
             "callback_url": "https://my-shop.com/callbacks",
             "redirect_url": "https://xendit.co/",

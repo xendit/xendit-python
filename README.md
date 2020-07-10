@@ -17,8 +17,17 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Global Variable](#global-variable)
       - [Use Xendit Instance](#use-xendit-instance)
     - [Headers](#headers)
+    - [Object Creation](#object-creation)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
+    - [Credit Card](#credit-card)
+      - [Create Authorization](#create-authorization)
+      - [Reverse Authorization](#reverse-authorization)
+      - [Create Charge](#create-charge)
+      - [Capture Charge](#capture-charge)
+      - [Get Charge](#get-charge)
+      - [Create Refund](#create-refund)
+      - [Create Promotion](#create-promotion)
     - [eWallets](#ewallets)
       - [Create OVO Payment](#create-ovo-payment)
       - [Create DANA Payment](#create-dana-payment)
@@ -110,6 +119,47 @@ Balance.get(for_user_id='subaccount-user-id')
 Balance.get(x_api_version='2020-01-01')
 ```
 
+### Object Creation
+
+If an API need an object as its parameter, you can use either dictionary for that class or a helper method e.g:
+
+```python
+items = []
+item = {
+    id: "123123",
+    name: "Phone Case",
+    price: 100000,
+    quantity: 1
+}
+items.append(item)
+EWallet.create_linkaja_payment(
+    external_id="linkaja-ewallet-test-1593663498",
+    phone="089911111111",
+    items=items,
+    amount=300000,
+    callback_url="https://my-shop.com/callbacks",
+    redirect_url="https://xendit.co/",
+)
+```
+
+is equivalent with
+
+```python
+items = []
+item = xendit.EWallet.helper_create_linkaja_item(
+    id="123123", name="Phone Case", price=100000, quantity=1
+)
+items.append(item)
+EWallet.create_linkaja_payment(
+    external_id="linkaja-ewallet-test-1593663498",
+    phone="089911111111",
+    items=items,
+    amount=300000,
+    callback_url="https://my-shop.com/callbacks",
+    redirect_url="https://xendit.co/",
+)
+```
+
 ### Balance Service
 
 #### Get Balance
@@ -145,6 +195,257 @@ Will return
 ```
 {'balance': 1000000000}
 1000000000
+```
+
+### Credit Card
+
+#### Create Authorization
+
+```python
+from xendit import CreditCard
+
+charge = CreditCard.create_authorization(
+    token_id="5f0410898bcf7a001a00879d",
+    external_id="card_preAuth-1594106356",
+    amount=75000,
+    card_cvn="123",
+)
+print(charge)
+```
+
+Will return
+
+```
+{
+    "status": "AUTHORIZED",
+    "authorized_amount": 75000,
+    "capture_amount": 0,
+    "currency": "IDR",
+    "business_id": "5ed75086a883856178afc12e",
+    "merchant_id": "xendit_ctv_agg",
+    "merchant_reference_code": "5f0421faa98815a4f4c92a0d",
+    "external_id": "card_preAuth-1594106356",
+    "eci": "07",
+    "charge_type": "MULTIPLE_USE_TOKEN",
+    "masked_card_number": "400000XXXXXX0002",
+    "card_brand": "VISA",
+    "card_type": "CREDIT",
+    "descriptor": "XENDIT*XENDIT&AMP;#X27;S INTERN",
+    "bank_reconciliation_id": "5941063625146828103011",
+    "approval_code": "831000",
+    "created": "2020-07-07T07:19:22.921Z",
+    "id": "5f0421fa8cc1e8001973a1d6"
+}
+```
+
+#### Reverse Authorization
+
+```python
+from xendit import CreditCard
+
+reverse_authorization = CreditCard.reverse_authorizatiton(
+    credit_card_charge_id="5f0421fa8cc1e8001973a1d6",
+    external_id="reverse-authorization-1594106387",
+)
+print(reverse_authorization)
+```
+
+Will return
+
+```
+{
+    "status": "SUCCEEDED",
+    "currency": "IDR",
+    "credit_card_charge_id": "5f0421fa8cc1e8001973a1d6",
+    "business_id": "5ed75086a883856178afc12e",
+    "external_id": "card_preAuth-1594106356",
+    "amount": 75000,
+    "created": "2020-07-07T07:19:48.896Z",
+    "id": "5f0422148cc1e8001973a1dc"
+}
+```
+
+#### Create Charge
+
+```python
+from xendit import CreditCard
+
+charge = CreditCard.create_charge(
+    token_id="5f0410898bcf7a001a00879d",
+    external_id="card_charge-1594106478",
+    amount=75000,
+    card_cvn="123",
+)
+print(charge)
+```
+
+Will return
+
+```
+{
+    "status": "CAPTURED",
+    "authorized_amount": 75000,
+    "capture_amount": 75000,
+    "currency": "IDR",
+    "business_id": "5ed75086a883856178afc12e",
+    "merchant_id": "xendit_ctv_agg",
+    "merchant_reference_code": "5f0422746fc1d25bd222df2e",
+    "external_id": "card_charge-1594106478",
+    "eci": "07",
+    "charge_type": "MULTIPLE_USE_TOKEN",
+    "masked_card_number": "400000XXXXXX0002",
+    "card_brand": "VISA",
+    "card_type": "CREDIT",
+    "descriptor": "XENDIT*XENDIT&AMP;#X27;S INTERN",
+    "bank_reconciliation_id": "5941064846646923303008",
+    "approval_code": "831000",
+    "created": "2020-07-07T07:21:25.027Z",
+    "id": "5f0422752bbbe50019a368b5"
+}
+```
+
+#### Capture Charge
+
+```python
+from xendit import CreditCard
+
+charge = CreditCard.capture_charge(
+    credit_card_charge_id="5f0422aa2bbbe50019a368c2",
+    amount=75000,
+)
+print(charge)
+```
+
+Will return
+
+```
+{
+    "status": "CAPTURED",
+    "authorized_amount": 75000,
+    "capture_amount": 75000,
+    "currency": "IDR",
+    "created": "2020-07-07T07:22:18.719Z",
+    "business_id": "5ed75086a883856178afc12e",
+    "merchant_id": "xendit_ctv_agg",
+    "merchant_reference_code": "5f0422aa6fc1d25bd222df32",
+    "external_id": "card_preAuth-1594106532",
+    "eci": "07",
+    "charge_type": "MULTIPLE_USE_TOKEN",
+    "masked_card_number": "400000XXXXXX0002",
+    "card_brand": "VISA",
+    "card_type": "CREDIT",
+    "descriptor": "XENDIT*XENDIT&AMP;#X27;S INTERN",
+    "bank_reconciliation_id": "5941065383296525603007",
+    "approval_code": "831000",
+    "mid_label": "CTV_TEST",
+    "id": "5f0422aa2bbbe50019a368c2"
+}
+```
+
+#### Get Charge
+
+```python
+from xendit import CreditCard
+
+charge = CreditCard.get_charge(
+    credit_card_charge_id="5f0422aa2bbbe50019a368c2",
+)
+print(charge)
+```
+
+Will return
+
+```
+{
+    "status": "CAPTURED",
+    "authorized_amount": 75000,
+    "capture_amount": 75000,
+    "currency": "IDR",
+    "created": "2020-07-07T07:22:18.719Z",
+    "business_id": "5ed75086a883856178afc12e",
+    "merchant_id": "xendit_ctv_agg",
+    "merchant_reference_code": "5f0422aa6fc1d25bd222df32",
+    "external_id": "card_preAuth-1594106532",
+    "eci": "07",
+    "charge_type": "MULTIPLE_USE_TOKEN",
+    "masked_card_number": "400000XXXXXX0002",
+    "card_brand": "VISA",
+    "card_type": "CREDIT",
+    "descriptor": "XENDIT*XENDIT&AMP;#X27;S INTERN",
+    "bank_reconciliation_id": "5941065383296525603007",
+    "approval_code": "831000",
+    "mid_label": "CTV_TEST",
+    "metadata": {},
+    "id": "5f0422aa2bbbe50019a368c2"
+}
+```
+
+#### Create Refund
+
+```python
+from xendit import CreditCard
+
+refund = CreditCard.create_refund(
+    credit_card_charge_id="5f0422aa2bbbe50019a368c2",
+    amount=10000,
+    external_id="card_refund-1594106755",
+)
+print(refund)
+```
+
+Will return
+
+```
+{
+    "status": "REQUESTED",
+    "currency": "IDR",
+    "credit_card_charge_id": "5f0422aa2bbbe50019a368c2",
+    "user_id": "5ed75086a883856178afc12e",
+    "amount": 10000,
+    "external_id": "card_refund-1594106755",
+    "created": "2020-07-07T07:25:56.872Z",
+    "updated": "2020-07-07T07:25:57.740Z",
+    "id": "5f0423848bb8da600c57c44f",
+    "fee_refund_amount": 290
+}
+```
+
+#### Create Promotion
+
+```python
+from xendit import CreditCard
+
+promotion = CreditCard.create_promotion(
+    reference_id="BRI_20_JAN-1594176600",
+    description="20% discount applied for all BRI cards",
+    discount_amount=10000,
+    bin_list=['400000', '460000'],
+    start_time="2020-01-01T00:00:00.000Z",
+    end_time="2021-01-01T00:00:00.000Z",
+)
+print(promotion)
+```
+
+Will return
+
+```
+{
+    "business_id": "5ed75086a883856178afc12e",
+    "reference_id": "BRI_20_JAN-1594176600",
+    "description": "20% discount applied for all BRI cards",
+    "start_time": "2020-01-01T00:00:00.000Z",
+    "end_time": "2021-01-01T00:00:00.000Z",
+    "type": "CARD_BIN",
+    "discount_amount": 10000,
+    "bin_list": [
+        "400000",
+        "460000"
+    ],
+    "currency": "IDR",
+    "id": "c65a2ae7-ce75-4a15-bbec-55d076f46bd0",
+    "created": "2020-07-08T02:50:02.296Z",
+    "status": "ACTIVE"
+}
 ```
 
 ### eWallets

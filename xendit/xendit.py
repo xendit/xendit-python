@@ -3,6 +3,7 @@ import requests
 from ._xendit_param_injector import _XenditParamInjector
 
 from .models import Balance
+from .models import CreditCard
 from .models import Disbursement
 from .models import EWallet
 from .models import Invoice
@@ -23,6 +24,7 @@ class Xendit:
     ):
         injected_params = (api_key, base_url, http_client)
         self.Balance = _XenditParamInjector.instantiate(Balance, injected_params)
+        self.CreditCard = _XenditParamInjector.instantiate(CreditCard, injected_params)
         self.Disbursement = _XenditParamInjector.instantiate(
             Disbursement, injected_params
         )
