@@ -35,7 +35,7 @@ class GetCustomerByRefID:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            customer = xendit_instance.DirectDebit.get_customer_by_ref_id(**kwargs,)
+            customer = xendit_instance.DirectDebit.get_customer_by_ref_id(**kwargs)
             print(customer)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -51,11 +51,87 @@ class GetCustomerByRefID:
         GetCustomerByRefID.run(xendit_instance, **args)
 
 
+class InitializeTokenization:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            customer = xendit_instance.DirectDebit.initialize_tokenization(**kwargs)
+            print(customer)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        args = {
+            "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+            "channel_code": "DC_BRI",
+            "properties": {
+                "account_mobile_number": "+62818555988",
+                "card_last_four": "8888",
+                "card_expiry": "06/24",
+                "account_email": "test.email@xendit.co",
+            },
+        }
+        print_running_function("xendit.DirectDebit.initialize_tokenization", args)
+        InitializeTokenization.run(xendit_instance, **args)
+
+
+class ValidateTokenOTP:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            linked_account_token = xendit_instance.DirectDebit.validate_token_otp(
+                **kwargs
+            )
+            print(linked_account_token)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        linked_account_token_id = input("Please input your linked_account_token_id: ")
+        args = {
+            "linked_account_token_id": linked_account_token_id,
+            "otp_code": "333000",
+        }
+        print_running_function("xendit.DirectDebit.validate_token_otp", args)
+        ValidateTokenOTP.run(xendit_instance, **args)
+
+
+class GetAccessibleAccountByToken:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            customer = xendit_instance.DirectDebit.get_accessible_account_by_token(
+                **kwargs
+            )
+            print(customer)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        linked_account_token_id = input("Please input your linked_account_token_id: ")
+        args = {
+            "linked_account_token_id": linked_account_token_id,
+        }
+        print_running_function(
+            "xendit.DirectDebit.get_accessible_account_by_token", args
+        )
+        GetAccessibleAccountByToken.run(xendit_instance, **args)
+
+
 def ask_direct_debit_input():
     print("Input the action that you want to use")
     print("0. Exit")
     print("1. Create Customer")
     print("2. Get Customer by Reference ID")
+    print("3. Initialize Linked Account Tokenization")
+    print("4. Validate OTP for Linked Account Token")
+    print("5. Retrieve Accessible Accounts by Linked Account Token")
     try:
         return int(input())
     except ValueError:
@@ -72,4 +148,15 @@ def direct_debit_example(xendit_instance):
         elif direct_debit_input == 2:
             print("Running example of Get Customer by Reference ID")
             GetCustomerByRefID.example(xendit_instance)
+        elif direct_debit_input == 3:
+            print("Running example of Initialize Linked Account Tokenization")
+            InitializeTokenization.example(xendit_instance)
+        elif direct_debit_input == 4:
+            print("Running example of Validate OTP for Linked Account Token")
+            ValidateTokenOTP.example(xendit_instance)
+        elif direct_debit_input == 5:
+            print(
+                "Running example of Retrieve Accessible Accounts by Linked Account Token"
+            )
+            GetAccessibleAccountByToken.example(xendit_instance)
         direct_debit_input = ask_direct_debit_input()

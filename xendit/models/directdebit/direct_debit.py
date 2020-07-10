@@ -314,18 +314,18 @@ class DirectDebit(BaseModel):
         url = f"/linked_account_tokens/{linked_account_token_id}/accounts"
         headers, _ = _extract_params(
             locals(),
-            func_object=DirectDebit.validate_token_otp,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            func_object=DirectDebit.get_accessible_account_by_token,
+            headers_params=["for_user_id", "x_api_version"],
             ignore_params=["linked_account_token_id"],
         )
         kwargs["headers"] = headers
 
-        resp = _APIRequestor.post(url, **kwargs)
+        resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             accessible_accounts = []
             for accessible_account in resp.body:
                 accessible_accounts.append(
-                    DirectDebitAccessibleAccount(accessible_account)
+                    DirectDebitAccessibleAccount(**accessible_account)
                 )
             return accessible_accounts
         else:
