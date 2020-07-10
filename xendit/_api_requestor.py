@@ -51,7 +51,6 @@ class _APIRequestor:
             resp = http_client.request(method, url, headers=headers, params=params)
         else:
             resp = http_client.request(method, url, headers=headers, json=body)
-        print(resp)
         return XenditResponse(resp.status_code, resp.headers, resp.json())
 
     @staticmethod
