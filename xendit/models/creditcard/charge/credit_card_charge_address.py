@@ -1,35 +1,35 @@
 from xendit.models._base_model import BaseModel
+from xendit.models._base_query import BaseQuery
 
 
 class CreditCardChargeAddress(BaseModel):
-    """Address class of Charge Billing Details (API Reference: Credit Card)
+    """Address class of Charge Billing Details (API Reference: Credit Card)"""
 
-    Use this for initialize create_authorization and create_charge
+    class Query(BaseQuery):
+        """Address class of Charge Billing Details Query (API Reference: Credit Card)
 
-    Attributes:
-        - country (str)
+        Use this for initialize create_authorization and create_charge
 
-    Optional Attributes:
-        - street_line1 (str)
-        - street_line2 (str)
-        - city (str)
-        - province (str)
-        - state (str)
-        - postal_code (str)
-        - description (str)
-    """
+        Attributes:
+          - country (str)
 
-    country: str
+        Optional Attributes:
+          - street_line1 (str)
+          - street_line2 (str)
+          - city (str)
+          - province (str)
+          - state (str)
+          - postal_code (str)
+          - description (str)
+        """
 
-    # Optional
-    street_line1: str
-    street_line2: str
-    city: str
-    province: str
-    state: str
-    postal_code: str
-    description: str
+        country: str
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.initialize_dict(**kwargs)
+        # Optional
+        street_line1: str
+        street_line2: str
+        city: str
+        province: str
+        state: str
+        postal_code: str
+        description: str

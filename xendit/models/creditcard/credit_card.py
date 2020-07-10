@@ -53,12 +53,12 @@ class CreditCard(BaseModel):
           - **interval (str)
 
         Return:
-          - CreditCardChargeInstallment
+          - CreditCardChargeInstallment.Query
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardChargeInstallment(**params)
+        return CreditCardChargeInstallment.Query(**params)
 
     @staticmethod
     def helper_create_charge_promotion(
@@ -71,12 +71,12 @@ class CreditCard(BaseModel):
           - **original_amount (float)
 
         Return:
-          - CreditCardChargePromotion
+          - CreditCardChargePromotion.Query
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardChargePromotion(**params)
+        return CreditCardChargePromotion.Query(**params)
 
     @staticmethod
     def helper_create_billing_details(
@@ -102,12 +102,12 @@ class CreditCard(BaseModel):
           - **phone_number (str)
 
         Return:
-          - CreditCardChargeBillingDetails
+          - CreditCardChargeBillingDetails.Query
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardChargeBillingDetails(**params)
+        return CreditCardChargeBillingDetails.Query(**params)
 
     @staticmethod
     def helper_create_address(
@@ -135,12 +135,12 @@ class CreditCard(BaseModel):
           - **description (str)
 
         Return:
-          - CreditCardChargeAddress
+          - CreditCardChargeAddress.Query
         """
         params = locals()
         del params["kwargs"]
 
-        return CreditCardChargeAddress(**params)
+        return CreditCardChargeAddress.Query(**params)
 
     @staticmethod
     def create_authorization(
@@ -174,9 +174,9 @@ class CreditCard(BaseModel):
           - **descriptor (str)
           - **currency (str)
           - **mid_label (str)
-          - **billing_details (CreditCardCharge.BillingDetails)
-          - **promotion (CreditCardCharge.Promotion)
-          - **installment (CreditCardCharge.Installment)
+          - **billing_details (CreditCardCharge.BillingDetails.Query)
+          - **promotion (CreditCardCharge.Promotion.Query)
+          - **installment (CreditCardCharge.Installment.Query)
           - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
@@ -269,9 +269,9 @@ class CreditCard(BaseModel):
           - **descriptor (str)
           - **currency (str)
           - **mid_label (str)
-          - **billing_details (CreditCardCharge.BillingDetails)
-          - **promotion (CreditCardCharge.Promotion)
-          - **installment (CreditCardCharge.Installment)
+          - **billing_details (CreditCardCharge.BillingDetails.Query)
+          - **promotion (CreditCardCharge.Promotion.Query)
+          - **installment (CreditCardCharge.Installment.Query)
           - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
