@@ -60,7 +60,7 @@ class TestCreateOVOPayment(ModelBaseTest):
 
     @pytest.mark.parametrize("mock_correct_response", [ovo_payment_response()], indirect=True)
     def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, api_requestor_request_data):
-        super().test_send_correct_request_to_api_requestor(mocker, mock_correct_response, api_requestor_request_data)
+        self.run_send_correct_request_to_api_requestor(mocker, mock_correct_response, api_requestor_request_data)
 
     @pytest.mark.oldversion
     @pytest.mark.parametrize("mock_correct_response", [ovo_payment_response("2019-02-04")], indirect=True)
