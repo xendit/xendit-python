@@ -1,21 +1,23 @@
 from xendit.models._base_model import BaseModel
+from xendit.models._base_query import BaseQuery
 
 
 class LinkAjaItem(BaseModel):
-    """Item Object for LinkAja (API Reference: eWallets)
+    """Item Class for LinkAja (API Reference: eWallets)"""
 
-    Attributes:
-      - id (str)
-      - name (str)
-      - price (int)
-      - quantity (int)
-    """
+    class Query(BaseQuery):
+        """Item Object for LinkAja Query (API Reference: eWallets)
 
-    id: str
-    name: str
-    price: int
-    quantity: int
+        Use this for create_linkaja_payment
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.initialize_dict(**kwargs)
+        Attributes:
+          - id (str)
+          - name (str)
+          - price (int)
+          - quantity (int)
+        """
+
+        id: str
+        name: str
+        price: int
+        quantity: int

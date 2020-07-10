@@ -46,7 +46,7 @@ class EWallet:
         params = locals()
         del params["kwargs"]
 
-        return LinkAjaItem(**params)
+        return LinkAjaItem.Query(**params)
 
     @staticmethod
     def create_ovo_payment(
@@ -160,7 +160,7 @@ class EWallet:
           - external_id (str)
           - phone (str)
           - amount (int)
-          - items (LinkAjaItem[])
+          - items (LinkAjaItem.Query[])
           - callback_url (str)
           - redirect_url (str)
           - **for_user_id (str) (XenPlatforms only)
