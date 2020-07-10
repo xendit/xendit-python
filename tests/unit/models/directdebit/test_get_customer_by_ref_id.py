@@ -5,7 +5,7 @@ from xendit.models import DirectDebit
 
 
 # fmt: off
-class TestCreateCustomer(ModelBaseTest):
+class TestGetCustomerByRefID(ModelBaseTest):
     @pytest.fixture
     def default_customer_data(self):
         tested_class = DirectDebit

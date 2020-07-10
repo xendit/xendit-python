@@ -293,7 +293,7 @@ class DirectDebit(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def get_accessible_account_by_token(
+    def get_accessible_accounts_by_token(
         *, linked_account_token_id, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Get list of bank accounts accessible by the linked account token
@@ -314,7 +314,7 @@ class DirectDebit(BaseModel):
         url = f"/linked_account_tokens/{linked_account_token_id}/accounts"
         headers, _ = _extract_params(
             locals(),
-            func_object=DirectDebit.get_accessible_account_by_token,
+            func_object=DirectDebit.get_accessible_accounts_by_token,
             headers_params=["for_user_id", "x_api_version"],
             ignore_params=["linked_account_token_id"],
         )

@@ -6,7 +6,7 @@ from tests.sampleresponse.direct_debit import (
     customer_response,
     multi_customer_response,
     linked_account_response,
-    accessible_account_response,
+    accessible_accounts_response,
 )
 
 
@@ -54,9 +54,9 @@ class TestDirectDebit(BaseIntegrationTest):
             validated_linked_account_token, linked_account_response()
         )
 
-        accessible_accounts = DirectDebit.get_accessible_account_by_token(
+        accessible_accounts = DirectDebit.get_accessible_accounts_by_token(
             linked_account_token_id=validated_linked_account_token.id
         )
         self.assert_returned_object_has_same_key_as_sample_response(
-            accessible_accounts[0], accessible_account_response()[0]
+            accessible_accounts[0], accessible_accounts_response()[0]
         )

@@ -100,11 +100,11 @@ class ValidateTokenOTP:
         ValidateTokenOTP.run(xendit_instance, **args)
 
 
-class GetAccessibleAccountByToken:
+class GetAccessibleAccountsByToken:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            customer = xendit_instance.DirectDebit.get_accessible_account_by_token(
+            customer = xendit_instance.DirectDebit.get_accessible_accounts_by_token(
                 **kwargs
             )
             print(customer)
@@ -121,7 +121,7 @@ class GetAccessibleAccountByToken:
         print_running_function(
             "xendit.DirectDebit.get_accessible_account_by_token", args
         )
-        GetAccessibleAccountByToken.run(xendit_instance, **args)
+        GetAccessibleAccountsByToken.run(xendit_instance, **args)
 
 
 def ask_direct_debit_input():
@@ -158,5 +158,5 @@ def direct_debit_example(xendit_instance):
             print(
                 "Running example of Retrieve Accessible Accounts by Linked Account Token"
             )
-            GetAccessibleAccountByToken.example(xendit_instance)
+            GetAccessibleAccountsByToken.example(xendit_instance)
         direct_debit_input = ask_direct_debit_input()

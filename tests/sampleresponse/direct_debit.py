@@ -31,7 +31,7 @@ def linked_account_response():
     }
 
 
-def accessible_account_response():
+def accessible_accounts_response():
     return [
         {
             "channel_code": "DC_BRI",
