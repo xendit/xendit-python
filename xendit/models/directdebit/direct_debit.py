@@ -1,5 +1,10 @@
 from .customer import DirectDebitCustomer, DirectDebitCustomerAddress
-from .token import DirectDebitCardLink, DirectDebitOnlineBankingLink, DirectDebitToken
+from .token import (
+    DirectDebitCardLink,
+    DirectDebitOnlineBankingLink,
+    DirectDebitToken,
+    DirectDebitAccessibleAccount,
+)
 from xendit.models._base_model import BaseModel
 
 from xendit._api_requestor import _APIRequestor
@@ -216,7 +221,7 @@ class DirectDebit(BaseModel):
         Args:
           - customer_id (str)
           - channel_code (str)
-          - **properties (DirectDebitCardLinking or DirectDebitOnlineBanking)
+          - **properties (DirectDebitCardLinking.Query or DirectDebitOnlineBanking.Query)
           - **metadata (dict)
           - **x_idempotency_key (str)
           - **for_user_id (str)
@@ -283,6 +288,45 @@ class DirectDebit(BaseModel):
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return
+            return DirectDebitToken(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def get_accessible_account_by_token(
+        *, linked_account_token_id, for_user_id=None, x_api_version=None, **kwargs,
+    ):
+        """Get list of bank accounts accessible by the linked account token
+        (API Reference: Direct Debit/Retrieve Accessible Accounts by Linked Account Token)
+
+        Args:
+          - linked_account_token_id (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitAccessibleAccount[]
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/linked_account_tokens/{linked_account_token_id}/accounts"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=DirectDebit.validate_token_otp,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            ignore_params=["linked_account_token_id"],
+        )
+        kwargs["headers"] = headers
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            accessible_accounts = []
+            for accessible_account in resp.body:
+                accessible_accounts.append(
+                    DirectDebitAccessibleAccount(accessible_account)
+                )
+            return accessible_accounts
         else:
             raise XenditError(resp)

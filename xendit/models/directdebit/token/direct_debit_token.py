@@ -8,15 +8,19 @@ class DirectDebitToken(BaseModel):
       - id (str)
       - customer_id (str)
       - channel_code (str)
-      - authorizer_url (str)
       - status (str)
       - metadata (dict)
+
+    Optional Attributes:
+      - authorizer_url (str)
 
     """
 
     id: str
     customer_id: str
     channel_code: str
-    authorizer_url: str
     status: str
     metadata: dict
+
+    # Optional
+    authorizer_url: str

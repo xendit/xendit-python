@@ -10,14 +10,14 @@ class DirectDebitAccessibleAccount(BaseModel):
     """Accessible Account in Direct Debit (API Reference: Direct Debit)
 
     Attributes:
-      - channel_code (str)
       - id (str)
-      - properties (DirectDebitCardLink or DirectDebitOnlineBankingLink)
+      - channel_code (str)
       - type (str)
+      - properties (DirectDebitCardLink or DirectDebitOnlineBankingLink)
 
     """
 
-    channel_code: str
     id: str
-    properties: Union[DirectDebitCardLink, DirectDebitOnlineBankingLink]
+    channel_code: str
     type: str
+    properties: Union[DirectDebitCardLink, DirectDebitOnlineBankingLink]
