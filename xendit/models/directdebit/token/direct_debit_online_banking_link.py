@@ -1,4 +1,5 @@
 from xendit.models._base_model import BaseModel
+from xendit.models._base_query import BaseQuery
 
 
 class DirectDebitOnlineBankingLink(BaseModel):
@@ -7,17 +8,37 @@ class DirectDebitOnlineBankingLink(BaseModel):
     Use this for initialize_tokenization
 
     Attributes:
-      - success_redirect_url (str)
+      - account_details (str)
+      - account_hash (str)
+      - account_type (str)
+      - currency (str)
+      - description (str)
 
-    Optional Attributes:
+    Parameters Attributes (initialize_tokenization):
+      - success_redirect_url (str)
+      - failure_redirect_url (str)
+      - callback_url (str)
 
     """
 
-    account_mobile_number: str
-    card_last_four: str
-    card_expiry: str
-    account_email: str
+    account_details: str
+    account_hash: str
+    account_type: str
+    currency: str
+    description: str
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.initialize_dict(**kwargs)
+    class Query(BaseQuery):
+        """Online Banking Linking class in Direct Debit Tokenization (API Reference: Direct Debit)
+
+        Use this for initialize_tokenization
+
+        Attributes:
+          - success_redirect_url (str)
+          - failure_redirect_url (str)
+          - callback_url (str)
+
+        """
+
+        success_redirect_url: str
+        failure_redirect_url: str
+        callback_url: str

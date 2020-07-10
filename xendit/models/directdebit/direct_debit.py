@@ -60,7 +60,7 @@ class DirectDebit(BaseModel):
         params = locals()
         del params["kwargs"]
 
-        return DirectDebitCustomerAddress(**params)
+        return DirectDebitCustomerAddress.Query(**params)
 
     @staticmethod
     def helper_create_online_banking_link(
@@ -79,7 +79,7 @@ class DirectDebit(BaseModel):
         params = locals()
         del params["kwargs"]
 
-        return DirectDebitOnlineBankingLink(**params)
+        return DirectDebitOnlineBankingLink.Query(**params)
 
     @staticmethod
     def helper_create_card_link(
@@ -94,12 +94,12 @@ class DirectDebit(BaseModel):
           - account_email (str)
 
         Return:
-          - DirectDebitCardLink
+          - DirectDebitCardLink.Query
         """
         params = locals()
         del params["kwargs"]
 
-        return DirectDebitCardLink(**params)
+        return DirectDebitCardLink.Query(**params)
 
     @staticmethod
     def create_customer(
@@ -138,7 +138,7 @@ class DirectDebit(BaseModel):
           - **metadata (dict)
           - **for_user_id (str)
           - **x_idempotency_key (str)
-          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str)
 
         Returns:
           DirectDebitCustomer
@@ -171,7 +171,7 @@ class DirectDebit(BaseModel):
         Args:
           - reference_id (str)
           - **for_user_id (str)
-          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str)
 
         Returns:
           DirectDebitCustomer
@@ -220,7 +220,7 @@ class DirectDebit(BaseModel):
           - **metadata (dict)
           - **x_idempotency_key (str)
           - **for_user_id (str)
-          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str)
 
         Returns:
           DirectDebitToken
@@ -248,6 +248,7 @@ class DirectDebit(BaseModel):
     def validate_token_otp(
         *,
         linked_account_token_id,
+        otp_code,
         x_idempotency_key=None,
         for_user_id=None,
         x_api_version=None,
@@ -258,9 +259,10 @@ class DirectDebit(BaseModel):
 
         Args:
           - linked_account_token_id (str)
+          - otp_code (str)
           - **x_idempotency_key (str)
           - **for_user_id (str)
-          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str)
 
         Returns:
           DirectDebitToken
@@ -274,6 +276,7 @@ class DirectDebit(BaseModel):
             locals(),
             func_object=DirectDebit.validate_token_otp,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            ignore_params=["linked_account_token_id"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body

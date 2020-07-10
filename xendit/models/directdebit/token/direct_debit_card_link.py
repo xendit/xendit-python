@@ -1,24 +1,36 @@
 from xendit.models._base_model import BaseModel
+from xendit.models._base_query import BaseQuery
 
 
 class DirectDebitCardLink(BaseModel):
     """Card Linking class in Direct Debit Tokenization (API Reference: Direct Debit)
 
-    Use this for initialize_tokenization
-
     Attributes:
-      - account_mobile_number (str)
       - card_last_four (str)
       - card_expiry (str)
-      - account_email (str)
+      - currency (str)
+      - description (str)
 
     """
 
-    account_mobile_number: str
     card_last_four: str
     card_expiry: str
-    account_email: str
+    currency: str
+    description: str
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.initialize_dict(**kwargs)
+    class Query(BaseQuery):
+        """Card Linking class in Direct Debit Tokenization Query (API Reference: Direct Debit)
+
+        Initialize this for initialize_tokenization
+
+        Attributes:
+          - account_mobile_number (str)
+          - card_last_four (str)
+          - card_expiry (str)
+          - account_email (str)
+        """
+
+        account_mobile_number: str
+        card_last_four: str
+        card_expiry: str
+        account_email: str
