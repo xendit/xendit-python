@@ -45,3 +45,27 @@ def accessible_accounts_response():
             "type": "DEBIT_CARD",
         }
     ]
+
+
+def payment_method_response():
+    return {
+        "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+        "type": "DEBIT_CARD",
+        "properties": {
+            "id": "la-fac7e744-ab40-4100-a447-cbbb16f29ded",
+            "currency": "IDR",
+            "card_expiry": "06/24",
+            "description": "",
+            "channel_code": "DC_BRI",
+            "card_last_four": "8888",
+        },
+        "status": "ACTIVE",
+        "metadata": {},
+        "id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+        "created": "2020-07-13T07:28:57.716Z",
+        "updated": "2020-07-13T07:28:57.716Z",
+    }
+
+
+def multi_payment_method_response():
+    return [payment_method_response(), payment_method_response()]
