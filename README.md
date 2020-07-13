@@ -39,6 +39,8 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
       - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
       - [Retrieve Accessible Accounts by Linked Account Token](#retrieve-accessible-accounts-by-linked-account-token)
+      - [Create Payment Method](#create-payment-method)
+      - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
     - [Virtual Account Service](#virtual-account-service)
       - [Create Virtual Account](#create-virtual-account)
       - [Get Virtual Account Banks](#get-virtual-account-banks)
@@ -720,6 +722,76 @@ Will return
         "description": ""
     },
     "type": "DEBIT_CARD"
+}]
+```
+
+#### Create Payment Method
+
+```python
+from xendit import DirectDebit
+
+payment_method = DirectDebit.create_payment_method(
+    customer_id="ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    type=DirectDebitPaymentMethodType.DEBIT_CARD,
+    properties={'id': 'la-fac7e744-ab40-4100-a447-cbbb16f29ded'},
+)
+
+print(payment_method)
+```
+
+Will return
+
+```
+{
+    "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    "type": "DEBIT_CARD",
+    "properties": {
+        "id": "la-fac7e744-ab40-4100-a447-cbbb16f29ded",
+        "currency": "IDR",
+        "card_expiry": "06/24",
+        "description": "",
+        "channel_code": "DC_BRI",
+        "card_last_four": "8888"
+    },
+    "status": "ACTIVE",
+    "metadata": {},
+    "id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    "created": "2020-07-13T07:28:57.716Z",
+    "updated": "2020-07-13T07:28:57.716Z"
+}
+```
+
+#### Get Payment Methods by Customer ID
+
+```python
+from xendit import DirectDebit
+
+payment_methods = DirectDebit.get_payment_methods_by_customer_id(
+    customer_id="ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+)
+
+print(payment_methods)
+```
+
+Will return
+
+```
+[{
+    "id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    "status": "ACTIVE",
+    "type": "DEBIT_CARD",
+    "properties": {
+        "id": "la-fac7e744-ab40-4100-a447-cbbb16f29ded",
+        "currency": "IDR",
+        "card_expiry": "06/24",
+        "description": "",
+        "channel_code": "DC_BRI",
+        "card_last_four": "8888"
+    },
+    "metadata": {},
+    "created": "2020-07-13T07:28:57.716Z",
+    "updated": "2020-07-13T07:28:57.716Z"
 }]
 ```
 
