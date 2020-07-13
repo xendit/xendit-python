@@ -434,7 +434,7 @@ class DirectDebit(BaseModel):
         if resp.status_code >= 200 and resp.status_code < 300:
             payment_methods = []
             for payment_method in resp.body:
-                payment_methods.append(**payment_method)
+                payment_methods.append(DirectDebitPaymentMethod(**payment_method))
             return payment_methods
         else:
             raise XenditError(resp)

@@ -124,6 +124,53 @@ class GetAccessibleAccountsByToken:
         GetAccessibleAccountsByToken.run(xendit_instance, **args)
 
 
+class CreatePaymentMethod:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            customer = xendit_instance.DirectDebit.create_payment_method(**kwargs)
+            print(customer)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        customer_id = input("Please input your customer_id: ")
+        linked_account_token_id = input("Please input your linked_account_token_id: ")
+        args = {
+            "customer_id": customer_id,
+            "type": xendit.DirectDebitPaymentMethodType.DEBIT_CARD,
+            "properties": {"id": linked_account_token_id},
+        }
+        print_running_function("xendit.DirectDebit.create_payment_method", args)
+        CreatePaymentMethod.run(xendit_instance, **args)
+
+
+class GetPaymentMethodsByCustomerID:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            customer = xendit_instance.DirectDebit.get_payment_methods_by_customer_id(
+                **kwargs
+            )
+            print(customer)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        customer_id = input("Please input your customer_id: ")
+        args = {
+            "customer_id": customer_id,
+        }
+        print_running_function(
+            "xendit.DirectDebit.get_payment_methods_by_customer_id", args
+        )
+        GetPaymentMethodsByCustomerID.run(xendit_instance, **args)
+
+
 def ask_direct_debit_input():
     print("Input the action that you want to use")
     print("0. Exit")
@@ -132,6 +179,8 @@ def ask_direct_debit_input():
     print("3. Initialize Linked Account Tokenization")
     print("4. Validate OTP for Linked Account Token")
     print("5. Retrieve Accessible Accounts by Linked Account Token")
+    print("6. Create Payment Method")
+    print("7. Get Payment Methods by Customer ID")
     try:
         return int(input())
     except ValueError:
@@ -159,4 +208,10 @@ def direct_debit_example(xendit_instance):
                 "Running example of Retrieve Accessible Accounts by Linked Account Token"
             )
             GetAccessibleAccountsByToken.example(xendit_instance)
+        elif direct_debit_input == 6:
+            print("Running example of Create Payment Method")
+            CreatePaymentMethod.example(xendit_instance)
+        elif direct_debit_input == 7:
+            print("Running example of Get Payment Methods by Customer ID")
+            GetPaymentMethodsByCustomerID.example(xendit_instance)
         direct_debit_input = ask_direct_debit_input()
