@@ -1,5 +1,8 @@
 from .customer import DirectDebitCustomer, DirectDebitCustomerAddress
-from .paymentmethod import DirectDebitPaymentMethodProperties
+from .paymentmethod import (
+    DirectDebitPaymentMethodProperties,
+    DirectDebitPaymentMethod,
+)
 from .token import (
     DirectDebitCardLink,
     DirectDebitOnlineBankingLink,
@@ -23,6 +26,9 @@ class DirectDebit(BaseModel):
       - DirectDebitCardLink
       - DirectDebitOnlineBankingLinking
       - DirectDebitToken
+      - DirectDebitAccessibleAccount
+      - DirectDebitPaymentMethod
+      - DirectDebitPaymentMethodProperties
 
     Static Methods:
       - DirectDebit.create_customer (API Reference: /Create Customer)
@@ -30,11 +36,14 @@ class DirectDebit(BaseModel):
       - DirectDebit.initialize_tokenization (API Reference: /Initialize Linked Account Tokenization)
       - DirectDebit.validate_token_otp (API Reference: /Validate OTP for Linked Account Token)
       - DirectDebit.get_accessible_account_by_token (API Reference: /Retrieve Accessible Accounts by Linked Account Token)
+      - DirectDebit.create_payment_method (API Reference: /Create Payment Method)
+      - DirectDebit.get_payment_method_by_customer_id (API Reference: /Get Payment Methods by Customer ID)
 
     Static Methods for Object Creation:
       - DirectDebit.helper_create_customer_address (For Address in create_customer)
       - DirectDebit.helper_create_online_banking_link (For OnlineBankingLink in initialize_tokenization)
       - DirectDebit.helper_create_card_link (For CardLink in initialize_tokenization)
+      - DirectDebit.helper_create_payment_method_properties (For Properties in create_payment_method)
     """
 
     @staticmethod
@@ -345,3 +354,94 @@ class DirectDebit(BaseModel):
             return accessible_accounts
         else:
             raise XenditError(resp)
+
+    @staticmethod
+    def create_payment_method(
+        *,
+        customer_id,
+        type,
+        properties,
+        metadata=None,
+        x_idempotency_key=None,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
+        """Create payment method for making payment
+        (API Reference: Direct Debit/Create Payment Method)
+
+        Args:
+          - customer_id (str)
+          - type (DirectDebitPaymentMethodType)
+          - properties (DirectDebitPaymentMethodProperties.Query)
+          - **metadata (dict)
+          - **x_idempotency_key (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitPaymentMethod
+
+        Raises:
+          XenditError
+
+        """
+        type = DirectDebit._parse_payment_method_type(type)
+        url = "/payment_methods"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.create_payment_method,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return DirectDebitPaymentMethod(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def get_payment_methods_by_customer_id(
+        *, customer_id, for_user_id=None, x_api_version=None, **kwargs,
+    ):
+        """Get payment methods by Customer ID
+        (API Reference: Direct Debit/Get Payment Methods by Customer ID)
+
+        Args:
+          - customer_id (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitPaymentMethod[]
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/payment_methods?customer_id={customer_id}"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.get_payment_methods_by_customer_id,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["customer_id"],
+        )
+        kwargs["headers"] = headers
+
+        resp = _APIRequestor.get(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            payment_methods = []
+            for payment_method in resp.body:
+                payment_methods.append(**payment_method)
+            return payment_methods
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def _parse_payment_method_type(payment_method_type):
+        try:
+            return payment_method_type.name
+        except AttributeError:
+            return payment_method_type
