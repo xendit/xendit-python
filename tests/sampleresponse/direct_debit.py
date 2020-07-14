@@ -69,3 +69,7 @@ def payment_method_response():
 
 def multi_payment_method_response():
     return [payment_method_response(), payment_method_response()]
+
+
+def payment_response():
+    return {}

@@ -29,7 +29,7 @@ class TestGetAccessibleAccountsByToken(ModelBaseTest):
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 
     @pytest.mark.parametrize("mock_correct_response", [accessible_accounts_response()], indirect=True)
-    def test_return_linked_account_token_on_correct_params(
+    def test_return_accessible_accounts_on_correct_params(
         self, mocker, mock_correct_response, default_linked_account_token_data
     ):
         self.run_success_return_test_on_xendit_instance(mocker, mock_correct_response, default_linked_account_token_data)
@@ -40,7 +40,7 @@ class TestGetAccessibleAccountsByToken(ModelBaseTest):
         self.run_raises_error_test_on_xendit_instance(mocker, mock_error_request_response, default_linked_account_token_data)
 
     @pytest.mark.parametrize("mock_correct_response", [accessible_accounts_response()], indirect=True)
-    def test_return_linked_account_token_on_correct_params_and_global_xendit(
+    def test_return_accessible_accounts_on_correct_params_and_global_xendit(
         self, mocker, mock_correct_response, default_linked_account_token_data
     ):
         self.run_success_return_test_on_global_config(mocker, mock_correct_response, default_linked_account_token_data)
