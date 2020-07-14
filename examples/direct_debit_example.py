@@ -190,7 +190,8 @@ class CreatePayment:
             "currency": "IDR",
             "amount": "60000",
             "callback_url": "http://webhook.site/",
-            "x_idempotency_key": "idemp_key",
+            "enable_otp": True,
+            "idempotency_key": f"idemp_key-{int(time.time())}",
         }
         print_running_function("xendit.DirectDebit.create_payment", args)
         CreatePayment.run(xendit_instance, **args)

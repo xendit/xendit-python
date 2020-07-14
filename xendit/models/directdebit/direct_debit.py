@@ -497,11 +497,11 @@ class DirectDebit(BaseModel):
         currency,
         amount,
         callback_url,
+        idempotency_key,
         enable_otp=None,
         description=None,
         basket=None,
         metadata=None,
-        x_idempotency_key=None,
         for_user_id=None,
         x_api_version=None,
         **kwargs,
@@ -515,11 +515,11 @@ class DirectDebit(BaseModel):
           - currency (str)
           - amount (int)
           - callback_url (str)
+          - idempotency_key (str)
           - **enable_otp (bool)
           - **description (str)
           - **basket (DirectDebitBasket[])
           - **metadata (dict)
-          - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
 
@@ -534,17 +534,14 @@ class DirectDebit(BaseModel):
         headers, body = _extract_params(
             locals(),
             func_object=DirectDebit.create_payment,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["for_user_id", "idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            payments = []
-            for payment in resp.body:
-                payments.append(DirectDebitPaymentMethod(**payment))
-            return payments
+            return DirectDebitPayment(**resp.body)
         else:
             raise XenditError(resp)
 
@@ -575,7 +572,7 @@ class DirectDebit(BaseModel):
           XenditError
 
         """
-        url = f"/{direct_debit_id}/validate_otp/"
+        url = f"/direct_debits/{direct_debit_id}/validate_otp/"
         headers, body = _extract_params(
             locals(),
             func_object=DirectDebit.validate_payment_otp,
@@ -593,19 +590,13 @@ class DirectDebit(BaseModel):
 
     @staticmethod
     def get_payment_status(
-        *,
-        direct_debit_id,
-        x_idempotency_key=None,
-        for_user_id=None,
-        x_api_version=None,
-        **kwargs,
+        *, direct_debit_id, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Get the details of a direct debit payment
         (API Reference: Direct Debit/Get Direct Debit Payment Status by ID)
 
         Args:
           - direct_debit_id (str)
-          - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
 
@@ -617,16 +608,15 @@ class DirectDebit(BaseModel):
 
         """
         url = f"/direct_debits/{direct_debit_id}/"
-        headers, body = _extract_params(
+        headers, _ = _extract_params(
             locals(),
             func_object=DirectDebit.get_payment_status,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["for_user_id", "x_api_version"],
             ignore_params=["direct_debit_id"],
         )
         kwargs["headers"] = headers
-        kwargs["body"] = body
 
-        resp = _APIRequestor.post(url, **kwargs)
+        resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return DirectDebitPayment(**resp.body)
         else:
@@ -634,42 +624,38 @@ class DirectDebit(BaseModel):
 
     @staticmethod
     def get_payment_status_by_ref_id(
-        *,
-        reference_id,
-        x_idempotency_key=None,
-        for_user_id=None,
-        x_api_version=None,
-        **kwargs,
+        *, reference_id, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Get the details of a direct debit payment
         (API Reference: Direct Debit/Get Direct Debit Payment Status by Reference ID)
 
         Args:
           - reference_id (str)
-          - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
 
         Returns:
-          DirectDebitPayment
+          DirectDebitPayment[]
 
         Raises:
           XenditError
 
         """
         url = f"/direct_debits?reference_id={reference_id}"
-        headers, body = _extract_params(
+        headers, _ = _extract_params(
             locals(),
             func_object=DirectDebit.get_payment_status,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["for_user_id", "x_api_version"],
             ignore_params=["reference_id"],
         )
         kwargs["headers"] = headers
-        kwargs["body"] = body
 
-        resp = _APIRequestor.post(url, **kwargs)
+        resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return DirectDebitPayment(**resp.body)
+            payments = []
+            for payment in resp.body:
+                payments.append(DirectDebitPayment(**payment))
+            return payments
         else:
             raise XenditError(resp)
 
