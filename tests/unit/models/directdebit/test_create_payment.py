@@ -19,7 +19,7 @@ class TestCreatePayment(ModelBaseTest):
             "currency": "IDR",
             "amount": "60000",
             "callback_url": "http://webhook.site/",
-            "x_idempotency_key": "idemp_key",
+            "idempotency_key": "idemp_key",
         }
         params = (args, kwargs)
         url = "/direct_debits"
@@ -29,7 +29,7 @@ class TestCreatePayment(ModelBaseTest):
     @pytest.fixture
     def api_requestor_request_data(self, default_direct_debit_payment_data):
         tested_class, class_name, method_name, http_method_name, url, params, _ = default_direct_debit_payment_data
-        headers = {"X-IDEMPOTENCY-KEY": "idemp_key"}
+        headers = {"Idempotency-key": "idemp_key"}
         body = {
             "reference_id": "mock-direct-debit-ref-123",
             "payment_method_id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",

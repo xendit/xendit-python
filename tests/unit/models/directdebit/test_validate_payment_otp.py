@@ -19,7 +19,7 @@ class TestValidatePaymentOTP(ModelBaseTest):
             "x_idempotency_key": "idemp_key",
         }
         params = (args, kwargs)
-        url = f"/{kwargs['direct_debit_id']}/validate_otp/"
+        url = f"/direct_debits/{kwargs['direct_debit_id']}/validate_otp/"
         expected_correct_result = payment_response()
         return (tested_class, class_name, method_name, http_method_name, url, params, expected_correct_result)
 

@@ -11,7 +11,7 @@ class TestGetPaymentStatus(ModelBaseTest):
         tested_class = DirectDebit
         class_name = "DirectDebit"
         method_name = "get_payment_status"
-        http_method_name = "post"
+        http_method_name = "get"
         args = ()
         kwargs = {
             "direct_debit_id": "mock-direct-debit-ref-123",
