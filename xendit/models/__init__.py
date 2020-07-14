@@ -1,5 +1,6 @@
 from .balance import *
 from .creditcard import *
+from .directdebit import *
 from .disbursement import *
 from .ewallet import *
 from .invoice import *
