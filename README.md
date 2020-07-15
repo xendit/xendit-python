@@ -197,8 +197,8 @@ Balance.AccountType(
 Usage example:
 
 ```python
-from xendit import Balance
-Balance balance = Balance.AccountType(
+from xendit import Balance, BalanceAccountType
+Balance balance = Balance.get(
     account_type=BalanceAccountType.CASH,
 )
 
