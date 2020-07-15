@@ -42,6 +42,7 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Create Payment Method](#create-payment-method)
       - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
       - [Create Direct Debit Payment](#create-direct-debit-payment)
+      - [Create Recurring Payment with Direct Debit](#create-recurring-payment-with-direct-debit)
       - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
       - [Get Direct Debit Payment Status by ID](#get-direct-debit-payment-status-by-id)
       - [Get Direct Debit Payment Status by Reference ID](#get-direct-debit-payment-status-by-reference-id)
@@ -839,6 +840,10 @@ Will return
     "updated": "2020-07-14T09:29:02.614443Z"
 }
 ```
+
+#### Create Recurring Payment with Direct Debit
+
+You can use [Create Recurring Payment](#create-recurring-payment) to use this feature.
 
 #### Validate OTP for Direct Debit Payment
 
