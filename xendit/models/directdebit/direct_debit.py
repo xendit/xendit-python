@@ -524,7 +524,7 @@ class DirectDebit(BaseModel):
           - **x_api_version (str)
 
         Returns:
-          DirectDebitPayment[]
+          DirectDebitPayment
 
         Raises:
           XenditError

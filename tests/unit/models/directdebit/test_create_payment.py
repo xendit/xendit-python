@@ -12,6 +12,12 @@ class TestCreatePayment(ModelBaseTest):
         class_name = "DirectDebit"
         method_name = "create_payment"
         http_method_name = "post"
+        basket = DirectDebit.helper_create_basket(
+            reference_id="mock-basket-123",
+            name="Mock item",
+            market="ID",
+            type="Mock type"
+        )
         args = ()
         kwargs = {
             "reference_id": "mock-direct-debit-ref-123",
@@ -20,6 +26,7 @@ class TestCreatePayment(ModelBaseTest):
             "amount": "60000",
             "callback_url": "http://webhook.site/",
             "idempotency_key": "idemp_key",
+            "basket": basket,
         }
         params = (args, kwargs)
         url = "/direct_debits"
@@ -36,6 +43,12 @@ class TestCreatePayment(ModelBaseTest):
             "currency": "IDR",
             "amount": "60000",
             "callback_url": "http://webhook.site/",
+            "basket": {
+                "reference_id": "mock-basket-123",
+                "name": "Mock item",
+                "market": "ID",
+                "type": "Mock type",
+            }
         }
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 
