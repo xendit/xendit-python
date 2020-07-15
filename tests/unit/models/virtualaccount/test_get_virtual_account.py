@@ -50,5 +50,5 @@ class TestGetVirtualAccount(ModelBaseTest):
 
     @pytest.mark.parametrize("mock_correct_response", [virtual_account_response()], indirect=True)
     def test_send_correct_request_to_api_requestor(self, mocker, mock_correct_response, api_requestor_request_data):
-        super().test_send_correct_request_to_api_requestor(mocker, mock_correct_response, api_requestor_request_data)
+        self.run_send_correct_request_to_api_requestor(mocker, mock_correct_response, api_requestor_request_data)
 # fmt: on
