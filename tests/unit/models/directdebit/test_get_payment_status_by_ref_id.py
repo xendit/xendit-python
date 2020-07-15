@@ -5,7 +5,7 @@ from xendit.models import DirectDebit
 
 
 # fmt: off
-class TestGetPaymentStatus(ModelBaseTest):
+class TestGetPaymentStatusByRefID(ModelBaseTest):
     @pytest.fixture
     def default_direct_debit_payment_data(self):
         tested_class = DirectDebit
