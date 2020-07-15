@@ -33,6 +33,9 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Create DANA Payment](#create-dana-payment)
       - [Create LinkAja Payment](#create-linkaja-payment)
       - [Get Payment Status](#get-payment-status)
+    - [QR Codes](#qr-codes)
+      - [Create QR Code](#create-qr-code)
+      - [Get QR Code by External ID](#get-qr-code-by-external-id)
     - [Direct Debit](#direct-debit)
       - [Create Customer](#create-customer)
       - [Get Customer by Reference ID](#get-customer-by-reference-id)
@@ -574,6 +577,65 @@ Will return
     "external_id": "ovo-ewallet-testing-id-1234",
     "status": "COMPLETED",
     "transaction_date": "2020-06-30T01:32:28.267Z"
+}
+```
+
+### QR Codes
+
+#### Create QR Code
+
+```python
+from xendit import QRCode, QRCodeType
+
+qrcode = QRCode.create(
+    external_id="qrcode-id-1594794038",
+    type=QRCodeType.DYNAMIC,
+    callback_url="https://webhook.site",
+    amount="4000",
+)
+print(qrcode)
+```
+
+Will return
+
+```
+{
+    "id": "qr_13c31ddd-9d58-449b-9f52-1bf5123a45b5",
+    "external_id": "qrcode-id-1594794038",
+    "amount": 4000,
+    "qr_string": "00020101021226660014ID.LINKAJA.WWW011893600911002411480002152004230411480010303UME51450015ID.OR.GPNQR.WWW02150000000000000000303UME520454995802ID5920Placeholder merchant6007Jakarta610612345662380115wLoc6DRGwAOgSkZ0715wLoc6DRGwAOgSkZ53033605404400063047668",
+    "callback_url": "https://webhook.site",
+    "type": "DYNAMIC",
+    "status": "ACTIVE",
+    "created": "2020-07-15T06:20:40.636Z",
+    "updated": "2020-07-15T06:20:40.636Z"
+}
+```
+
+#### Get QR Code by External ID
+
+```python
+from xendit import QRCode
+
+qrcode = QRCode.get_by_ext_id(
+    external_id="qrcode-id-1594794038",
+)
+print(qrcode)
+```
+
+Will return
+
+```
+{
+    "id": "qr_13c31ddd-9d58-449b-9f52-1bf5123a45b5",
+    "external_id": "qrcode-id-1594794038",
+    "amount": 4000,
+    "qr_string": "00020101021226660014ID.LINKAJA.WWW011893600911002411480002152004230411480010303UME51450015ID.OR.GPNQR.WWW02150000000000000000303UME520454995802ID5920Placeholder merchant6007Jakarta610612345662380115wLoc6DRGwAOgSkZ0715wLoc6DRGwAOgSkZ53033605404400063047668",
+    "callback_url": "https://webhook.site",
+    "type": "DYNAMIC",
+    "status": "ACTIVE",
+    "created": "2020-07-15T06:20:40.636Z",
+    "updated": "2020-07-15T06:20:40.636Z"
 }
 ```
 
