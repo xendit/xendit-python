@@ -66,6 +66,7 @@ class QRCode(BaseModel):
           XenditError
 
         """
+        type = QRCode._parse_qrcode_type(type)
         url = "/qr_codes"
         headers, body = _extract_params(
             locals(),
@@ -117,3 +118,10 @@ class QRCode(BaseModel):
             return QRCode(**resp.body)
         else:
             raise XenditError(resp)
+
+    @staticmethod
+    def _parse_qrcode_type(qrcode_type):
+        try:
+            return qrcode_type.name
+        except AttributeError:
+            return qrcode_type
