@@ -20,3 +20,28 @@ def customer_response():
 
 def multi_customer_response():
     return [customer_response(), customer_response()]
+
+
+def linked_account_response():
+    return {
+        "id": "lat-afcfde47-18e0-4d68-bf1b-c729a5d8e54a",
+        "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+        "channel_code": "DC_BRI",
+        "status": "PENDING",
+    }
+
+
+def accessible_accounts_response():
+    return [
+        {
+            "channel_code": "DC_BRI",
+            "id": "la-aefbc050-4198-4e30-a925-4bbcf572f20d",
+            "properties": {
+                "card_expiry": "06/24",
+                "card_last_four": "8888",
+                "currency": "IDR",
+                "description": "",
+            },
+            "type": "DEBIT_CARD",
+        }
+    ]

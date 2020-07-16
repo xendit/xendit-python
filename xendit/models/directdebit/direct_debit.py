@@ -1,5 +1,10 @@
 from .customer import DirectDebitCustomer, DirectDebitCustomerAddress
-
+from .token import (
+    DirectDebitCardLink,
+    DirectDebitOnlineBankingLink,
+    DirectDebitToken,
+    DirectDebitAccessibleAccount,
+)
 from xendit.models._base_model import BaseModel
 
 from xendit._api_requestor import _APIRequestor
@@ -12,14 +17,23 @@ class DirectDebit(BaseModel):
     """DirectDebit class (API Reference: Direct Debit)
 
     Related Classes:
-      - DisbursementBank
+      - DirectDebitCustomer
+      - DirectDebitCustomerAddress
+      - DirectDebitCardLink
+      - DirectDebitOnlineBankingLinking
+      - DirectDebitToken
 
     Static Methods:
       - DirectDebit.create_customer (API Reference: /Create Customer)
       - DirectDebit.get_customer_by_ref_id (API Reference: /Get Customer by Reference ID)
+      - DirectDebit.initialize_tokenization (API Reference: /Initialize Linked Account Tokenization)
+      - DirectDebit.validate_token_otp (API Reference: /Validate OTP for Linked Account Token)
+      - DirectDebit.get_accessible_account_by_token (API Reference: /Retrieve Accessible Accounts by Linked Account Token)
 
     Static Methods for Object Creation:
       - DirectDebit.helper_create_customer_address (For Address in create_customer)
+      - DirectDebit.helper_create_online_banking_link (For OnlineBankingLink in initialize_tokenization)
+      - DirectDebit.helper_create_card_link (For CardLink in initialize_tokenization)
     """
 
     @staticmethod
@@ -51,7 +65,46 @@ class DirectDebit(BaseModel):
         params = locals()
         del params["kwargs"]
 
-        return DirectDebitCustomerAddress(**params)
+        return DirectDebitCustomerAddress.Query(**params)
+
+    @staticmethod
+    def helper_create_online_banking_link(
+        *, success_redirect_url, failure_redirect_url=None, callback_url=None, **kwargs,
+    ):
+        """Construct OnlineBankingLink Object for DirectDebit Token
+
+        Args:
+          - success_redirect_url (str)
+          - failure_redirect_url (str)
+          - callback_url (str)
+
+        Return:
+          - DirectDebitOnlineBankingLink
+        """
+        params = locals()
+        del params["kwargs"]
+
+        return DirectDebitOnlineBankingLink.Query(**params)
+
+    @staticmethod
+    def helper_create_card_link(
+        *, account_mobile_number, card_last_four, card_expiry, account_email, **kwargs,
+    ):
+        """Construct CardLink Object for DirectDebit Token
+
+        Args:
+          - account_mobile_number (str)
+          - card_last_four (str)
+          - card_expiry (str)
+          - account_email (str)
+
+        Return:
+          - DirectDebitCardLink.Query
+        """
+        params = locals()
+        del params["kwargs"]
+
+        return DirectDebitCardLink.Query(**params)
 
     @staticmethod
     def create_customer(
@@ -90,7 +143,7 @@ class DirectDebit(BaseModel):
           - **metadata (dict)
           - **for_user_id (str)
           - **x_idempotency_key (str)
-          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str)
 
         Returns:
           DirectDebitCustomer
@@ -123,7 +176,7 @@ class DirectDebit(BaseModel):
         Args:
           - reference_id (str)
           - **for_user_id (str)
-          - **x_api_version (str): API Version that will be used. If not provided will default to the latest
+          - **x_api_version (str)
 
         Returns:
           DirectDebitCustomer
@@ -147,5 +200,133 @@ class DirectDebit(BaseModel):
             for customer in resp.body:
                 customers.append(DirectDebitCustomer(**customer))
             return customers
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def initialize_tokenization(
+        *,
+        customer_id,
+        channel_code,
+        properties=None,
+        metadata=None,
+        x_idempotency_key=None,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
+        """Initialize Authorization Process and Account Token Creation
+        (API Reference: Direct Debit/Initialize Linked Account Tokenization)
+
+        Args:
+          - customer_id (str)
+          - channel_code (str)
+          - **properties (DirectDebitCardLinking.Query or DirectDebitOnlineBanking.Query)
+          - **metadata (dict)
+          - **x_idempotency_key (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitToken
+
+        Raises:
+          XenditError
+
+        """
+        url = "/linked_account_tokens/auth"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.initialize_tokenization,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return DirectDebitToken(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def validate_token_otp(
+        *,
+        linked_account_token_id,
+        otp_code,
+        x_idempotency_key=None,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
+        """Validates the Linked Account Token OTP
+        (API Reference: Direct Debit/Validate OTP for Linked Account Token)
+
+        Args:
+          - linked_account_token_id (str)
+          - otp_code (str)
+          - **x_idempotency_key (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitToken
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/linked_account_tokens/{linked_account_token_id}/validate_otp"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.validate_token_otp,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            ignore_params=["linked_account_token_id"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return DirectDebitToken(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def get_accessible_accounts_by_token(
+        *, linked_account_token_id, for_user_id=None, x_api_version=None, **kwargs,
+    ):
+        """Get list of bank accounts accessible by the linked account token
+        (API Reference: Direct Debit/Retrieve Accessible Accounts by Linked Account Token)
+
+        Args:
+          - linked_account_token_id (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitAccessibleAccount[]
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/linked_account_tokens/{linked_account_token_id}/accounts"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=DirectDebit.get_accessible_accounts_by_token,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["linked_account_token_id"],
+        )
+        kwargs["headers"] = headers
+
+        resp = _APIRequestor.get(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            accessible_accounts = []
+            for accessible_account in resp.body:
+                accessible_accounts.append(
+                    DirectDebitAccessibleAccount(**accessible_account)
+                )
+            return accessible_accounts
         else:
             raise XenditError(resp)

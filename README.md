@@ -36,6 +36,9 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Direct Debit](#direct-debit)
       - [Create Customer](#create-customer)
       - [Get Customer by Reference ID](#get-customer-by-reference-id)
+      - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
+      - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
+      - [Retrieve Accessible Accounts by Linked Account Token](#retrieve-accessible-accounts-by-linked-account-token)
     - [Virtual Account Service](#virtual-account-service)
       - [Create Virtual Account](#create-virtual-account)
       - [Get Virtual Account Banks](#get-virtual-account-banks)
@@ -634,6 +637,89 @@ Will return
     "employment": null,
     "source_of_wealth": null,
     "metadata": null
+}]
+```
+
+#### Initialize Linked Account Tokenization
+
+```python
+from xendit import DirectDebit
+
+card_linking = DirectDebit.helper_create_card_link(
+    account_mobile_number="+62818555988",
+    card_last_four="8888",
+    card_expiry="06/24",
+    account_email="test.email@xendit.co",
+)
+linked_account = DirectDebit.initialize_tokenization(
+    customer_id="ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    channel_code="DC_BRI",
+    properties=card_linking,   
+)
+print(linked_account)
+```
+
+Will return
+
+```
+{
+    "id": "lat-f325b757-0aae-4c24-92c5-3661e299e154",
+    "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    "channel_code": "DC_BRI",
+    "authorizer_url": null,
+    "status": "PENDING",
+    "metadata": null
+}
+```
+
+#### Validate OTP for Linked Account Token
+
+```python
+from xendit import DirectDebit
+
+linked_account = DirectDebit.validate_token_otp(
+    linked_account_token_id="lat-f325b757-0aae-4c24-92c5-3661e299e154",
+    otp_code="333000",
+)
+print(linked_account)
+```
+
+Will return
+
+```
+{
+    "id": "lat-f325b757-0aae-4c24-92c5-3661e299e154",
+    "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
+    "channel_code": "DC_BRI",
+    "status": "SUCCESS",
+    "metadata": null
+}
+```
+
+#### Retrieve Accessible Accounts by Linked Account Token
+
+```python
+from xendit import DirectDebit
+
+accessible_accounts = DirectDebit.get_accessible_account_by_token(
+    linked_account_token_id="lat-f325b757-0aae-4c24-92c5-3661e299e154",
+)
+print(accessible_accounts)
+```
+
+Will return
+
+```
+[{
+    "channel_code": "DC_BRI",
+    "id": "la-08b089e8-7035-4f5f-bdd9-94edd9dc9480",
+    "properties": {
+        "card_expiry": "06/24",
+        "card_last_four": "8888",
+        "currency": "IDR",
+        "description": ""
+    },
+    "type": "DEBIT_CARD"
 }]
 ```
 
