@@ -1,9 +1,11 @@
 [tool.poetry]
-name = "xendit-python"
-version = "0.1.0"
+name = "xendit"
+version = "0.1.1"
 description = "Xendit REST API Client for Python - Card, Virtual Account, Invoice, Disbursement, Recurring Payments, Payout, EWallet, Balance, Retail Outlets Services https://xendit.github.io/apireference/"
 authors = ["Adyaksa Wisanggeni <adyaksa@xendit.co>"]
 license = "MIT"
+repository = "https://github.com/xendit/xendit-python"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -17,7 +19,6 @@ flake8 = "^3.8.3"
 pytest-mock = "^3.1.1"
 pre-commit = "^2.5.1"
 responses = "^0.10.15"
-pyment = "^0.3.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0a5"]
