@@ -13,7 +13,8 @@ def test_method_correctly_injected(mocker):
     http_client = mocker.Mock()
     params = (api_key, base_url, http_client)
 
-    MockInjectedClass = _XenditParamInjector.instantiate(SampleMockClass, params)
+    param_injector = _XenditParamInjector(params)
+    MockInjectedClass = param_injector.instantiate(SampleMockClass)
 
     received_args = MockInjectedClass.mock_function()
     assert received_args["api_key"] == api_key

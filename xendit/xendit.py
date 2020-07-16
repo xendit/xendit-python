@@ -2,16 +2,6 @@ import requests
 
 from ._xendit_param_injector import _XenditParamInjector
 
-from .models import Balance
-from .models import CreditCard
-from .models import DirectDebit
-from .models import Disbursement
-from .models import EWallet
-from .models import Invoice
-from .models import RecurringPayment
-from .models import RetailOutlet
-from .models import VirtualAccount
-
 from .network import HTTPClientInterface
 
 
@@ -25,22 +15,14 @@ class Xendit:
         http_client: HTTPClientInterface = requests,
     ):
         injected_params = (api_key, base_url, http_client)
-        self.Balance = _XenditParamInjector.instantiate(Balance, injected_params)
-        self.CreditCard = _XenditParamInjector.instantiate(CreditCard, injected_params)
-        self.DirectDebit = _XenditParamInjector.instantiate(
-            DirectDebit, injected_params
-        )
-        self.Disbursement = _XenditParamInjector.instantiate(
-            Disbursement, injected_params
-        )
-        self.EWallet = _XenditParamInjector.instantiate(EWallet, injected_params)
-        self.Invoice = _XenditParamInjector.instantiate(Invoice, injected_params)
-        self.RecurringPayment = _XenditParamInjector.instantiate(
-            RecurringPayment, injected_params
-        )
-        self.RetailOutlet = _XenditParamInjector.instantiate(
-            RetailOutlet, injected_params
-        )
-        self.VirtualAccount = _XenditParamInjector.instantiate(
-            VirtualAccount, injected_params
-        )
+        param_injector = _XenditParamInjector(injected_params)
+
+        self.Balance = param_injector.instantiate_balance()
+        self.CreditCard = param_injector.instantiate_credit_card()
+        self.DirectDebit = param_injector.instantiate_direct_debit()
+        self.Disbursement = param_injector.instantiate_disbursement()
+        self.EWallet = param_injector.instantiate_ewallet()
+        self.Invoice = param_injector.instantiate_invoice()
+        self.RecurringPayment = param_injector.instantiate_recurring_payment()
+        self.RetailOutlet = param_injector.instantiate_retail_outlet()
+        self.VirtualAccount = param_injector.instantiate_virtual_account()
