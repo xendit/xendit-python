@@ -21,3 +21,8 @@ jobs:
         user: __token__
         password: ${{ secrets.test_pypi_token }}
         repository_url: https://test.pypi.org/legacy/
+    - name: Publish a Python distribution to PyPI
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        user: __token__
+        password: ${{ secrets.pypi_token }}
