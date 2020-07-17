@@ -1,20 +1,64 @@
 from inspect import signature
 
+from .models import Balance
+from .models import CreditCard
+from .models import DirectDebit
+from .models import Disbursement
+from .models import EWallet
+from .models import Invoice
+from .models import QRCode
+from .models import RecurringPayment
+from .models import RetailOutlet
+from .models import VirtualAccount
+
 
 class _XenditParamInjector:
     """Builder class to inject parameters (api_key, base_url, http_client) to feature class"""
 
-    @staticmethod
-    def instantiate(injected_class, params):
+    def __init__(self, params):
+        self.params = params
+
+    def instantiate_balance(self) -> Balance:
+        return self.instantiate(Balance)
+
+    def instantiate_credit_card(self) -> CreditCard:
+        return self.instantiate(CreditCard)
+
+    def instantiate_direct_debit(self) -> DirectDebit:
+        return self.instantiate(DirectDebit)
+
+    def instantiate_disbursement(self) -> Disbursement:
+        return self.instantiate(Disbursement)
+
+    def instantiate_ewallet(self) -> EWallet:
+        return self.instantiate(EWallet)
+
+    def instantiate_invoice(self) -> Invoice:
+        return self.instantiate(Invoice)
+
+    def instantiate_qrcode(self) -> QRCode:
+        return self.instantiate(QRCode)
+
+    def instantiate_recurring_payment(self) -> RecurringPayment:
+        return self.instantiate(RecurringPayment)
+
+    def instantiate_retail_outlet(self) -> RetailOutlet:
+        return self.instantiate(RetailOutlet)
+
+    def instantiate_virtual_account(self) -> VirtualAccount:
+        return self.instantiate(VirtualAccount)
+
+    def instantiate(self, injected_class):
         """Inject every static method in `injected_class` with provided parameters.
 
         Args:
           - injected_class (class): Class that will be injected
-          - params (tuple): Parameters that will be injected. Consist of (api_key, base_url, http_client)
 
         Return:
           injected_class
         """
+        params = self.params
+
         injected_class = type(
             injected_class.__name__,
             injected_class.__bases__,
