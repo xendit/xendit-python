@@ -171,6 +171,93 @@ class GetPaymentMethodsByCustomerID:
         GetPaymentMethodsByCustomerID.run(xendit_instance, **args)
 
 
+class CreatePayment:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            payment = xendit_instance.DirectDebit.create_payment(**kwargs)
+            print(payment)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        payment_method_id = input("Please input your payment_method_id: ")
+        args = {
+            "reference_id": f"direct-debit-ref-{int(time.time())}",
+            "payment_method_id": payment_method_id,
+            "currency": "IDR",
+            "amount": "60000",
+            "callback_url": "http://webhook.site/",
+            "enable_otp": True,
+            "idempotency_key": f"idemp_key-{int(time.time())}",
+        }
+        print_running_function("xendit.DirectDebit.create_payment", args)
+        CreatePayment.run(xendit_instance, **args)
+
+
+class ValidatePaymentOTP:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            payment = xendit_instance.DirectDebit.validate_payment_otp(**kwargs)
+            print(payment)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        direct_debit_id = input("Please input your direct_debit_id: ")
+        args = {
+            "direct_debit_id": direct_debit_id,
+            "otp_code": "222000",
+        }
+        print_running_function("xendit.DirectDebit.validate_payment_otp", args)
+        ValidatePaymentOTP.run(xendit_instance, **args)
+
+
+class GetPaymentStatus:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            payment = xendit_instance.DirectDebit.get_payment_status(**kwargs)
+            print(payment)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        direct_debit_id = input("Please input your direct_debit_id: ")
+        args = {
+            "direct_debit_id": direct_debit_id,
+        }
+        print_running_function("xendit.DirectDebit.get_payment_status", args)
+        GetPaymentStatus.run(xendit_instance, **args)
+
+
+class GetPaymentStatusByRefID:
+    @staticmethod
+    def run(xendit_instance, **kwargs):
+        try:
+            payment = xendit_instance.DirectDebit.get_payment_status_by_ref_id(**kwargs)
+            print(payment)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        reference_id = input("Please input your reference_id: ")
+        args = {
+            "reference_id": reference_id,
+        }
+        print_running_function("xendit.DirectDebit.get_payment_status_by_ref_id", args)
+        GetPaymentStatusByRefID.run(xendit_instance, **args)
+
+
 def ask_direct_debit_input():
     print("Input the action that you want to use")
     print("0. Exit")
@@ -181,6 +268,10 @@ def ask_direct_debit_input():
     print("5. Retrieve Accessible Accounts by Linked Account Token")
     print("6. Create Payment Method")
     print("7. Get Payment Methods by Customer ID")
+    print("8. Create Direct Debit Payment")
+    print("9. Validate OTP for Direct Debit Payment")
+    print("10. Get Direct Debit Payment Status by ID")
+    print("11. Get Direct Debit Payment Status by Reference ID")
     try:
         return int(input())
     except ValueError:
@@ -214,4 +305,16 @@ def direct_debit_example(xendit_instance):
         elif direct_debit_input == 7:
             print("Running example of Get Payment Methods by Customer ID")
             GetPaymentMethodsByCustomerID.example(xendit_instance)
+        elif direct_debit_input == 8:
+            print("Running example of Create Direct Debit Payment")
+            CreatePayment.example(xendit_instance)
+        elif direct_debit_input == 9:
+            print("Running example of Validate OTP for Direct Debit Payment")
+            ValidatePaymentOTP.example(xendit_instance)
+        elif direct_debit_input == 10:
+            print("Running example of Get Direct Debit Payment Status by ID")
+            GetPaymentStatus.example(xendit_instance)
+        elif direct_debit_input == 11:
+            print("Running example of Get Direct Debit Payment Status by Reference ID")
+            GetPaymentStatusByRefID.example(xendit_instance)
         direct_debit_input = ask_direct_debit_input()

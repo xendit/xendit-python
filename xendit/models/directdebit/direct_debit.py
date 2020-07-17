@@ -1,4 +1,8 @@
 from .customer import DirectDebitCustomer, DirectDebitCustomerAddress
+from .payment import (
+    DirectDebitBasket,
+    DirectDebitPayment,
+)
 from .paymentmethod import (
     DirectDebitPaymentMethodProperties,
     DirectDebitPaymentMethod,
@@ -29,6 +33,8 @@ class DirectDebit(BaseModel):
       - DirectDebitAccessibleAccount
       - DirectDebitPaymentMethod
       - DirectDebitPaymentMethodProperties
+      - DirectDebitBasket
+      - DirectDebitPayment
 
     Static Methods:
       - DirectDebit.create_customer (API Reference: /Create Customer)
@@ -38,12 +44,17 @@ class DirectDebit(BaseModel):
       - DirectDebit.get_accessible_account_by_token (API Reference: /Retrieve Accessible Accounts by Linked Account Token)
       - DirectDebit.create_payment_method (API Reference: /Create Payment Method)
       - DirectDebit.get_payment_method_by_customer_id (API Reference: /Get Payment Methods by Customer ID)
+      - DirectDebit.create_payment (API Reference: /Create Direct Debit Payment)
+      - DirectDebit.validate_payment_otp (API Reference: /Validate OTP for Direct Debit Payment)
+      - DirectDebit.get_payment_status (API Reference: /Get Direct Debit Payment Status by ID)
+      - DirectDebit.get_payment_status_by_ref_id (API Reference: /Get Direct Debit Payment Status by Reference ID)
 
     Static Methods for Object Creation:
       - DirectDebit.helper_create_customer_address (For Address in create_customer)
       - DirectDebit.helper_create_online_banking_link (For OnlineBankingLink in initialize_tokenization)
       - DirectDebit.helper_create_card_link (For CardLink in initialize_tokenization)
       - DirectDebit.helper_create_payment_method_properties (For Properties in create_payment_method)
+      - DirectDebit.helper_create_basket (For Basket in create_payment)
     """
 
     @staticmethod
@@ -129,6 +140,45 @@ class DirectDebit(BaseModel):
         del params["kwargs"]
 
         return DirectDebitPaymentMethodProperties.Query(**params)
+
+    @staticmethod
+    def helper_create_basket(
+        *,
+        reference_id,
+        name,
+        market,
+        type,
+        description=None,
+        category=None,
+        sub_category=None,
+        price=None,
+        url=None,
+        metadata=None,
+        quantity=None,
+        **kwargs,
+    ):
+        """Construct Basket object for DirectDebit payment
+
+        Args:
+          - reference_id (str)
+          - name (str)
+          - market (str)
+          - type (str)
+          - **description (str)
+          - **category (str)
+          - **sub_category (str)
+          - **price (str)
+          - **url (str)
+          - **metadata (str)
+          - **quantity (str)
+
+        Return:
+          - DirectDebitBasket.Query
+        """
+        params = locals()
+        del params["kwargs"]
+
+        return DirectDebitBasket.Query(**params)
 
     @staticmethod
     def create_customer(
@@ -436,6 +486,176 @@ class DirectDebit(BaseModel):
             for payment_method in resp.body:
                 payment_methods.append(DirectDebitPaymentMethod(**payment_method))
             return payment_methods
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def create_payment(
+        *,
+        reference_id,
+        payment_method_id,
+        currency,
+        amount,
+        callback_url,
+        idempotency_key,
+        enable_otp=None,
+        description=None,
+        basket=None,
+        metadata=None,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
+        """Create a debit to pull funds from the end customer's account
+        (API Reference: Direct Debit/Create Direct Debit Payment)
+
+        Args:
+          - reference_id (str)
+          - payment_method_id (str)
+          - currency (str)
+          - amount (int)
+          - callback_url (str)
+          - idempotency_key (str)
+          - **enable_otp (bool)
+          - **description (str)
+          - **basket (DirectDebitBasket[])
+          - **metadata (dict)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitPayment
+
+        Raises:
+          XenditError
+
+        """
+        url = "/direct_debits"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.create_payment,
+            headers_params=["for_user_id", "idempotency_key", "x_api_version"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return DirectDebitPayment(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def validate_payment_otp(
+        *,
+        direct_debit_id,
+        otp_code,
+        x_idempotency_key=None,
+        for_user_id=None,
+        x_api_version=None,
+        **kwargs,
+    ):
+        """Validate OTP provided by end customer
+        (API Reference: Direct Debit/Validate OTP for Direct Debit Payment)
+
+        Args:
+          - direct_debit_id (str)
+          - otp_code (str)
+          - **x_idempotency_key (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitPayment
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/direct_debits/{direct_debit_id}/validate_otp/"
+        headers, body = _extract_params(
+            locals(),
+            func_object=DirectDebit.validate_payment_otp,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            ignore_params=["direct_debit_id"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return DirectDebitPayment(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def get_payment_status(
+        *, direct_debit_id, for_user_id=None, x_api_version=None, **kwargs,
+    ):
+        """Get the details of a direct debit payment
+        (API Reference: Direct Debit/Get Direct Debit Payment Status by ID)
+
+        Args:
+          - direct_debit_id (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitPayment
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/direct_debits/{direct_debit_id}/"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=DirectDebit.get_payment_status,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["direct_debit_id"],
+        )
+        kwargs["headers"] = headers
+
+        resp = _APIRequestor.get(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return DirectDebitPayment(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def get_payment_status_by_ref_id(
+        *, reference_id, for_user_id=None, x_api_version=None, **kwargs,
+    ):
+        """Get the details of a direct debit payment
+        (API Reference: Direct Debit/Get Direct Debit Payment Status by Reference ID)
+
+        Args:
+          - reference_id (str)
+          - **for_user_id (str)
+          - **x_api_version (str)
+
+        Returns:
+          DirectDebitPayment[]
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/direct_debits?reference_id={reference_id}"
+        headers, _ = _extract_params(
+            locals(),
+            func_object=DirectDebit.get_payment_status,
+            headers_params=["for_user_id", "x_api_version"],
+            ignore_params=["reference_id"],
+        )
+        kwargs["headers"] = headers
+
+        resp = _APIRequestor.get(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            payments = []
+            for payment in resp.body:
+                payments.append(DirectDebitPayment(**payment))
+            return payments
         else:
             raise XenditError(resp)
 

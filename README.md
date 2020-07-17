@@ -41,6 +41,11 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Retrieve Accessible Accounts by Linked Account Token](#retrieve-accessible-accounts-by-linked-account-token)
       - [Create Payment Method](#create-payment-method)
       - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
+      - [Create Direct Debit Payment](#create-direct-debit-payment)
+      - [Create Recurring Payment with Direct Debit](#create-recurring-payment-with-direct-debit)
+      - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
+      - [Get Direct Debit Payment Status by ID](#get-direct-debit-payment-status-by-id)
+      - [Get Direct Debit Payment Status by Reference ID](#get-direct-debit-payment-status-by-reference-id)
     - [Virtual Account Service](#virtual-account-service)
       - [Create Virtual Account](#create-virtual-account)
       - [Get Virtual Account Banks](#get-virtual-account-banks)
@@ -193,8 +198,8 @@ Balance.AccountType(
 Usage example:
 
 ```python
-from xendit import Balance
-Balance balance = Balance.AccountType(
+from xendit import Balance, BalanceAccountType
+Balance balance = Balance.get(
     account_type=BalanceAccountType.CASH,
 )
 
@@ -792,6 +797,157 @@ Will return
     "metadata": {},
     "created": "2020-07-13T07:28:57.716Z",
     "updated": "2020-07-13T07:28:57.716Z"
+}]
+```
+
+#### Create Direct Debit Payment
+
+```python
+from xendit import DirectDebit
+
+payment = DirectDebit.create_payment(
+    reference_id="direct-debit-ref-1594718940",
+    payment_method_id="pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    currency="IDR",
+    amount="60000",
+    callback_url="http://webhook.site/",
+    enable_otp=True,
+    idempotency_key="idemp_key-1594718940",
+)
+
+print(payment)
+```
+
+Will return
+
+```
+{
+    "failure_code": null,
+    "otp_mobile_number": null,
+    "otp_expiration_timestamp": null,
+    "id": "ddpy-eaa093b6-b669-401a-ba2e-61ac644b2aff",
+    "reference_id": "direct-debit-ref-1594718940",
+    "payment_method_id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    "channel_code": "DC_BRI",
+    "currency": "IDR",
+    "amount": 60000,
+    "is_otp_required": true,
+    "basket": null,
+    "description": "",
+    "status": "PENDING",
+    "metadata": null,
+    "created": "2020-07-14T09:29:02.614443Z",
+    "updated": "2020-07-14T09:29:02.614443Z"
+}
+```
+
+#### Create Recurring Payment with Direct Debit
+
+You can use [Create Recurring Payment](#create-recurring-payment) to use this feature.
+
+#### Validate OTP for Direct Debit Payment
+
+```python
+from xendit import DirectDebit
+
+payment = DirectDebit.validate_payment_otp(
+    direct_debit_id="ddpy-eaa093b6-b669-401a-ba2e-61ac644b2aff",
+    otp_code="222000",
+)
+
+print(payment)
+```
+
+Will return
+
+```
+{
+    "failure_code": null,
+    "otp_mobile_number": null,
+    "otp_expiration_timestamp": null,
+    "id": "ddpy-eaa093b6-b669-401a-ba2e-61ac644b2aff",
+    "reference_id": "direct-debit-ref-1594718940",
+    "payment_method_id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    "channel_code": "DC_BRI",
+    "currency": "IDR",
+    "amount": 60000,
+    "is_otp_required": true,
+    "basket": null,
+    "description": "",
+    "status": "PENDING",
+    "metadata": null,
+    "created": "2020-07-14T09:29:02.614443Z",
+    "updated": "2020-07-14T09:29:02.614443Z"
+}
+```
+
+#### Get Direct Debit Payment Status by ID
+
+```python
+from xendit import DirectDebit
+
+payment = DirectDebit.get_payment_status(
+    direct_debit_id="ddpy-38ef50a8-00f0-4019-8b28-9bca81f2cbf1",
+)
+
+print(payment)
+```
+
+Will return
+
+```
+{
+    "failure_code": null,
+    "otp_mobile_number": null,
+    "otp_expiration_timestamp": null,
+    "id": "ddpy-38ef50a8-00f0-4019-8b28-9bca81f2cbf1",
+    "reference_id": "direct-debit-ref-1594717458",
+    "payment_method_id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    "channel_code": "DC_BRI",
+    "currency": "IDR",
+    "amount": 60000,
+    "is_otp_required": false,
+    "basket": null,
+    "description": "",
+    "status": "PENDING",
+    "metadata": null,
+    "created": "2020-07-14T09:04:20.031451Z",
+    "updated": "2020-07-14T09:04:20.031451Z"
+}
+```
+
+#### Get Direct Debit Payment Status by Reference ID
+
+```python
+from xendit import DirectDebit
+
+payments = DirectDebit.get_payment_status_by_ref_id(
+    reference_id="direct-debit-ref-1594717458",
+)
+
+print(payments)
+```
+
+Will return
+
+```
+[{
+    "amount": 60000,
+    "basket": null,
+    "channel_code": "DC_BRI",
+    "created": "2020-07-14T09:04:20.031451Z",
+    "currency": "IDR",
+    "description": "",
+    "failure_code": null,
+    "id": "ddpy-38ef50a8-00f0-4019-8b28-9bca81f2cbf1",
+    "is_otp_required": false,
+    "metadata": null,
+    "otp_expiration_timestamp": null,
+    "otp_mobile_number": null,
+    "payment_method_id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+    "reference_id": "direct-debit-ref-1594717458",
+    "status": "PENDING",
+    "updated": "2020-07-14T09:04:20.031451Z"
 }]
 ```
 

@@ -12,13 +12,14 @@ class TestCreatePaymentMethod(ModelBaseTest):
         class_name = "DirectDebit"
         method_name = "create_payment_method"
         http_method_name = "post"
+        properties = DirectDebit.helper_create_payment_method_properties(
+            id='la-fac7e744-ab40-4100-a447-cbbb16f29ded',
+        )
         args = ()
         kwargs = {
             "customer_id": "ed20b5db-df04-41fc-8018-8ea4ac4d1030",
             "type": DirectDebitPaymentMethodType.DEBIT_CARD,
-            "properties": {
-                'id': 'la-fac7e744-ab40-4100-a447-cbbb16f29ded'
-            },
+            "properties": properties,
         }
         params = (args, kwargs)
         url = "/payment_methods"

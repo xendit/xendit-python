@@ -12,12 +12,16 @@ class TestCreateCustomer(ModelBaseTest):
         class_name = "DirectDebit"
         method_name = "create_customer"
         http_method_name = "post"
+        addresses = [DirectDebit.helper_create_customer_address(
+            country="ID",
+        )]
         args = ()
         kwargs = {
             "reference_id": "mock-merc-123",
             "email": "t@x.co",
             "given_names": "Adyaksa",
             "x_idempotency_key": "test-idemp_123",
+            "addresses": addresses,
         }
         params = (args, kwargs)
         url = "/customers"
@@ -32,6 +36,11 @@ class TestCreateCustomer(ModelBaseTest):
             "reference_id": "mock-merc-123",
             "email": "t@x.co",
             "given_names": "Adyaksa",
+            "addresses": [
+                {
+                    "country": "ID",
+                },
+            ]
         }
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 

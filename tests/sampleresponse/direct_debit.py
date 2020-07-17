@@ -69,3 +69,28 @@ def payment_method_response():
 
 def multi_payment_method_response():
     return [payment_method_response(), payment_method_response()]
+
+
+def payment_response():
+    return {
+        "amount": 60000,
+        "basket": None,
+        "channel_code": "DC_BRI",
+        "created": "2020-07-14T09:04:20.031451Z",
+        "currency": "IDR",
+        "description": "",
+        "failure_code": None,
+        "id": "ddpy-38ef50a8-00f0-4019-8b28-9bca81f2cbf1",
+        "is_otp_required": False,
+        "metadata": None,
+        "otp_expiration_timestamp": None,
+        "otp_mobile_number": None,
+        "payment_method_id": "pm-b6116aea-8c23-42d0-a1e6-33227b52fccd",
+        "reference_id": "direct-debit-ref-1594717458",
+        "status": "PENDING",
+        "updated": "2020-07-14T09:04:20.031451Z",
+    }
+
+
+def multi_payment_response():
+    return [payment_response(), payment_response()]
