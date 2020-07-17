@@ -1,4 +1,4 @@
-name: Run Tests
+name: Publish library
 on: [release]
 
 jobs:
