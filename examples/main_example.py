@@ -1,5 +1,12 @@
 from balance_example import balance_example
+from credit_card_example import credit_card_example
+from direct_debit_example import direct_debit_example
 from disbursement_example import disbursement_example
+from ewallet_example import ewallet_example
+from invoice_example import invoice_example
+from qrcode_example import qrcode_example
+from recurring_payment_example import recurring_payment_example
+from retail_outlet_example import retail_outlet_example
 from virtual_account_example import virtual_account_example
 
 # Hackish method to import from another directory
@@ -14,7 +21,14 @@ def ask_input():
     print("Please type one of the number below")
     print("0. Exit")
     print("1. Balance")
+    print("3. Credit Card")
+    print("4. eWallet")
+    print("6. QR Codes")
+    print("7. Direct Debit")
     print("8. VirtualAccount")
+    print("9. Retail Outlets")
+    print("10. Invoice")
+    print("11. Recurring Payment")
     print("13. Disbursement")
     try:
         return int(input())
@@ -31,8 +45,22 @@ if __name__ == "__main__":
         print()
         if user_choice == 1:
             balance_example(xendit_instance)
+        elif user_choice == 3:
+            credit_card_example(xendit_instance)
+        elif user_choice == 4:
+            ewallet_example(xendit_instance)
+        elif user_choice == 6:
+            qrcode_example(xendit_instance)
+        elif user_choice == 7:
+            direct_debit_example(xendit_instance)
         elif user_choice == 8:
             virtual_account_example(xendit_instance)
+        elif user_choice == 9:
+            retail_outlet_example(xendit_instance)
+        elif user_choice == 10:
+            invoice_example(xendit_instance)
+        elif user_choice == 11:
+            recurring_payment_example(xendit_instance)
         elif user_choice == 13:
             disbursement_example(xendit_instance)
         else:

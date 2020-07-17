@@ -1,3 +1,5 @@
+from print_running_function import print_running_function
+
 # Hackish method to import from another directory
 # Useful while xendit-python isn't released yet to the public
 import importlib.machinery
@@ -11,7 +13,7 @@ class CreateVirtualAccount:
     def run(xendit_instance, external_id, bank_code, name, **kwargs):
         try:
             virtual_account = xendit_instance.VirtualAccount.create(
-                external_id, bank_code, name, **kwargs
+                external_id=external_id, bank_code=bank_code, name=name, **kwargs,
             )
             print(virtual_account)
         except xendit.XenditError as e:
@@ -20,19 +22,13 @@ class CreateVirtualAccount:
 
     @staticmethod
     def example(xendit_instance):
-        print(
-            'Running xendit.VirtualAccount.create("demo_1475459775872", "BNI", "Rika Sutanto"):'
-        )
-        CreateVirtualAccount.run(
-            xendit_instance, "demo_1475459775872", "BNI", "Rika Sutanto",
-        )
-
-        print(
-            'Running xendit.VirtualAccount.create("demo_1475459775872", "CIB", "Rika Sutanto"):'
-        )
-        CreateVirtualAccount.run(
-            xendit_instance, "demo_1475459775872", "CIB", "Rika Sutanto",
-        )
+        args_1 = {
+            "external_id": "demo_1475459775872",
+            "bank_code": "BNI",
+            "name": "Rika Sutanto",
+        }
+        print_running_function("xendit.VirtualAccount.create", args_1)
+        CreateVirtualAccount.run(xendit_instance, **args_1)
 
 
 class GetVirtualAccountBanks:
@@ -47,7 +43,8 @@ class GetVirtualAccountBanks:
 
     @staticmethod
     def example(xendit_instance):
-        print("Running xendit.VirtualAccount.get_banks():")
+        args = {}
+        print_running_function("xendit.VirtualAccount.get_banks", args)
         GetVirtualAccountBanks.run(xendit_instance)
 
 
@@ -55,7 +52,7 @@ class GetVirtualAccount:
     @staticmethod
     def run(xendit_instance, id, **kwargs):
         try:
-            virtual_account = xendit_instance.VirtualAccount.get(id, **kwargs)
+            virtual_account = xendit_instance.VirtualAccount.get(id=id, **kwargs,)
             print(virtual_account)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -63,18 +60,18 @@ class GetVirtualAccount:
 
     @staticmethod
     def example(xendit_instance):
-        print('Running xendit.VirtualAccount.get("5eec3a3e8dd9ea2fc97d6728"):')
-        GetVirtualAccount.run(xendit_instance, "5eec3a3e8dd9ea2fc97d6728")
-
-        print('Running xendit.VirtualAccount.get("random-id"):')
-        GetVirtualAccount.run(xendit_instance, "random-id")
+        args = {
+            "id": "5eec3a3e8dd9ea2fc97d6728",
+        }
+        print_running_function("xendit.VirtualAccount.get", args)
+        GetVirtualAccount.run(xendit_instance, **args)
 
 
 class UpdateVirtualAccount:
     @staticmethod
     def run(xendit_instance, id, **kwargs):
         try:
-            virtual_account = xendit_instance.VirtualAccount.update(id, **kwargs)
+            virtual_account = xendit_instance.VirtualAccount.update(id=id, **kwargs,)
             print(virtual_account)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -82,22 +79,21 @@ class UpdateVirtualAccount:
 
     @staticmethod
     def example(xendit_instance):
-        print(
-            'Running xendit.VirtualAccount.update("5eec3a3e8dd9ea2fc97d6728", is_single_use=True):'
-        )
-        UpdateVirtualAccount.run(
-            xendit_instance, "5eec3a3e8dd9ea2fc97d6728", is_single_use=True
-        )
-
-        print('Running xendit.VirtualAccount.update("random-id"):')
-        UpdateVirtualAccount.run(xendit_instance, "random-id")
+        args = {
+            "id": "5eec3a3e8dd9ea2fc97d6728",
+            "is_single_use": True,
+        }
+        print_running_function("xendit.VirtualAccount.update", args)
+        UpdateVirtualAccount.run(xendit_instance, **args)
 
 
 class GetVirtualAccountPayment:
     @staticmethod
-    def run(xendit_instance, id, **kwargs):
+    def run(xendit_instance, payment_id, **kwargs):
         try:
-            virtual_account = xendit_instance.VirtualAccount.get_payment(id, **kwargs)
+            virtual_account = xendit_instance.VirtualAccount.get_payment(
+                payment_id=payment_id, **kwargs,
+            )
             print(virtual_account)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -105,11 +101,9 @@ class GetVirtualAccountPayment:
 
     @staticmethod
     def example(xendit_instance):
-        print('Running xendit.VirtualAccount.get_payment("5ef18efca7d10d1b4d61fb52"):')
-        GetVirtualAccountPayment.run(xendit_instance, "5ef18efca7d10d1b4d61fb52")
-
-        print('Running xendit.VirtualAccount.get_payment("random-id"):')
-        GetVirtualAccountPayment.run(xendit_instance, "random-id")
+        args = {"payment_id": "5ef18efca7d10d1b4d61fb52"}
+        print_running_function("xendit.VirtualAccount.get_payment", args)
+        GetVirtualAccountPayment.run(xendit_instance, **args)
 
 
 def ask_virtual_account_input():

@@ -1,6 +1,7 @@
 import base64
 import requests
 import xendit
+from importlib.metadata import version
 from xendit.network import XenditResponse
 
 
@@ -26,6 +27,7 @@ class _APIRequestor:
         http_client=requests,
         headers={},
         body={},
+        params={},
     ):
         """Send HTTP Method to given url
 
@@ -37,6 +39,7 @@ class _APIRequestor:
           - **http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
           - **headers: Headers of the request
           - **body: Body of the request. Only used on POST and PATCH request
+          - **params: Parameters of the request. Only used on GET request
         """
         if api_key is None:
             api_key = xendit.api_key
@@ -46,7 +49,7 @@ class _APIRequestor:
 
         headers = _APIRequestor._add_default_headers(api_key, headers)
         if method == "GET":
-            resp = http_client.request(method, url, headers=headers)
+            resp = http_client.request(method, url, headers=headers, params=params)
         else:
             resp = http_client.request(method, url, headers=headers, json=body)
         return XenditResponse(resp.status_code, resp.headers, resp.json())
@@ -56,8 +59,7 @@ class _APIRequestor:
         headers["Content-type"] = "application/json"
         headers["Authorization"] = f"Basic {_APIRequestor._generate_auth(api_key)}"
         headers["xendit-lib"] = "python"
-        headers["xendit-lib-ver"] = "0.1.0"
-
+        headers["xendit-lib-ver"] = version("xendit")
         return headers
 
     @staticmethod

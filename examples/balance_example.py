@@ -1,3 +1,5 @@
+from print_running_function import print_running_function
+
 # Hackish method to import from another directory
 # Useful while xendit-python isn't released yet to the public
 import importlib.machinery
@@ -10,7 +12,7 @@ class GetBalance:
     @staticmethod
     def run(xendit_instance, account_type):
         try:
-            balance = xendit_instance.Balance.get(account_type)
+            balance = xendit_instance.Balance.get(account_type=account_type)
             print(balance)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -18,11 +20,9 @@ class GetBalance:
 
     @staticmethod
     def example(xendit_instance):
-        print("Running xendit.Balance.get(xendit.Balance.AccountType.CASH):")
-        GetBalance.run(xendit_instance, xendit.BalanceAccountType.CASH)
-
-        print('Running xendit.Balance.get("cash"):')
-        GetBalance.run(xendit_instance, "cash")
+        args = {"account_type": xendit.BalanceAccountType.CASH}
+        print_running_function("xendit.Balance.AccountType", args)
+        GetBalance.run(xendit_instance, **args)
 
 
 def ask_balance_input():
@@ -40,6 +40,6 @@ def balance_example(xendit_instance):
     balance_input = ask_balance_input()
     while balance_input != 0:
         if balance_input == 1:
-            print("Running example of Create Virtual Account")
+            print("Running example of Get Balance")
             GetBalance.example(xendit_instance)
         balance_input = ask_balance_input()
