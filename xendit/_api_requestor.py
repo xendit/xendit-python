@@ -1,8 +1,13 @@
 import base64
 import requests
 import xendit
-from importlib.metadata import version
+import sys
 from xendit.network import XenditResponse
+
+if sys.version_info[1] < 8:
+    from importlib_metadata import version
+else:
+    from importlib.metadata import version
 
 
 class _APIRequestor:
