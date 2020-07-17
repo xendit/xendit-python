@@ -1,6 +1,7 @@
 import base64
 import requests
 import xendit
+from importlib.metadata import version
 from xendit.network import XenditResponse
 
 
@@ -58,8 +59,7 @@ class _APIRequestor:
         headers["Content-type"] = "application/json"
         headers["Authorization"] = f"Basic {_APIRequestor._generate_auth(api_key)}"
         headers["xendit-lib"] = "python"
-        headers["xendit-lib-ver"] = "0.1.0"
-
+        headers["xendit-lib-ver"] = version("xendit")
         return headers
 
     @staticmethod
