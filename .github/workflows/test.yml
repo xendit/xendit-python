@@ -19,9 +19,3 @@ jobs:
         python_version: 3.7
         poetry_version: 1.0
         args: run python -m pytest --cov=src --cov-branch
-    - name: Build
-      uses: abatilo/actions-poetry@v1.8.0
-      with:
-        python_version: 3.7
-        poetry_version: 1.0
-        args: build
