@@ -18,6 +18,7 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Use Xendit Instance](#use-xendit-instance)
     - [Headers](#headers)
     - [Object Creation](#object-creation)
+      - [Creating Custom HTTP Client](#creating-custom-http-client)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
     - [Credit Card](#credit-card)
@@ -76,7 +77,6 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Contributing](#contributing)
     - [Tests](#tests)
       - [Running the Test](#running-the-test)
-      - [Creating Custom HTTP Client](#creating-custom-http-client)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -178,6 +178,16 @@ EWallet.create_linkaja_payment(
     callback_url="https://my-shop.com/callbacks",
     redirect_url="https://xendit.co/",
 )
+```
+
+#### Creating Custom HTTP Client
+
+To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/_xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
+
+```python
+import xendit
+
+xendit_instance =  xendit.Xendit(api_key='', http_client=YourHTTPClientClass)
 ```
 
 ### Balance Service
@@ -1832,14 +1842,4 @@ Run with coverage:
 
 ```
 python -m pytest tests/ --cov=xendit/
-```
-
-#### Creating Custom HTTP Client
-
-To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/_xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
-
-```python
-import xendit
-
-xendit_instance =  xendit.Xendit(api_key='', http_client=YourHTTPClientClass)
 ```

@@ -64,7 +64,7 @@ class _APIRequestor:
         headers["Content-type"] = "application/json"
         headers["Authorization"] = f"Basic {_APIRequestor._generate_auth(api_key)}"
         headers["xendit-lib"] = "python"
-        headers["xendit-lib-ver"] = version("xendit")
+        headers["xendit-lib-ver"] = version("xendit-python")
         return headers
 
     @staticmethod
