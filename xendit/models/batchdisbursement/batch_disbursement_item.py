@@ -1,44 +1,35 @@
-class BatchDisbursementItem:
-    """Item to be sent for Batch Disbursement (API Reference: BatchDisbursement)
+from typing import List
+from xendit.models._base_model import BaseModel
+from xendit.models._base_query import BaseQuery
 
-    Attributes:
-      - amount (int)
-      - bank_code (str)
-      - bank_account_name (str)
-      - bank_account_number (str)
-      - description (str)
-      - external_id (str)
-      - email_to (str[])
-      - email_cc (str[])
-      - email_bcc (str[])
 
-    """
+class BatchDisbursementItem(BaseModel):
+    """Item to be sent for Batch Disbursement (API Reference: BatchDisbursement)"""
 
-    def __init__(
-        self,
-        amount,
-        bank_code,
-        bank_account_name,
-        bank_account_number,
-        description,
-        external_id=None,
-        email_to=[],
-        email_cc=[],
-        email_bcc=[],
-    ):
-        self.amount = amount
-        self.bank_code = bank_code
-        self.bank_account_name = bank_account_name
-        self.bank_account_number = bank_account_number
-        self.description = description
-        if external_id is not None:
-            self.external_id = external_id
-        if len(email_to) > 0:
-            self.email_to = email_to
-        if len(email_cc) > 0:
-            self.email_cc = email_cc
-        if len(email_bcc) > 0:
-            self.email_bcc = email_bcc
+    class Query(BaseQuery):
+        """Item to be sent for Batch Disbursement (API Reference: Batch Disbursement)
 
-    def to_json(self):
-        return vars(self)
+        Use this to initialize create_batch
+
+        Attributes:
+        - amount (int)
+        - bank_code (str)
+        - bank_account_name (str)
+        - bank_account_number (str)
+        - description (str)
+        - external_id (str)
+        - email_to (str[])
+        - email_cc (str[])
+        - email_bcc (str[])
+
+        """
+
+        amount: int
+        bank_code: str
+        bank_account_name: str
+        bank_account_number: str
+        description: str
+        external_id: str
+        email_to: List[str]
+        email_cc: List[str]
+        email_bcc: List[str]
