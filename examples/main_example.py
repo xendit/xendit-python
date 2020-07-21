@@ -1,4 +1,5 @@
 from balance_example import balance_example
+from batch_disbursement_example import batch_disbursement_example
 from credit_card_example import credit_card_example
 from direct_debit_example import direct_debit_example
 from disbursement_example import disbursement_example
@@ -30,6 +31,7 @@ def ask_input():
     print("10. Invoice")
     print("11. Recurring Payment")
     print("13. Disbursement")
+    print("14. Batch Disbursement")
     try:
         return int(input())
     except ValueError:
@@ -63,6 +65,8 @@ if __name__ == "__main__":
             recurring_payment_example(xendit_instance)
         elif user_choice == 13:
             disbursement_example(xendit_instance)
+        elif user_choice == 14:
+            batch_disbursement_example(xendit_instance)
         else:
             print("Wrong input, please output number in range [0,1]")
         print()

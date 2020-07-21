@@ -13,7 +13,7 @@ class BatchDisbursement(BaseModel):
       - BatchDisbursementItem
 
     Static Methods:
-      - BatchDisbursement.create_batch (API Reference: /Create Batch Disbursement)
+      - BatchDisbursement.create (API Reference: /Create Batch Disbursement)
 
     Static Methods for Object Creation:
       - BatchDisbursement.helper_create_batch_item (For BatchDisbursementItem in create_batch)
@@ -64,7 +64,8 @@ class BatchDisbursement(BaseModel):
         return BatchDisbursementItem.Query(**params)
 
     @staticmethod
-    def create_batch(
+    def create(
+        *,
         reference,
         disbursements,
         x_idempotency_key=None,
@@ -77,8 +78,8 @@ class BatchDisbursement(BaseModel):
         Args:
           - reference (str)
           - disbursements (BatchDisbursementItem)
-          - **x_idempotency_key (str)
           - **for_user_id (str) (XenPlatform only)
+          - **x_idempotency_key (str)
           - **x_api_version (str)
 
         Returns
@@ -91,14 +92,14 @@ class BatchDisbursement(BaseModel):
         url = "/batch_disbursements"
         headers, body = _extract_params(
             locals(),
-            func_object=BatchDisbursement.create_batch,
-            headers_params=["for_user_id", "for_user_id", "x_api_version"],
+            func_object=BatchDisbursement.create,
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
-            return BatchDisbursement(resp.body)
+            return BatchDisbursement(**resp.body)
         else:
             raise XenditError(resp)
