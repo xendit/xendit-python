@@ -18,10 +18,10 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Use Xendit Instance](#use-xendit-instance)
     - [Headers](#headers)
     - [Object Creation](#object-creation)
-      - [Creating Custom HTTP Client](#creating-custom-http-client)
+    - [Creating Custom HTTP Client](#creating-custom-http-client)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
-    - [Credit Card](#credit-card)
+    - [Credit Card Service](#credit-card-service)
       - [Create Authorization](#create-authorization)
       - [Reverse Authorization](#reverse-authorization)
       - [Create Charge](#create-charge)
@@ -29,12 +29,12 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Get Charge](#get-charge)
       - [Create Refund](#create-refund)
       - [Create Promotion](#create-promotion)
-    - [eWallets](#ewallets)
+    - [eWallets Service](#ewallets-service)
       - [Create OVO Payment](#create-ovo-payment)
       - [Create DANA Payment](#create-dana-payment)
       - [Create LinkAja Payment](#create-linkaja-payment)
       - [Get Payment Status](#get-payment-status)
-    - [Direct Debit](#direct-debit)
+    - [Direct Debit Service](#direct-debit-service)
       - [Create Customer](#create-customer)
       - [Get Customer by Reference ID](#get-customer-by-reference-id)
       - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
@@ -62,7 +62,7 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Get Invoice](#get-invoice)
       - [Expire Invoice](#expire-invoice)
       - [List All Invoice](#list-all-invoice)
-    - [Recurring Payment](#recurring-payment)
+    - [Recurring Payment Service](#recurring-payment-service)
       - [Create Recurring Payment](#create-recurring-payment)
       - [Get Recurring Payment](#get-recurring-payment)
       - [Edit Recurring Payment](#edit-recurring-payment)
@@ -180,7 +180,7 @@ EWallet.create_linkaja_payment(
 )
 ```
 
-#### Creating Custom HTTP Client
+### Creating Custom HTTP Client
 
 To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/_xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
 
@@ -227,7 +227,7 @@ Will return
 1000000000
 ```
 
-### Credit Card
+### Credit Card Service
 
 #### Create Authorization
 
@@ -478,7 +478,7 @@ Will return
 }
 ```
 
-### eWallets
+### eWallets Service
 
 #### Create OVO Payment
 
@@ -587,7 +587,7 @@ Will return
 }
 ```
 
-### Direct Debit
+### Direct Debit Service
 
 #### Create Customer
 
@@ -1480,7 +1480,7 @@ Will return
 ]
 ```
 
-### Recurring Payment
+### Recurring Payment Service
 
 #### Create Recurring Payment
 
