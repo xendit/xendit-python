@@ -18,6 +18,8 @@ class BatchDisbursementItem(BaseModel):
         - bank_account_number (str)
         - description (str)
         - external_id (str)
+
+        Optional Attributes:
         - email_to (str[])
         - email_cc (str[])
         - email_bcc (str[])
@@ -30,6 +32,8 @@ class BatchDisbursementItem(BaseModel):
         bank_account_number: str
         description: str
         external_id: str
+
+        # Optional
         email_to: List[str]
         email_cc: List[str]
         email_bcc: List[str]
