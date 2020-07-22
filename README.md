@@ -18,7 +18,7 @@ This library is the abstraction of Xendit API for access from applications writt
       - [Use Xendit Instance](#use-xendit-instance)
     - [Headers](#headers)
     - [Object Creation](#object-creation)
-    - [Creating Custom HTTP Client](#creating-custom-http-client)
+    - [Using Custom HTTP Client](#using-custom-http-client)
     - [Balance Service](#balance-service)
       - [Get Balance](#get-balance)
     - [Credit Card Service](#credit-card-service)
@@ -183,9 +183,9 @@ EWallet.create_linkaja_payment(
 )
 ```
 
-### Creating Custom HTTP Client
+### Using Custom HTTP Client
 
-To create your own HTTP Client, you can do it by implementing interface at `xendit/network/http_client_interface.py`. Our default HTTP Client are wrapper of [requests](https://github.com/psf/requests), which can be found at `xendit/network/_xendit_http_client.py`. To attach it to your instance, add it to your xendit parameter.
+To use your own HTTP Client, you can do it as long as your http client adhere to HTTP client interface at `xendit/network/http_client_interface.py`. For example, [requests](https://github.com/psf/requests) library are compatible with that interface, so we can freely use it in our library. To attach it to your instance, add it to your xendit parameter.
 
 ```python
 import xendit
