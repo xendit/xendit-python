@@ -5,6 +5,7 @@ from direct_debit_example import direct_debit_example
 from disbursement_example import disbursement_example
 from ewallet_example import ewallet_example
 from invoice_example import invoice_example
+from payout_example import payout_example
 from qrcode_example import qrcode_example
 from recurring_payment_example import recurring_payment_example
 from retail_outlet_example import retail_outlet_example
@@ -30,6 +31,7 @@ def ask_input():
     print("9. Retail Outlets")
     print("10. Invoice")
     print("11. Recurring Payment")
+    print("12. Payout")
     print("13. Disbursement")
     print("14. Batch Disbursement")
     try:
@@ -63,6 +65,8 @@ if __name__ == "__main__":
             invoice_example(xendit_instance)
         elif user_choice == 11:
             recurring_payment_example(xendit_instance)
+        elif user_choice == 12:
+            payout_example(xendit_instance)
         elif user_choice == 13:
             disbursement_example(xendit_instance)
         elif user_choice == 14:

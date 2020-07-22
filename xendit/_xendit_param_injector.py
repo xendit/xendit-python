@@ -7,6 +7,7 @@ from .models import DirectDebit
 from .models import Disbursement
 from .models import EWallet
 from .models import Invoice
+from .models import Payout
 from .models import QRCode
 from .models import RecurringPayment
 from .models import RetailOutlet
@@ -39,6 +40,9 @@ class _XenditParamInjector:
 
     def instantiate_invoice(self) -> Invoice:
         return self.instantiate(Invoice)
+
+    def instantiate_payout(self) -> Payout:
+        return self.instantiate(Payout)
 
     def instantiate_qrcode(self) -> QRCode:
         return self.instantiate(QRCode)

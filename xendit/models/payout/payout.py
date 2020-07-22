@@ -154,7 +154,7 @@ class Payout(BaseModel):
         url = f"/payouts/{id}/void"
         headers, body = _extract_params(
             locals(),
-            func_object=Payout.get,
+            func_object=Payout.void,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
             ignore_params=["id"],
         )
