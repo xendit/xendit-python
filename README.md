@@ -73,6 +73,10 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Stop Recurring Payment](#stop-recurring-payment)
     - [Pause Recurring Payment](#pause-recurring-payment)
     - [Resume Recurring Payment](#resume-recurring-payment)
+  - [Payout Service](#payout-service)
+    - [Create Payout](#create-payout)
+    - [Get Payout](#get-payout)
+    - [Void a Payout](#void-a-payout)
   - [Disbursement Service](#disbursement-service)
     - [Create Disbursement](#create-disbursement)
     - [Get Disbursement by ID](#get-disbursement-by-id)
@@ -1561,6 +1565,7 @@ recurring_payment = RecurringPayment.create_recurring_payment(
     interval="MONTH",
     interval_count=1,
 )
+print(recurring_payment)
 ```
 
 Will return
@@ -1596,6 +1601,7 @@ from xendit import RecurringPayment
 recurring_payment = RecurringPayment.get_recurring_payment(
     id="5f05825ff9f52d3ed204c687",
 )
+print(recurring_payment)
 ```
 
 Will return
@@ -1632,6 +1638,7 @@ recurring_payment = RecurringPayment.edit_recurring_payment(
     id="5f05825ff9f52d3ed204c687",
     interval_count=2,
 )
+print(recurring_payment)
 ```
 
 Will return
@@ -1666,6 +1673,7 @@ from xendit import RecurringPayment
 recurring_payment = RecurringPayment.stop_recurring_payment(
     id="5f05825ff9f52d3ed204c687",
 )
+print(recurring_payment)
 ```
 
 Will return
@@ -1700,6 +1708,7 @@ from xendit import RecurringPayment
 recurring_payment = RecurringPayment.pause_recurring_payment(
     id="5f05825ff9f52d3ed204c687",
 )
+print(recurring_payment)
 ```
 
 Will return
@@ -1734,6 +1743,7 @@ from xendit import RecurringPayment
 recurring_payment = RecurringPayment.resume_recurring_payment(
     id="5f05825ff9f52d3ed204c687",
 )
+print(recurring_payment)
 ```
 
 Will return
@@ -1757,6 +1767,90 @@ Will return
     "created": "2020-07-08T08:22:55.817Z",
     "updated": "2020-07-08T08:26:03.082Z",
     "id": "5f05825ff9f52d3ed204c687"
+}
+```
+
+### Payout Service
+
+#### Create Payout
+
+```python
+from xendit import Payout
+
+payout = Payout.create(
+    external_id="payout-1595405117",
+    amount=50000,
+    email="test@email.co",
+)
+print(payout)
+```
+
+Will return
+
+```
+{
+    "id": "a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472",
+    "external_id": "payout-1595405117",
+    "amount": 50000,
+    "merchant_name": "Xendit&amp;#x27;s Intern",
+    "status": "PENDING",
+    "expiration_timestamp": "2020-07-23T08:05:19.815Z",
+    "created": "2020-07-22T08:05:18.421Z",
+    "email": "test@email.co",
+    "payout_url": "https://payout-staging.xendit.co/web/a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472"
+}
+```
+
+#### Get Payout
+
+```python
+from xendit import Payout
+
+payout = Payout.get(
+    id="a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472",
+)
+print(payout)
+```
+
+Will return
+
+```
+{
+    "id": "a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472",
+    "external_id": "payout-1595405117",
+    "amount": 50000,
+    "merchant_name": "Xendit&amp;#x27;s Intern",
+    "status": "PENDING",
+    "expiration_timestamp": "2020-07-23T08:05:19.815Z",
+    "created": "2020-07-22T08:05:18.421Z",
+    "email": "test@email.co",
+    "payout_url": "https://payout-staging.xendit.co/web/a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472"
+}
+```
+
+#### Void a Payout
+
+```python
+from xendit import Payout
+
+payout = Payout.void(
+    id="a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472",
+)
+print(payout)
+```
+
+Will return
+
+```
+{
+    "id": "a6ee1bf1-ffcd-4bda-a7ab-99c1d5cd0472",
+    "external_id": "payout-1595405117",
+    "amount": 50000,
+    "merchant_name": "Xendit&amp;#x27;s Intern",
+    "status": "VOIDED",
+    "expiration_timestamp": "2020-07-23T08:05:19.815Z",
+    "created": "2020-07-22T08:05:18.421Z",
+    "email": "test@email.co"
 }
 ```
 
