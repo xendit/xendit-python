@@ -103,8 +103,6 @@ class BatchDisbursement(BaseModel):
         kwargs["headers"] = headers
         kwargs["body"] = body
 
-        print(kwargs)
-
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             return BatchDisbursement(**resp.body)

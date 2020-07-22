@@ -5,7 +5,7 @@ from xendit.models import BatchDisbursement
 
 
 # fmt: off
-class TestGetBatchDisbursement(ModelBaseTest):
+class TestCreateBatchDisbursement(ModelBaseTest):
     @pytest.fixture
     def default_batch_disbursement_data(self):
         tested_class = BatchDisbursement
