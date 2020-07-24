@@ -23,6 +23,7 @@ class Xendit:
         self.Disbursement = param_injector.instantiate_disbursement()
         self.EWallet = param_injector.instantiate_ewallet()
         self.Invoice = param_injector.instantiate_invoice()
+        self.QRCode = param_injector.instantiate_qrcode()
         self.RecurringPayment = param_injector.instantiate_recurring_payment()
         self.RetailOutlet = param_injector.instantiate_retail_outlet()
         self.VirtualAccount = param_injector.instantiate_virtual_account()

@@ -1,82 +1,86 @@
+<!-- omit in toc -->
 # Xendit Python Library
 
 This library is the abstraction of Xendit API for access from applications written with Python.
 
+<!-- omit in toc -->
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Xendit Python Library](#xendit-python-library)
-  - [Table of Contents](#table-of-contents)
-  - [API Documentation](#api-documentation)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [API Key](#api-key)
-      - [Global Variable](#global-variable)
-      - [Use Xendit Instance](#use-xendit-instance)
-    - [Headers](#headers)
-    - [Object Creation](#object-creation)
-    - [Using Custom HTTP Client](#using-custom-http-client)
-    - [Balance Service](#balance-service)
-      - [Get Balance](#get-balance)
-    - [Credit Card Service](#credit-card-service)
-      - [Create Authorization](#create-authorization)
-      - [Reverse Authorization](#reverse-authorization)
-      - [Create Charge](#create-charge)
-      - [Capture Charge](#capture-charge)
-      - [Get Charge](#get-charge)
-      - [Create Refund](#create-refund)
-      - [Create Promotion](#create-promotion)
-    - [eWallets Service](#ewallets-service)
-      - [Create OVO Payment](#create-ovo-payment)
-      - [Create DANA Payment](#create-dana-payment)
-      - [Create LinkAja Payment](#create-linkaja-payment)
-      - [Get Payment Status](#get-payment-status)
-    - [Direct Debit Service](#direct-debit-service)
-      - [Create Customer](#create-customer)
-      - [Get Customer by Reference ID](#get-customer-by-reference-id)
-      - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
-      - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
-      - [Retrieve Accessible Accounts by Linked Account Token](#retrieve-accessible-accounts-by-linked-account-token)
-      - [Create Payment Method](#create-payment-method)
-      - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
-      - [Create Direct Debit Payment](#create-direct-debit-payment)
-      - [Create Recurring Payment with Direct Debit](#create-recurring-payment-with-direct-debit)
-      - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
-      - [Get Direct Debit Payment Status by ID](#get-direct-debit-payment-status-by-id)
-      - [Get Direct Debit Payment Status by Reference ID](#get-direct-debit-payment-status-by-reference-id)
-    - [Virtual Account Service](#virtual-account-service)
-      - [Create Virtual Account](#create-virtual-account)
-      - [Get Virtual Account Banks](#get-virtual-account-banks)
-      - [Get Virtual Account](#get-virtual-account)
-      - [Update Virtual Account](#update-virtual-account)
-      - [Get Virtual Account Payment](#get-virtual-account-payment)
-    - [Retail Outlet Service](#retail-outlet-service)
-      - [Create Fixed Payment Code](#create-fixed-payment-code)
-      - [Update Fixed Payment Code](#update-fixed-payment-code)
-      - [Get Fixed Payment Code](#get-fixed-payment-code)
-    - [Invoice Service](#invoice-service)
-      - [Create Invoice](#create-invoice)
-      - [Get Invoice](#get-invoice)
-      - [Expire Invoice](#expire-invoice)
-      - [List All Invoice](#list-all-invoice)
-    - [Recurring Payment Service](#recurring-payment-service)
-      - [Create Recurring Payment](#create-recurring-payment)
-      - [Get Recurring Payment](#get-recurring-payment)
-      - [Edit Recurring Payment](#edit-recurring-payment)
-      - [Stop Recurring Payment](#stop-recurring-payment)
-      - [Pause Recurring Payment](#pause-recurring-payment)
-      - [Resume Recurring Payment](#resume-recurring-payment)
-    - [Disbursement Service](#disbursement-service)
-      - [Create Disbursement](#create-disbursement)
-      - [Get Disbursement by ID](#get-disbursement-by-id)
-      - [Get Disbursement by External ID](#get-disbursement-by-external-id)
-      - [Get Available Banks](#get-available-banks)
-  - [Contributing](#contributing)
-    - [Tests](#tests)
-      - [Running the Test](#running-the-test)
+
+- [API Documentation](#api-documentation)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [API Key](#api-key)
+    - [Global Variable](#global-variable)
+    - [Use Xendit Instance](#use-xendit-instance)
+  - [Headers](#headers)
+  - [Object Creation](#object-creation)
+  - [Using Custom HTTP Client](#using-custom-http-client)
+  - [Balance Service](#balance-service)
+    - [Get Balance](#get-balance)
+  - [Credit Card Service](#credit-card-service)
+    - [Create Authorization](#create-authorization)
+    - [Reverse Authorization](#reverse-authorization)
+    - [Create Charge](#create-charge)
+    - [Capture Charge](#capture-charge)
+    - [Get Charge](#get-charge)
+    - [Create Refund](#create-refund)
+    - [Create Promotion](#create-promotion)
+  - [eWallets Service](#ewallets-service)
+    - [Create OVO Payment](#create-ovo-payment)
+    - [Create DANA Payment](#create-dana-payment)
+    - [Create LinkAja Payment](#create-linkaja-payment)
+    - [Get Payment Status](#get-payment-status)
+  - [QR Codes Service](#qr-codes-service)
+    - [Create QR Code](#create-qr-code)
+    - [Get QR Code by External ID](#get-qr-code-by-external-id)
+  - [Direct Debit Service](#direct-debit-service)
+    - [Create Customer](#create-customer)
+    - [Get Customer by Reference ID](#get-customer-by-reference-id)
+    - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
+    - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
+    - [Retrieve Accessible Accounts by Linked Account Token](#retrieve-accessible-accounts-by-linked-account-token)
+    - [Create Payment Method](#create-payment-method)
+    - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
+    - [Create Direct Debit Payment](#create-direct-debit-payment)
+    - [Create Recurring Payment with Direct Debit](#create-recurring-payment-with-direct-debit)
+    - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
+    - [Get Direct Debit Payment Status by ID](#get-direct-debit-payment-status-by-id)
+    - [Get Direct Debit Payment Status by Reference ID](#get-direct-debit-payment-status-by-reference-id)
+  - [Virtual Account Service](#virtual-account-service)
+    - [Create Virtual Account](#create-virtual-account)
+    - [Get Virtual Account Banks](#get-virtual-account-banks)
+    - [Get Virtual Account](#get-virtual-account)
+    - [Update Virtual Account](#update-virtual-account)
+    - [Get Virtual Account Payment](#get-virtual-account-payment)
+  - [Retail Outlet Service](#retail-outlet-service)
+    - [Create Fixed Payment Code](#create-fixed-payment-code)
+    - [Update Fixed Payment Code](#update-fixed-payment-code)
+    - [Get Fixed Payment Code](#get-fixed-payment-code)
+  - [Invoice Service](#invoice-service)
+    - [Create Invoice](#create-invoice)
+    - [Get Invoice](#get-invoice)
+    - [Expire Invoice](#expire-invoice)
+    - [List All Invoice](#list-all-invoice)
+  - [Recurring Payment Service](#recurring-payment-service)
+    - [Create Recurring Payment](#create-recurring-payment)
+    - [Get Recurring Payment](#get-recurring-payment)
+    - [Edit Recurring Payment](#edit-recurring-payment)
+    - [Stop Recurring Payment](#stop-recurring-payment)
+    - [Pause Recurring Payment](#pause-recurring-payment)
+    - [Resume Recurring Payment](#resume-recurring-payment)
+  - [Disbursement Service](#disbursement-service)
+    - [Create Disbursement](#create-disbursement)
+    - [Get Disbursement by ID](#get-disbursement-by-id)
+    - [Get Disbursement by External ID](#get-disbursement-by-external-id)
+    - [Get Available Banks](#get-available-banks)
+- [Contributing](#contributing)
+  - [Tests](#tests)
+    - [Running the Test](#running-the-test)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -584,6 +588,65 @@ Will return
     "external_id": "ovo-ewallet-testing-id-1234",
     "status": "COMPLETED",
     "transaction_date": "2020-06-30T01:32:28.267Z"
+}
+```
+
+### QR Codes Service
+
+#### Create QR Code
+
+```python
+from xendit import QRCode, QRCodeType
+
+qrcode = QRCode.create(
+    external_id="qrcode-id-1594794038",
+    type=QRCodeType.DYNAMIC,
+    callback_url="https://webhook.site",
+    amount="4000",
+)
+print(qrcode)
+```
+
+Will return
+
+```
+{
+    "id": "qr_13c31ddd-9d58-449b-9f52-1bf5123a45b5",
+    "external_id": "qrcode-id-1594794038",
+    "amount": 4000,
+    "qr_string": "00020101021226660014ID.LINKAJA.WWW011893600911002411480002152004230411480010303UME51450015ID.OR.GPNQR.WWW02150000000000000000303UME520454995802ID5920Placeholder merchant6007Jakarta610612345662380115wLoc6DRGwAOgSkZ0715wLoc6DRGwAOgSkZ53033605404400063047668",
+    "callback_url": "https://webhook.site",
+    "type": "DYNAMIC",
+    "status": "ACTIVE",
+    "created": "2020-07-15T06:20:40.636Z",
+    "updated": "2020-07-15T06:20:40.636Z"
+}
+```
+
+#### Get QR Code by External ID
+
+```python
+from xendit import QRCode
+
+qrcode = QRCode.get_by_ext_id(
+    external_id="qrcode-id-1594794038",
+)
+print(qrcode)
+```
+
+Will return
+
+```
+{
+    "id": "qr_13c31ddd-9d58-449b-9f52-1bf5123a45b5",
+    "external_id": "qrcode-id-1594794038",
+    "amount": 4000,
+    "qr_string": "00020101021226660014ID.LINKAJA.WWW011893600911002411480002152004230411480010303UME51450015ID.OR.GPNQR.WWW02150000000000000000303UME520454995802ID5920Placeholder merchant6007Jakarta610612345662380115wLoc6DRGwAOgSkZ0715wLoc6DRGwAOgSkZ53033605404400063047668",
+    "callback_url": "https://webhook.site",
+    "type": "DYNAMIC",
+    "status": "ACTIVE",
+    "created": "2020-07-15T06:20:40.636Z",
+    "updated": "2020-07-15T06:20:40.636Z"
 }
 ```
 
