@@ -1,8 +1,8 @@
-name: Run Tests
+name: Run Linter and Tests
 on: [pull_request]
 
 jobs:
-  pytest:
+  build:
     name: pytest
     runs-on: ubuntu-latest
     steps:
