@@ -78,6 +78,9 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Get Disbursement by ID](#get-disbursement-by-id)
     - [Get Disbursement by External ID](#get-disbursement-by-external-id)
     - [Get Available Banks](#get-available-banks)
+  - [Batch Disbursement Service](#batch-disbursement-service)
+    - [Create Batch Disbursement](#create-batch-disbursement)
+    - [Get Batch Disbursement Available Banks](#get-batch-disbursement-available-banks)
 - [Contributing](#contributing)
   - [Tests](#tests)
     - [Running the Test](#running-the-test)
@@ -1883,6 +1886,49 @@ Will return
     }
 ]
 ```
+
+### Batch Disbursement Service
+
+#### Create Batch Disbursement
+
+```python
+from xendit import BatchDisbursement
+
+batch_disbursement_items = []
+batch_disbursement_items.append(
+    BatchDisbursement.helper_create_batch_item(
+        amount=10000,
+        bank_code="BCA",
+        bank_account_name="Adyaksa W",
+        bank_account_number="12345678",
+        description="Sample Batch Disbursement",
+        external_id=f"batch-disbursement-item-{int(time.time())}"
+    )
+)
+batch_disbursement = BatchDisbursement.create(
+    reference="batch_disbursement-1595326225",
+    disbursements=batch_disbursement_items,
+)
+print(batch_disbursement)
+```
+
+Will return
+
+```
+{
+    "status": "UPLOADING",
+    "reference": "batch_disbursement-1595326225",
+    "total_uploaded_amount": 10000,
+    "total_uploaded_count": 1,
+    "created": "2020-07-21T10:10:35.782Z",
+    "id": "5f16bf1bfc70de0017b858bf"
+}
+```
+
+#### Get Batch Disbursement Available Banks
+
+You can use [Get Available Banks](#get-available-banks) to use this feature.
+
 ## Contributing
 
 For any requests, bugs, or comments, please open an [issue](https://github.com/xendit/xendit-python/issues) or [submit a pull request](https://github.com/xendit/xendit-python/pulls).
