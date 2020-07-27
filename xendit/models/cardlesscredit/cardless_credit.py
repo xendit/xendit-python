@@ -126,6 +126,9 @@ class CardlessCredit(BaseModel):
           XenditError
 
         """
+        cardless_credit_type = CardlessCredit._parse_cardless_credit_type(
+            cardless_credit_type
+        )
         url = "/cardless-credit"
         headers, body = _extract_params(
             locals(),
@@ -170,6 +173,9 @@ class CardlessCredit(BaseModel):
           XenditError
 
         """
+        cardless_credit_type = CardlessCredit._parse_cardless_credit_type(
+            cardless_credit_type
+        )
         url = "/cardless-credit/payment-types"
         headers, body = _extract_params(
             locals(),
@@ -184,3 +190,10 @@ class CardlessCredit(BaseModel):
             return CardlessCreditPaymentTypeCalculation(**resp.body)
         else:
             raise XenditError(resp)
+
+    @staticmethod
+    def _parse_cardless_credit_type(cardless_credit_type):
+        try:
+            return cardless_credit_type.name
+        except AttributeError:
+            return cardless_credit_type

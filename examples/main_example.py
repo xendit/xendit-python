@@ -1,5 +1,6 @@
 from balance_example import balance_example
 from batch_disbursement_example import batch_disbursement_example
+from cardless_credit_example import cardless_credit_example
 from credit_card_example import credit_card_example
 from direct_debit_example import direct_debit_example
 from disbursement_example import disbursement_example
@@ -25,6 +26,7 @@ def ask_input():
     print("1. Balance")
     print("3. Credit Card")
     print("4. eWallet")
+    print("5. Cardless Credit")
     print("6. QR Codes")
     print("7. Direct Debit")
     print("8. VirtualAccount")
@@ -53,6 +55,8 @@ if __name__ == "__main__":
             credit_card_example(xendit_instance)
         elif user_choice == 4:
             ewallet_example(xendit_instance)
+        elif user_choice == 5:
+            cardless_credit_example(xendit_instance)
         elif user_choice == 6:
             qrcode_example(xendit_instance)
         elif user_choice == 7:

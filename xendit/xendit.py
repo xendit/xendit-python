@@ -19,6 +19,7 @@ class Xendit:
 
         self.Balance = param_injector.instantiate_balance()
         self.BatchDisbursement = param_injector.instantiate_batch_disbursement()
+        self.CardlessCredit = param_injector.instantiate_cardless_credit()
         self.CreditCard = param_injector.instantiate_credit_card()
         self.DirectDebit = param_injector.instantiate_direct_debit()
         self.Disbursement = param_injector.instantiate_disbursement()

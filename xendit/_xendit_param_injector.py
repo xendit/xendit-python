@@ -2,6 +2,7 @@ from inspect import signature
 
 from .models import Balance
 from .models import BatchDisbursement
+from .models import CardlessCredit
 from .models import CreditCard
 from .models import DirectDebit
 from .models import Disbursement
@@ -25,6 +26,9 @@ class _XenditParamInjector:
 
     def instantiate_batch_disbursement(self) -> BatchDisbursement:
         return self.instantiate(BatchDisbursement)
+
+    def instantiate_cardless_credit(self) -> CardlessCredit:
+        return self.instantiate(CardlessCredit)
 
     def instantiate_credit_card(self) -> CreditCard:
         return self.instantiate(CreditCard)

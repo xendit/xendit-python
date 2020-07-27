@@ -1,5 +1,6 @@
 from .balance import *
 from .batchdisbursement import *
+from .cardlesscredit import *
 from .creditcard import *
 from .directdebit import *
 from .disbursement import *
