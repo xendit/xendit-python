@@ -5,6 +5,7 @@ from .directdebit import *
 from .disbursement import *
 from .ewallet import *
 from .invoice import *
+from .payout import *
 from .qrcode import *
 from .retailoutlet import *
 from .recurringpayment import *
