@@ -26,9 +26,7 @@ class CardlessCredit(BaseModel):
     """
 
     @staticmethod
-    def helper_create_item(
-        *, id, name, price, type, url, quantity,
-    ):
+    def helper_create_item(*, id, name, price, type, url, quantity, **kwargs):
         """Construct Cardless Credit Item Object
 
         Args:
@@ -47,7 +45,9 @@ class CardlessCredit(BaseModel):
 
         return CardlessCreditItem.Query(**params)
 
-    def helper_create_customer_details(*, first_name, last_name, email, phone):
+    def helper_create_customer_details(
+        *, first_name, last_name, email, phone, **kwargs
+    ):
         """Construct Cardless Credit Customer Details Object
 
         Args:
@@ -65,7 +65,15 @@ class CardlessCredit(BaseModel):
         return CardlessCreditCustomerDetails.Query(**params)
 
     def helper_create_shipping_address(
-        *, first_name, last_name, address, city, postal_code, phone, country_code
+        *,
+        first_name,
+        last_name,
+        address,
+        city,
+        postal_code,
+        phone,
+        country_code,
+        **kwargs,
     ):
         """Construct Cardless Credit Customer Details Object
 
