@@ -113,7 +113,6 @@ class XenPlatform(BaseModel):
         kwargs["headers"] = headers
         kwargs["body"] = body
         url = f"/callback_urls/{type}"
-        print(url)
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:

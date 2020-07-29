@@ -88,6 +88,10 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Batch Disbursement Service](#batch-disbursement-service)
     - [Create Batch Disbursement](#create-batch-disbursement)
     - [Get Batch Disbursement Available Banks](#get-batch-disbursement-available-banks)
+  - [XenPlatform Service](#xenplatform-service)
+    - [Create Account](#create-account)
+    - [Set Callback URLs](#set-callback-urls)
+    - [Transfers](#transfers)
 - [Contributing](#contributing)
   - [Tests](#tests)
     - [Running the Test](#running-the-test)
@@ -2130,6 +2134,85 @@ Will return
 #### Get Batch Disbursement Available Banks
 
 You can use [Get Available Banks](#get-available-banks) to use this feature.
+
+### XenPlatform Service
+
+#### Create Account
+
+```python
+from xendit import XenPlatform, XenPlatformAccountType
+
+xenplatform_account = XenPlatform.create_account(
+    account_email="test-xenplatform@pythonxendit.co",
+    type=XenPlatformAccountType.OWNED,
+    business_profile={'business_name': 'python-xendit'},
+)
+print(xenplatform_account)
+```
+
+Will return
+
+```
+{
+    "account_email": "test-xenplatform@pythonxendit.co",
+    "user_id": "5f2132ed172cd67992c402d6",
+    "created": "2020-07-29T08:27:25.346Z",
+    "status": "SUCCESSFUL",
+    "type": "OWNED"
+}
+```
+
+#### Set Callback URLs
+
+```python
+from xendit import XenPlatform, XenPlatformURLType
+
+xenplatform_callback_url = XenPlatform.set_callback_url(
+    type=XenPlatformURLType.INVOICE,
+    url="https://test-url-invoice.com",
+)
+print(xenplatform_callback_url)
+```
+
+Will return
+
+```
+{
+    "status": "SUCCESSFUL",
+    "user_id": "5e6b30d967627b957de8c123",
+    "url": "https://test-url-invoice.com",
+    "environment": "TEST",
+    "callback_token": "66a6680348e1c33ed2b9053a8eb9291b9e2230ff4f4d3057c9f4ac26405d2123"
+}
+```
+
+#### Transfers
+
+```python
+from xendit import XenPlatform
+
+xenplatform_transfers = XenPlatform.transfers(
+    reference="transfer001",
+    amount=10000,
+    source_user_id="54afeb170a2b18519b1b8768",
+    destination_user_id="5cafeb170a2b1851246b8768",
+)
+print(xenplatform_transfers)
+```
+
+Will return
+
+```
+{
+    "created": "2020-01-01T08:51:44.484Z",
+    "transfer_id": "60b9d810-d9a3-456c-abbf-2786ec7a9651",
+    "reference": "transfer001",
+    "source_user_id": "54afeb170a2b18519b1b8768",
+    "destination_user_id": "5cafeb170a2b1851246b8768",
+    "status": "SUCCESSFUL",
+    "amount": 10000
+}
+```
 
 ## Contributing
 
