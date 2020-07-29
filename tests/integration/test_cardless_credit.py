@@ -11,10 +11,9 @@ from xendit import CardlessCreditType
 
 class TestCardlessCredit(BaseIntegrationTest):
     @pytest.fixture
-    def CardlessCredit(self, xendit_instance):
-        return xendit_instance.CardlessCredit
+    def CardlessCredit(self, xendit_instance_cardless_enabled):
+        return xendit_instance_cardless_enabled.CardlessCredit
 
-    @pytest.mark.skip(reason="API Key doesn't have sufficient access")
     def test_create_payment_return_correct_keys(self, CardlessCredit):
         cardless_credit_items = []
         cardless_credit_items.append(
@@ -57,7 +56,6 @@ class TestCardlessCredit(BaseIntegrationTest):
             cardless_credit_payment, cardless_credit_payment_response()
         )
 
-    @pytest.mark.skip(reason="API Key doesn't have sufficient access")
     def test_calculate_payment_type_return_correct_keys(self, CardlessCredit):
         cardless_credit_items = []
         cardless_credit_items.append(
