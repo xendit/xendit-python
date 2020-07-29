@@ -14,8 +14,8 @@ class CreateAccount:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            xenplatform_payment = xendit_instance.XenPlatform.create_account(**kwargs)
-            print(xenplatform_payment)
+            xenplatform_account = xendit_instance.XenPlatform.create_account(**kwargs)
+            print(xenplatform_account)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
             print("Error message:", e)
@@ -35,8 +35,10 @@ class SetCallbackURL:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            xenplatform_payment = xendit_instance.XenPlatform.set_callback_url(**kwargs)
-            print(xenplatform_payment)
+            xenplatform_callback_url = xendit_instance.XenPlatform.set_callback_url(
+                **kwargs
+            )
+            print(xenplatform_callback_url)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
             print("Error message:", e)
@@ -55,8 +57,8 @@ class Transfers:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            xenplatform_payment = xendit_instance.XenPlatform.transfers(**kwargs)
-            print(xenplatform_payment)
+            xenplatform_transfers = xendit_instance.XenPlatform.transfers(**kwargs)
+            print(xenplatform_transfers)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
             print("Error message:", e)

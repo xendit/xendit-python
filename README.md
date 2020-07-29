@@ -88,7 +88,7 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Batch Disbursement Service](#batch-disbursement-service)
     - [Create Batch Disbursement](#create-batch-disbursement)
     - [Get Batch Disbursement Available Banks](#get-batch-disbursement-available-banks)
-  - [XenPlatform Service](#xenplatform-service)
+  - [xenPlatform Service](#xenplatform-service)
     - [Create Account](#create-account)
     - [Set Callback URLs](#set-callback-urls)
     - [Transfers](#transfers)
@@ -2135,7 +2135,7 @@ Will return
 
 You can use [Get Available Banks](#get-available-banks) to use this feature.
 
-### XenPlatform Service
+### xenPlatform Service
 
 #### Create Account
 
