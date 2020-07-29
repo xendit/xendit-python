@@ -30,3 +30,4 @@ class Xendit:
         self.RecurringPayment = param_injector.instantiate_recurring_payment()
         self.RetailOutlet = param_injector.instantiate_retail_outlet()
         self.VirtualAccount = param_injector.instantiate_virtual_account()
+        self.XenPlatform = param_injector.instantiate_xenplatform()

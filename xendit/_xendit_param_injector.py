@@ -13,6 +13,7 @@ from .models import QRCode
 from .models import RecurringPayment
 from .models import RetailOutlet
 from .models import VirtualAccount
+from .models import XenPlatform
 
 
 class _XenditParamInjector:
@@ -59,6 +60,9 @@ class _XenditParamInjector:
 
     def instantiate_virtual_account(self) -> VirtualAccount:
         return self.instantiate(VirtualAccount)
+
+    def instantiate_xenplatform(self) -> XenPlatform:
+        return self.instantiate(XenPlatform)
 
     def instantiate(self, injected_class):
         """Inject every static method in `injected_class` with provided parameters.
