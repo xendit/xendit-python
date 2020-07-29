@@ -61,7 +61,7 @@ class XenPlatform(BaseModel):
           XenditError
 
         """
-        type = XenPlatform._parse_account_type(type)
+        type = XenPlatform._parse_type(type)
         url = "/accounts"
         headers, body = _extract_params(
             locals(),
@@ -103,8 +103,7 @@ class XenPlatform(BaseModel):
           XenditError
 
         """
-        type = XenPlatform._parse_account_type(type)
-        url = f"/callback_urls/{type}"
+        type = XenPlatform._parse_type(type)
         headers, body = _extract_params(
             locals(),
             func_object=XenPlatform.set_callback_url,
@@ -113,6 +112,8 @@ class XenPlatform(BaseModel):
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
+        url = f"/callback_urls/{type}"
+        print(url)
 
         resp = _APIRequestor.post(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
@@ -164,3 +165,10 @@ class XenPlatform(BaseModel):
             return XenPlatformTransfers(**resp.body)
         else:
             raise XenditError(resp)
+
+    @staticmethod
+    def _parse_type(enum_type):
+        try:
+            return enum_type.value
+        except AttributeError:
+            return enum_type

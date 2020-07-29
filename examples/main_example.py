@@ -11,6 +11,7 @@ from qrcode_example import qrcode_example
 from recurring_payment_example import recurring_payment_example
 from retail_outlet_example import retail_outlet_example
 from virtual_account_example import virtual_account_example
+from xenplatform_example import xenplatform_example
 
 # Hackish method to import from another directory
 # Useful while xendit-python isn't released yet to the public
@@ -36,6 +37,7 @@ def ask_input():
     print("12. Payout")
     print("13. Disbursement")
     print("14. Batch Disbursement")
+    print("15. xenPlatform")
     try:
         return int(input())
     except ValueError:
@@ -75,7 +77,9 @@ if __name__ == "__main__":
             disbursement_example(xendit_instance)
         elif user_choice == 14:
             batch_disbursement_example(xendit_instance)
+        elif user_choice == 15:
+            xenplatform_example(xendit_instance)
         else:
-            print("Wrong input, please output number in range [0,1]")
+            print("Wrong input, please output number in range [0,15]")
         print()
         user_choice = ask_input()
