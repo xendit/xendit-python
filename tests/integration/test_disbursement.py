@@ -6,11 +6,12 @@ from tests.sampleresponse.disbursement import disbursement_banks_response
 
 
 class TestDisbursement(BaseIntegrationTest):
-    @pytest.fixture
+    @pytest.fixture(scope="class")
     def Disbursement(self, xendit_instance):
         return xendit_instance.Disbursement
 
-    def test_create_disbursement_return_correct_keys(self, Disbursement):
+    @pytest.fixture(scope="class")
+    def disbursement_data(self, Disbursement):
         disbursement = Disbursement.create(
             external_id="demo_1475459775872",
             bank_code="BCA",
@@ -19,12 +20,20 @@ class TestDisbursement(BaseIntegrationTest):
             description="Reimbursement for shoes",
             amount=17000,
         )
+        return disbursement
+
+    def test_create_disbursement_return_correct_keys(self, disbursement_data):
+        disbursement = disbursement_data
         self.assert_returned_object_has_same_key_as_sample_response(
             disbursement, disbursement_response()
         )
 
-    def test_get_disbursement_by_id_return_correct_keys(self, Disbursement):
-        disbursement = Disbursement.get(id="5ef1befeecb16100179e1d05")
+    def test_get_disbursement_by_id_return_correct_keys(
+        self, Disbursement, disbursement_data
+    ):
+        disbursement = disbursement_data
+
+        disbursement = Disbursement.get(id=disbursement.id)
         self.assert_returned_object_has_same_key_as_sample_response(
             disbursement, disbursement_response()
         )

@@ -35,6 +35,9 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Create DANA Payment](#create-dana-payment)
     - [Create LinkAja Payment](#create-linkaja-payment)
     - [Get Payment Status](#get-payment-status)
+  - [Cardless Credit Service](#cardless-credit-service)
+    - [Create Payment / Generate Checkout URL](#create-payment--generate-checkout-url)
+    - [Calculate Payment Types](#calculate-payment-types)
   - [QR Codes Service](#qr-codes-service)
     - [Create QR Code](#create-qr-code)
     - [Get QR Code by External ID](#get-qr-code-by-external-id)
@@ -595,6 +598,111 @@ Will return
     "external_id": "ovo-ewallet-testing-id-1234",
     "status": "COMPLETED",
     "transaction_date": "2020-06-30T01:32:28.267Z"
+}
+```
+
+### Cardless Credit Service
+
+#### Create Payment / Generate Checkout URL
+
+```python
+from xendit import Cardlesscredit, CardlessCreditType
+
+cardless_credit_items = []
+cardless_credit_items.append(
+    CardlessCredit.helper_create_item(
+        id="item-123",
+        name="Phone Case",
+        price=200000,
+        type="Smartphone",
+        url="http://example.com/phone/phone_case",
+        quantity=2,
+    )
+)
+customer_details = CardlessCredit.helper_create_customer_details(
+    first_name="customer first name",
+    last_name="customer last name",
+    email="customer@email.com",
+    phone="0812332145",
+)
+shipping_address = CardlessCredit.helper_create_shipping_address(
+    first_name="first name",
+    last_name="last name",
+    address="Jl Teknologi No. 12",
+    city="Jakarta",
+    postal_code="12345",
+    phone="081513114262",
+    country_code="IDN",
+)
+cardless_credit_payment = CardlessCredit.create_payment(
+    cardless_credit_type=CardlessCreditType.KREDIVO,
+    external_id="id-1595923113",
+    amount=10000,
+    payment_type="3_months",
+    items=cardless_credit_items,
+    customer_details=customer_details,
+    shipping_address=shipping_address,
+    redirect_url="https://my-shop.com/home",
+    callback_url="https://my-shop.com/callback",
+)
+print(cardless_credit_payment)
+```
+
+Will return
+
+```
+{
+    "redirect_url": "https://pay-sandbox.kredivo.com/signIn?tk=26458cdf-660c-4491-a1de-bb6e63312d8a",
+    "order_id": "e8ae4066-7980-499f-b92c-eb3a587782c1",
+    "external_id": "id-1595923113",
+    "cardless_credit_type": "KREDIVO"
+}
+```
+
+#### Calculate Payment Types
+
+```python
+from xendit import Cardlesscredit, CardlessCreditType
+
+cardless_credit_items = []
+cardless_credit_items.append(
+    CardlessCredit.helper_create_item(
+        id="item-123",
+        name="Phone Case",
+        price=200000,
+        type="Smartphone",
+        url="http://example.com/phone/phone_case",
+        quantity=2,
+    )
+)
+cardless_credit_payment_types = CardlessCredit.calculate_payment_type(
+    cardless_credit_type=CardlessCreditType.KREDIVO,
+    amount=10000,
+    items=cardless_credit_items,
+)
+print(cardless_credit_payment_types)
+```
+
+Will return
+
+```
+{
+    "message": "Available payment types are listed.",
+    "payments": [
+        {
+            "raw_monthly_installment": 401000,
+            "name": "Bayar dalam 30 hari",
+            "amount": 401000,
+            "installment_amount": 401000,
+            "raw_amount": 401000,
+            "rate": 0,
+            "down_payment": 0,
+            "monthly_installment": 401000,
+            "discounted_monthly_installment": 0,
+            "tenure": 1,
+            "id": "30_days"
+        }
+    ]
 }
 ```
 
