@@ -1,8 +1,8 @@
-name: Run Tests
+name: Run Linter and Tests
 on: [pull_request]
 
 jobs:
-  pytest:
+  build:
     name: pytest
     runs-on: ubuntu-latest
     steps:
@@ -13,6 +13,12 @@ jobs:
         python_version: 3.7
         poetry_version: 1.0
         args: install
+    - name: Run Linter
+      uses: abatilo/actions-poetry@v1.8.0
+      with:
+        python_version: 3.7
+        poetry_version: 1.0
+        args: run flake8
     - name: Run pytest
       uses: abatilo/actions-poetry@v1.8.0
       with:
