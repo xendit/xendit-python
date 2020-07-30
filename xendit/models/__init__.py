@@ -11,3 +11,4 @@ from .qrcode import *
 from .retailoutlet import *
 from .recurringpayment import *
 from .virtualaccount import *
+from .xenplatform import *
