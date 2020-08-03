@@ -1274,7 +1274,7 @@ from xendit import VirtualAccount
 virtual_account_payment = VirtualAccount.get(
     payment_id="5ef18efca7d10d1b4d61fb52",
 )
-print(virtual_account)
+print(virtual_account_payment)
 ```
 
 Will return
