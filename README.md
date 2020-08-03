@@ -2111,7 +2111,7 @@ batch_disbursement_items.append(
         bank_account_name="Adyaksa W",
         bank_account_number="12345678",
         description="Sample Batch Disbursement",
-        external_id=f"batch-disbursement-item-{int(time.time())}"
+        external_id=f"batch-disbursement-item-12345"
     )
 )
 batch_disbursement = BatchDisbursement.create(
