@@ -17,7 +17,7 @@ class TestCreateQRCode(ModelBaseTest):
             "external_id": "mock-qrcode-id-1594794038",
             "type": QRCodeType.DYNAMIC,
             "callback_url": "https://mock-site.site",
-            "amount": "4000",
+            "amount": 4000,
             "x_idempotency_key": "test-idemp_123",
         }
         params = (args, kwargs)
@@ -33,7 +33,7 @@ class TestCreateQRCode(ModelBaseTest):
             "external_id": "mock-qrcode-id-1594794038",
             "type": "DYNAMIC",
             "callback_url": "https://mock-site.site",
-            "amount": "4000",
+            "amount": 4000,
         }
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 

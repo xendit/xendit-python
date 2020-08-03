@@ -724,7 +724,7 @@ qrcode = QRCode.create(
     external_id="qrcode-id-1594794038",
     type=QRCodeType.DYNAMIC,
     callback_url="https://webhook.site",
-    amount="4000",
+    amount=4000,
 )
 print(qrcode)
 ```
