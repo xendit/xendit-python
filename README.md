@@ -613,7 +613,7 @@ Will return
 #### Create Payment / Generate Checkout URL
 
 ```python
-from xendit import Cardlesscredit, CardlessCreditType
+from xendit import CardlessCredit, CardlessCreditType
 
 cardless_credit_items = []
 cardless_credit_items.append(
@@ -669,7 +669,7 @@ Will return
 #### Calculate Payment Types
 
 ```python
-from xendit import Cardlesscredit, CardlessCreditType
+from xendit import CardlessCredit, CardlessCreditType
 
 cardless_credit_items = []
 cardless_credit_items.append(
