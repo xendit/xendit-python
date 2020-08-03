@@ -1672,7 +1672,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.create_recurring_payment(
+recurring_payment = RecurringPayment.create(
     external_id="recurring_12345",
     payer_email="test@x.co",
     description="Test Curring Payment",
@@ -1713,7 +1713,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.get_recurring_payment(
+recurring_payment = RecurringPayment.get(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -1749,7 +1749,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.edit_recurring_payment(
+recurring_payment = RecurringPayment.edit(
     id="5f05825ff9f52d3ed204c687",
     interval_count=2,
 )
@@ -1785,7 +1785,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.stop_recurring_payment(
+recurring_payment = RecurringPayment.stop(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -1820,7 +1820,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.pause_recurring_payment(
+recurring_payment = RecurringPayment.pause(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -1855,7 +1855,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.resume_recurring_payment(
+recurring_payment = RecurringPayment.resume(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)

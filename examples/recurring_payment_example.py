@@ -12,9 +12,7 @@ class CreateRecurringPayment:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            recurring_payment = xendit_instance.RecurringPayment.create_recurring_payment(
-                **kwargs
-            )
+            recurring_payment = xendit_instance.RecurringPayment.create(**kwargs)
             print(recurring_payment)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -30,7 +28,7 @@ class CreateRecurringPayment:
             "interval": "MONTH",
             "interval_count": 1,
         }
-        print_running_function("xendit.RecurringPayment.create_recurring_payment", args)
+        print_running_function("xendit.RecurringPayment.create", args)
         CreateRecurringPayment.run(xendit_instance, **args)
 
 
@@ -38,9 +36,7 @@ class GetRecurringPayment:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            recurring_payment = xendit_instance.RecurringPayment.get_recurring_payment(
-                **kwargs
-            )
+            recurring_payment = xendit_instance.RecurringPayment.get(**kwargs)
             print(recurring_payment)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -52,7 +48,7 @@ class GetRecurringPayment:
         args = {
             "id": id,
         }
-        print_running_function("xendit.RecurringPayment.get_recurring_payment", args)
+        print_running_function("xendit.RecurringPayment.get", args)
         GetRecurringPayment.run(xendit_instance, **args)
 
 
@@ -60,9 +56,7 @@ class EditRecurringPayment:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            recurring_payment = xendit_instance.RecurringPayment.edit_recurring_payment(
-                **kwargs
-            )
+            recurring_payment = xendit_instance.RecurringPayment.edit(**kwargs)
             print(recurring_payment)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -75,7 +69,7 @@ class EditRecurringPayment:
             "id": id,
             "interval_count": 2,
         }
-        print_running_function("xendit.RecurringPayment.edit_recurring_payment", args)
+        print_running_function("xendit.RecurringPayment.edit", args)
         EditRecurringPayment.run(xendit_instance, **args)
 
 
@@ -83,9 +77,7 @@ class StopRecurringPayment:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            recurring_payment = xendit_instance.RecurringPayment.stop_recurring_payment(
-                **kwargs
-            )
+            recurring_payment = xendit_instance.RecurringPayment.stop(**kwargs)
             print(recurring_payment)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -97,7 +89,7 @@ class StopRecurringPayment:
         args = {
             "id": id,
         }
-        print_running_function("xendit.RecurringPayment.stop_recurring_payment", args)
+        print_running_function("xendit.RecurringPayment.stop", args)
         StopRecurringPayment.run(xendit_instance, **args)
 
 
@@ -105,9 +97,7 @@ class PauseRecurringPayment:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            recurring_payment = xendit_instance.RecurringPayment.pause_recurring_payment(
-                **kwargs
-            )
+            recurring_payment = xendit_instance.RecurringPayment.pause(**kwargs)
             print(recurring_payment)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -119,7 +109,7 @@ class PauseRecurringPayment:
         args = {
             "id": id,
         }
-        print_running_function("xendit.RecurringPayment.pause_recurring_payment", args)
+        print_running_function("xendit.RecurringPayment.pause", args)
         PauseRecurringPayment.run(xendit_instance, **args)
 
 
@@ -127,9 +117,7 @@ class ResumeRecurringPayment:
     @staticmethod
     def run(xendit_instance, **kwargs):
         try:
-            recurring_payment = xendit_instance.RecurringPayment.resume_recurring_payment(
-                **kwargs
-            )
+            recurring_payment = xendit_instance.RecurringPayment.resume(**kwargs)
             print(recurring_payment)
         except xendit.XenditError as e:
             print("Error status code:", e.status_code)
@@ -141,7 +129,7 @@ class ResumeRecurringPayment:
         args = {
             "id": id,
         }
-        print_running_function("xendit.RecurringPayment.resume_recurring_payment", args)
+        print_running_function("xendit.RecurringPayment.resume", args)
         ResumeRecurringPayment.run(xendit_instance, **args)
 
 

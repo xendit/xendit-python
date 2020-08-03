@@ -10,7 +10,7 @@ class TestPauseRecurringPayment(ModelBaseTest):
     def default_recurring_payment_data(self):
         tested_class = RecurringPayment
         class_name = "RecurringPayment"
-        method_name = "pause_recurring_payment"
+        method_name = "pause"
         http_method_name = "post"
         args = ()
         kwargs = {
