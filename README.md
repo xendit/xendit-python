@@ -586,7 +586,7 @@ Will return
 #### Get Payment Status
 
 ```python
-from xendit import EWallet
+from xendit import EWallet, EWalletType
 
 ovo_payment_status = EWallet.get_payment_status(
     ewallet_type=EWalletType.OVO,
