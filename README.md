@@ -556,8 +556,11 @@ Will return
 from xendit import EWallet, LinkAjaItem
 
 items = []
-items.append(LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1))
-linkaja_payment = EWallet.create_linkaja_payment(
+item = xendit.EWallet.helper_create_linkaja_item(
+    id="123123", name="Phone Case", price=100000, quantity=1
+)
+items.append(item)
+EWallet.create_linkaja_payment(
     external_id="linkaja-ewallet-test-1593663498",
     phone="089911111111",
     items=items,
