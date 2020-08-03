@@ -184,7 +184,7 @@ is equivalent with
 
 ```python
 items = []
-item = xendit.EWallet.helper_create_linkaja_item(
+item = EWallet.helper_create_linkaja_item(
     id="123123", name="Phone Case", price=100000, quantity=1
 )
 items.append(item)
@@ -553,10 +553,10 @@ Will return
 #### Create LinkAja Payment
 
 ```python
-from xendit import EWallet, LinkAjaItem
+from xendit import EWallet
 
 items = []
-item = xendit.EWallet.helper_create_linkaja_item(
+item = EWallet.helper_create_linkaja_item(
     id="123123", name="Phone Case", price=100000, quantity=1
 )
 items.append(item)
