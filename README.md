@@ -928,7 +928,7 @@ Will return
 #### Create Payment Method
 
 ```python
-from xendit import DirectDebit
+from xendit import DirectDebit, DirectDebitPaymentMethodType
 
 payment_method = DirectDebit.create_payment_method(
     customer_id="ed20b5db-df04-41fc-8018-8ea4ac4d1030",
