@@ -1271,7 +1271,7 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account_payment = VirtualAccount.get(
+virtual_account_payment = VirtualAccount.get_payment(
     payment_id="5ef18efca7d10d1b4d61fb52",
 )
 print(virtual_account_payment)
