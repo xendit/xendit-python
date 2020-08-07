@@ -26,7 +26,7 @@ class CreateQRCode:
             "external_id": f"qrcode-id-{int(time.time())}",
             "type": xendit.QRCodeType.DYNAMIC,
             "callback_url": "https://webhook.site",
-            "amount": "4000",
+            "amount": 4000,
         }
         print_running_function("xendit.QRCode.create", args)
         CreateQRCode.run(xendit_instance, **args)

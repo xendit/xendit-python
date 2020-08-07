@@ -184,7 +184,7 @@ is equivalent with
 
 ```python
 items = []
-item = xendit.EWallet.helper_create_linkaja_item(
+item = EWallet.helper_create_linkaja_item(
     id="123123", name="Phone Case", price=100000, quantity=1
 )
 items.append(item)
@@ -553,10 +553,13 @@ Will return
 #### Create LinkAja Payment
 
 ```python
-from xendit import EWallet, LinkAjaItem
+from xendit import EWallet
 
 items = []
-items.append(LinkAjaItem(id="123123", name="Phone Case", price=100000, quantity=1))
+item = EWallet.helper_create_linkaja_item(
+    id="123123", name="Phone Case", price=100000, quantity=1
+)
+items.append(item)
 linkaja_payment = EWallet.create_linkaja_payment(
     external_id="linkaja-ewallet-test-1593663498",
     phone="089911111111",
@@ -583,7 +586,7 @@ Will return
 #### Get Payment Status
 
 ```python
-from xendit import EWallet
+from xendit import EWallet, EWalletType
 
 ovo_payment_status = EWallet.get_payment_status(
     ewallet_type=EWalletType.OVO,
@@ -610,7 +613,7 @@ Will return
 #### Create Payment / Generate Checkout URL
 
 ```python
-from xendit import Cardlesscredit, CardlessCreditType
+from xendit import CardlessCredit, CardlessCreditType
 
 cardless_credit_items = []
 cardless_credit_items.append(
@@ -666,7 +669,7 @@ Will return
 #### Calculate Payment Types
 
 ```python
-from xendit import Cardlesscredit, CardlessCreditType
+from xendit import CardlessCredit, CardlessCreditType
 
 cardless_credit_items = []
 cardless_credit_items.append(
@@ -721,7 +724,7 @@ qrcode = QRCode.create(
     external_id="qrcode-id-1594794038",
     type=QRCodeType.DYNAMIC,
     callback_url="https://webhook.site",
-    amount="4000",
+    amount=4000,
 )
 print(qrcode)
 ```
@@ -925,7 +928,7 @@ Will return
 #### Create Payment Method
 
 ```python
-from xendit import DirectDebit
+from xendit import DirectDebit, DirectDebitPaymentMethodType
 
 payment_method = DirectDebit.create_payment_method(
     customer_id="ed20b5db-df04-41fc-8018-8ea4ac4d1030",
@@ -1268,10 +1271,10 @@ Will return
 ```python
 from xendit import VirtualAccount
 
-virtual_account_payment = VirtualAccount.get(
+virtual_account_payment = VirtualAccount.get_payment(
     payment_id="5ef18efca7d10d1b4d61fb52",
 )
-print(virtual_account)
+print(virtual_account_payment)
 ```
 
 Will return
@@ -1669,7 +1672,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.create_recurring_payment(
+recurring_payment = RecurringPayment.create(
     external_id="recurring_12345",
     payer_email="test@x.co",
     description="Test Curring Payment",
@@ -1710,7 +1713,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.get_recurring_payment(
+recurring_payment = RecurringPayment.get(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -1746,7 +1749,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.edit_recurring_payment(
+recurring_payment = RecurringPayment.edit(
     id="5f05825ff9f52d3ed204c687",
     interval_count=2,
 )
@@ -1782,7 +1785,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.stop_recurring_payment(
+recurring_payment = RecurringPayment.stop(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -1817,7 +1820,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.pause_recurring_payment(
+recurring_payment = RecurringPayment.pause(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -1852,7 +1855,7 @@ Will return
 ```python
 from xendit import RecurringPayment
 
-recurring_payment = RecurringPayment.resume_recurring_payment(
+recurring_payment = RecurringPayment.resume(
     id="5f05825ff9f52d3ed204c687",
 )
 print(recurring_payment)
@@ -2108,7 +2111,7 @@ batch_disbursement_items.append(
         bank_account_name="Adyaksa W",
         bank_account_number="12345678",
         description="Sample Batch Disbursement",
-        external_id=f"batch-disbursement-item-{int(time.time())}"
+        external_id=f"batch-disbursement-item-12345"
     )
 )
 batch_disbursement = BatchDisbursement.create(

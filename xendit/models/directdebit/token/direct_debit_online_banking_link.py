@@ -14,11 +14,6 @@ class DirectDebitOnlineBankingLink(BaseModel):
       - currency (str)
       - description (str)
 
-    Parameters Attributes (initialize_tokenization):
-      - success_redirect_url (str)
-      - failure_redirect_url (str)
-      - callback_url (str)
-
     """
 
     account_details: str

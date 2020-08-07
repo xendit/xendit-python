@@ -18,7 +18,7 @@ class TestQRCode(BaseIntegrationTest):
             external_id=f"qrcode-id-{int(time.time())}",
             type=QRCodeType.DYNAMIC,
             callback_url="https://webhook.site",
-            amount="4000",
+            amount=4000,
         )
         return qrcode
 

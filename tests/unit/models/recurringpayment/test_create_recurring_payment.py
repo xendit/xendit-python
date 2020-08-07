@@ -10,7 +10,7 @@ class TestCreateRecurringPayment(ModelBaseTest):
     def default_recurring_payment_data(self):
         tested_class = RecurringPayment
         class_name = "RecurringPayment"
-        method_name = "create_recurring_payment"
+        method_name = "create"
         http_method_name = "post"
         args = ()
         kwargs = {

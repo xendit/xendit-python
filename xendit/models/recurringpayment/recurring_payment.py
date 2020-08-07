@@ -10,12 +10,12 @@ class RecurringPayment(BaseModel):
     """RecurringPayment class (API Reference: RecurringPayment)
 
     Static Methods:
-      - RecurringPayment.create_recurring_payment (API Reference: /Create Recurring Payment)
-      - RecurringPayment.get_recurring_payment (API Reference: /Get Recurring Payment)
-      - RecurringPayment.edit_recurring_payment (API Reference: /Edit Recurring Payment)
-      - RecurringPayment.stop_recurring_payment (API Reference: /Stop Recurring Payment)
-      - RecurringPayment.pause_recurring_payment (API Reference: /Pause Recurring Payment)
-      - RecurringPayment.resume_recurring_payment (API Reference: /Resume Recurring Payment)
+      - RecurringPayment.create (API Reference: /Create Recurring Payment)
+      - RecurringPayment.get (API Reference: /Get Recurring Payment)
+      - RecurringPayment.edit (API Reference: /Edit Recurring Payment)
+      - RecurringPayment.stop (API Reference: /Stop Recurring Payment)
+      - RecurringPayment.pause (API Reference: /Pause Recurring Payment)
+      - RecurringPayment.resume (API Reference: /Resume Recurring Payment)
 
     Static Methods for Object Creation:
       - RecurringPayment.helper_create_installment (For Installment in create_authorization and create_charge)
@@ -73,7 +73,7 @@ class RecurringPayment(BaseModel):
     currency: str
 
     @staticmethod
-    def create_recurring_payment(
+    def create(
         *,
         external_id,
         payer_email,
@@ -133,7 +133,7 @@ class RecurringPayment(BaseModel):
         url = "/recurring_payments"
         headers, body = _extract_params(
             locals(),
-            func_object=RecurringPayment.create_recurring_payment,
+            func_object=RecurringPayment.create,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
@@ -146,7 +146,7 @@ class RecurringPayment(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def get_recurring_payment(
+    def get(
         *, id, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Get Recurring Payment by ID (API Reference: Recurring Payment/Get Recurring Payment)
@@ -166,7 +166,7 @@ class RecurringPayment(BaseModel):
         url = f"/recurring_payments/{id}"
         headers, _ = _extract_params(
             locals(),
-            func_object=RecurringPayment.get_recurring_payment,
+            func_object=RecurringPayment.get,
             headers_params=["for_user_id", "x_api_version"],
         )
         kwargs["headers"] = headers
@@ -178,7 +178,7 @@ class RecurringPayment(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def edit_recurring_payment(
+    def edit(
         *,
         id,
         amount=None,
@@ -222,7 +222,7 @@ class RecurringPayment(BaseModel):
         url = f"/recurring_payments/{id}"
         headers, body = _extract_params(
             locals(),
-            func_object=RecurringPayment.edit_recurring_payment,
+            func_object=RecurringPayment.edit,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
             ignore_params=["id"],
         )
@@ -236,7 +236,7 @@ class RecurringPayment(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def stop_recurring_payment(
+    def stop(
         *, id, x_idempotency_key=None, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Stop Recurring Payment (API Reference: Recurring Payment/Stop Recurring Payment)
@@ -257,7 +257,7 @@ class RecurringPayment(BaseModel):
         url = f"/recurring_payments/{id}/stop!"
         headers, body = _extract_params(
             locals(),
-            func_object=RecurringPayment.stop_recurring_payment,
+            func_object=RecurringPayment.stop,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
             ignore_params=["id"],
         )
@@ -271,7 +271,7 @@ class RecurringPayment(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def pause_recurring_payment(
+    def pause(
         *, id, x_idempotency_key=None, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Pause Recurring Payment (API Reference: Recurring Payment/Pause Recurring Payment)
@@ -292,7 +292,7 @@ class RecurringPayment(BaseModel):
         url = f"/recurring_payments/{id}/pause!"
         headers, body = _extract_params(
             locals(),
-            func_object=RecurringPayment.stop_recurring_payment,
+            func_object=RecurringPayment.stop,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
             ignore_params=["id"],
         )
@@ -306,7 +306,7 @@ class RecurringPayment(BaseModel):
             raise XenditError(resp)
 
     @staticmethod
-    def resume_recurring_payment(
+    def resume(
         *, id, x_idempotency_key=None, for_user_id=None, x_api_version=None, **kwargs,
     ):
         """Pause Recurring Payment (API Reference: Recurring Payment/Pause Recurring Payment)
@@ -327,7 +327,7 @@ class RecurringPayment(BaseModel):
         url = f"/recurring_payments/{id}/resume!"
         headers, body = _extract_params(
             locals(),
-            func_object=RecurringPayment.stop_recurring_payment,
+            func_object=RecurringPayment.stop,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
             ignore_params=["id"],
         )
