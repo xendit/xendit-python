@@ -14,7 +14,11 @@ class TestVirtualAccount(BaseIntegrationTest):
     @pytest.fixture(scope="class")
     def virtual_account_data(self, VirtualAccount):
         virtual_account = VirtualAccount.create(
-            external_id="demo_1475459775872", bank_code="BNI", name="Rika Sutanto",
+            external_id="demo_1475459775872",
+            bank_code="BNI",
+            name="Rika Sutanto",
+            is_closed=True,
+            expected_amount=15000,
         )
         return virtual_account
 
@@ -40,9 +44,9 @@ class TestVirtualAccount(BaseIntegrationTest):
             virtual_account, virtual_account_response()
         )
 
-    def test_update_virtual_account_return_correct_keys(self, VirtualAccount):
+    def test_update_virtual_account_return_correct_keys(self, VirtualAccount, virtual_account_data):
         virtual_account = VirtualAccount.update(
-            id="5f224d510af2e9385877bfbc", expected_amount=20000,
+            id=virtual_account_data.id, expected_amount=20000
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             virtual_account, virtual_account_response()
