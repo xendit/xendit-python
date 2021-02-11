@@ -93,7 +93,6 @@ class EWallet:
 
         return EWalletBasket.Query(**params)
 
-
     @staticmethod
     def create_ovo_payment(
         *,
@@ -370,5 +369,3 @@ class EWallet:
             return EWalletCharge(**resp.body)
         else:
             raise XenditError(resp)
-
-

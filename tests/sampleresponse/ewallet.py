@@ -82,6 +82,7 @@ def linkaja_payment_status_expired_response():
         "checkout_url": "https://ewallet-linkaja-dev.xendit.co/checkouts/ecae96ff-2e06-4a00-9a42-95e44ba56aca",
     }
 
+
 def ewallet_charge_response():
     return {
         "id": "ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c",

@@ -211,15 +211,15 @@ class CreateEWalletCharge:
     def example(xendit_instance):
         basket = []
         basket_item = xendit.EWallet.helper_create_basket_item(
-            reference_id = "basket-product-ref-id",
-            name = "product_name",
-            category = "mechanics",
-            currency = "IDR",
-            price = 50000,
-            quantity = 5,
-            type = "wht",
-            sub_category = "evr",
-            metadata = {
+            reference_id="basket-product-ref-id",
+            name="product_name",
+            category="mechanics",
+            currency="IDR",
+            price=50000,
+            quantity=5,
+            type="wht",
+            sub_category="evr",
+            metadata={
                 "meta": "data"
             }
         )
