@@ -498,113 +498,149 @@ Will return
 
 ### eWallets Service
 
-#### Create OVO Payment
-
+#### Create E-Wallet Charge
 ```python
 from xendit import EWallet
 
-ovo_payment = EWallet.create_ovo_payment(
-    external_id="ovo-ewallet-testing-id-1593663430",
-    amount="80001",
-    phone="08123123123",
+basket = []
+basket_item = EWallet.helper_create_basket_item(
+    reference_id = "basket-product-ref-id",
+    name = "product_name",
+    category = "product_category",
+    currency = "IDR",
+    price = 50000,
+    quantity = 5,
+    type = "product_type",
+    sub_category = "product_sub_category",
+    metadata = {
+        "meta": "data"
+    }
 )
-print(ovo_payment)
+basket.append(basket_item)
+
+ewallet_charge = EWallet.create_ewallet_charge(
+    reference_id="basket-product-ref-id",
+    currency="IDR",
+    amount=10000,
+    checkout_method="ONE_TIME_PAYMENT",
+    channel_code="ID_SHOPEEPAY",
+    channel_properties={
+        "success_redirect_url": "https://yourwebsite.com/order/123",
+    },
+    basket=basket,
+)
 ```
 
 Will return
 
-```
+```json
 {
-    "amount": 80001,
+    "id": "ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c",
     "business_id": "5ed75086a883856178afc12e",
-    "external_id": "ovo-ewallet-testing-id-1593663430",
-    "ewallet_type": "OVO",
-    "phone": "08123123123",
-    "created": "2020-07-02T04:17:12.979Z",
-    "status": "PENDING"
+    "reference_id": "basket-product-ref-id",
+    "status": "PENDING",
+    "currency": "IDR",
+    "charge_amount": 10000,
+    "capture_amount": 10000,
+    "checkout_method": "ONE_TIME_PAYMENT",
+    "channel_code": "ID_SHOPEEPAY",
+    "channel_properties": {
+        "success_redirect_url": "https://yourwebsite.com/order/123",
+    },
+    "actions": {
+        "desktop_web_checkout_url": null,
+        "mobile_web_checkout_url": null,
+        "mobile_deeplink_checkout_url": "https://ewallet-mock-connector.xendit.co/v1/ewallet_connector/checkouts?token=ZjQyOGIzMGVlNGFjOWJhNTE2YWQ3NGQyN2RiMTIwODg6ZTY2YjA2YjQ1ZjJlZWI0NDA4OGNjODg2NGFlYzQ2N2U5YTI5MjM3ODUzODViYzljNjQyYWYwOGExMjU4MzdmMTc3NDFlMWZmYjcxN2MzOWZiYmMyNjY4N2ViNmMxM2ZkMjg1ZmIzZDM5ZmZiZDYzM2ViNGMyMDRkOWM3ZTUzNWUyMDBlOWUzMzdhZTkwZjllZjQwZjQyMjExOTkyNWQ2MTg2YzgzZTQ3N2JhYWZkNDFhN2U0MWM1ZDMzMGJmMmNhNzhiMjhmMmY5ZDBjZDQ4MjlkODA3MjE5YWQzYTlhNTE0YmM1NjUzYjljMmZlOWU1YjMwM2FmNTZiNmViNGVlZDIxODQzNzdjNDJmYjRmNzBmZDZlZDhlM2MyMGM4YmExY2RmNTVkOTdjZmU3MWYxMWVmMDYzMmQzNGE1ZTFmMzE=",
+        "qr_checkout_string": "test-qr-string",
+    },
+    "is_redirect_required": true,
+    "callback_url": "https://yourwebsite.com/order/123",
+    "created": "2021-02-09T06:22:35.064408Z",
+    "updated": "2021-02-09T06:22:35.064408Z",
+    "voided_at": null,
+    "capture_now": true,
+    "customer_id": null,
+    "payment_method_id": null,
+    "failure_code": null,
+    "basket": [
+        {
+            "reference_id": "basket-product-ref-id",
+            "name": "product_name",
+            "category": "product_category",
+            "currency": "IDR",
+            "price": 50000,
+            "quantity": 5,
+            "type": "product_type",
+            "url": "",
+            "description": "",
+            "sub_category": "product_sub_category",
+            "metadata": {
+                "meta": "data"
+            }
+        }
+    ],
+    "metadata": null,
 }
 ```
 
-#### Create DANA Payment
-
+#### Get E-Wallet Charge Status
 ```python
 from xendit import EWallet
 
-dana_payment = EWallet.create_dana_payment(
-    external_id="dana-ewallet-test-1593663447",
-    amount="1001",
-    callback_url="https://my-shop.com/callbacks",
-    redirect_url="https://my-shop.com/home",
+ewallet_charge = EWallet.get_ewallet_charge_status(
+    charge_id="ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c",
 )
-print(dana_payment)
 ```
 
 Will return
 
-```
+```json
 {
-    "external_id": "dana-ewallet-test-1593663447",
-    "amount": 1001,
-    "checkout_url": "https://sandbox.m.dana.id/m/portal/cashier/checkout?bizNo=20200702111212800110166820100550620&timestamp=1593663450389&mid=216620000000261692328&sign=XS3FMKj1oZHkTWu0EXk8PBwzjR1VtwSedqbKX%2BgMF6CyZvbA5xhAmMUR%2FlhD4QkBODbbTPcju1YDFnHmSdzmjbqPfGcQGtkCPgLwVOZo1ERPmoUhhGJIbQXkfZ1Z8eA1w1RSqDzdmDB%2B%2FlvHaTbYPiUlvjzs%2BfgkM33YFFEl0BG1kUFz0%2FKb9OoT1QKyoHxw6ge4SWPF3Po6BwNtjqUZe2n43s7y0CvSrcNiNLHT3k2XHSlIdguwCGjNHh2zClgtv9XbSCecnD96nuIuohYARX8Ai%2BaYo%2FEDO1VEch4XditfIXvyBhL0TocxhYxda7yKNNjkZj56Rl9ds8u7Wyv1eQ%3D%3D",
-    "ewallet_type": "DANA"
-}
-```
-
-#### Create LinkAja Payment
-
-```python
-from xendit import EWallet
-
-items = []
-item = EWallet.helper_create_linkaja_item(
-    id="123123", name="Phone Case", price=100000, quantity=1
-)
-items.append(item)
-linkaja_payment = EWallet.create_linkaja_payment(
-    external_id="linkaja-ewallet-test-1593663498",
-    phone="089911111111",
-    items=items,
-    amount=300000,
-    callback_url="https://my-shop.com/callbacks",
-    redirect_url="https://xendit.co/",
-)
-print(linkaja_payment)
-```
-
-Will return
-
-```
-{
-    "checkout_url": "https://ewallet-linkaja-dev.xendit.co/checkouts/c627cf1f-0470-420f-a0f4-3931ef384bf4",
-    "transaction_date": "2020-07-02T04:18:21.729Z",
-    "amount": 300000,
-    "external_id": "linkaja-ewallet-test-1593663498",
-    "ewallet_type": "LINKAJA"
-}
-```
-
-#### Get Payment Status
-
-```python
-from xendit import EWallet, EWalletType
-
-ovo_payment_status = EWallet.get_payment_status(
-    ewallet_type=EWalletType.OVO,
-    external_id="ovo-ewallet-testing-id-1234",
-)
-print(ovo_payment_status)
-```
-
-Will return
-
-```
-{
-    "amount": "8888",
+    "id": "ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c",
     "business_id": "5ed75086a883856178afc12e",
-    "ewallet_type": "OVO",
-    "external_id": "ovo-ewallet-testing-id-1234",
-    "status": "COMPLETED",
-    "transaction_date": "2020-06-30T01:32:28.267Z"
+    "reference_id": "basket-product-ref-id",
+    "status": "PENDING",
+    "currency": "IDR",
+    "charge_amount": 10000,
+    "capture_amount": 10000,
+    "checkout_method": "ONE_TIME_PAYMENT",
+    "channel_code": "ID_SHOPEEPAY",
+    "channel_properties": {
+        "success_redirect_url": "https://yourwebsite.com/order/123",
+    },
+    "actions": {
+        "desktop_web_checkout_url": null,
+        "mobile_web_checkout_url": null,
+        "mobile_deeplink_checkout_url": "https://ewallet-mock-connector.xendit.co/v1/ewallet_connector/checkouts?token=ZjQyOGIzMGVlNGFjOWJhNTE2YWQ3NGQyN2RiMTIwODg6ZTY2YjA2YjQ1ZjJlZWI0NDA4OGNjODg2NGFlYzQ2N2U5YTI5MjM3ODUzODViYzljNjQyYWYwOGExMjU4MzdmMTc3NDFlMWZmYjcxN2MzOWZiYmMyNjY4N2ViNmMxM2ZkMjg1ZmIzZDM5ZmZiZDYzM2ViNGMyMDRkOWM3ZTUzNWUyMDBlOWUzMzdhZTkwZjllZjQwZjQyMjExOTkyNWQ2MTg2YzgzZTQ3N2JhYWZkNDFhN2U0MWM1ZDMzMGJmMmNhNzhiMjhmMmY5ZDBjZDQ4MjlkODA3MjE5YWQzYTlhNTE0YmM1NjUzYjljMmZlOWU1YjMwM2FmNTZiNmViNGVlZDIxODQzNzdjNDJmYjRmNzBmZDZlZDhlM2MyMGM4YmExY2RmNTVkOTdjZmU3MWYxMWVmMDYzMmQzNGE1ZTFmMzE=",
+        "qr_checkout_string": "test-qr-string",
+    },
+    "is_redirect_required": true,
+    "callback_url": "https://yourwebsite.com/order/123",
+    "created": "2021-02-09T06:22:35.064408Z",
+    "updated": "2021-02-09T06:22:35.064408Z",
+    "voided_at": null,
+    "capture_now": true,
+    "customer_id": null,
+    "payment_method_id": null,
+    "failure_code": null,
+    "basket": [
+        {
+            "reference_id": "basket-product-ref-id",
+            "name": "product_name",
+            "category": "product_category",
+            "currency": "IDR",
+            "price": 50000,
+            "quantity": 5,
+            "type": "product_type",
+            "url": "",
+            "description": "",
+            "sub_category": "product_sub_category",
+            "metadata": {
+                "meta": "data"
+            }
+        }
+    ],
+    "metadata": null,
 }
 ```
 

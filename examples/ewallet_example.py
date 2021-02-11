@@ -174,6 +174,96 @@ class GetLinkAjaPaymentStatus:
         GetLinkAjaPaymentStatus.run(xendit_instance, **args)
 
 
+class CreateEWalletCharge:
+    @staticmethod
+    def run(
+        xendit_instance,
+        reference_id,
+        currency,
+        amount,
+        checkout_method,
+        channel_code=None,
+        channel_properties=None,
+        customer_id=None,
+        basket=None,
+        metadata=None,
+        **kwargs,
+    ):
+        try:
+            ewallet_charge = xendit_instance.EWallet.create_ewallet_charge(
+                reference_id=reference_id,
+                currency=currency,
+                amount=amount,
+                checkout_method=checkout_method,
+                channel_code=channel_code,
+                channel_properties=channel_properties,
+                customer_id=customer_id,
+                basket=basket,
+                metadata=metadata,
+                **kwargs,
+            )
+            print(ewallet_charge)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        basket = []
+        basket_item = xendit.EWallet.helper_create_basket_item(
+            reference_id = "basket-product-ref-id",
+            name = "product_name",
+            category = "mechanics",
+            currency = "IDR",
+            price = 50000,
+            quantity = 5,
+            type = "wht",
+            sub_category = "evr",
+            metadata = {
+                "meta": "data"
+            }
+        )
+        basket.append(basket_item)
+
+        args = {
+            "reference_id": "test-reference-id",
+            "currency": "IDR",
+            "amount": 1688,
+            "checkout_method": "ONE_TIME_PAYMENT",
+            "channel_code": "ID_SHOPEEPAY",
+            "channel_properties": {
+                "success_redirect_url": "https://yourwebsite.com/order/123",
+            },
+            "basket": basket,
+            "metadata": {
+                "meta2": "data2",
+            },
+        }
+        print_running_function("xendit.EWallet.create_ewallet_charge", args)
+        CreateEWalletCharge.run(xendit_instance, **args)
+
+
+class GetEWalletChargeStatus:
+    @staticmethod
+    def run(xendit_instance, charge_id, **kwargs):
+        try:
+            ewallet = xendit_instance.EWallet.get_ewallet_charge_status(
+                charge_id=charge_id, **kwargs,
+            )
+            print(ewallet)
+        except xendit.XenditError as e:
+            print("Error status code:", e.status_code)
+            print("Error message:", e)
+
+    @staticmethod
+    def example(xendit_instance):
+        args = {
+            "charge_id": "ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c",
+        }
+        print_running_function("xendit.EWallet.get_ewallet_charge_status", args)
+        GetEWalletChargeStatus.run(xendit_instance, **args)
+
+
 def ask_ewallet_input():
     print("Input the action that you want to use")
     print("0. Exit")
@@ -183,6 +273,8 @@ def ask_ewallet_input():
     print("4. Get OVO Payment Status")
     print("5. Get DANA Payment Status")
     print("6. Get LinkAja Payment Status")
+    print("7. Create E-Wallet Charge")
+    print("8. Get E-Wallet Charge Status")
     try:
         return int(input())
     except ValueError:
@@ -211,4 +303,10 @@ def ewallet_example(xendit_instance):
         elif ewallet_input == 6:
             print("Running example of Get Payment Status of LinkAja")
             GetLinkAjaPaymentStatus.example(xendit_instance)
+        elif ewallet_input == 7:
+            print("Running example of Create E-Wallet Charge")
+            CreateEWalletCharge.example(xendit_instance)
+        elif ewallet_input == 8:
+            print("Running example of Get E-Wallet Charge Status")
+            GetEWalletChargeStatus.example(xendit_instance)
         ewallet_input = ask_ewallet_input()
