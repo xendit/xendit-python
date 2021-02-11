@@ -107,7 +107,7 @@ class TestCreditCard(BaseIntegrationTest):
             discount_amount=10000,
             bin_list=["400000", "460000"],
             start_time="2020-01-01T00:00:00.000Z",
-            end_time="2021-01-01T00:00:00.000Z",
+            end_time="2100-01-01T00:00:00.000Z",
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             promotion, promotion_response()
