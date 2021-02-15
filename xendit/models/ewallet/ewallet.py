@@ -57,17 +57,17 @@ class EWallet:
     @staticmethod
     def helper_create_basket_item(
         *,
-        reference_id,
-        name,
-        category,
-        currency,
-        price,
-        quantity,
-        type,
-        url=None,
-        description=None,
-        sub_category=None,
-        metadata=None,
+        reference_id: str,
+        name: str,
+        category: str,
+        currency: str,
+        price: int,
+        quantity: int,
+        type: str,
+        url: str=None,
+        description: str=None,
+        sub_category: str=None,
+        metadata: dict=None,
         **kwargs,
     ):
         """Construct Installments Object for Charge
@@ -286,17 +286,17 @@ class EWallet:
     @staticmethod
     def create_ewallet_charge(
         *,
-        reference_id,
-        currency,
-        amount,
-        checkout_method,
-        channel_code=None,
-        channel_properties=None,
-        customer_id=None,
-        basket=None,
-        metadata=None,
-        for_user_id=None,
-        with_fee_rule=None,
+        reference_id: str,
+        currency: str,
+        amount: int,
+        checkout_method: str,
+        channel_code: str=None,
+        channel_properties: dict=None,
+        customer_id: str=None,
+        basket: list=None,
+        metadata: dict=None,
+        for_user_id: str=None,
+        with_fee_rule: str=None,
         **kwargs,
     ):
         """Send POST Request to create EWallet Charge (API Reference: eWallets/Create E-Wallet Charge)
@@ -339,8 +339,8 @@ class EWallet:
     @staticmethod
     def get_ewallet_charge_status(
         *,
-        charge_id,
-        for_user_id=None,
+        charge_id: str,
+        for_user_id: str=None,
         **kwargs,
     ):
         """Get ewallet charge status of given charge id (API Reference: eWallets/Get E-Wallet Charge Status)
