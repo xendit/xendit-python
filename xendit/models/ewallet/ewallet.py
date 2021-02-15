@@ -64,10 +64,10 @@ class EWallet:
         price: int,
         quantity: int,
         type: str,
-        url: str=None,
-        description: str=None,
-        sub_category: str=None,
-        metadata: dict=None,
+        url: str = None,
+        description: str = None,
+        sub_category: str = None,
+        metadata: dict = None,
         **kwargs,
     ):
         """Construct Installments Object for Charge
@@ -290,13 +290,13 @@ class EWallet:
         currency: str,
         amount: int,
         checkout_method: str,
-        channel_code: str=None,
-        channel_properties: dict=None,
-        customer_id: str=None,
-        basket: list=None,
-        metadata: dict=None,
-        for_user_id: str=None,
-        with_fee_rule: str=None,
+        channel_code: str = None,
+        channel_properties: dict = None,
+        customer_id: str = None,
+        basket: list = None,
+        metadata: dict = None,
+        for_user_id: str = None,
+        with_fee_rule: str = None,
         **kwargs,
     ):
         """Send POST Request to create EWallet Charge (API Reference: eWallets/Create E-Wallet Charge)
@@ -340,7 +340,7 @@ class EWallet:
     def get_ewallet_charge_status(
         *,
         charge_id: str,
-        for_user_id: str=None,
+        for_user_id: str = None,
         **kwargs,
     ):
         """Get ewallet charge status of given charge id (API Reference: eWallets/Get E-Wallet Charge Status)
