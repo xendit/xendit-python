@@ -44,9 +44,9 @@ class TestVirtualAccount(BaseIntegrationTest):
             virtual_account, virtual_account_response()
         )
 
-    def test_update_virtual_account_return_correct_keys(self, VirtualAccount, virtual_account_data):
+    def test_update_virtual_account_return_correct_keys(self, VirtualAccount):
         virtual_account = VirtualAccount.update(
-            id=virtual_account_data.id, expected_amount=20000
+            id="602bafe23ef3e5403c720cf9", expected_amount=20000
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             virtual_account, virtual_account_response()
