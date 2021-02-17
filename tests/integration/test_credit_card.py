@@ -17,7 +17,7 @@ class TestCreditCard(BaseIntegrationTest):
 
     def test_create_authorization_return_correct_keys(self, CreditCard):
         charge = CreditCard.create_authorization(
-            token_id="5f0410898bcf7a001a00879d",
+            token_id="602b9886396b5a001c99b798",
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
@@ -29,7 +29,7 @@ class TestCreditCard(BaseIntegrationTest):
 
     def test_reverse_authorization_return_correct_keys(self, CreditCard):
         charge = CreditCard.create_authorization(
-            token_id="5f0410898bcf7a001a00879d",
+            token_id="602b9886396b5a001c99b798",
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
@@ -45,7 +45,7 @@ class TestCreditCard(BaseIntegrationTest):
 
     def test_create_charge_return_correct_keys(self, CreditCard):
         charge = CreditCard.create_charge(
-            token_id="5f0410898bcf7a001a00879d",
+            token_id="602b9886396b5a001c99b798",
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
@@ -57,7 +57,7 @@ class TestCreditCard(BaseIntegrationTest):
 
     def test_capture_charge_return_correct_keys(self, CreditCard):
         charge = CreditCard.create_authorization(
-            token_id="5f0410898bcf7a001a00879d",
+            token_id="602b9886396b5a001c99b798",
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
@@ -72,7 +72,7 @@ class TestCreditCard(BaseIntegrationTest):
 
     def test_get_charge_return_correct_keys(self, CreditCard):
         charge = CreditCard.create_charge(
-            token_id="5f0410898bcf7a001a00879d",
+            token_id="602b9886396b5a001c99b798",
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
@@ -85,7 +85,7 @@ class TestCreditCard(BaseIntegrationTest):
 
     def test_create_refund_return_correct_keys(self, CreditCard):
         charge = CreditCard.create_charge(
-            token_id="5f0410898bcf7a001a00879d",
+            token_id="602b9886396b5a001c99b798",
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
@@ -107,7 +107,7 @@ class TestCreditCard(BaseIntegrationTest):
             discount_amount=10000,
             bin_list=["400000", "460000"],
             start_time="2020-01-01T00:00:00.000Z",
-            end_time="2021-01-01T00:00:00.000Z",
+            end_time="2100-01-01T00:00:00.000Z",
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             promotion, promotion_response()

@@ -13,6 +13,7 @@ from tests.sampleresponse.ewallet import dana_payment_status_response
 from tests.sampleresponse.ewallet import linkaja_payment_response
 from tests.sampleresponse.ewallet import linkaja_payment_status_completed_response
 from tests.sampleresponse.ewallet import linkaja_payment_status_expired_response
+from tests.sampleresponse.ewallet import ewallet_charge_response
 
 
 class TestEWallet(BaseIntegrationTest):
@@ -112,4 +113,58 @@ class TestEWallet(BaseIntegrationTest):
         )
         self.assert_returned_object_has_same_key_as_sample_response(
             ewallet, linkaja_payment_status_expired_response()
+        )
+
+    @pytest.fixture(scope="class")
+    def ewallet_charge_data(self, EWallet):
+        # Object Creation Test
+        basket = []
+        basket_item = EWallet.helper_create_basket_item(
+            reference_id="basket-product-ref-id",
+            name="product_name",
+            category="mechanics",
+            currency="IDR",
+            price=50000,
+            quantity=5,
+            type="wht",
+            sub_category="evr",
+            metadata={
+                "meta": "data"
+            }
+        )
+        basket.append(basket_item)
+
+        ewallet_charge = EWallet.create_ewallet_charge(
+            reference_id="basket-product-ref-id",
+            currency="IDR",
+            amount=1688,
+            checkout_method="ONE_TIME_PAYMENT",
+            channel_code="ID_SHOPEEPAY",
+            channel_properties={
+                "success_redirect_url": "https://yourwebsite.com/order/123",
+            },
+            basket=basket,
+            metadata={
+                "meta2": "data2",
+            },
+        )
+        return ewallet_charge
+
+    def test_create_ewallet_charge_return_correct_keys(self, ewallet_charge_data):
+        ewallet_charge = ewallet_charge_data
+
+        self.assert_returned_object_has_same_key_as_sample_response(
+            ewallet_charge, ewallet_charge_response()
+        )
+
+    def test_get_ewallet_charge_status_return_correct_keys(
+        self, EWallet, ewallet_charge_data
+    ):
+        ewallet_charge = ewallet_charge_data
+
+        ewallet_charge_status = EWallet.get_ewallet_charge_status(
+            charge_id=ewallet_charge.id,
+        )
+        self.assert_returned_object_has_same_key_as_sample_response(
+            ewallet_charge_status, ewallet_charge_response()
         )

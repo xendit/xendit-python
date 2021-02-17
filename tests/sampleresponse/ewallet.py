@@ -81,3 +81,37 @@ def linkaja_payment_status_expired_response():
         "expired_at": "2020-06-30T02:03:36.078Z",
         "checkout_url": "https://ewallet-linkaja-dev.xendit.co/checkouts/ecae96ff-2e06-4a00-9a42-95e44ba56aca",
     }
+
+
+def ewallet_charge_response():
+    return {
+        "id": "ewc_f3925450-5c54-4777-98c1-fcf22b0d1e1c",
+        "business_id": "business-id-example",
+        "reference_id": "test-reference-id",
+        "status": "PENDING",
+        "currency": "IDR",
+        "charge_amount": 10000,
+        "capture_amount": 10000,
+        "checkout_method": "ONE_TIME_PAYMENT",
+        "channel_code": "ID_SHOPEEPAY",
+        "channel_properties": {
+            "success_redirect_url": "https://yourwebsite.com/order/123",
+        },
+        "actions": {
+            "desktop_web_checkout_url": None,
+            "mobile_web_checkout_url": None,
+            "mobile_deeplink_checkout_url": 'https://mobile.deeplink.checkout.url',
+            "qr_checkout_string": 'test-qr-string',
+        },
+        "is_redirect_required": True,
+        "callback_url": "https://yourwebsite.com/order/123",
+        "created": '2021-02-09T06:22:35.064408Z',
+        "updated": '2021-02-09T06:22:35.064408Z',
+        "voided_at": None,
+        "capture_now": True,
+        "customer_id": None,
+        "payment_method_id": None,
+        "failure_code": None,
+        "basket": None,
+        "metadata": None,
+    }

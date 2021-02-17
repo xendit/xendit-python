@@ -7,6 +7,8 @@ from .ewallet_type import EWalletType
 from .ovo import OVOPayment, OVOPaymentStatus
 from .dana import DANAPayment, DANAPaymentStatus
 from .linkaja import LinkAjaPayment, LinkAjaPaymentStatus, LinkAjaItem
+from .ewallet_charge import EWalletCharge
+from .ewallet_basket import EWalletBasket
 
 
 class EWallet:
@@ -19,15 +21,19 @@ class EWallet:
       - DANAPaymentStatus
       - LinkAjaPayment
       - LinkAjaPaymentStatus
+      - EWalletCharge
 
     Static Methods:
       - EWallet.create_ovo_payment (API Reference: /Create Payment)
       - EWallet.create_dana_payment (API Reference: /Create Payment)
       - EWallet.create_linkaja_payment (API Reference: /Create Payment)
-      - EWallet.get_payment_statis (API Reference: /Get Payment Status)
+      - EWallet.get_payment_status (API Reference: /Get Payment Status)
+      - EWallet.create_ewallet_charge (API Reference: /Create E-Wallet Charge)
+      - EWallet.get_ewallet_charge_status (API Reference: /Get E-Wallet Charge Status)
 
     Static Methods for Object Creation:
       - CreditCard.helper_create_linkaja_item (For create_linkaja_payment)
+      - EWallet.helper_create_basket_item (For ewallet charge)
     """
 
     @staticmethod
@@ -47,6 +53,45 @@ class EWallet:
         del params["kwargs"]
 
         return LinkAjaItem.Query(**params)
+
+    @staticmethod
+    def helper_create_basket_item(
+        *,
+        reference_id: str,
+        name: str,
+        category: str,
+        currency: str,
+        price: int,
+        quantity: int,
+        type: str,
+        url: str = None,
+        description: str = None,
+        sub_category: str = None,
+        metadata: dict = None,
+        **kwargs,
+    ):
+        """Construct Installments Object for Charge
+
+        Args:
+          - reference_id (str)
+          - name (str)
+          - category (str)
+          - currency (str)
+          - price (int)
+          - quantity (int)
+          - type (str)
+          - url (str)
+          - description (str)
+          - sub_category (str)
+          - metadata (dict)
+
+        Return:
+          - EWalletBasket
+        """
+        params = locals()
+        del params["kwargs"]
+
+        return EWalletBasket.Query(**params)
 
     @staticmethod
     def create_ovo_payment(
@@ -237,3 +282,90 @@ class EWallet:
             return ewallet_type.name
         except AttributeError:
             return ewallet_type
+
+    @staticmethod
+    def create_ewallet_charge(
+        *,
+        reference_id: str,
+        currency: str,
+        amount: int,
+        checkout_method: str,
+        channel_code: str = None,
+        channel_properties: dict = None,
+        customer_id: str = None,
+        basket: list = None,
+        metadata: dict = None,
+        for_user_id: str = None,
+        with_fee_rule: str = None,
+        **kwargs,
+    ):
+        """Send POST Request to create EWallet Charge (API Reference: eWallets/Create E-Wallet Charge)
+
+        Args:
+          - reference_id (str)
+          - currency (str)
+          - amount (int)
+          - checkout_method (str)
+          - channel_code (str)
+          - channel_properties (dict)
+          - customer_id (str)
+          - basket (list)
+          - metadata (dict)
+          - **for_user_id (str) (XenPlatforms only)
+          - **with_fee_rule (str) (XenPlatforms only)
+
+        Returns:
+          EWalletCharge
+
+        Raises:
+          XenditError
+
+        """
+        url = "/ewallets/charges"
+        headers, body = _extract_params(
+            locals(),
+            func_object=EWallet.create_ewallet_charge,
+            headers_params=["for_user_id", "with_fee_rule"],
+        )
+        kwargs["headers"] = headers
+        kwargs["body"] = body
+
+        resp = _APIRequestor.post(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return EWalletCharge(**resp.body)
+        else:
+            raise XenditError(resp)
+
+    @staticmethod
+    def get_ewallet_charge_status(
+        *,
+        charge_id: str,
+        for_user_id: str = None,
+        **kwargs,
+    ):
+        """Get ewallet charge status of given charge id (API Reference: eWallets/Get E-Wallet Charge Status)
+
+        Args:
+          - charge_id (str)
+          - **for_user_id (str) (XenPlatforms only)
+
+        Returns:
+          - EWalletCharge
+
+        Raises:
+          XenditError
+
+        """
+        url = f"/ewallets/charges/{charge_id}"
+        headers, body = _extract_params(
+            locals(),
+            func_object=EWallet.get_ewallet_charge_status,
+            headers_params=["for_user_id"],
+        )
+        kwargs["headers"] = headers
+
+        resp = _APIRequestor.get(url, **kwargs)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return EWalletCharge(**resp.body)
+        else:
+            raise XenditError(resp)
