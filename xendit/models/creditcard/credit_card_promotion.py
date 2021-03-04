@@ -19,6 +19,8 @@ class CreditCardPromotion(BaseModel):
       - currency (str)
       - start_time (str)
       - end_time (str)
+      - min_original_amount (float)
+      - max_discount_amount (float)
     """
 
     id: str
@@ -34,3 +36,5 @@ class CreditCardPromotion(BaseModel):
     currency: str
     start_time: str
     end_time: str
+    min_original_amount: float
+    max_discount_amount: float
