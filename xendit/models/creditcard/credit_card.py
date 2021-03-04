@@ -430,6 +430,8 @@ class CreditCard(BaseModel):
         discount_percent=None,
         discount_amount=None,
         currency=None,
+        max_discount_amount=None,
+        min_original_amount=None,
         x_idempotency_key=None,
         for_user_id=None,
         x_api_version=None,
@@ -447,6 +449,8 @@ class CreditCard(BaseModel):
           - **channel_code (str)
           - **discount_percent (float)
           - **discount_amount (float)
+          - **max_discount_amount (float)
+          - **min_original_amount (float)
           - **currency (str)
           - **x_idempotency_key (str)
           - **for_user_id (str)
