@@ -30,6 +30,7 @@ class Invoice(BaseModel):
       - status (str)
       - merchant_name (str)
       - merchant_profile_picture_url (str)
+      - customer (object)
       - amount (int)
       - payer_email (str)
       - description (str)
@@ -51,6 +52,7 @@ class Invoice(BaseModel):
     status: str
     merchant_name: str
     merchant_profile_picture_url: str
+    customer: object
     amount: int
     payer_email: str
     description: str
@@ -72,6 +74,7 @@ class Invoice(BaseModel):
         payer_email,
         description,
         amount,
+        customer=None,
         should_send_email=None,
         callback_virtual_account_id=None,
         invoice_duration=None,
@@ -94,6 +97,7 @@ class Invoice(BaseModel):
           - payer_email (str)
           - description (str)
           - amount (int)
+          - **customer (object)
           - **should_send_email (bool)
           - **callback_virtual_account_id (str)
           - **invoice_duration (int)

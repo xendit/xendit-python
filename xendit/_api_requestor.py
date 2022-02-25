@@ -37,14 +37,14 @@ class _APIRequestor:
         """Send HTTP Method to given url
 
         Args:
-          - method (str): HTTP Method that will be send
-          - url (str): URL Directory that will be searched (not including base_url)
-          - **api_key (string): API Key from xendit instance. Default to config if not provided
-          - **base_url (string): Base url of the API. Default to config if not provided
-          - **http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
-          - **headers: Headers of the request
-          - **body: Body of the request. Only used on POST and PATCH request
-          - **params: Parameters of the request. Only used on GET request
+            - method (str): HTTP Method that will be send
+            - url (str): URL Directory that will be searched (not including base_url)
+            - **api_key (string): API Key from xendit instance. Default to config if not provided
+            - **base_url (string): Base url of the API. Default to config if not provided
+            - **http_client (HTTPClientInterface): HTTP Client that adhere to HTTPClientInterface. Default to config if not provided
+            - **headers: Headers of the request
+            - **body: Body of the request. Only used on POST and PATCH request
+            - **params: Parameters of the request. Only used on GET request
         """
         if api_key is None:
             api_key = xendit.api_key
