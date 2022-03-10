@@ -228,7 +228,7 @@ class CreateEWalletCharge:
                 "success_redirect_url": "https://yourwebsite.com/order/123",
             },
             "basket": basket,
-            "metadata": {"meta2": "data2",},
+            "metadata": {"meta2": "data2"},
         }
         print_running_function("xendit.EWallet.create_ewallet_charge", args)
         CreateEWalletCharge.run(xendit_instance, **args)

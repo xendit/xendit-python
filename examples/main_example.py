@@ -41,8 +41,7 @@ def ask_input():
 
 
 if __name__ == "__main__":
-    # api_key = input("Please paste your SECRET KEY here: ")
-    api_key = "xnd_development_xRH6Hd5fYBmWWQSM61U5GAM5bTgwKui0AGdKji4FVQQLkovYHsgFm5DdyiNtCi8i"
+    api_key = input("Please paste your SECRET KEY here: ")
     xendit_instance = xendit.Xendit(api_key=api_key)
     user_choice = ask_input()
     while user_choice != 0:
