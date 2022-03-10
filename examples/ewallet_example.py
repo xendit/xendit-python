@@ -2,12 +2,7 @@ from print_running_function import print_running_function
 
 import time
 
-# Hackish method to import from another directory
-# Useful while xendit-python isn't released yet to the public
-import importlib.machinery
-
-loader = importlib.machinery.SourceFileLoader("xendit", "../xendit/__init__.py")
-xendit = loader.load_module("xendit")
+import xendit
 
 
 class CreateOVOPayment:
@@ -219,9 +214,7 @@ class CreateEWalletCharge:
             quantity=5,
             type="wht",
             sub_category="evr",
-            metadata={
-                "meta": "data"
-            }
+            metadata={"meta": "data"},
         )
         basket.append(basket_item)
 
@@ -235,9 +228,7 @@ class CreateEWalletCharge:
                 "success_redirect_url": "https://yourwebsite.com/order/123",
             },
             "basket": basket,
-            "metadata": {
-                "meta2": "data2",
-            },
+            "metadata": {"meta2": "data2",},
         }
         print_running_function("xendit.EWallet.create_ewallet_charge", args)
         CreateEWalletCharge.run(xendit_instance, **args)

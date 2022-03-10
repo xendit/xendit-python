@@ -16,6 +16,7 @@ classifiers = [
 packages = [
     { include = "xendit" }
 ]
+
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.23.0"

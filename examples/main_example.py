@@ -13,12 +13,7 @@ from retail_outlet_example import retail_outlet_example
 from virtual_account_example import virtual_account_example
 from xenplatform_example import xenplatform_example
 
-# Hackish method to import from another directory
-# Useful while xendit-python isn't released yet to the public
-import importlib.machinery
-
-loader = importlib.machinery.SourceFileLoader("xendit", "../xendit/__init__.py")
-xendit = loader.load_module("xendit")
+import xendit
 
 
 def ask_input():
@@ -46,7 +41,8 @@ def ask_input():
 
 
 if __name__ == "__main__":
-    api_key = input("Please paste your SECRET KEY here: ")
+    # api_key = input("Please paste your SECRET KEY here: ")
+    api_key = "xnd_development_xRH6Hd5fYBmWWQSM61U5GAM5bTgwKui0AGdKji4FVQQLkovYHsgFm5DdyiNtCi8i"
     xendit_instance = xendit.Xendit(api_key=api_key)
     user_choice = ask_input()
     while user_choice != 0:
