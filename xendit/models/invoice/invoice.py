@@ -85,6 +85,8 @@ class Invoice(BaseModel):
         currency=None,
         fixed_va=None,
         reminder_time=None,
+        fees=None,
+        items=None,
         for_user_id=None,
         x_idempotency_key=None,
         x_api_version=None,
@@ -108,6 +110,8 @@ class Invoice(BaseModel):
           - **currency (str)
           - **fixed_va (bool)
           - **reminder_time (int)
+          - **fees (object[])
+          - **items (object[])
           - **for_user_id (str) (XenPlatforms only)
           - **x_idempotency_key (str)
           - **x_api_version (str): API Version that will be used. If not provided will default to the latest
