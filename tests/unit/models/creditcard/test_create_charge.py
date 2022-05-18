@@ -34,6 +34,9 @@ class TestCreateCharge(ModelBaseTest):
             "billing_details": billing_details,
             "installment": installment,
             "promotion": promotion,
+            "metadata": {
+                "meta": "data",
+            },
         }
         params = (args, kwargs)
         url = "/credit_card_charges"
@@ -63,6 +66,9 @@ class TestCreateCharge(ModelBaseTest):
             "promotion": {
                 "reference_id": "Xendit-123",
                 "original_amount": 75000
+            },
+            "metadata": {
+                "meta": "data",
             },
         }
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)

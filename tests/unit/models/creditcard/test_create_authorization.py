@@ -19,6 +19,9 @@ class TestCreateAuthorization(ModelBaseTest):
             "amount": 75000,
             "card_cvn": "123",
             "x_idempotency_key": "test-idemp_123",
+            "metadata": {
+                "meta": "data",
+            },
         }
         params = (args, kwargs)
         url = "/credit_card_charges"
@@ -35,6 +38,9 @@ class TestCreateAuthorization(ModelBaseTest):
             "external_id": "mock_card_preAuth-123",
             "amount": 75000,
             "card_cvn": "123",
+            "metadata": {
+                "meta": "data",
+            },
         }
         return (tested_class, class_name, method_name, http_method_name, url, params, headers, body)
 

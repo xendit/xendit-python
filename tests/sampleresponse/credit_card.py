@@ -31,6 +31,9 @@ def charge_response():
         "approval_code": "831000",
         "created": "2020-07-07T07:19:22.921Z",
         "id": "5f0421fa8cc1e8001973a1d6",
+        "metadata": {
+            "meta": "data"
+        },
     }
 
 

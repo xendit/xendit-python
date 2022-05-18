@@ -257,6 +257,9 @@ charge = CreditCard.create_authorization(
     external_id="card_preAuth-1594106356",
     amount=75000,
     card_cvn="123",
+    metadata={
+        "meta": "data",
+    },
 )
 print(charge)
 ```
@@ -282,7 +285,10 @@ Will return
     "bank_reconciliation_id": "5941063625146828103011",
     "approval_code": "831000",
     "created": "2020-07-07T07:19:22.921Z",
-    "id": "5f0421fa8cc1e8001973a1d6"
+    "id": "5f0421fa8cc1e8001973a1d6",
+    "metadata": {
+        "meta": "data"
+    }
 }
 ```
 
@@ -323,6 +329,9 @@ charge = CreditCard.create_charge(
     external_id="card_charge-1594106478",
     amount=75000,
     card_cvn="123",
+    metadata={
+        "meta": "data",
+    },
 )
 print(charge)
 ```
@@ -348,7 +357,10 @@ Will return
     "bank_reconciliation_id": "5941064846646923303008",
     "approval_code": "831000",
     "created": "2020-07-07T07:21:25.027Z",
-    "id": "5f0422752bbbe50019a368b5"
+    "id": "5f0422752bbbe50019a368b5",
+    "metadata": {
+        "meta": "data"
+    }
 }
 ```
 
