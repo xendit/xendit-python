@@ -1,7 +1,6 @@
 def reverse_auth_response():
     return {
         "status": "SUCCEEDED",
-        "currency": "IDR",
         "credit_card_charge_id": "5f0421fa8cc1e8001973a1d6",
         "business_id": "5ed75086a883856178afc12e",
         "external_id": "card_preAuth-1594106356",
@@ -32,7 +31,7 @@ def charge_response():
         "created": "2020-07-07T07:19:22.921Z",
         "id": "5f0421fa8cc1e8001973a1d6",
         "metadata": {
-            "meta": "data"
+            "meta": "data",
         },
     }
 
