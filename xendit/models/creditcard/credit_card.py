@@ -160,6 +160,7 @@ class CreditCard(BaseModel):
         x_idempotency_key=None,
         for_user_id=None,
         x_api_version=None,
+        metadata=None,
         **kwargs,
     ):
         """Send POST Request to create Credit Card Authorization (API Reference: Credit Card/Create Authorization)
@@ -180,6 +181,7 @@ class CreditCard(BaseModel):
           - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
+          - **metadata (dict)
 
 
         Returns:
@@ -255,6 +257,7 @@ class CreditCard(BaseModel):
         x_idempotency_key=None,
         for_user_id=None,
         x_api_version=None,
+        metadata=None,
         **kwargs,
     ):
         """Send POST Request to create Credit Card Charge (API Reference: Credit Card/Create Charge)
@@ -275,6 +278,7 @@ class CreditCard(BaseModel):
           - **x_idempotency_key (str)
           - **for_user_id (str)
           - **x_api_version (str)
+          - **metadata (dict)
 
         Returns:
           CreditCardCharge

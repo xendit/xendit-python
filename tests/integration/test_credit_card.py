@@ -21,6 +21,9 @@ class TestCreditCard(BaseIntegrationTest):
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
+            metadata={
+                "meta": "data",
+            },
         )
 
         self.assert_returned_object_has_same_key_as_sample_response(
@@ -33,6 +36,9 @@ class TestCreditCard(BaseIntegrationTest):
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
+            metadata={
+                "meta": "data",
+            },
         )
         reverse_auth = CreditCard.reverse_authorization(
             credit_card_charge_id=charge.id,
@@ -49,6 +55,9 @@ class TestCreditCard(BaseIntegrationTest):
             external_id=f"card_preAuth-{int(time.time())}",
             amount=75000,
             card_cvn="123",
+            metadata={
+                "meta": "data",
+            },
         )
 
         self.assert_returned_object_has_same_key_as_sample_response(
