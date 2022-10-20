@@ -1,5 +1,6 @@
 from inspect import signature
 
+
 from .models import Balance
 from .models import BatchDisbursement
 from .models import CardlessCredit
@@ -8,6 +9,7 @@ from .models import DirectDebit
 from .models import Disbursement
 from .models import EWallet
 from .models import Invoice
+from .models import PaymentMethod
 from .models import Payout
 from .models import QRCode
 from .models import RecurringPayment
@@ -45,6 +47,9 @@ class _XenditParamInjector:
 
     def instantiate_invoice(self) -> Invoice:
         return self.instantiate(Invoice)
+
+    def instantiate_payment_method(self) -> PaymentMethod:
+        return self.instantiate(PaymentMethod)
 
     def instantiate_payout(self) -> Payout:
         return self.instantiate(Payout)
