@@ -101,6 +101,7 @@ class ModelBaseTest:
         api_requestor_used_method = getattr(_APIRequestor, http_method_name)
         setattr(api_requestor_used_method, "return_value", mock_correct_response)
         returned_object = getattr(tested_class, method_name)(*args, **kwargs)
+
         try:
             assert vars(returned_object) == expected_correct_result
         except TypeError:
