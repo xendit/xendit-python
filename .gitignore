@@ -150,3 +150,5 @@ cython_debug/
 ### End of generation
 
 .idea/
+
+.DS_Store
