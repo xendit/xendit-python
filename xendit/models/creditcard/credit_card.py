@@ -256,6 +256,7 @@ class CreditCard(BaseModel):
         installment=None,
         x_idempotency_key=None,
         for_user_id=None,
+        with_fee_rule=None,
         x_api_version=None,
         metadata=None,
         **kwargs,
@@ -277,6 +278,7 @@ class CreditCard(BaseModel):
           - **installment (CreditCardCharge.Installment.Query)
           - **x_idempotency_key (str)
           - **for_user_id (str)
+          - **with_fee_rule (str)
           - **x_api_version (str)
           - **metadata (dict)
 
@@ -291,7 +293,7 @@ class CreditCard(BaseModel):
         headers, body = _extract_params(
             locals(),
             func_object=CreditCard.create_charge,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["with_fee_rule", "for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
