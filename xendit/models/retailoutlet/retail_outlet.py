@@ -52,6 +52,7 @@ class RetailOutlet(BaseModel):
         expiration_date=None,
         is_single_use=None,
         for_user_id=None,
+        with_fee_rule=None,
         x_idempotency_key=None,
         x_api_version=None,
         **kwargs,
@@ -67,6 +68,7 @@ class RetailOutlet(BaseModel):
           - **expiration_date (str) (ISO 8601 Date)
           - **is_single_use (bool)
           - **for_user_id (str)
+          - **with_fee_rule (str)
           - **x_idempotency_key (str)
           - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
@@ -81,7 +83,7 @@ class RetailOutlet(BaseModel):
         headers, body = _extract_params(
             locals(),
             func_object=RetailOutlet.create_fixed_payment_code,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["with_fee_rule", "for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body

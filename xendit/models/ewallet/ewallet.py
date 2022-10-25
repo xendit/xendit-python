@@ -100,6 +100,7 @@ class EWallet:
         amount,
         phone,
         for_user_id=None,
+        with_fee_rule=None,
         x_idempotency_key=None,
         x_api_version=None,
         **kwargs,
@@ -111,6 +112,7 @@ class EWallet:
           - amount (int)
           - phone (str)
           - **for_user_id (str) (XenPlatforms only)
+          - **with_fee_rule (str) (XenPlatforms only)
           - **x_idempotency_key (str)
           - **x_api_version (str)
 
@@ -125,7 +127,7 @@ class EWallet:
         headers, body = _extract_params(
             locals(),
             func_object=EWallet.create_ovo_payment,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["with_fee_rule", "for_user_id", "x_idempotency_key", "x_api_version"],
         )
         body["ewallet_type"] = "OVO"
         kwargs["headers"] = headers
@@ -146,6 +148,7 @@ class EWallet:
         redirect_url,
         expiration_date=None,
         for_user_id=None,
+        with_fee_rule=None,
         x_idempotency_key=None,
         x_api_version=None,
         **kwargs,
@@ -159,6 +162,7 @@ class EWallet:
           - redirect_url (str)
           - **expiration_date (str)
           - **for_user_id (str) (XenPlatforms only)
+          - **with_fee_rule (str) (XenPlatforms only)
           - **x_idempotency_key (str)
           - **x_api_version (str)
 
@@ -173,7 +177,7 @@ class EWallet:
         headers, body = _extract_params(
             locals(),
             func_object=EWallet.create_dana_payment,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["with_fee_rule", "for_user_id", "x_idempotency_key", "x_api_version"],
         )
         body["ewallet_type"] = "DANA"
         kwargs["headers"] = headers
@@ -195,6 +199,7 @@ class EWallet:
         callback_url,
         redirect_url,
         for_user_id=None,
+        with_fee_rule=None,
         x_idempotency_key=None,
         x_api_version=None,
         **kwargs,
@@ -209,6 +214,7 @@ class EWallet:
           - callback_url (str)
           - redirect_url (str)
           - **for_user_id (str) (XenPlatforms only)
+          - **with_fee_rule (str) (XenPlatforms only)
           - **x_idempotency_key (str)
           - **x_api_version (str)
 
@@ -223,7 +229,7 @@ class EWallet:
         headers, body = _extract_params(
             locals(),
             func_object=EWallet.create_linkaja_payment,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["with_fee_rule", "for_user_id", "x_idempotency_key", "x_api_version"],
         )
         body["ewallet_type"] = "LINKAJA"
         kwargs["headers"] = headers
