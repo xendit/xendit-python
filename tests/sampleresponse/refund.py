@@ -1,0 +1,19 @@
+def refund_response():
+    return {
+        "id": "rfd-48fd6af8-9cf3-471d-9f37-f6d27a829220",
+        "payment_id": "ewc_7827b97c-ac28-4a2e-804a-ac2acec7fd16",
+        "invoice_id": "624cfc01e44daa21f0430c71",
+        "amount": 100,
+        "payment_method_type": "EWALLET",
+        "channel_code": "SHOPEEPAY",
+        "country": "ID",
+        "currency": "IDR",
+        "status": "PENDING",
+        "reason": "CANCELLATION",
+        "reference_id": "403fe54b-2f8d-47bd-9454-41e3e19f5bf0",
+        "failure_code": None,
+        "refund_fee_amount": None,
+        "created": "2022-04-06T02:37:51.420645208Z",
+        "updated": "2022-04-06T02:37:51.420645388Z",
+        "metadata": None
+    }
