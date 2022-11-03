@@ -8,4 +8,5 @@ class BaseIntegrationTest:
         """
         expected_key_list = [*sample_response]
         actual_key_list = [*(vars(returned_object))]
+        
         assert set(expected_key_list).issubset(actual_key_list)
