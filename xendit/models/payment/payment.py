@@ -1,10 +1,8 @@
 from typing import List
 
-from xendit._api_requestor import _APIRequestor
-from xendit._extract_params import _extract_params
-from xendit.models._base_model import BaseModel
+from xendit.models._base_model import BaseModel, BaseListModel
 from xendit.models.paymentmethod.payment_method import PaymentMethod
-from xendit.xendit_error import XenditError
+
 
 class Payment(BaseModel):
     id: str
@@ -24,6 +22,6 @@ class Payment(BaseModel):
     metadata: dict
 
 
-class PaymentList(BaseModel):
+class PaymentList(BaseListModel):
     has_more: bool
     data: List[Payment]

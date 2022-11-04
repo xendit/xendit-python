@@ -1,7 +1,7 @@
 from typing import List
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
-from xendit.models._base_model import BaseModel
+from xendit.models._base_model import BaseModel, BaseListModel
 from xendit.models._base_query import BaseQuery
 from xendit.models.paymentmethod.billing_information import BillingInformation
 from xendit.models.paymentmethod.card.card import Card
@@ -172,8 +172,8 @@ class PaymentMethod(BaseModel):
         status: str = None,
         reusability: str = None,
         reference_id: str = None,
-        over_the_counter=OverTheCounter.Query,
-        virtual_account=VirtualAccount.Query,
+        over_the_counter: OverTheCounter.Query = None,
+        virtual_account: VirtualAccount.Query = None,
         for_user_id=None,
         x_api_version=None,
         **kwargs,
@@ -358,8 +358,8 @@ class PaymentMethod(BaseModel):
         before_id: str = None,
         channel_code: str = None,
         customer_id: str = None,
-        payment_request_id: str=None,
-        reference_id: str=None,
+        payment_request_id: str = None,
+        reference_id: str = None,
         status: str = None,
         limit: int = None,
         for_user_id=None,
@@ -392,16 +392,16 @@ class PaymentMethod(BaseModel):
 
         from xendit.models.payment.payment import Payment, PaymentList
 
-        url = "/v2/payment_methods"
+        url = f"/v2/payment_methods/{payment_method_id}/payments"
         headers, params = _extract_params(
             locals(),
             func_object=PaymentMethod.list_payments,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
-            ignore_params=[],
+            ignore_params=["payment_method_id"],
         )
         kwargs["headers"] = headers
         kwargs["params"] = params
-    
+
         resp = _APIRequestor.get(url, **kwargs)
         if resp.status_code >= 200 and resp.status_code < 300:
             has_more = resp.body["has_more"]
@@ -409,7 +409,6 @@ class PaymentMethod(BaseModel):
             return PaymentList(has_more=has_more, data=data)
         else:
             raise XenditError(resp)
-
 
     class Query(BaseQuery):
         type: str
@@ -428,6 +427,5 @@ class PaymentMethod(BaseModel):
         billing_information: BillingInformation
 
 
-class PaymentMethodList(BaseModel):
-    has_more: bool
-    data: List[PaymentMethod]
+class PaymentMethodList(BaseListModel):
+    pass
