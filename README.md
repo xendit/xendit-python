@@ -92,6 +92,25 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Create Account](#create-account)
     - [Set Callback URLs](#set-callback-urls)
     - [Transfers](#transfers)
+  - [Payment Methods](#payment-methods)
+    - [Create Payment Method](#create-payment-method-1)
+    - [Get Payment Method](#get-payment-method)
+    - [Update Payment Method](#update-payment-method)
+    - [Expire Payment Method](#expire-payment-method)
+    - [List Payment Methods](#expire-payment-method)
+    - [Authorize Payment Method](#authorize-a-payment-method)
+    - [List Payments](#list-payments)
+  - [Payment Requests](#payment-requests)
+    - [Create Payment Request](#create-payment-request)
+    - [Get Payment Request](#get-payment-request)
+    - [Create Payment Request](#create-payment-request)
+    - [Confirm Payment Request](#confirm-payment-request)
+    - [Resend Auth for Payment Request](#resend-auth-for-payment-request)
+    - [List Payment Request](#list-payment-request)
+  - [Refunds](#refunds)
+    - [Create Refund](#create-refund)
+    - [Get Refund](#get-refund)
+    - [List Refund](#list-refunds)
 - [Contributing](#contributing)
   - [Tests](#tests)
     - [Running the Test](#running-the-test)
@@ -2264,6 +2283,1001 @@ Will return
     "amount": 10000
 }
 ```
+
+### Payment Methods
+
+#### Create Payment Method
+
+```python
+from xendit import PaymentMethod
+from xendit.models.paymentmethod import ewallet
+
+payment_method = PaymentMethod.create(
+    type="EWALLET",
+    reusability="ONE_TIME_USE",
+    ewallet=ewallet.EWallet.Query(
+        channel_code="PAYMAYA",
+            channel_properties=ewallet.ChannelProperties.Query(
+                success_return_url="https://mock-test.co",
+                failure_return_url="https://mock-test.co",
+                cancel_return_url="https://mock-test.co",
+            ),
+    )
+)
+print(payment_method)
+```
+
+Will return
+
+```
+{
+    "id": "pm-9cee5b23-5f70-49f0-8b2c-82cae820c380",
+    "type": "EWALLET",
+    "country": "PH",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "customer_id": null,
+    "reference_id": "729aaf53-69bc-4be5-b232-8ad16c092c71",
+    "reusability": "ONE_TIME_USE",
+    "status": "ACTIVE",
+    "actions": [],
+    "description": null,
+    "created": "2022-11-04T02:14:02.830773203Z",
+    "updated": "2022-11-04T02:14:02.830773203Z",
+    "metadata": null,
+    "billing_information": null,
+    "failure_code": null,
+    "ewallet": {
+        "channel_code": "PAYMAYA",
+        "channel_properties": {
+            "cancel_return_url": "https://mock-test.co",
+            "failure_return_url": "https://mock-test.co",
+            "success_return_url": "https://mock-test.co"
+        },
+        "account": {
+            "name": null,
+            "account_details": null,
+            "balance": null,
+            "point_balance": null
+        }
+    },
+    "direct_bank_transfer": null,
+    "direct_debit": null,
+    "card": null,
+    "over_the_counter": null,
+    "qr_code": null,
+    "virtual_account": null
+}
+```
+
+#### Get Payment Method
+
+```python
+from xendit import PaymentMethod
+
+payment_method = PaymentMethod.get(
+    payment_method_id="pm-9cee5b23-5f70-49f0-8b2c-82cae820c380"
+)
+print(payment_method)
+```
+
+Will return
+
+```
+{
+    "id": "pm-9cee5b23-5f70-49f0-8b2c-82cae820c380",
+    "type": "EWALLET",
+    "country": "PH",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "customer_id": null,
+    "reference_id": "729aaf53-69bc-4be5-b232-8ad16c092c71",
+    "reusability": "ONE_TIME_USE",
+    "status": "ACTIVE",
+    "actions": [],
+    "description": null,
+    "created": "2022-11-04T02:14:02.830773203Z",
+    "updated": "2022-11-04T02:14:02.830773203Z",
+    "metadata": null,
+    "billing_information": null,
+    "failure_code": null,
+    "ewallet": {
+        "channel_code": "PAYMAYA",
+        "channel_properties": {
+            "cancel_return_url": "https://mock-test.co",
+            "failure_return_url": "https://mock-test.co",
+            "success_return_url": "https://mock-test.co"
+        },
+        "account": {
+            "name": null,
+            "account_details": null,
+            "balance": null,
+            "point_balance": null
+        }
+    },
+    "direct_bank_transfer": null,
+    "direct_debit": null,
+    "card": null,
+    "over_the_counter": null,
+    "qr_code": null,
+    "virtual_account": null
+}
+```
+
+#### Update Payment Method
+
+```python
+from xendit import PaymentMethod
+
+payment_method = PaymentMethod.update(
+    payment_method_id="pm-9cee5b23-5f70-49f0-8b2c-82cae820c380",
+    status="INACTIVE"
+)
+print(payment_method)
+```
+
+Will return
+
+```
+{
+    "id": "pm-9cee5b23-5f70-49f0-8b2c-82cae820c380",
+    "type": "EWALLET",
+    "country": "PH",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "customer_id": null,
+    "reference_id": "729aaf53-69bc-4be5-b232-8ad16c092c71",
+    "reusability": "ONE_TIME_USE",
+    "status": "INACTIVE",
+    "actions": [],
+    "description": null,
+    "created": "2022-11-04T02:14:02.830773Z",
+    "updated": "2022-11-04T02:32:42.982673023Z",
+    "metadata": null,
+    "billing_information": null,
+    "failure_code": null,
+    "ewallet": {
+        "channel_code": "PAYMAYA",
+        "channel_properties": {
+            "cancel_return_url": "https://mock-test.co",
+            "failure_return_url": "https://mock-test.co",
+            "success_return_url": "https://mock-test.co"
+        },
+        "account": {
+            "name": null,
+            "account_details": null,
+            "balance": null,
+            "point_balance": null
+        }
+    },
+    "direct_bank_transfer": null,
+    "direct_debit": null,
+    "card": null,
+    "over_the_counter": null,
+    "qr_code": null,
+    "virtual_account": null
+}
+```
+
+#### Expire Payment Method
+
+```python
+from xendit import PaymentMethod
+
+payment_method = PaymentMethod.expire(
+    payment_method_id="pm-9cee5b23-5f70-49f0-8b2c-82cae820c380"
+)
+print(payment_method)
+```
+
+Will return
+
+```
+{
+    "id": "pm-9cee5b23-5f70-49f0-8b2c-82cae820c380",
+    "type": "EWALLET",
+    "country": "PH",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "customer_id": null,
+    "reference_id": "729aaf53-69bc-4be5-b232-8ad16c092c71",
+    "reusability": "ONE_TIME_USE",
+    "status": "EXPIRED",
+    "actions": [],
+    "description": null,
+    "created": "2022-11-04T02:14:02.830773Z",
+    "updated": "2022-11-04T02:32:42.982673023Z",
+    "metadata": null,
+    "billing_information": null,
+    "failure_code": null,
+    "ewallet": {
+        "channel_code": "PAYMAYA",
+        "channel_properties": {
+            "cancel_return_url": "https://mock-test.co",
+            "failure_return_url": "https://mock-test.co",
+            "success_return_url": "https://mock-test.co"
+        },
+        "account": {
+            "name": null,
+            "account_details": null,
+            "balance": null,
+            "point_balance": null
+        }
+    },
+    "direct_bank_transfer": null,
+    "direct_debit": null,
+    "card": null,
+    "over_the_counter": null,
+    "qr_code": null,
+    "virtual_account": null
+}
+```
+
+#### List Payment Methods
+
+```python
+from xendit import PaymentMethod
+
+payment_methods = PaymentMethod.list()
+print(payment_methods)
+```
+
+Will return
+
+```
+{
+    "has_more": false,
+    "data": [{
+        "id": "pm-9cee5b23-5f70-49f0-8b2c-82cae820c380",
+        "type": "EWALLET",
+        "country": "PH",
+        "business_id": "5f9a3fbd571a1c4068aa40ce",
+        "customer_id": null,
+        "reference_id": "729aaf53-69bc-4be5-b232-8ad16c092c71",
+        "reusability": "ONE_TIME_USE",
+        "status": "INACTIVE",
+        "actions": [],
+        "description": null,
+        "created": "2022-11-04T02:14:02.830773Z",
+        "updated": "2022-11-04T02:32:42.982673023Z",
+        "metadata": null,
+        "billing_information": null,
+        "failure_code": null,
+        "ewallet": {
+            "channel_code": "PAYMAYA",
+            "channel_properties": {
+                "cancel_return_url": "https://mock-test.co",
+                "failure_return_url": "https://mock-test.co",
+                "success_return_url": "https://mock-test.co"
+            },
+            "account": {
+                "name": null,
+                "account_details": null,
+                "balance": null,
+                "point_balance": null
+            }
+        },
+        "direct_bank_transfer": null,
+        "direct_debit": null,
+        "card": null,
+        "over_the_counter": null,
+        "qr_code": null,
+        "virtual_account": null
+    }]
+}
+```
+
+
+#### Authorize a Payment Method
+
+This endpoint only applies to BRI Direct Debit. This is used when an additional authorization (ex. OTP Validation) is required in order to successfully activate a payment method. This is equivalent to the POST - AUTH action provided when a Payment Method has the status REQUIRES_ACTION.
+
+```python
+from xendit import PaymentMethod
+
+payment_method = PaymentMethod.authorize(
+    payment_method_id="pm-6ff0b6f2-f5de-457f-b08f-bc98fbae485a",
+    auth_code="123456"
+)
+print(payment_method)
+```
+
+Will return
+
+```
+{
+    "id": "pm-6ff0b6f2-f5de-457f-b08f-bc98fbae485a",
+    "card": null,
+    "type": "DIRECT_DEBIT",
+    "status": "ACTIVE",
+    "actions": [],
+    "country": "ID",
+    "created": "2022-08-12T13:30:26.579048Z",
+    "ewallet": null,
+    "qr_code": null,
+    "updated": "2022-08-12T13:30:58.908220358Z",
+    "metadata": null,
+    "customer_id": "e2878b4c-d57e-4a2c-922d-c0313c2800a3",
+    "description": null,
+    "reusability": "MULTIPLE_USE",
+    "direct_debit": {
+        "type": "DEBIT_CARD",
+        "debit_card": {
+            "mobile_number": "+62818555988",
+                "card_last_four": "8888",
+                "card_expiry": "06/24",
+                "email": "email@email.com"
+        },
+        "bank_account": null,
+        "channel_code": "BRI",
+        "channel_properties": {
+            "mobile_number": "+62818555988",
+            "card_last_four": "8888",
+            "card_expiry": "06/24",
+            "email": "test.email@xendit.co"
+        }
+    },
+    "failure_code": null,
+    "reference_id": "620b9df4-fe69-4bfd-b9d4-5cba6861db8a",
+    "virtual_account": null,
+    "over_the_counter": null,
+    "billing_information": null,
+    "direct_bank_transfer": null,
+    "business_id": "5f27a14a9bf05c73dd040bc8"
+}
+```
+
+
+#### List Payments
+
+```python
+from xendit import PaymentMethod
+
+payments = PaymentMethod.list_payments(
+    payment_method_id="pm-62605ad7-3fbd-462c-9fd4-193e5a9e77b6"
+)
+
+print(payments)
+```
+
+Will return
+
+```
+{
+    "has_more": false,
+    "data": [
+        {
+            "amount": 100,
+            "business_id": "61371058772b574041bc5ee2",
+            "channel_code": "RCBC",
+            "country": "PH",
+            "created": "2022-09-22T09:05:30.484Z",
+            "currency": "PHP",
+            "id": "pymt-c025b648-bd51-4138-8cf1-94b48bc1a9f8",
+            "instrument_id": "qrpy_fe3c2e20-f885-4a68-b841-0973121e20d4",
+            "payment_detail": {
+                "issuer_name": "",
+                "receipt_id": ""
+            },
+            "payment_method": {
+                "card": {},
+                "created": "2022-09-22T09:03:39.197475Z",
+                "direct_bank_transfer": null,
+                "direct_debit": null,
+                "ewallet": null,
+                "id": "pm-62605ad7-3fbd-462c-9fd4-193e5a9e77b6",
+                "over_the_counter": null,
+                "qr_code": {
+                    "channel_code": "RCBC",
+                    "channel_properties": {
+                        "qr_string": "some-random-qr-string"
+                    }
+                },
+                "reference_id": "a4486137-7624-4b34-b879-16cbbfc1a032",
+                "reusability": "ONE_TIME_USE",
+                "status": "EXPIRED",
+                "type": "QR_CODE",
+                "updated": "2022-09-22T09:05:30.409211Z",
+                "virtual_account": null
+            },
+            "payment_request_id": "pr-b33ecb15-c8e6-455c-9b1b-84612b6fd13b",
+            "reference_id": "a4486137-7624-4b34-b879-16cbbfc1a032",
+            "status": "SUCCEEDED",
+            "type": "QR_CODE",
+            "updated": "2022-09-22T09:05:30.484Z"
+        }
+    ]
+}
+```
+
+### Payment Requests
+#### Create Payment Request
+
+#### With Payment Method ID
+
+```python
+from xendit import PaymentRequest
+
+payment_request = PaymentRequest.create(
+    amount=50,
+    currency="PHP",
+    payment_method_id="pm-64eedc01-702e-439c-9a96-b3b665caeb05"
+)
+print(payment_request)
+```
+
+Will return
+
+```
+{
+    "id": "ddpy-74ebdd86-e052-42e8-8b53-d84255ab7004",
+    "reference_id": "7200b7ce-4634-489e-976b-269d641e4343",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "currency": "PHP",
+    "amount": 50,
+    "country": "PH",
+    "payment_method": {
+        "id": "pm-64eedc01-702e-439c-9a96-b3b665caeb05",
+        "type": "DIRECT_DEBIT",
+        "reference_id": "9c511ec0-a9b7-4eee-9cb5-b91085edbdd3",
+        "description": null,
+        "created": "2022-11-04T04:43:04.259281Z",
+        "updated": "2022-11-04T04:43:29.063919Z",
+        "card": null,
+        "ewallet": null,
+        "direct_debit": {
+            "channel_code": "BPI",
+            "channel_properties": {
+                "success_return_url": "https://mock-test.co",
+                "failure_return_url": "https://mock-test.co"
+            },
+            "type": "BANK_ACCOUNT",
+            "bank_account": {
+                "masked_bank_account_number": "XXX1631",
+                "bank_account_hash": "8f06b7dc684aa57a283adf49b2f67bdb11750ac04300f3996d97c7412ac5ca48"
+            },
+            "debit_card": null
+        },
+        "direct_bank_transfer": null,
+        "over_the_counter": null,
+        "virtual_account": null,
+        "qr_code": null,
+        "metadata": null,
+        "reusability": "MULTIPLE_USE",
+        "status": "ACTIVE"
+    },
+    "description": null,
+    "metadata": null,
+    "customer_id": "fa8f36a4-60e4-4a49-a040-adf953539f71",
+    "created": "2022-11-04T04:44:39.220981439Z",
+    "updated": "2022-11-04T04:44:39.220981439Z",
+    "status": "REQUIRES_ACTION",
+    "actions": [
+        {
+            "action": "AUTH",
+            "url": "https://direct-debit-web-dev.xendit.co/direct_debits/ddpy-74ebdd86-e052-42e8-8b53-d84255ab7004/checkout?failure_redirect_url=https%3A%2F%2Fredirect.me%2Fbadstuff&payment_redirect_delay=10",
+            "url_type": "WEB",
+            "method": "GET",
+            "qr_code": null
+        },
+        {
+            "action": "AUTH",
+            "url": "https://api.xendit.co/payment_requests/ddpy-74ebdd86-e052-42e8-8b53-d84255ab7004/auth",
+            "url_type": "API",
+            "method": "POST",
+            "qr_code": null
+        }
+    ],
+    "failure_code": null,
+    "capture_method": "AUTOMATIC",
+    "initiator": null,
+    "card_verification_results": null,
+    "channel_properties": null,
+    "shipping_information": null,
+    "items": null
+}
+```
+
+##### With Payment Method Object
+
+```python
+from xendit import PaymentRequest
+from xendit.models.paymentmethod import direct_debit, PaymentMethod
+
+payment_request = PaymentRequest.create(
+    amount=50,
+    currency="PHP",
+    customer_id="fa8f36a4-60e4-4a49-a040-adf953539f71",
+    payment_method=PaymentMethod.Query(
+        type="DIRECT_DEBIT",
+        reusability="MULTIPLE_USE",
+        direct_debit=direct_debit.DirectDebit.Query(
+            channel_code="BPI",
+            channel_properties=direct_debit.ChannelProperties.Query(
+                success_return_url="https://mock-test.co",
+                failure_return_url="https://mock-test.co"
+            )
+        )
+    )
+)
+print(payment_request)
+```
+
+Will return
+
+```
+{
+    "id": "pr-db958a53-cf92-4c1f-99d2-dcf2401211d2",
+    "reference_id": "e192b1c2-8814-4e71-a203-ecd43b7af808",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "currency": "PHP",
+    "amount": 50,
+    "country": "PH",
+    "payment_method": {
+        "id": "pm-b8c93e5c-0bc9-44ef-869a-ca5eb73f1ad0",
+        "type": "DIRECT_DEBIT",
+        "reference_id": "9b1841a2-e4a4-4ab7-ab7a-ca7d78b4ce07",
+        "description": null,
+        "created": "2022-11-04T04:51:28.284694454Z",
+        "updated": "2022-11-04T04:51:28.284694454Z",
+        "card": null,
+        "ewallet": null,
+        "direct_debit": {
+            "channel_code": "BPI",
+            "channel_properties": {
+                "success_return_url": "https://mock-test.co",
+                "failure_return_url": "https://mock-test.co"
+            },
+            "type": "BANK_ACCOUNT",
+            "bank_account": {
+                "masked_bank_account_number": null,
+                "bank_account_hash": null
+            },
+            "debit_card": null
+        },
+        "direct_bank_transfer": null,
+        "over_the_counter": null,
+        "virtual_account": null,
+        "qr_code": null,
+        "metadata": null,
+        "reusability": "MULTIPLE_USE",
+        "status": "PENDING"
+    },
+    "description": null,
+    "metadata": null,
+    "customer_id": "fa8f36a4-60e4-4a49-a040-adf953539f71",
+    "created": "2022-11-04T04:51:28.157374805Z",
+    "updated": "2022-11-04T04:51:28.157374805Z",
+    "status": "REQUIRES_ACTION",
+    "actions": [
+        {
+            "action": "AUTH",
+            "url": "https://link-web-staging.xendit.co/oauth/lat-c752e0e0-c4eb-4e4f-9fc8-fbfb12a8d095/confirm",
+            "url_type": "WEB",
+            "method": "GET",
+            "qr_code": null
+        }
+    ],
+    "failure_code": null,
+    "capture_method": "AUTOMATIC",
+    "initiator": null,
+    "card_verification_results": null,
+    "channel_properties": null,
+    "shipping_information": null,
+    "items": null
+}
+```
+
+#### Get Payment Request
+
+```python
+from xendit import PaymentRequest
+
+payment_request = PaymentRequest.get(
+    payment_request_id="pr-db958a53-cf92-4c1f-99d2-dcf2401211d2"
+)
+print(payment_request)
+```
+
+Will return
+
+```
+{
+    "id": "pr-db958a53-cf92-4c1f-99d2-dcf2401211d2",
+    "reference_id": "e192b1c2-8814-4e71-a203-ecd43b7af808",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "currency": "PHP",
+    "amount": 50,
+    "country": "PH",
+    "payment_method": {
+        "id": "pm-b8c93e5c-0bc9-44ef-869a-ca5eb73f1ad0",
+        "type": "DIRECT_DEBIT",
+        "reference_id": "9b1841a2-e4a4-4ab7-ab7a-ca7d78b4ce07",
+        "description": null,
+        "created": "2022-11-04T04:51:28.284694454Z",
+        "updated": "2022-11-04T04:51:28.284694454Z",
+        "card": null,
+        "ewallet": null,
+        "direct_debit": {
+            "channel_code": "BPI",
+            "channel_properties": {
+                "success_return_url": "https://mock-test.co",
+                "failure_return_url": "https://mock-test.co"
+            },
+            "type": "BANK_ACCOUNT",
+            "bank_account": {
+                "masked_bank_account_number": null,
+                "bank_account_hash": null
+            },
+            "debit_card": null
+        },
+        "direct_bank_transfer": null,
+        "over_the_counter": null,
+        "virtual_account": null,
+        "qr_code": null,
+        "metadata": null,
+        "reusability": "MULTIPLE_USE",
+        "status": "PENDING"
+    },
+    "description": null,
+    "metadata": null,
+    "customer_id": "fa8f36a4-60e4-4a49-a040-adf953539f71",
+    "created": "2022-11-04T04:51:28.157374805Z",
+    "updated": "2022-11-04T04:51:28.157374805Z",
+    "status": "REQUIRES_ACTION",
+    "actions": [
+        {
+            "action": "AUTH",
+            "url": "https://link-web-staging.xendit.co/oauth/lat-c752e0e0-c4eb-4e4f-9fc8-fbfb12a8d095/confirm",
+            "url_type": "WEB",
+            "method": "GET",
+            "qr_code": null
+        }
+    ],
+    "failure_code": null,
+    "capture_method": "AUTOMATIC",
+    "initiator": null,
+    "card_verification_results": null,
+    "channel_properties": null,
+    "shipping_information": null,
+    "items": null
+}
+```
+
+#### Confirm Payment Request
+
+```python
+from xendit import PaymentRequest
+
+payment_request = PaymentRequest.confirm(
+    payment_request_id="pr-db958a53-cf92-4c1f-99d2-dcf2401211d2",
+    auth_code="123456"
+)
+print(payment_request)
+```
+
+Will return
+
+```
+{
+    "id": "pr-db958a53-cf92-4c1f-99d2-dcf2401211d2",
+    "reference_id": "e192b1c2-8814-4e71-a203-ecd43b7af808",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "currency": "PHP",
+    "amount": 50,
+    "country": "PH",
+    "payment_method": {
+        "id": "pm-b8c93e5c-0bc9-44ef-869a-ca5eb73f1ad0",
+        "type": "DIRECT_DEBIT",
+        "reference_id": "9b1841a2-e4a4-4ab7-ab7a-ca7d78b4ce07",
+        "description": null,
+        "created": "2022-11-04T04:51:28.284694454Z",
+        "updated": "2022-11-04T04:51:28.284694454Z",
+        "card": null,
+        "ewallet": null,
+        "direct_debit": {
+            "channel_code": "RCBC",
+            "channel_properties": {
+                "success_return_url": "https://mock-test.co",
+                "failure_return_url": "https://mock-test.co"
+            },
+            "type": "BANK_ACCOUNT",
+            "bank_account": {
+                "masked_bank_account_number": "11111111111",
+                "bank_account_hash": "loremipman"
+            },
+            "debit_card": null
+        },
+        "direct_bank_transfer": null,
+        "over_the_counter": null,
+        "virtual_account": null,
+        "qr_code": null,
+        "metadata": null,
+        "reusability": "MULTIPLE_USE",
+        "status": "PENDING"
+    },
+    "description": null,
+    "metadata": null,
+    "customer_id": "fa8f36a4-60e4-4a49-a040-adf953539f71",
+    "created": "2022-11-04T04:51:28.157374805Z",
+    "updated": "2022-11-04T04:51:28.157374805Z",
+    "status": "SUCCEEDED",
+    "actions": [],
+    "failure_code": null,
+    "capture_method": "AUTOMATIC",
+    "initiator": null,
+    "card_verification_results": null,
+    "channel_properties": null,
+    "shipping_information": null,
+    "items": null
+}
+```
+
+#### Resend Auth for Payment Request 
+
+```python
+from xendit import PaymentRequest
+
+payment_request = PaymentRequest.resend_auth(payment_request_id="ddpy-a310d9c2-ed99-4031-a3bf-fb4d8e384f45")
+print(payment_request)
+```
+
+Will return
+
+```
+{
+    "id": "ddpy-a310d9c2-ed99-4031-a3bf-fb4d8e384f45",
+    "reference_id": "3abc9ab4-294e-4f9d-994c-f755b5b87a2a",
+    "business_id": "5f9a3fbd571a1c4068aa40ce",
+    "currency": "PHP",
+    "amount": 500,
+    "country": "PH",
+    "payment_method": {
+        "id": "pm-3d15aa4f-7b08-4355-a4ab-94187151d33c",
+        "type": "DIRECT_DEBIT",
+        "reference_id": "b869964d-37b7-4fc2-9915-386c12a48791",
+        "description": null,
+        "created": "2022-11-04T05:50:27.446274Z",
+        "updated": "2022-11-04T05:50:49.865006Z",
+        "card": null,
+        "ewallet": null,
+        "direct_debit": {
+            "channel_code": "BPI",
+            "channel_properties": {
+                "success_return_url": "https://redirect.me/goodstuff",
+                "failure_return_url": "https://redirect.me/badstuff"
+            },
+            "type": "BANK_ACCOUNT",
+            "bank_account": {
+                "masked_bank_account_number": "XXX1631",
+                "bank_account_hash": "8f06b7dc684aa57a283adf49b2f67bdb11750ac04300f3996d97c7412ac5ca48"
+            },
+            "debit_card": null
+        },
+        "direct_bank_transfer": null,
+        "over_the_counter": null,
+        "virtual_account": null,
+        "qr_code": null,
+        "metadata": null,
+        "reusability": "MULTIPLE_USE",
+        "status": "ACTIVE"
+    },
+    "description": null,
+    "metadata": null,
+    "customer_id": "96f2bab4-4a59-4a80-8da4-1e086c200512",
+    "created": "2022-11-04T05:54:35.703988Z",
+    "updated": "2022-11-04T05:54:35.942271Z",
+    "status": "REQUIRES_ACTION",
+    "actions": [
+        {
+            "action": "AUTH",
+            "url": "https://direct-debit-web-dev.xendit.co/direct_debits/ddpy-a310d9c2-ed99-4031-a3bf-fb4d8e384f45/checkout?failure_redirect_url=https%3A%2F%2Fredirect.me%2Fbadstuff&payment_redirect_delay=10",
+            "url_type": "WEB",
+            "method": "GET",
+            "qr_code": null
+        },
+        {
+            "action": "AUTH",
+            "url": "https://api.xendit.co/payment_requests/ddpy-a310d9c2-ed99-4031-a3bf-fb4d8e384f45/auth",
+            "url_type": "API",
+            "method": "POST",
+            "qr_code": null
+        }
+    ],
+    "failure_code": null,
+    "capture_method": "AUTOMATIC",
+    "initiator": null,
+    "card_verification_results": null,
+    "channel_properties": null,
+    "shipping_information": null,
+    "items": null
+}
+```
+
+
+#### List Payment Requests
+
+```python
+from xendit import PaymentRequest
+
+payment_requests = PaymentRequest.list()
+print(payment_requests)
+```
+
+Will return
+
+```
+{
+    "has_more": false,
+    "data": [
+        {
+            "id": "pr-ba8a686b-57d7-4d93-aa50-2753af90e889",
+            "reference_id": "48e11a9f-025d-4c6b-bc7d-7cec7d91c3ea",
+            "business_id": "5ed75086a883856178afc12e",
+            "currency": "PHP",
+            "amount": 1500,
+            "country": "PH",
+            "payment_method": {
+                "id": "pm-193fff85-e457-41f8-adcd-da8b61525d2e",
+                "type": "EWALLET",
+                "reference_id": "1c376b0a-bbf0-4c7d-89e4-88d63443a955",
+                "description": null,
+                "created": "2022-10-21T03:42:11.602144Z",
+                "updated": "2022-10-21T03:42:11.602144Z",
+                "card": null,
+                "ewallet": {
+                    "channel_code": "PAYMAYA",
+                    "channel_properties": {
+                        "cancel_return_url": "https://redirect.me/nostuff",
+                        "failure_return_url": "https://redirect.me/badstuff",
+                        "success_return_url": "https://redirect.me/goodstuff"
+                    },
+                    "account": {
+                        "name": null,
+                        "account_details": null,
+                        "balance": null,
+                        "point_balance": null
+                    }
+                },
+                "direct_debit": null,
+                "direct_bank_transfer": null,
+                "over_the_counter": null,
+                "virtual_account": null,
+                "qr_code": null,
+                "metadata": null,
+                "reusability": "ONE_TIME_USE",
+                "status": "ACTIVE"
+            },
+            "description": null,
+            "metadata": null,
+            "customer_id": null,
+            "created": "2022-10-21T03:42:11.617507Z",
+            "updated": "2022-10-21T03:42:11.617507Z",
+            "status": "UNKNOWN",
+            "actions": [],
+            "failure_code": null,
+            "capture_method": "AUTOMATIC",
+            "initiator": null,
+            "card_verification_results": null,
+            "channel_properties": null,
+            "shipping_information": null,
+            "items": null
+        }
+    ]
+}
+```
+
+### Refunds
+
+#### Create Refund
+
+```python
+from xendit import Refund
+
+refund = Refund.create(
+    payment_request_id="ewc_0b98b8c6-2f5f-4355-87f1-d3afe372495b"
+)
+print(refund)
+```
+
+Will return
+
+```
+{
+    "id": "rfd-107ac068-0737-4c85-8aaf-61f908e3c136",
+    "payment_id": "ewc_0b98b8c6-2f5f-4355-87f1-d3afe372495b",
+    "invoice_id": "",
+    "amount": 1500,
+    "payment_method_type": "EWALLET",
+    "channel_code": "GRABPAY",
+    "country": "PH",
+    "currency": "PHP",
+    "status": "PENDING",
+    "reason": "",
+    "reference_id": "",
+    "failure_code": null,
+    "refund_fee_amount": null,
+    "created": "2022-11-04T06:21:35.213018123Z",
+    "updated": "2022-11-04T06:21:35.213018243Z",
+    "metadata": null,
+    "refund_method": "DIRECT",
+    "payout_link_properties": null,
+    "actions": null
+}
+```
+
+#### Get Refund
+
+```python
+from xendit import Refund
+
+refund = Refund.get(
+    refund_id="rfd-107ac068-0737-4c85-8aaf-61f908e3c136"
+)
+print(refund)
+```
+
+Will return
+
+```
+{
+    "id": "rfd-107ac068-0737-4c85-8aaf-61f908e3c136",
+    "payment_id": "ewc_0b98b8c6-2f5f-4355-87f1-d3afe372495b",
+    "invoice_id": "",
+    "amount": 1500,
+    "payment_method_type": "EWALLET",
+    "channel_code": "GRABPAY",
+    "country": "PH",
+    "currency": "PHP",
+    "status": "PENDING",
+    "reason": "",
+    "reference_id": "",
+    "failure_code": null,
+    "refund_fee_amount": null,
+    "created": "2022-11-04T06:21:35.213018123Z",
+    "updated": "2022-11-04T06:21:35.213018243Z",
+    "metadata": null,
+    "refund_method": "DIRECT",
+    "payout_link_properties": null,
+    "actions": null
+}
+```
+
+
+#### List Refunds
+
+```python
+from xendit import Refund
+
+refunds = Refund.list()
+print(refunds)
+```
+
+Will return
+
+```
+{
+    "has_more": true,
+    "data": [{
+        "id": "rfd-107ac068-0737-4c85-8aaf-61f908e3c136",
+        "payment_id": "ewc_0b98b8c6-2f5f-4355-87f1-d3afe372495b",
+        "invoice_id": "",
+        "amount": 1500,
+        "payment_method_type": "EWALLET",
+        "channel_code": "GRABPAY",
+        "country": "PH",
+        "currency": "PHP",
+        "status": "PENDING",
+        "reason": "",
+        "reference_id": "",
+        "failure_code": null,
+        "refund_fee_amount": null,
+        "created": "2022-11-04T06:21:35.213018123Z",
+        "updated": "2022-11-04T06:21:35.213018243Z",
+        "metadata": null,
+        "refund_method": "DIRECT",
+        "payout_link_properties": null,
+        "actions": null
+    }]
+}
+```
+
 
 ## Contributing
 
