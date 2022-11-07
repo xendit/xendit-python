@@ -2,8 +2,9 @@ from typing import List
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
-from xendit.models._base_model import BaseModel
+from xendit.models._base_model import BaseModel, BaseListModel
 from xendit.xendit_error import XenditError
+
 
 class Refund(BaseModel):
     """Refund class (API Reference: Payment Method)
@@ -27,7 +28,7 @@ class Refund(BaseModel):
     status: str
     channel_code: str
     reason: str
-    failure_code:str
+    failure_code: str
     refund_fee_amount: float
     created: str
     updated: str
@@ -42,7 +43,7 @@ class Refund(BaseModel):
         currency: str = None,
         amount: float = None,
         reason: str = None,
-        metadata: dict=None,
+        metadata: dict = None,
         for_user_id=None,
         x_api_version=None,
         **kwargs,
@@ -175,6 +176,5 @@ class Refund(BaseModel):
             raise XenditError(resp)
 
 
-class RefundList(BaseModel):
-    has_more: bool
-    data: List[Refund]
+class RefundList(BaseListModel):
+    pass

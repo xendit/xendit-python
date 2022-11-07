@@ -2,7 +2,7 @@ from typing import List
 
 from xendit._api_requestor import _APIRequestor
 from xendit._extract_params import _extract_params
-from xendit.models._base_model import BaseModel
+from xendit.models._base_model import BaseModel, BaseListModel
 from xendit.models.paymentmethod.payment_method import PaymentMethod
 from xendit.xendit_error import XenditError
 
@@ -91,7 +91,7 @@ class PaymentRequest(BaseModel):
         Raises:
           XenditError
         """
- 
+
         url = "/payment_requests"
         headers, body = _extract_params(
             locals(),
@@ -210,10 +210,10 @@ class PaymentRequest(BaseModel):
           XenditError
 
         """
-        url = f"/payment_requests/{payment_request_id}/resend"
+        url = f"/payment_requests/{payment_request_id}/auth/resend"
         headers, _ = _extract_params(
             locals(),
-            func_object=PaymentRequest.confirm,
+            func_object=PaymentRequest.resend_auth,
             headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
             ignore_params=["payment_request_id"],
         )
@@ -284,6 +284,5 @@ class PaymentRequest(BaseModel):
             raise XenditError(resp)
 
 
-class PaymentRequestList(BaseModel):
-    has_more: bool
-    data: List[PaymentRequest]
+class PaymentRequestList(BaseListModel):
+    pass
