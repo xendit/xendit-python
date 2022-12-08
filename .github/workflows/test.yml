@@ -8,19 +8,19 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Install
-      uses: abatilo/actions-poetry@v2
+      uses: abatilo/actions-poetry@v1.11.0
       with:
         python_version: 3.7
         poetry_version: 1.0
         args: install
     - name: Run Linter
-      uses: abatilo/actions-poetry@v2
+      uses: abatilo/actions-poetry@v1.11.0
       with:
         python_version: 3.7
         poetry_version: 1.0
         args: run flake8
     - name: Run pytest
-      uses: abatilo/actions-poetry@v2
+      uses: abatilo/actions-poetry@v1.11.0
       with:
         python_version: 3.7
         poetry_version: 1.0
