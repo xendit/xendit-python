@@ -74,6 +74,7 @@ class VirtualAccount(BaseModel):
         is_single_use=None,
         description=None,
         for_user_id=None,
+        with_fee_rule=None,
         x_idempotency_key=None,
         x_api_version=None,
         **kwargs,
@@ -92,6 +93,7 @@ class VirtualAccount(BaseModel):
           - **is_single_use (bool)
           - **description (str)
           - **for_user_id (str) (XenPlatforms only)
+          - **with_fee_rule (str) (XenPlatforms only)
           - **x_idempotency_key (str)
           - **x_api_version (str): API Version that will be used. If not provided will default to the latest
 
@@ -106,7 +108,7 @@ class VirtualAccount(BaseModel):
         headers, body = _extract_params(
             locals(),
             func_object=VirtualAccount.create,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["with_fee_rule", "for_user_id", "x_idempotency_key", "x_api_version"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
