@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Install
-      uses: abatilo/actions-poetry@v1.8.0
+      uses: abatilo/actions-poetry@v2
       with:
         python_version: 3.7
         poetry_version: 1.0
