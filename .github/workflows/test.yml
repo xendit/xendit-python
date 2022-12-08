@@ -2,26 +2,21 @@ name: Run Linter and Tests
 on: [pull_request]
 
 jobs:
-  build:
-    name: pytest
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: Install
-      uses: abatilo/actions-poetry@v1.8.0
-      with:
-        python_version: 3.7
-        poetry_version: 1.0
-        args: install
-    - name: Run Linter
-      uses: abatilo/actions-poetry@v1.8.0
-      with:
-        python_version: 3.7
-        poetry_version: 1.0
-        args: run flake8
-    - name: Run pytest
-      uses: abatilo/actions-poetry@v1.8.0
-      with:
-        python_version: 3.7
-        poetry_version: 1.0
-        args: run python -m pytest --cov=src --cov-branch
+    build:
+        name: Run Linting and Tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: 3.7
+            - name: Install Poetry
+              uses: abatilo/actions-poetry@v2
+              with:
+                  poetry-version: 1.2.2
+            - name: Install Dependencies
+              run: poetry install
+            - name: Run Linter
+              run: poetry run flake8
+            - name: Run Tests
+              run: poetry run python -m pytest --cov=src --cov-branch
