@@ -12,7 +12,7 @@ jobs:
     - name: Build
       uses: abatilo/actions-poetry@v2
       with:
-        python_version: 3.7.0
+        python_version: 3.7
         poetry_version: 1.0
         args: build
     - name: Publish a Python distribution to TestPyPI
