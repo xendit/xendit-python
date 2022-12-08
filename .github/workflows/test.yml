@@ -16,5 +16,5 @@ jobs:
                   poetry_version: 1.2.2
             - name: Run Linter
               run: poetry run flake8
-            - name: Run Linter
+            - name: Run Tests
               run: poetry run python -m pytest --cov=src --cov-branch
