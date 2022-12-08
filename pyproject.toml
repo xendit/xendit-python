@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xendit-python"
-version = "0.1.10"
+version = "0.1.11"
 description = "Xendit REST API Client for Python - Card, Virtual Account, Invoice, Disbursement, Recurring Payments, Payout, EWallet, Balance, Retail Outlets, Payments API, Services https://xendit.github.io/apireference/"
 authors = ["Maahir Ur Rahman <maahir@xendit.co>"]
 license = "MIT"
