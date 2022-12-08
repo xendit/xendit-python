@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build
-      uses: abatilo/actions-poetry@v1.8.0
+      uses: abatilo/actions-poetry@v2
       with:
         python_version: 3.7.0
         poetry_version: 1.0
