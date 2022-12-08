@@ -14,6 +14,8 @@ jobs:
               uses: abatilo/actions-poetry@v2
               with:
                   poetry_version: 1.2.2
+            - name: Install Dependencies
+              run: poetry install
             - name: Run Linter
               run: poetry run flake8
             - name: Run Tests
