@@ -258,6 +258,7 @@ class CreditCard(BaseModel):
         for_user_id=None,
         x_api_version=None,
         metadata=None,
+        with_fee_rule=None,
         **kwargs,
     ):
         """Send POST Request to create Credit Card Charge (API Reference: Credit Card/Create Charge)
@@ -276,7 +277,8 @@ class CreditCard(BaseModel):
           - **promotion (CreditCardCharge.Promotion.Query)
           - **installment (CreditCardCharge.Installment.Query)
           - **x_idempotency_key (str)
-          - **for_user_id (str)
+          - **for_user_id (str) (XenPlatforms only)
+          - **with_fee_rule (str) (XenPlatforms only)
           - **x_api_version (str)
           - **metadata (dict)
 
@@ -291,7 +293,7 @@ class CreditCard(BaseModel):
         headers, body = _extract_params(
             locals(),
             func_object=CreditCard.create_charge,
-            headers_params=["for_user_id", "x_idempotency_key", "x_api_version"],
+            headers_params=["for_user_id", "x_idempotency_key", "x_api_version", "with_fee_rule"],
         )
         kwargs["headers"] = headers
         kwargs["body"] = body
