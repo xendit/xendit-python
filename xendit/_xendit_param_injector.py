@@ -8,7 +8,7 @@ from .models import CardlessCredit
 from .models import CreditCard
 from .models import DirectDebit
 from .models import Disbursement
-from .models import EWallet
+from .models.ewallet import EWallet
 from .models import Invoice
 from .models import PaymentMethod
 from .models import PaymentRequest
