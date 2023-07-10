@@ -75,6 +75,8 @@ class Invoice(BaseModel):
         description,
         amount,
         customer=None,
+        customer_notification_preference=None,
+        expiry_date=None,
         should_send_email=None,
         callback_virtual_account_id=None,
         invoice_duration=None,
