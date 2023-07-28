@@ -82,10 +82,10 @@ class _XenditParamInjector:
         """Inject every static method in `injected_class` with provided parameters.
 
         Args:
-          - injected_class (class): Class that will be injected
+            - injected_class (class): Class that will be injected
 
         Return:
-          injected_class
+            - injected_class
         """
         params = self.params
 

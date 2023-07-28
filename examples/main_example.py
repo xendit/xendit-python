@@ -13,12 +13,7 @@ from retail_outlet_example import retail_outlet_example
 from virtual_account_example import virtual_account_example
 from xenplatform_example import xenplatform_example
 
-# Hackish method to import from another directory
-# Useful while xendit-python isn't released yet to the public
-import importlib.machinery
-
-loader = importlib.machinery.SourceFileLoader("xendit", "../xendit/__init__.py")
-xendit = loader.load_module("xendit")
+import xendit
 
 
 def ask_input():

@@ -1,11 +1,13 @@
 from print_running_function import print_running_function
 
-# Hackish method to import from another directory
-# Useful while xendit-python isn't released yet to the public
-import importlib.machinery
+# # Hackish method to import from another directory
+# # Useful while xendit-python isn't released yet to the public
+# import importlib.machinery
 
-loader = importlib.machinery.SourceFileLoader("xendit", "../xendit/__init__.py")
-xendit = loader.load_module("xendit")
+# loader = importlib.machinery.SourceFileLoader("xendit", "../xendit/__init__.py")
+# xendit = loader.load_module("xendit")
+
+import xendit
 
 
 class GetBalance:
