@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.86.1
+    The version of the XENDIT API: 1.42.3
 """
 
 
@@ -7,13 +7,15 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.over_the_counter_channel_code import OverTheCounterChannelCode
-from xendit.payment_method.model.over_the_counter_channel_properties import OverTheCounterChannelProperties
-from xendit.payment_method.model.over_the_counter_parameters import OverTheCounterParameters
+from xendit.payment_request.model.over_the_counter_channel_code import OverTheCounterChannelCode
+from xendit.payment_request.model.over_the_counter_channel_properties import OverTheCounterChannelProperties
+from xendit.payment_request.model.over_the_counter_parameters import OverTheCounterParameters
+from xendit.payment_request.model.payment_request_currency import PaymentRequestCurrency
 globals()['OverTheCounterChannelCode'] = OverTheCounterChannelCode
 globals()['OverTheCounterChannelProperties'] = OverTheCounterChannelProperties
 globals()['OverTheCounterParameters'] = OverTheCounterParameters
-from xendit.payment_method.model.over_the_counter import OverTheCounter
+globals()['PaymentRequestCurrency'] = PaymentRequestCurrency
+from xendit.payment_request.model.over_the_counter import OverTheCounter
 
 
 class TestOverTheCounter(unittest.TestCase):

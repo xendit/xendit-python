@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.4.2
+    The version of the XENDIT API: 1.5.0
 """
 
 
@@ -53,7 +53,6 @@ class InvoiceClientType(ModelSimple):
             'ON_DEMAND': "ON_DEMAND",
             'RECURRING': "RECURRING",
             'MOBILE': "MOBILE",
-            'STOREFRONT': "STOREFRONT",
         },
     }
 
@@ -105,10 +104,10 @@ class InvoiceClientType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", "STOREFRONT", ]  # noqa: E501
+            args[0] (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", "STOREFRONT", ]  # noqa: E501
+            value (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -201,10 +200,10 @@ class InvoiceClientType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", "STOREFRONT", ]  # noqa: E501
+            args[0] (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", "STOREFRONT", ]  # noqa: E501
+            value (str): Representing the client type or source of an invoice.., must be one of ["DASHBOARD", "API_GATEWAY", "INTEGRATION", "ON_DEMAND", "RECURRING", "MOBILE", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

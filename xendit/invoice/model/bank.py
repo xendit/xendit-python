@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.4.2
+    The version of the XENDIT API: 1.5.0
 """
 
 
@@ -25,7 +25,9 @@ from xendit.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from xendit.invoice.model.alternative_display_item import AlternativeDisplayItem
     from xendit.invoice.model.bank_code import BankCode
+    globals()['AlternativeDisplayItem'] = AlternativeDisplayItem
     globals()['BankCode'] = BankCode
 
 
@@ -88,6 +90,7 @@ class Bank(ModelNormal):
             'bank_branch': (str,),  # noqa: E501
             'bank_account_number': (str,),  # noqa: E501
             'transfer_amount': (float,),  # noqa: E501
+            'alternative_displays': ([AlternativeDisplayItem],),  # noqa: E501
         }
 
     @cached_property
@@ -102,6 +105,7 @@ class Bank(ModelNormal):
         'bank_branch': 'bank_branch',  # noqa: E501
         'bank_account_number': 'bank_account_number',  # noqa: E501
         'transfer_amount': 'transfer_amount',  # noqa: E501
+        'alternative_displays': 'alternative_displays',  # noqa: E501
     }
 
     read_only_vars = {
@@ -153,6 +157,7 @@ class Bank(ModelNormal):
             bank_branch (str): The branch of the bank.. [optional]  # noqa: E501
             bank_account_number (str): The bank account number.. [optional]  # noqa: E501
             transfer_amount (float): The transfer amount.. [optional]  # noqa: E501
+            alternative_displays ([AlternativeDisplayItem]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -251,6 +256,7 @@ class Bank(ModelNormal):
             bank_branch (str): The branch of the bank.. [optional]  # noqa: E501
             bank_account_number (str): The bank account number.. [optional]  # noqa: E501
             transfer_amount (float): The transfer amount.. [optional]  # noqa: E501
+            alternative_displays ([AlternativeDisplayItem]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

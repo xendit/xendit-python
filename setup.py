@@ -1,12 +1,12 @@
 """
-    The version of the XENDIT API: 2.86.1
+    The version of the XENDIT API: 2.87.2
 """
 
 
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "xendit"
-VERSION = "3.0.0-beta.0"
+VERSION = "3.0.0-beta.2"
 # To install the library, run the following
 #
 # python setup.py install

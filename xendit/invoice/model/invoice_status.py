@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.4.2
+    The version of the XENDIT API: 1.5.0
 """
 
 
@@ -48,11 +48,9 @@ class InvoiceStatus(ModelSimple):
     allowed_values = {
         ('value',): {
             'PENDING': "PENDING",
-            'COMPLETING': "COMPLETING",
             'PAID': "PAID",
             'SETTLED': "SETTLED",
             'EXPIRED': "EXPIRED",
-            'REMINDER': "REMINDER",
         },
     }
 
@@ -104,10 +102,10 @@ class InvoiceStatus(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the status of an invoice.., must be one of ["PENDING", "COMPLETING", "PAID", "SETTLED", "EXPIRED", "REMINDER", ]  # noqa: E501
+            args[0] (str): Representing the status of an invoice.., must be one of ["PENDING", "PAID", "SETTLED", "EXPIRED", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the status of an invoice.., must be one of ["PENDING", "COMPLETING", "PAID", "SETTLED", "EXPIRED", "REMINDER", ]  # noqa: E501
+            value (str): Representing the status of an invoice.., must be one of ["PENDING", "PAID", "SETTLED", "EXPIRED", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -200,10 +198,10 @@ class InvoiceStatus(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the status of an invoice.., must be one of ["PENDING", "COMPLETING", "PAID", "SETTLED", "EXPIRED", "REMINDER", ]  # noqa: E501
+            args[0] (str): Representing the status of an invoice.., must be one of ["PENDING", "PAID", "SETTLED", "EXPIRED", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the status of an invoice.., must be one of ["PENDING", "COMPLETING", "PAID", "SETTLED", "EXPIRED", "REMINDER", ]  # noqa: E501
+            value (str): Representing the status of an invoice.., must be one of ["PENDING", "PAID", "SETTLED", "EXPIRED", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

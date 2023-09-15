@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **bank_branch** | **str** | The branch of the bank. | [optional] 
 **bank_account_number** | **str** | The bank account number. | [optional] 
 **transfer_amount** | **float** | The transfer amount. | [optional] 
+**alternative_displays** | [**[AlternativeDisplayItem]**](AlternativeDisplayItem.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

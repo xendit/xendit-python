@@ -33,9 +33,7 @@ from xendit.balance_and_transaction.model.currency import Currency
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -108,9 +106,7 @@ from xendit.balance_and_transaction.model.validation_error import ValidationErro
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client

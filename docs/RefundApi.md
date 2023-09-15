@@ -30,9 +30,7 @@ from xendit.refund.model.create_refund_default_response import CreateRefundDefau
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -105,9 +103,7 @@ from xendit.refund.model.create_refund_default_response import CreateRefundDefau
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -168,9 +164,7 @@ from xendit.refund.model.create_refund_default_response import CreateRefundDefau
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -221,9 +215,7 @@ from xendit.refund.model.create_refund_default_response import CreateRefundDefau
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.4.2
+    The version of the XENDIT API: 1.5.0
 """
 
 
@@ -29,7 +29,6 @@ def lazy_import():
     from xendit.invoice.model.customer_object import CustomerObject
     from xendit.invoice.model.direct_debit import DirectDebit
     from xendit.invoice.model.ewallet import Ewallet
-    from xendit.invoice.model.invoice_client_type import InvoiceClientType
     from xendit.invoice.model.invoice_currency import InvoiceCurrency
     from xendit.invoice.model.invoice_fee import InvoiceFee
     from xendit.invoice.model.invoice_item import InvoiceItem
@@ -43,7 +42,6 @@ def lazy_import():
     globals()['CustomerObject'] = CustomerObject
     globals()['DirectDebit'] = DirectDebit
     globals()['Ewallet'] = Ewallet
-    globals()['InvoiceClientType'] = InvoiceClientType
     globals()['InvoiceCurrency'] = InvoiceCurrency
     globals()['InvoiceFee'] = InvoiceFee
     globals()['InvoiceItem'] = InvoiceItem
@@ -110,7 +108,6 @@ class Invoice(ModelNormal):
         return {
             'external_id': (str,),  # noqa: E501
             'user_id': (str,),  # noqa: E501
-            'is_high': (bool,),  # noqa: E501
             'status': (InvoiceStatus,),  # noqa: E501
             'merchant_name': (str,),  # noqa: E501
             'merchant_profile_picture_url': (str,),  # noqa: E501
@@ -124,7 +121,6 @@ class Invoice(ModelNormal):
             'available_direct_debits': ([DirectDebit],),  # noqa: E501
             'available_paylaters': ([Paylater],),  # noqa: E501
             'should_send_email': (bool,),  # noqa: E501
-            'client_type': (InvoiceClientType,),  # noqa: E501
             'created': (datetime,),  # noqa: E501
             'updated': (datetime,),  # noqa: E501
             'id': (str,),  # noqa: E501
@@ -153,7 +149,6 @@ class Invoice(ModelNormal):
     attribute_map = {
         'external_id': 'external_id',  # noqa: E501
         'user_id': 'user_id',  # noqa: E501
-        'is_high': 'is_high',  # noqa: E501
         'status': 'status',  # noqa: E501
         'merchant_name': 'merchant_name',  # noqa: E501
         'merchant_profile_picture_url': 'merchant_profile_picture_url',  # noqa: E501
@@ -167,7 +162,6 @@ class Invoice(ModelNormal):
         'available_direct_debits': 'available_direct_debits',  # noqa: E501
         'available_paylaters': 'available_paylaters',  # noqa: E501
         'should_send_email': 'should_send_email',  # noqa: E501
-        'client_type': 'client_type',  # noqa: E501
         'created': 'created',  # noqa: E501
         'updated': 'updated',  # noqa: E501
         'id': 'id',  # noqa: E501
@@ -195,13 +189,12 @@ class Invoice(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, external_id, user_id, is_high, status, merchant_name, merchant_profile_picture_url, amount, expiry_date, invoice_url, available_banks, available_retail_outlets, available_ewallets, available_qr_codes, available_direct_debits, available_paylaters, should_send_email, client_type, created, updated, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, external_id, user_id, status, merchant_name, merchant_profile_picture_url, amount, expiry_date, invoice_url, available_banks, available_retail_outlets, available_ewallets, available_qr_codes, available_direct_debits, available_paylaters, should_send_email, created, updated, *args, **kwargs):  # noqa: E501
         """Invoice - a model defined in OpenAPI
 
         Args:
             external_id (str): The external identifier for the invoice.
             user_id (str): The user ID associated with the invoice.
-            is_high (bool): Indicates if it's a high-value invoice.
             status (InvoiceStatus):
             merchant_name (str): The name of the merchant.
             merchant_profile_picture_url (str): The URL of the merchant's profile picture.
@@ -215,7 +208,6 @@ class Invoice(ModelNormal):
             available_direct_debits ([DirectDebit]): An array of available direct debit options for payment.
             available_paylaters ([Paylater]): An array of available pay-later options for payment.
             should_send_email (bool): Indicates whether email notifications should be sent.
-            client_type (InvoiceClientType):
             created (datetime): Representing a date and time in ISO 8601 format.
             updated (datetime): Representing a date and time in ISO 8601 format.
 
@@ -301,7 +293,6 @@ class Invoice(ModelNormal):
 
         self.external_id = external_id
         self.user_id = user_id
-        self.is_high = is_high
         self.status = status
         self.merchant_name = merchant_name
         self.merchant_profile_picture_url = merchant_profile_picture_url
@@ -315,7 +306,6 @@ class Invoice(ModelNormal):
         self.available_direct_debits = available_direct_debits
         self.available_paylaters = available_paylaters
         self.should_send_email = should_send_email
-        self.client_type = client_type
         self.created = created
         self.updated = updated
         for var_name, var_value in kwargs.items():
@@ -338,13 +328,12 @@ class Invoice(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, external_id, user_id, is_high, status, merchant_name, merchant_profile_picture_url, amount, expiry_date, invoice_url, available_banks, available_retail_outlets, available_ewallets, available_qr_codes, available_direct_debits, available_paylaters, should_send_email, client_type, created, updated, *args, **kwargs):  # noqa: E501
+    def __init__(self, external_id, user_id, status, merchant_name, merchant_profile_picture_url, amount, expiry_date, invoice_url, available_banks, available_retail_outlets, available_ewallets, available_qr_codes, available_direct_debits, available_paylaters, should_send_email, created, updated, *args, **kwargs):  # noqa: E501
         """Invoice - a model defined in OpenAPI
 
         Args:
             external_id (str): The external identifier for the invoice.
             user_id (str): The user ID associated with the invoice.
-            is_high (bool): Indicates if it's a high-value invoice.
             status (InvoiceStatus):
             merchant_name (str): The name of the merchant.
             merchant_profile_picture_url (str): The URL of the merchant's profile picture.
@@ -358,7 +347,6 @@ class Invoice(ModelNormal):
             available_direct_debits ([DirectDebit]): An array of available direct debit options for payment.
             available_paylaters ([Paylater]): An array of available pay-later options for payment.
             should_send_email (bool): Indicates whether email notifications should be sent.
-            client_type (InvoiceClientType):
             created (datetime): Representing a date and time in ISO 8601 format.
             updated (datetime): Representing a date and time in ISO 8601 format.
 
@@ -442,7 +430,6 @@ class Invoice(ModelNormal):
 
         self.external_id = external_id
         self.user_id = user_id
-        self.is_high = is_high
         self.status = status
         self.merchant_name = merchant_name
         self.merchant_profile_picture_url = merchant_profile_picture_url
@@ -456,7 +443,6 @@ class Invoice(ModelNormal):
         self.available_direct_debits = available_direct_debits
         self.available_paylaters = available_paylaters
         self.should_send_email = should_send_email
-        self.client_type = client_type
         self.created = created
         self.updated = updated
         for var_name, var_value in kwargs.items():

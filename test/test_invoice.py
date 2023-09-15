@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.4.2
+    The version of the XENDIT API: 1.5.0
 """
 
 
@@ -11,7 +11,6 @@ from xendit.invoice.model.bank import Bank
 from xendit.invoice.model.customer_object import CustomerObject
 from xendit.invoice.model.direct_debit import DirectDebit
 from xendit.invoice.model.ewallet import Ewallet
-from xendit.invoice.model.invoice_client_type import InvoiceClientType
 from xendit.invoice.model.invoice_currency import InvoiceCurrency
 from xendit.invoice.model.invoice_fee import InvoiceFee
 from xendit.invoice.model.invoice_item import InvoiceItem
@@ -25,7 +24,6 @@ globals()['Bank'] = Bank
 globals()['CustomerObject'] = CustomerObject
 globals()['DirectDebit'] = DirectDebit
 globals()['Ewallet'] = Ewallet
-globals()['InvoiceClientType'] = InvoiceClientType
 globals()['InvoiceCurrency'] = InvoiceCurrency
 globals()['InvoiceFee'] = InvoiceFee
 globals()['InvoiceItem'] = InvoiceItem

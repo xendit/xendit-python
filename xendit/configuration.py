@@ -16,6 +16,11 @@ JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'minLength', 'pattern', 'maxItems', 'minItems'
 }
 
+def set_api_key(api_key):
+    config = Configuration()
+    config.api_key = api_key
+    config.set_default(config)
+
 class Configuration(object):
     """NOTE: This class is auto generated
     Do not edit the class manually.
@@ -359,8 +364,8 @@ class Configuration(object):
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 2.86.1\n"\
-               "SDK Package Version: 3.0.0-beta.0".\
+               "Version of the API: 2.87.2\n"\
+               "SDK Package Version: 3.0.0-beta.2".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

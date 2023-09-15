@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **external_id** | **str** | The external identifier for the invoice. | 
 **user_id** | **str** | The user ID associated with the invoice. | 
-**is_high** | **bool** | Indicates if it&#39;s a high-value invoice. | 
 **status** | [**InvoiceStatus**](InvoiceStatus.md) |  | 
 **merchant_name** | **str** | The name of the merchant. | 
 **merchant_profile_picture_url** | **str** | The URL of the merchant&#39;s profile picture. | 
@@ -21,7 +20,6 @@ Name | Type | Description | Notes
 **available_direct_debits** | [**[DirectDebit]**](DirectDebit.md) | An array of available direct debit options for payment. | 
 **available_paylaters** | [**[Paylater]**](Paylater.md) | An array of available pay-later options for payment. | 
 **should_send_email** | **bool** | Indicates whether email notifications should be sent. | 
-**client_type** | [**InvoiceClientType**](InvoiceClientType.md) |  | 
 **created** | **datetime** | Representing a date and time in ISO 8601 format. | 
 **updated** | **datetime** | Representing a date and time in ISO 8601 format. | 
 **id** | **str** | The unique identifier for the invoice. | [optional] 

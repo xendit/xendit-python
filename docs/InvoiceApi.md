@@ -31,9 +31,7 @@ from xendit.invoice.model.create_invoice_request import CreateInvoiceRequest
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -45,7 +43,6 @@ create_invoice_request = CreateInvoiceRequest(
         amount=3.14,
         payer_email="payer_email_example",
         description="description_example",
-        client_type="client_type_example",
         invoice_duration="invoice_duration_example",
         callback_virtual_account_id="callback_virtual_account_id_example",
         should_send_email=True,
@@ -163,9 +160,7 @@ from xendit.invoice.model.server_error import ServerError
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -224,9 +219,7 @@ from xendit.invoice.model.server_error import ServerError
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -279,15 +272,15 @@ Get all Invoices
 import time
 import xendit
 from xendit.apis import InvoiceApi
+from xendit.invoice.model.invoice_status import InvoiceStatus
 from xendit.invoice.model.invoice import Invoice
+from xendit.invoice.model.invoice_client_type import InvoiceClientType
 from xendit.invoice.model.unauthorized_error import UnauthorizedError
 from xendit.invoice.model.server_error import ServerError
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -311,7 +304,7 @@ except xendit.ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **external_id** | **str**|  | [optional]
- **statuses** | **[str]**|  | [optional]
+ **statuses** | [**[InvoiceStatus]**](InvoiceStatus.md)|  | [optional]
  **limit** | **float**|  | [optional]
  **created_after** | **datetime**|  | [optional]
  **created_before** | **datetime**|  | [optional]
@@ -320,7 +313,7 @@ Name | Type | Description  | Notes
  **expired_after** | **datetime**|  | [optional]
  **expired_before** | **datetime**|  | [optional]
  **last_invoice** | **str**|  | [optional]
- **client_types** | **[str]**|  | [optional]
+ **client_types** | [**[InvoiceClientType]**](InvoiceClientType.md)|  | [optional]
  **payment_channels** | **[str]**|  | [optional]
  **on_demand_link** | **str**|  | [optional]
  **recurring_payment_id** | **str**|  | [optional]

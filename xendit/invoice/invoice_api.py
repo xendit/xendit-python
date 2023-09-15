@@ -3,7 +3,7 @@
 
     xendit-invoice-service descriptions  # noqa: E501
 
-    The version of the OpenAPI document: 1.4.2
+    The version of the OpenAPI document: 1.5.0
 """
 
 import re  # noqa: F401
@@ -209,8 +209,6 @@ class InvoiceApi(object):
                 'nullable': [
                 ],
                 'enum': [
-                    'statuses',
-                    'client_types',
                 ],
                 'validation': [
                 ]
@@ -219,28 +217,12 @@ class InvoiceApi(object):
                 'validations': {
                 },
                 'allowed_values': {
-                    ('statuses',): {
-
-                        "PENDING": "PENDING",
-                        "PAID": "PAID",
-                        "SETTLED": "SETTLED",
-                        "EXPIRED": "EXPIRED"
-                    },
-                    ('client_types',): {
-
-                        "API_GATEWAY": "API_GATEWAY",
-                        "DASHBOARD": "DASHBOARD",
-                        "INTEGRATION": "INTEGRATION",
-                        "ON_DEMAND": "ON_DEMAND",
-                        "RECURRING": "RECURRING",
-                        "MOBILE": "MOBILE"
-                    },
                 },
                 'openapi_types': {
                     'external_id':
                         (str,),
                     'statuses':
-                        ([str],),
+                        ([InvoiceStatus],),
                     'limit':
                         (float,),
                     'created_after':
@@ -258,7 +240,7 @@ class InvoiceApi(object):
                     'last_invoice':
                         (str,),
                     'client_types':
-                        ([str],),
+                        ([InvoiceClientType],),
                     'payment_channels':
                         ([str],),
                     'on_demand_link':
@@ -574,7 +556,7 @@ class InvoiceApi(object):
 
         Keyword Args:
             external_id (str): [optional]
-            statuses ([str]): [optional]
+            statuses ([InvoiceStatus]): [optional]
             limit (float): [optional]
             created_after (datetime): [optional]
             created_before (datetime): [optional]
@@ -583,7 +565,7 @@ class InvoiceApi(object):
             expired_after (datetime): [optional]
             expired_before (datetime): [optional]
             last_invoice (str): [optional]
-            client_types ([str]): [optional]
+            client_types ([InvoiceClientType]): [optional]
             payment_channels ([str]): [optional]
             on_demand_link (str): [optional]
             recurring_payment_id (str): [optional]

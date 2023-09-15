@@ -10,6 +10,7 @@
 # sys.setrecursionlimit(n)
 
 from xendit.invoice.model.address_object import AddressObject
+from xendit.invoice.model.alternative_display_item import AlternativeDisplayItem
 from xendit.invoice.model.bad_request_error import BadRequestError
 from xendit.invoice.model.bank import Bank
 from xendit.invoice.model.bank_code import BankCode

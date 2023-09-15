@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.4.2
+    The version of the XENDIT API: 1.5.0
 """
 
 
@@ -92,7 +92,6 @@ class CreateInvoiceRequest(ModelNormal):
             'amount': (float,),  # noqa: E501
             'payer_email': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
-            'client_type': (str,),  # noqa: E501
             'invoice_duration': (str,),  # noqa: E501
             'callback_virtual_account_id': (str,),  # noqa: E501
             'should_send_email': (bool,),  # noqa: E501
@@ -121,7 +120,6 @@ class CreateInvoiceRequest(ModelNormal):
         'amount': 'amount',  # noqa: E501
         'payer_email': 'payer_email',  # noqa: E501
         'description': 'description',  # noqa: E501
-        'client_type': 'client_type',  # noqa: E501
         'invoice_duration': 'invoice_duration',  # noqa: E501
         'callback_virtual_account_id': 'callback_virtual_account_id',  # noqa: E501
         'should_send_email': 'should_send_email',  # noqa: E501
@@ -187,7 +185,6 @@ class CreateInvoiceRequest(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             payer_email (str): The email address of the payer.. [optional]  # noqa: E501
             description (str): A description of the payment.. [optional]  # noqa: E501
-            client_type (str): The client type (internal use).. [optional]  # noqa: E501
             invoice_duration (str): The duration of the invoice.. [optional]  # noqa: E501
             callback_virtual_account_id (str): The ID of the callback virtual account.. [optional]  # noqa: E501
             should_send_email (bool): Indicates whether email notifications should be sent.. [optional]  # noqa: E501
@@ -299,7 +296,6 @@ class CreateInvoiceRequest(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             payer_email (str): The email address of the payer.. [optional]  # noqa: E501
             description (str): A description of the payment.. [optional]  # noqa: E501
-            client_type (str): The client type (internal use).. [optional]  # noqa: E501
             invoice_duration (str): The duration of the invoice.. [optional]  # noqa: E501
             callback_virtual_account_id (str): The ID of the callback virtual account.. [optional]  # noqa: E501
             should_send_email (bool): Indicates whether email notifications should be sent.. [optional]  # noqa: E501

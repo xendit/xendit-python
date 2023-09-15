@@ -1,4 +1,4 @@
-# xendit.payment_request.model.EWalletAccount
+# xendit.payment_method.model.EWalletAccount
 
 EWallet Account Properties
 

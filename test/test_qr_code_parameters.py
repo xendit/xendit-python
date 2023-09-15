@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.86.1
+    The version of the XENDIT API: 1.42.3
 """
 
 
@@ -7,11 +7,11 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.qr_code_channel_code import QRCodeChannelCode
-from xendit.payment_method.model.qr_code_channel_properties import QRCodeChannelProperties
+from xendit.payment_request.model.qr_code_channel_code import QRCodeChannelCode
+from xendit.payment_request.model.qr_code_channel_properties import QRCodeChannelProperties
 globals()['QRCodeChannelCode'] = QRCodeChannelCode
 globals()['QRCodeChannelProperties'] = QRCodeChannelProperties
-from xendit.payment_method.model.qr_code_parameters import QRCodeParameters
+from xendit.payment_request.model.qr_code_parameters import QRCodeParameters
 
 
 class TestQRCodeParameters(unittest.TestCase):

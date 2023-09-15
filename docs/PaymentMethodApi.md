@@ -40,9 +40,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -121,9 +119,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -191,9 +187,7 @@ from xendit.payment_method.model.payment_method_expire_parameters import Payment
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -267,9 +261,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -335,9 +327,7 @@ from xendit.payment_method.model.payment_method_list import PaymentMethodList
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -409,9 +399,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -476,9 +464,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -567,9 +553,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client
@@ -644,9 +628,7 @@ from xendit.payment_method.model.get_all_payment_methods_default_response import
 from pprint import pprint
 
 # See configuration.py for a list of all supported configuration parameters.
-configuration = xendit.Configuration(
-    api_key = 'XENDIT API KEY'
-)
+xendit.set_api_key('XENDIT API KEY')
 
 
 # Enter a context with an instance of the API client

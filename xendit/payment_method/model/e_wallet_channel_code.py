@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.86.1
+    The version of the XENDIT API: 2.87.2
 """
 
 
@@ -63,6 +63,10 @@ class EWalletChannelCode(ModelSimple):
             'VNPTWALLET': "VNPTWALLET",
             'VIETTELPAY': "VIETTELPAY",
             'ZALOPAY': "ZALOPAY",
+            'WECHATPAY': "WECHATPAY",
+            'LINEPAY': "LINEPAY",
+            'TRUEMONEY': "TRUEMONEY",
+            'ALIPAY': "ALIPAY",
         },
     }
 
@@ -114,10 +118,10 @@ class EWalletChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", ]  # noqa: E501
+            args[0] (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", "WECHATPAY", "LINEPAY", "TRUEMONEY", "ALIPAY", ]  # noqa: E501
 
         Keyword Args:
-            value (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", ]  # noqa: E501
+            value (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", "WECHATPAY", "LINEPAY", "TRUEMONEY", "ALIPAY", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -210,10 +214,10 @@ class EWalletChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", ]  # noqa: E501
+            args[0] (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", "WECHATPAY", "LINEPAY", "TRUEMONEY", "ALIPAY", ]  # noqa: E501
 
         Keyword Args:
-            value (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", ]  # noqa: E501
+            value (str): EWallet Channel Code., must be one of ["GCASH", "GRABPAY", "PAYMAYA", "OVO", "DANA", "LINKAJA", "SHOPEEPAY", "SAKUKU", "NEXCASH", "ASTRAPAY", "JENIUSPAY", "APPOTA", "MOMO", "VNPTWALLET", "VIETTELPAY", "ZALOPAY", "WECHATPAY", "LINEPAY", "TRUEMONEY", "ALIPAY", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
