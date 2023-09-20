@@ -1,0 +1,77 @@
+# flake8: noqa
+
+# import all models into this package
+# if you have many models here with many references from one model to another this may
+# raise a RecursionError
+# to avoid this, import only the models that you directly need like:
+# from xendit.payment_method.model.pet import Pet
+# or import this package, but before doing it, use:
+# import sys
+# sys.setrecursionlimit(n)
+
+from xendit.payment_method.model.billing_information import BillingInformation
+from xendit.payment_method.model.card import Card
+from xendit.payment_method.model.card_channel_properties import CardChannelProperties
+from xendit.payment_method.model.card_parameters import CardParameters
+from xendit.payment_method.model.card_parameters_card_information import CardParametersCardInformation
+from xendit.payment_method.model.card_verification_results import CardVerificationResults
+from xendit.payment_method.model.card_verification_results_three_d_secure import CardVerificationResultsThreeDSecure
+from xendit.payment_method.model.channel_amount_limits import ChannelAmountLimits
+from xendit.payment_method.model.channel_amount_limits_all_of import ChannelAmountLimitsAllOf
+from xendit.payment_method.model.channel_property import ChannelProperty
+from xendit.payment_method.model.channel_property_all_of import ChannelPropertyAllOf
+from xendit.payment_method.model.create_payment_method409_response import CreatePaymentMethod409Response
+from xendit.payment_method.model.create_payment_method503_response import CreatePaymentMethod503Response
+from xendit.payment_method.model.direct_debit import DirectDebit
+from xendit.payment_method.model.direct_debit_all_of import DirectDebitAllOf
+from xendit.payment_method.model.direct_debit_bank_account import DirectDebitBankAccount
+from xendit.payment_method.model.direct_debit_channel_code import DirectDebitChannelCode
+from xendit.payment_method.model.direct_debit_channel_properties import DirectDebitChannelProperties
+from xendit.payment_method.model.direct_debit_debit_card import DirectDebitDebitCard
+from xendit.payment_method.model.direct_debit_parameters import DirectDebitParameters
+from xendit.payment_method.model.direct_debit_type import DirectDebitType
+from xendit.payment_method.model.e_wallet import EWallet
+from xendit.payment_method.model.e_wallet_account import EWalletAccount
+from xendit.payment_method.model.e_wallet_channel_code import EWalletChannelCode
+from xendit.payment_method.model.e_wallet_channel_properties import EWalletChannelProperties
+from xendit.payment_method.model.e_wallet_parameters import EWalletParameters
+from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
+from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
+from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
+from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
+from xendit.payment_method.model.over_the_counter import OverTheCounter
+from xendit.payment_method.model.over_the_counter_channel_code import OverTheCounterChannelCode
+from xendit.payment_method.model.over_the_counter_channel_properties import OverTheCounterChannelProperties
+from xendit.payment_method.model.over_the_counter_channel_properties_update import OverTheCounterChannelPropertiesUpdate
+from xendit.payment_method.model.over_the_counter_parameters import OverTheCounterParameters
+from xendit.payment_method.model.over_the_counter_update_parameters import OverTheCounterUpdateParameters
+from xendit.payment_method.model.payment_channel import PaymentChannel
+from xendit.payment_method.model.payment_channel_all_of import PaymentChannelAllOf
+from xendit.payment_method.model.payment_channel_list import PaymentChannelList
+from xendit.payment_method.model.payment_channel_list_links_inner import PaymentChannelListLinksInner
+from xendit.payment_method.model.payment_channel_list_links_inner_all_of import PaymentChannelListLinksInnerAllOf
+from xendit.payment_method.model.payment_method import PaymentMethod
+from xendit.payment_method.model.payment_method_action import PaymentMethodAction
+from xendit.payment_method.model.payment_method_auth_parameters import PaymentMethodAuthParameters
+from xendit.payment_method.model.payment_method_country import PaymentMethodCountry
+from xendit.payment_method.model.payment_method_expire_parameters import PaymentMethodExpireParameters
+from xendit.payment_method.model.payment_method_list import PaymentMethodList
+from xendit.payment_method.model.payment_method_parameters import PaymentMethodParameters
+from xendit.payment_method.model.payment_method_reusability import PaymentMethodReusability
+from xendit.payment_method.model.payment_method_status import PaymentMethodStatus
+from xendit.payment_method.model.payment_method_type import PaymentMethodType
+from xendit.payment_method.model.payment_method_update_parameters import PaymentMethodUpdateParameters
+from xendit.payment_method.model.qr_code import QRCode
+from xendit.payment_method.model.qr_code_channel_code import QRCodeChannelCode
+from xendit.payment_method.model.qr_code_channel_properties import QRCodeChannelProperties
+from xendit.payment_method.model.qr_code_parameters import QRCodeParameters
+from xendit.payment_method.model.simulate_payment_request import SimulatePaymentRequest
+from xendit.payment_method.model.tokenized_card_information import TokenizedCardInformation
+from xendit.payment_method.model.virtual_account import VirtualAccount
+from xendit.payment_method.model.virtual_account_all_of import VirtualAccountAllOf
+from xendit.payment_method.model.virtual_account_alternative_display import VirtualAccountAlternativeDisplay
+from xendit.payment_method.model.virtual_account_channel_code import VirtualAccountChannelCode
+from xendit.payment_method.model.virtual_account_channel_properties import VirtualAccountChannelProperties
+from xendit.payment_method.model.virtual_account_channel_properties_patch import VirtualAccountChannelPropertiesPatch
+from xendit.payment_method.model.virtual_account_parameters import VirtualAccountParameters
+from xendit.payment_method.model.virtual_account_update_parameters import VirtualAccountUpdateParameters
