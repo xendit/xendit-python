@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.42.3
+    The version of the XENDIT API: 2.87.2
 """
 
 
@@ -7,7 +7,7 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_request.model.direct_debit_debit_card import DirectDebitDebitCard
+from xendit.payment_method.model.direct_debit_debit_card import DirectDebitDebitCard
 
 
 class TestDirectDebitDebitCard(unittest.TestCase):

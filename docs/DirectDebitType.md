@@ -1,4 +1,4 @@
-# xendit.payment_method.model.DirectDebitType
+# xendit.payment_request.model.DirectDebitType
 
 
 ## Properties

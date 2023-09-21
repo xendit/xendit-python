@@ -211,6 +211,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Request successful |  -  |
+**201** | Request successful |  -  |
 **400** | Errors |  -  |
 **500** | Errors |  -  |
 **0** | Errors |  -  |

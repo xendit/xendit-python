@@ -416,8 +416,6 @@ class PaymentMethodApi(object):
                     'updated_gte',
                     'updated_lte',
                     'limit',
-                    'after_id',
-                    'before_id',
                 ],
                 'required': [
                     'payment_method_id',
@@ -461,10 +459,6 @@ class PaymentMethodApi(object):
                         (datetime,),
                     'limit':
                         (int,),
-                    'after_id':
-                        (str,),
-                    'before_id':
-                        (str,),
                 },
                 'attribute_map': {
                     'payment_method_id': 'paymentMethodId',
@@ -480,8 +474,6 @@ class PaymentMethodApi(object):
                     'updated_gte': 'updated[gte]',
                     'updated_lte': 'updated[lte]',
                     'limit': 'limit',
-                    'after_id': 'after_id',
-                    'before_id': 'before_id',
                 },
                 'location_map': {
                     'payment_method_id': 'path',
@@ -497,8 +489,6 @@ class PaymentMethodApi(object):
                     'updated_gte': 'query',
                     'updated_lte': 'query',
                     'limit': 'query',
-                    'after_id': 'query',
-                    'before_id': 'query',
                 },
                 'collection_format_map': {
                     'payment_request_id': 'multi',
@@ -1156,8 +1146,6 @@ class PaymentMethodApi(object):
             updated_gte (datetime): [optional]
             updated_lte (datetime): [optional]
             limit (int): [optional]
-            after_id (str): [optional]
-            before_id (str): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object

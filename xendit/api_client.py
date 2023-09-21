@@ -74,11 +74,11 @@ class ApiClient(object):
 
         # XENDIT headers
         self.default_headers['xendit-lib'] = 'python'
-        self.default_headers['xendit-lib-version'] = '3.0.0'
+        self.default_headers['xendit-lib-version'] = '3.1.0'
             
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/3.0.0/python'
+        self.user_agent = 'OpenAPI-Generator/3.1.0/python'
 
     def __enter__(self):
         return self

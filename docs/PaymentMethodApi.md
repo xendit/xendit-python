@@ -485,7 +485,7 @@ except xendit.ApiException as e:
 # and optional values
 try:
     # Returns payments with matching PaymentMethodID.
-    api_response = api_instance.get_payments_by_payment_method_id(payment_method_id, payment_request_id=payment_request_id, payment_method_id2=payment_method_id2, reference_id=reference_id, payment_method_type=payment_method_type, channel_code=channel_code, status=status, currency=currency, created_gte=created_gte, created_lte=created_lte, updated_gte=updated_gte, updated_lte=updated_lte, limit=limit, after_id=after_id, before_id=before_id)
+    api_response = api_instance.get_payments_by_payment_method_id(payment_method_id, payment_request_id=payment_request_id, payment_method_id2=payment_method_id2, reference_id=reference_id, payment_method_type=payment_method_type, channel_code=channel_code, status=status, currency=currency, created_gte=created_gte, created_lte=created_lte, updated_gte=updated_gte, updated_lte=updated_lte, limit=limit)
     pprint(api_response)
 except xendit.ApiException as e:
     print("Exception when calling PaymentMethodApi->get_payments_by_payment_method_id: %s\n" % e)
@@ -509,8 +509,6 @@ Name | Type | Description  | Notes
  **updated_gte** | **datetime**|  | [optional]
  **updated_lte** | **datetime**|  | [optional]
  **limit** | **int**|  | [optional]
- **after_id** | **str**|  | [optional]
- **before_id** | **str**|  | [optional]
 
 ### Return type
 
