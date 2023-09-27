@@ -18,7 +18,7 @@ from urllib3.fields import RequestField
 
 from xendit import rest
 from xendit.configuration import Configuration
-from xendit.exceptions import ApiTypeError, ApiValueError, ApiException
+from xendit.exceptions import ApiTypeError, ApiValueError, XenditSdkException
 from xendit.model_utils import (
     ModelNormal,
     ModelSimple,
@@ -74,11 +74,11 @@ class ApiClient(object):
 
         # XENDIT headers
         self.default_headers['xendit-lib'] = 'python'
-        self.default_headers['xendit-lib-version'] = '3.1.0'
+        self.default_headers['xendit-lib-version'] = '3.2.0'
             
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/3.1.0/python'
+        self.user_agent = 'OpenAPI-Generator/3.2.0/python'
 
     def __enter__(self):
         return self
@@ -203,8 +203,7 @@ class ApiClient(object):
                 post_params=post_params, body=body,
                 _preload_content=_preload_content,
                 _request_timeout=_request_timeout)
-        except ApiException as e:
-            e.body = e.body.decode('utf-8')
+        except XenditSdkException as e:
             raise e
 
         self.last_response = response_data

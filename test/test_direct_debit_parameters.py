@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.44.0
 """
 
 
@@ -7,11 +7,13 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.direct_debit_channel_code import DirectDebitChannelCode
-from xendit.payment_method.model.direct_debit_channel_properties import DirectDebitChannelProperties
+from xendit.payment_request.model.direct_debit_channel_code import DirectDebitChannelCode
+from xendit.payment_request.model.direct_debit_channel_properties import DirectDebitChannelProperties
+from xendit.payment_request.model.direct_debit_type import DirectDebitType
 globals()['DirectDebitChannelCode'] = DirectDebitChannelCode
 globals()['DirectDebitChannelProperties'] = DirectDebitChannelProperties
-from xendit.payment_method.model.direct_debit_parameters import DirectDebitParameters
+globals()['DirectDebitType'] = DirectDebitType
+from xendit.payment_request.model.direct_debit_parameters import DirectDebitParameters
 
 
 class TestDirectDebitParameters(unittest.TestCase):

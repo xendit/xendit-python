@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.refund.model import *  # noqa: F401,E501
 
@@ -237,15 +238,16 @@ class RefundApi(object):
 
     def cancel_refund(
         self,
-        refund_id,
+        refund_id: str,
+        idempotency_key: Optional[str] = None,
         **kwargs
-    ):
+    ) -> Refund:
         """cancel_refund  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.cancel_refund(refund_id, async_req=True)
+        >>> thread = api.cancel_refund(refund_id, idempotency_key, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -314,20 +316,23 @@ class RefundApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['refund_id'] = \
-            refund_id
+        kwargs['refund_id'] = refund_id
+        if idempotency_key is not None:
+            kwargs['idempotency_key'] = idempotency_key
         return self.cancel_refund_endpoint.call_with_http_info(**kwargs)
 
     def create_refund(
         self,
+        idempotency_key: Optional[str] = None,
+        create_refund: Optional[CreateRefund] = None,
         **kwargs
-    ):
+    ) -> Refund:
         """create_refund  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_refund(async_req=True)
+        >>> thread = api.create_refund(idempotency_key, create_refund, async_req=True)
         >>> result = thread.get()
 
 
@@ -395,12 +400,16 @@ class RefundApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if idempotency_key is not None:
+            kwargs['idempotency_key'] = idempotency_key
+        if create_refund is not None:
+            kwargs['create_refund'] = create_refund
         return self.create_refund_endpoint.call_with_http_info(**kwargs)
 
     def get_all_refunds(
         self,
         **kwargs
-    ):
+    ) -> RefundList:
         """get_all_refunds  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -476,15 +485,16 @@ class RefundApi(object):
 
     def get_refund(
         self,
-        refund_id,
+        refund_id: str,
+        idempotency_key: Optional[str] = None,
         **kwargs
-    ):
+    ) -> Refund:
         """get_refund  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_refund(refund_id, async_req=True)
+        >>> thread = api.get_refund(refund_id, idempotency_key, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -553,7 +563,8 @@ class RefundApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['refund_id'] = \
-            refund_id
+        kwargs['refund_id'] = refund_id
+        if idempotency_key is not None:
+            kwargs['idempotency_key'] = idempotency_key
         return self.get_refund_endpoint.call_with_http_info(**kwargs)
 

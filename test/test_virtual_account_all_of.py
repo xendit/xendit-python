@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.44.0
 """
 
 
@@ -7,9 +7,9 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.virtual_account_alternative_display import VirtualAccountAlternativeDisplay
+from xendit.payment_request.model.virtual_account_alternative_display import VirtualAccountAlternativeDisplay
 globals()['VirtualAccountAlternativeDisplay'] = VirtualAccountAlternativeDisplay
-from xendit.payment_method.model.virtual_account_all_of import VirtualAccountAllOf
+from xendit.payment_request.model.virtual_account_all_of import VirtualAccountAllOf
 
 
 class TestVirtualAccountAllOf(unittest.TestCase):

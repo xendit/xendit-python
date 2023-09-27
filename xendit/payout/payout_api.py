@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.payout.model import *  # noqa: F401,E501
 
@@ -314,9 +315,9 @@ class PayoutApi(object):
 
     def cancel_payout(
         self,
-        id,
+        id: str,
         **kwargs
-    ):
+    ) -> GetPayouts200ResponseDataInner:
         """API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -390,21 +391,22 @@ class PayoutApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['id'] = \
-            id
+        kwargs['id'] = id
         return self.cancel_payout_endpoint.call_with_http_info(**kwargs)
 
     def create_payout(
         self,
-        idempotency_key,
+        idempotency_key: str,
+        for_user_id: Optional[str] = None,
+        create_payout_request: Optional[CreatePayoutRequest] = None,
         **kwargs
-    ):
+    ) -> GetPayouts200ResponseDataInner:
         """API to send money at scale to bank accounts & eWallets  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_payout(idempotency_key, async_req=True)
+        >>> thread = api.create_payout(idempotency_key, for_user_id, create_payout_request, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -474,15 +476,18 @@ class PayoutApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['idempotency_key'] = \
-            idempotency_key
+        kwargs['idempotency_key'] = idempotency_key
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        if create_payout_request is not None:
+            kwargs['create_payout_request'] = create_payout_request
         return self.create_payout_endpoint.call_with_http_info(**kwargs)
 
     def get_payout_by_id(
         self,
-        id,
+        id: str,
         **kwargs
-    ):
+    ) -> GetPayouts200ResponseDataInner:
         """API to fetch the current status, or details of the payout  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -556,20 +561,22 @@ class PayoutApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['id'] = \
-            id
+        kwargs['id'] = id
         return self.get_payout_by_id_endpoint.call_with_http_info(**kwargs)
 
     def get_payout_channels(
         self,
+        currency: Optional[str] = None,
+        channel_category: Optional[List[ChannelCategory]] = None,
+        channel_code: Optional[str] = None,
         **kwargs
-    ):
+    ) -> [Channel]:
         """API providing the current list of banks and e-wallets we support for payouts for both regions  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_payout_channels(async_req=True)
+        >>> thread = api.get_payout_channels(currency, channel_category, channel_code, async_req=True)
         >>> result = thread.get()
 
 
@@ -638,19 +645,28 @@ class PayoutApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if currency is not None:
+            kwargs['currency'] = currency
+        if channel_category is not None:
+            kwargs['channel_category'] = channel_category
+        if channel_code is not None:
+            kwargs['channel_code'] = channel_code
         return self.get_payout_channels_endpoint.call_with_http_info(**kwargs)
 
     def get_payouts(
         self,
-        reference_id,
+        reference_id: str,
+        limit: Optional[float] = None,
+        after_id: Optional[str] = None,
+        before_id: Optional[str] = None,
         **kwargs
-    ):
+    ) -> GetPayouts200Response:
         """API to retrieve all matching payouts with reference ID  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_payouts(reference_id, async_req=True)
+        >>> thread = api.get_payouts(reference_id, limit, after_id, before_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -721,7 +737,12 @@ class PayoutApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['reference_id'] = \
-            reference_id
+        kwargs['reference_id'] = reference_id
+        if limit is not None:
+            kwargs['limit'] = limit
+        if after_id is not None:
+            kwargs['after_id'] = after_id
+        if before_id is not None:
+            kwargs['before_id'] = before_id
         return self.get_payouts_endpoint.call_with_http_info(**kwargs)
 

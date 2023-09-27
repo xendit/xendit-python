@@ -6,7 +6,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "xendit"
-VERSION = "3.1.0"
+VERSION = "3.2.0"
 # To install the library, run the following
 #
 # python setup.py install

@@ -2,6 +2,7 @@
     The version of the XENDIT API: 2.87.2
 """
 
+import json
 
 class OpenApiException(Exception):
     """The base exception class for all OpenAPIExceptions"""
@@ -90,57 +91,51 @@ class ApiKeyError(OpenApiException, KeyError):
         super(ApiKeyError, self).__init__(full_msg)
 
 
-class ApiException(OpenApiException):
-
-    def __init__(self, status=None, reason=None, http_resp=None):
-        if http_resp:
-            self.status = http_resp.status
-            self.reason = http_resp.reason
-            self.body = http_resp.data
-            self.headers = http_resp.getheaders()
+class XenditSdkException(OpenApiException):
+    def __init__(self, raw_response=None, param_status=None, param_status_text=None):
+        if raw_response is None:
+            self.rawResponse = raw_response
+            self.status = param_status or ""
+            self.errorCode = ""
+            self.errorMessage = param_status_text or ""
         else:
-            self.status = status
-            self.reason = reason
-            self.body = None
-            self.headers = None
+            raw_response = json.loads(raw_response.decode(encoding="utf-8")) if isinstance(raw_response, bytes) else raw_response
+            self.rawResponse = raw_response
+
+            self.status = param_status or ""
+            if self.status == "" and "status" in raw_response and raw_response["status"] is not None:
+                self.status = raw_response["status"]
+            elif self.status == "" and "status_code" in raw_response and raw_response["status_code"] is not None:
+                self.status = raw_response["status_code"]
+            elif self.status == "" and "statusCode" in raw_response and raw_response["statusCode"] is not None:
+                self.status = raw_response["statusCode"]
+
+
+            if "error" in raw_response and raw_response["error"] is not None:
+                self.errorCode = raw_response["error"]
+            elif "error_code" in raw_response and raw_response["error_code"] is not None:
+                self.errorCode = raw_response["error_code"]
+            elif "errorCode" in raw_response and raw_response["errorCode"] is not None:
+                self.errorCode = raw_response["errorCode"]
+            else:
+                self.errorCode = ""
+
+            if "message" in raw_response and raw_response["message"] is not None:
+                self.errorMessage = raw_response["message"]
+            elif "error_message" in raw_response and raw_response["error_message"] is not None:
+                self.errorMessage = raw_response["error_message"]
+            elif "errorMessage" in raw_response and raw_response["errorMessage"] is not None:
+                self.errorMessage = raw_response["errorMessage"]
+            else:
+                self.errorMessage = param_status_text or ""
 
     def __str__(self):
         """Custom error messages for exception"""
         error_message = "Status Code: {0}\n"\
-                        "Reason: {1}\n".format(self.status, self.reason)
-        if self.headers:
-            error_message += "HTTP response headers: {0}\n".format(
-                self.headers)
-
-        if self.body:
-            error_message += "HTTP response body: {0}\n".format(self.body)
-
+                        "Error Code: {1}\n"\
+                        "Error Message: {2}\n"\
+                        "Raw Response: {3}\n".format(self.status, self.errorCode, self.errorMessage, self.rawResponse)
         return error_message
-
-
-class NotFoundException(ApiException):
-
-    def __init__(self, status=None, reason=None, http_resp=None):
-        super(NotFoundException, self).__init__(status, reason, http_resp)
-
-
-class UnauthorizedException(ApiException):
-
-    def __init__(self, status=None, reason=None, http_resp=None):
-        super(UnauthorizedException, self).__init__(status, reason, http_resp)
-
-
-class ForbiddenException(ApiException):
-
-    def __init__(self, status=None, reason=None, http_resp=None):
-        super(ForbiddenException, self).__init__(status, reason, http_resp)
-
-
-class ServiceException(ApiException):
-
-    def __init__(self, status=None, reason=None, http_resp=None):
-        super(ServiceException, self).__init__(status, reason, http_resp)
-
 
 def render_path(path_to_item):
     """Returns a string representation of a path"""

@@ -42,7 +42,7 @@ try:
     # API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.
     api_response = api_instance.cancel_payout(id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->cancel_payout: %s\n" % e)
 ```
 
@@ -101,7 +101,7 @@ try:
     # API to send money at scale to bank accounts & eWallets
     api_response = api_instance.create_payout(idempotency_key)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->create_payout: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -110,7 +110,7 @@ try:
     # API to send money at scale to bank accounts & eWallets
     api_response = api_instance.create_payout(idempotency_key, for_user_id=for_user_id, create_payout_request=create_payout_request)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->create_payout: %s\n" % e)
 ```
 
@@ -172,7 +172,7 @@ try:
     # API to fetch the current status, or details of the payout
     api_response = api_instance.get_payout_by_id(id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->get_payout_by_id: %s\n" % e)
 ```
 
@@ -232,7 +232,7 @@ try:
     # API providing the current list of banks and e-wallets we support for payouts for both regions
     api_response = api_instance.get_payout_channels(currency=currency, channel_category=channel_category, channel_code=channel_code)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->get_payout_channels: %s\n" % e)
 ```
 
@@ -290,7 +290,7 @@ try:
     # API to retrieve all matching payouts with reference ID
     api_response = api_instance.get_payouts(reference_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->get_payouts: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -299,7 +299,7 @@ try:
     # API to retrieve all matching payouts with reference ID
     api_response = api_instance.get_payouts(reference_id, limit=limit, after_id=after_id, before_id=before_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PayoutApi->get_payouts: %s\n" % e)
 ```
 

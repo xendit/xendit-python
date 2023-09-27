@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.balance_and_transaction.model import *  # noqa: F401,E501
 
@@ -98,15 +99,18 @@ class BalanceApi(object):
 
     def get_balance(
         self,
+        account_type: Optional[str] = "CASH",
+        currency: Optional[str] = None,
+        for_user_id: Optional[str] = None,
         **kwargs
-    ):
+    ) -> Balance:
         """Retrieves balances for a business, default to CASH type  # noqa: E501
 
         Retrieves balance for your business, defaults to CASH type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_balance(async_req=True)
+        >>> thread = api.get_balance(currency, for_user_id, account_type="CASH", async_req=True)
         >>> result = thread.get()
 
 
@@ -175,5 +179,11 @@ class BalanceApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if account_type is not None:
+            kwargs['account_type'] = account_type
+        if currency is not None:
+            kwargs['currency'] = currency
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         return self.get_balance_endpoint.call_with_http_info(**kwargs)
 

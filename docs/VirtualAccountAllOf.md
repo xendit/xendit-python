@@ -1,4 +1,4 @@
-# xendit.payment_request.model.VirtualAccountAllOf
+# xendit.payment_method.model.VirtualAccountAllOf
 
 
 ## Properties

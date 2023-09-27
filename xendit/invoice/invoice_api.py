@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.invoice.model import *  # noqa: F401,E501
 
@@ -297,9 +298,9 @@ class InvoiceApi(object):
 
     def create_invoice(
         self,
-        create_invoice_request,
+        create_invoice_request: CreateInvoiceRequest,
         **kwargs
-    ):
+    ) -> Invoice:
         """Create an invoice  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -373,15 +374,14 @@ class InvoiceApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['create_invoice_request'] = \
-            create_invoice_request
+        kwargs['create_invoice_request'] = create_invoice_request
         return self.create_invoice_endpoint.call_with_http_info(**kwargs)
 
     def expire_invoice(
         self,
-        invoice_id,
+        invoice_id: str,
         **kwargs
-    ):
+    ) -> Invoice:
         """Manually expire an invoice  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -455,15 +455,14 @@ class InvoiceApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['invoice_id'] = \
-            invoice_id
+        kwargs['invoice_id'] = invoice_id
         return self.expire_invoice_endpoint.call_with_http_info(**kwargs)
 
     def get_invoice_by_id(
         self,
-        invoice_id,
+        invoice_id: str,
         **kwargs
-    ):
+    ) -> Invoice:
         """Get invoice by invoice id  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -537,20 +536,33 @@ class InvoiceApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['invoice_id'] = \
-            invoice_id
+        kwargs['invoice_id'] = invoice_id
         return self.get_invoice_by_id_endpoint.call_with_http_info(**kwargs)
 
     def get_invoices(
         self,
+        external_id: Optional[str] = None,
+        statuses: Optional[List[InvoiceStatus]] = None,
+        limit: Optional[float] = None,
+        created_after: Optional[datetime] = None,
+        created_before: Optional[datetime] = None,
+        paid_after: Optional[datetime] = None,
+        paid_before: Optional[datetime] = None,
+        expired_after: Optional[datetime] = None,
+        expired_before: Optional[datetime] = None,
+        last_invoice: Optional[str] = None,
+        client_types: Optional[List[InvoiceClientType]] = None,
+        payment_channels: Optional[List[str]] = None,
+        on_demand_link: Optional[str] = None,
+        recurring_payment_id: Optional[str] = None,
         **kwargs
-    ):
+    ) -> [Invoice]:
         """Get all Invoices  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_invoices(async_req=True)
+        >>> thread = api.get_invoices(external_id, statuses, limit, created_after, created_before, paid_after, paid_before, expired_after, expired_before, last_invoice, client_types, payment_channels, on_demand_link, recurring_payment_id, async_req=True)
         >>> result = thread.get()
 
 
@@ -630,5 +642,33 @@ class InvoiceApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if external_id is not None:
+            kwargs['external_id'] = external_id
+        if statuses is not None:
+            kwargs['statuses'] = statuses
+        if limit is not None:
+            kwargs['limit'] = limit
+        if created_after is not None:
+            kwargs['created_after'] = created_after
+        if created_before is not None:
+            kwargs['created_before'] = created_before
+        if paid_after is not None:
+            kwargs['paid_after'] = paid_after
+        if paid_before is not None:
+            kwargs['paid_before'] = paid_before
+        if expired_after is not None:
+            kwargs['expired_after'] = expired_after
+        if expired_before is not None:
+            kwargs['expired_before'] = expired_before
+        if last_invoice is not None:
+            kwargs['last_invoice'] = last_invoice
+        if client_types is not None:
+            kwargs['client_types'] = client_types
+        if payment_channels is not None:
+            kwargs['payment_channels'] = payment_channels
+        if on_demand_link is not None:
+            kwargs['on_demand_link'] = on_demand_link
+        if recurring_payment_id is not None:
+            kwargs['recurring_payment_id'] = recurring_payment_id
         return self.get_invoices_endpoint.call_with_http_info(**kwargs)
 

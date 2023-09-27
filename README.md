@@ -5,7 +5,7 @@
 The official Xendit Python SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Python.
 
-* Package version: 3.1.0
+* Package version: 3.2.0
 
 ## Requirements.
 
@@ -58,7 +58,7 @@ client = xendit.ApiClient()
 try:
     response = BalancesApi(client).get_balance('CASH')
     pprint(response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling BalancesApi->get_balance: %s\n" % e)
 ```
 

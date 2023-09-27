@@ -1,4 +1,4 @@
-# xendit.payment_request.model.VirtualAccountChannelCode
+# xendit.payment_method.model.VirtualAccountChannelCode
 
 Virtual Account Channel Code
 

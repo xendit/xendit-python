@@ -47,7 +47,7 @@ try:
     # Payment Request Authorize
     api_response = api_instance.authorize_payment_request(payment_request_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->authorize_payment_request: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -56,7 +56,7 @@ try:
     # Payment Request Authorize
     api_response = api_instance.authorize_payment_request(payment_request_id, payment_request_auth_parameters=payment_request_auth_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->authorize_payment_request: %s\n" % e)
 ```
 
@@ -118,7 +118,7 @@ try:
     # Payment Request Capture
     api_response = api_instance.capture_payment_request(payment_request_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->capture_payment_request: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -127,7 +127,7 @@ try:
     # Payment Request Capture
     api_response = api_instance.capture_payment_request(payment_request_id, capture_parameters=capture_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->capture_payment_request: %s\n" % e)
 ```
 
@@ -189,7 +189,7 @@ try:
     # Create Payment Request
     api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, payment_request_parameters=payment_request_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->create_payment_request: %s\n" % e)
 ```
 
@@ -251,7 +251,7 @@ try:
     # Get all payment requests by filter
     api_response = api_instance.get_all_payment_requests(reference_id=reference_id, id=id, customer_id=customer_id, limit=limit, before_id=before_id, after_id=after_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->get_all_payment_requests: %s\n" % e)
 ```
 
@@ -316,7 +316,7 @@ try:
     # Get payment request by ID
     api_response = api_instance.get_payment_request_by_id(payment_request_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->get_payment_request_by_id: %s\n" % e)
 ```
 
@@ -376,16 +376,16 @@ try:
     # Get Payment Request Capture
     api_response = api_instance.get_payment_request_captures(payment_request_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->get_payment_request_captures: %s\n" % e)
 
 # example passing only required values which don't have defaults set
 # and optional values
 try:
     # Get Payment Request Capture
-    api_response = api_instance.get_payment_request_captures(payment_request_id, limit=limit, after_id=after_id, before_id=before_id)
+    api_response = api_instance.get_payment_request_captures(payment_request_id, limit=limit)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->get_payment_request_captures: %s\n" % e)
 ```
 
@@ -396,8 +396,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payment_request_id** | **str**|  |
  **limit** | **int**|  | [optional]
- **after_id** | **str**|  | [optional]
- **before_id** | **str**|  | [optional]
 
 ### Return type
 
@@ -448,7 +446,7 @@ try:
     # Payment Request Resend Auth
     api_response = api_instance.resend_payment_request_auth(payment_request_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->resend_payment_request_auth: %s\n" % e)
 ```
 

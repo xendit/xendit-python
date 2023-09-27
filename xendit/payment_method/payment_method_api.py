@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.payment_method.model import *  # noqa: F401,E501
 
@@ -621,16 +622,17 @@ class PaymentMethodApi(object):
 
     def auth_payment_method(
         self,
-        payment_method_id,
+        payment_method_id: str,
+        payment_method_auth_parameters: Optional[PaymentMethodAuthParameters] = None,
         **kwargs
-    ):
+    ) -> PaymentMethod:
         """Validate a payment method's linking OTP  # noqa: E501
 
         This endpoint validates a payment method linking OTP  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.auth_payment_method(payment_method_id, async_req=True)
+        >>> thread = api.auth_payment_method(payment_method_id, payment_method_auth_parameters, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -699,21 +701,23 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_method_id'] = \
-            payment_method_id
+        kwargs['payment_method_id'] = payment_method_id
+        if payment_method_auth_parameters is not None:
+            kwargs['payment_method_auth_parameters'] = payment_method_auth_parameters
         return self.auth_payment_method_endpoint.call_with_http_info(**kwargs)
 
     def create_payment_method(
         self,
+        payment_method_parameters: Optional[PaymentMethodParameters] = None,
         **kwargs
-    ):
+    ) -> PaymentMethod:
         """Creates payment method  # noqa: E501
 
         This endpoint initiates creation of payment method  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_payment_method(async_req=True)
+        >>> thread = api.create_payment_method(payment_method_parameters, async_req=True)
         >>> result = thread.get()
 
 
@@ -780,20 +784,23 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if payment_method_parameters is not None:
+            kwargs['payment_method_parameters'] = payment_method_parameters
         return self.create_payment_method_endpoint.call_with_http_info(**kwargs)
 
     def expire_payment_method(
         self,
-        payment_method_id,
+        payment_method_id: str,
+        payment_method_expire_parameters: Optional[PaymentMethodExpireParameters] = None,
         **kwargs
-    ):
+    ) -> PaymentMethod:
         """Expires a payment method  # noqa: E501
 
         This endpoint expires a payment method and performs unlinking if necessary  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.expire_payment_method(payment_method_id, async_req=True)
+        >>> thread = api.expire_payment_method(payment_method_id, payment_method_expire_parameters, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -862,21 +869,24 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_method_id'] = \
-            payment_method_id
+        kwargs['payment_method_id'] = payment_method_id
+        if payment_method_expire_parameters is not None:
+            kwargs['payment_method_expire_parameters'] = payment_method_expire_parameters
         return self.expire_payment_method_endpoint.call_with_http_info(**kwargs)
 
     def get_all_payment_channels(
         self,
+        is_activated: Optional[bool] = True,
+        type: Optional[str] = None,
         **kwargs
-    ):
+    ) -> PaymentChannelList:
         """Get all payment channels  # noqa: E501
 
         Get all payment channels  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_all_payment_channels(async_req=True)
+        >>> thread = api.get_all_payment_channels(type, is_activated=True, async_req=True)
         >>> result = thread.get()
 
 
@@ -944,19 +954,32 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if is_activated is not None:
+            kwargs['is_activated'] = is_activated
+        if type is not None:
+            kwargs['type'] = type
         return self.get_all_payment_channels_endpoint.call_with_http_info(**kwargs)
 
     def get_all_payment_methods(
         self,
+        id: Optional[List[str]] = None,
+        type: Optional[List[str]] = None,
+        status: Optional[List[PaymentMethodStatus]] = None,
+        reusability: Optional[PaymentMethodReusability] = None,
+        customer_id: Optional[str] = None,
+        reference_id: Optional[str] = None,
+        after_id: Optional[str] = None,
+        before_id: Optional[str] = None,
+        limit: Optional[int] = None,
         **kwargs
-    ):
+    ) -> PaymentMethodList:
         """Get all payment methods by filters  # noqa: E501
 
         Get all payment methods by filters  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_all_payment_methods(async_req=True)
+        >>> thread = api.get_all_payment_methods(id, type, status, reusability, customer_id, reference_id, after_id, before_id, limit, async_req=True)
         >>> result = thread.get()
 
 
@@ -1031,13 +1054,31 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if id is not None:
+            kwargs['id'] = id
+        if type is not None:
+            kwargs['type'] = type
+        if status is not None:
+            kwargs['status'] = status
+        if reusability is not None:
+            kwargs['reusability'] = reusability
+        if customer_id is not None:
+            kwargs['customer_id'] = customer_id
+        if reference_id is not None:
+            kwargs['reference_id'] = reference_id
+        if after_id is not None:
+            kwargs['after_id'] = after_id
+        if before_id is not None:
+            kwargs['before_id'] = before_id
+        if limit is not None:
+            kwargs['limit'] = limit
         return self.get_all_payment_methods_endpoint.call_with_http_info(**kwargs)
 
     def get_payment_method_by_id(
         self,
-        payment_method_id,
+        payment_method_id: str,
         **kwargs
-    ):
+    ) -> PaymentMethod:
         """Get payment method by ID  # noqa: E501
 
         Get payment method by ID  # noqa: E501
@@ -1112,22 +1153,33 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_method_id'] = \
-            payment_method_id
+        kwargs['payment_method_id'] = payment_method_id
         return self.get_payment_method_by_id_endpoint.call_with_http_info(**kwargs)
 
     def get_payments_by_payment_method_id(
         self,
-        payment_method_id,
+        payment_method_id: str,
+        payment_request_id: Optional[List[str]] = None,
+        payment_method_id2: Optional[List[str]] = None,
+        reference_id: Optional[List[str]] = None,
+        payment_method_type: Optional[List[PaymentMethodType]] = None,
+        channel_code: Optional[List[str]] = None,
+        status: Optional[List[str]] = None,
+        currency: Optional[List[str]] = None,
+        created_gte: Optional[datetime] = None,
+        created_lte: Optional[datetime] = None,
+        updated_gte: Optional[datetime] = None,
+        updated_lte: Optional[datetime] = None,
+        limit: Optional[int] = None,
         **kwargs
-    ):
+    ) -> {str: (bool, date, datetime, dict, float, int, list, str, none_type)}:
         """Returns payments with matching PaymentMethodID.  # noqa: E501
 
         Returns payments with matching PaymentMethodID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_payments_by_payment_method_id(payment_method_id, async_req=True)
+        >>> thread = api.get_payments_by_payment_method_id(payment_method_id, payment_request_id, payment_method_id2, reference_id, payment_method_type, channel_code, status, currency, created_gte, created_lte, updated_gte, updated_lte, limit, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1207,22 +1259,46 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_method_id'] = \
-            payment_method_id
+        kwargs['payment_method_id'] = payment_method_id
+        if payment_request_id is not None:
+            kwargs['payment_request_id'] = payment_request_id
+        if payment_method_id2 is not None:
+            kwargs['payment_method_id2'] = payment_method_id2
+        if reference_id is not None:
+            kwargs['reference_id'] = reference_id
+        if payment_method_type is not None:
+            kwargs['payment_method_type'] = payment_method_type
+        if channel_code is not None:
+            kwargs['channel_code'] = channel_code
+        if status is not None:
+            kwargs['status'] = status
+        if currency is not None:
+            kwargs['currency'] = currency
+        if created_gte is not None:
+            kwargs['created_gte'] = created_gte
+        if created_lte is not None:
+            kwargs['created_lte'] = created_lte
+        if updated_gte is not None:
+            kwargs['updated_gte'] = updated_gte
+        if updated_lte is not None:
+            kwargs['updated_lte'] = updated_lte
+        if limit is not None:
+            kwargs['limit'] = limit
         return self.get_payments_by_payment_method_id_endpoint.call_with_http_info(**kwargs)
 
     def patch_payment_method(
         self,
-        payment_method_id,
+        payment_method_id: str,
+        payment_method_update_parameters: Optional[PaymentMethodUpdateParameters] = None,
         **kwargs
-    ):
+    ) -> PaymentMethod:
         """Patch payment methods  # noqa: E501
 
         This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```.  This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.patch_payment_method(payment_method_id, async_req=True)
+        >>> thread = api.patch_payment_method(payment_method_id, payment_method_update_parameters, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1291,22 +1367,24 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_method_id'] = \
-            payment_method_id
+        kwargs['payment_method_id'] = payment_method_id
+        if payment_method_update_parameters is not None:
+            kwargs['payment_method_update_parameters'] = payment_method_update_parameters
         return self.patch_payment_method_endpoint.call_with_http_info(**kwargs)
 
     def simulate_payment(
         self,
-        payment_method_id,
+        payment_method_id: str,
+        simulate_payment_request: Optional[SimulatePaymentRequest] = None,
         **kwargs
-    ):
+    ) -> None:
         """Makes payment with matching PaymentMethodID.  # noqa: E501
 
         Makes payment with matching PaymentMethodID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.simulate_payment(payment_method_id, async_req=True)
+        >>> thread = api.simulate_payment(payment_method_id, simulate_payment_request, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1375,7 +1453,8 @@ class PaymentMethodApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_method_id'] = \
-            payment_method_id
+        kwargs['payment_method_id'] = payment_method_id
+        if simulate_payment_request is not None:
+            kwargs['simulate_payment_request'] = simulate_payment_request
         return self.simulate_payment_endpoint.call_with_http_info(**kwargs)
 

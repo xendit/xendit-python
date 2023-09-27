@@ -1,10 +1,10 @@
-# xendit.payment_request.model.CardVerificationResults
+# xendit.payment_method.model.CardVerificationResults
 
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**three_d_secure** | [**CardVerificationResultsThreeDSecure**](CardVerificationResultsThreeDSecure.md) |  | [optional] 
+**three_d_secure** | [**CardVerificationResultsThreeDSecure**](CardVerificationResultsThreeDSecure.md) |  | 
 **cvv_result** | **str, none_type** |  | [optional] 
 **address_verification_result** | **str, none_type** |  | [optional] 
 

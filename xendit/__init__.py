@@ -5,7 +5,7 @@
 """
 
 
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 
 # import ApiClient
 from xendit.api_client import ApiClient
@@ -20,4 +20,4 @@ from xendit.exceptions import ApiAttributeError
 from xendit.exceptions import ApiTypeError
 from xendit.exceptions import ApiValueError
 from xendit.exceptions import ApiKeyError
-from xendit.exceptions import ApiException
+from xendit.exceptions import XenditSdkException

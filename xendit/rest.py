@@ -14,7 +14,7 @@ from urllib.request import proxy_bypass_environment
 import urllib3
 import ipaddress
 
-from xendit.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
+from xendit.exceptions import ApiValueError, XenditSdkException
 
 
 logger = logging.getLogger(__name__)
@@ -196,7 +196,10 @@ class RESTClientObject(object):
                     msg = """Cannot prepare a request message for provided
                              arguments. Please check that your arguments match
                              declared content type."""
-                    raise ApiException(status=0, reason=msg)
+                    raise XenditSdkException(
+                        param_status="0",
+                        param_status_text=msg
+                    )
             # For `GET`, `HEAD`
             else:
                 r = self.pool_manager.request(method, url,
@@ -206,7 +209,10 @@ class RESTClientObject(object):
                                               headers=headers)
         except urllib3.exceptions.SSLError as e:
             msg = "{0}\n{1}".format(type(e).__name__, str(e))
-            raise ApiException(status=0, reason=msg)
+            raise XenditSdkException(
+                param_status="0",
+                param_status_text=msg
+            )
 
         if _preload_content:
             r = RESTResponse(r)
@@ -215,20 +221,11 @@ class RESTClientObject(object):
             logger.debug("response body: %s", r.data)
 
         if not 200 <= r.status <= 299:
-            if r.status == 401:
-                raise UnauthorizedException(http_resp=r)
-
-            if r.status == 403:
-                raise ForbiddenException(http_resp=r)
-
-            if r.status == 404:
-                raise NotFoundException(http_resp=r)
-
-            if 500 <= r.status <= 599:
-                raise ServiceException(http_resp=r)
-
-            raise ApiException(http_resp=r)
-
+            raise XenditSdkException(
+                raw_response=r.data,
+                param_status=str(r.status),
+                param_status_text=r.reason,
+            )
         return r
 
     def GET(self, url, headers=None, query_params=None, _preload_content=True,

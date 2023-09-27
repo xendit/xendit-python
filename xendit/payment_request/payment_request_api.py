@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.payment_request.model import *  # noqa: F401,E501
 
@@ -331,8 +332,6 @@ class PaymentRequestApi(object):
                 'all': [
                     'payment_request_id',
                     'limit',
-                    'after_id',
-                    'before_id',
                 ],
                 'required': [
                     'payment_request_id',
@@ -354,22 +353,14 @@ class PaymentRequestApi(object):
                         (str,),
                     'limit':
                         (int,),
-                    'after_id':
-                        (str,),
-                    'before_id':
-                        (str,),
                 },
                 'attribute_map': {
                     'payment_request_id': 'paymentRequestId',
                     'limit': 'limit',
-                    'after_id': 'after_id',
-                    'before_id': 'before_id',
                 },
                 'location_map': {
                     'payment_request_id': 'path',
                     'limit': 'query',
-                    'after_id': 'query',
-                    'before_id': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -434,16 +425,17 @@ class PaymentRequestApi(object):
 
     def authorize_payment_request(
         self,
-        payment_request_id,
+        payment_request_id: str,
+        payment_request_auth_parameters: Optional[PaymentRequestAuthParameters] = None,
         **kwargs
-    ):
+    ) -> PaymentRequest:
         """Payment Request Authorize  # noqa: E501
 
         Payment Request Authorize  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.authorize_payment_request(payment_request_id, async_req=True)
+        >>> thread = api.authorize_payment_request(payment_request_id, payment_request_auth_parameters, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -512,22 +504,24 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = \
-            payment_request_id
+        kwargs['payment_request_id'] = payment_request_id
+        if payment_request_auth_parameters is not None:
+            kwargs['payment_request_auth_parameters'] = payment_request_auth_parameters
         return self.authorize_payment_request_endpoint.call_with_http_info(**kwargs)
 
     def capture_payment_request(
         self,
-        payment_request_id,
+        payment_request_id: str,
+        capture_parameters: Optional[CaptureParameters] = None,
         **kwargs
-    ):
+    ) -> Capture:
         """Payment Request Capture  # noqa: E501
 
         Payment Request Capture  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.capture_payment_request(payment_request_id, async_req=True)
+        >>> thread = api.capture_payment_request(payment_request_id, capture_parameters, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -596,21 +590,24 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = \
-            payment_request_id
+        kwargs['payment_request_id'] = payment_request_id
+        if capture_parameters is not None:
+            kwargs['capture_parameters'] = capture_parameters
         return self.capture_payment_request_endpoint.call_with_http_info(**kwargs)
 
     def create_payment_request(
         self,
+        idempotency_key: Optional[str] = None,
+        payment_request_parameters: Optional[PaymentRequestParameters] = None,
         **kwargs
-    ):
+    ) -> PaymentRequest:
         """Create Payment Request  # noqa: E501
 
         Create Payment Request  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_payment_request(async_req=True)
+        >>> thread = api.create_payment_request(idempotency_key, payment_request_parameters, async_req=True)
         >>> result = thread.get()
 
 
@@ -678,19 +675,29 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if idempotency_key is not None:
+            kwargs['idempotency_key'] = idempotency_key
+        if payment_request_parameters is not None:
+            kwargs['payment_request_parameters'] = payment_request_parameters
         return self.create_payment_request_endpoint.call_with_http_info(**kwargs)
 
     def get_all_payment_requests(
         self,
+        reference_id: Optional[List[str]] = None,
+        id: Optional[List[str]] = None,
+        customer_id: Optional[List[str]] = None,
+        limit: Optional[int] = None,
+        before_id: Optional[str] = None,
+        after_id: Optional[str] = None,
         **kwargs
-    ):
+    ) -> PaymentRequestListResponse:
         """Get all payment requests by filter  # noqa: E501
 
         Get all payment requests by filter  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_all_payment_requests(async_req=True)
+        >>> thread = api.get_all_payment_requests(reference_id, id, customer_id, limit, before_id, after_id, async_req=True)
         >>> result = thread.get()
 
 
@@ -762,13 +769,25 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if reference_id is not None:
+            kwargs['reference_id'] = reference_id
+        if id is not None:
+            kwargs['id'] = id
+        if customer_id is not None:
+            kwargs['customer_id'] = customer_id
+        if limit is not None:
+            kwargs['limit'] = limit
+        if before_id is not None:
+            kwargs['before_id'] = before_id
+        if after_id is not None:
+            kwargs['after_id'] = after_id
         return self.get_all_payment_requests_endpoint.call_with_http_info(**kwargs)
 
     def get_payment_request_by_id(
         self,
-        payment_request_id,
+        payment_request_id: str,
         **kwargs
-    ):
+    ) -> PaymentRequest:
         """Get payment request by ID  # noqa: E501
 
         Get payment request by ID  # noqa: E501
@@ -843,22 +862,22 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = \
-            payment_request_id
+        kwargs['payment_request_id'] = payment_request_id
         return self.get_payment_request_by_id_endpoint.call_with_http_info(**kwargs)
 
     def get_payment_request_captures(
         self,
-        payment_request_id,
+        payment_request_id: str,
+        limit: Optional[int] = None,
         **kwargs
-    ):
+    ) -> CaptureListResponse:
         """Get Payment Request Capture  # noqa: E501
 
         Get Payment Request Capture  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_payment_request_captures(payment_request_id, async_req=True)
+        >>> thread = api.get_payment_request_captures(payment_request_id, limit, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -866,8 +885,6 @@ class PaymentRequestApi(object):
 
         Keyword Args:
             limit (int): [optional]
-            after_id (str): [optional]
-            before_id (str): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -929,15 +946,16 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = \
-            payment_request_id
+        kwargs['payment_request_id'] = payment_request_id
+        if limit is not None:
+            kwargs['limit'] = limit
         return self.get_payment_request_captures_endpoint.call_with_http_info(**kwargs)
 
     def resend_payment_request_auth(
         self,
-        payment_request_id,
+        payment_request_id: str,
         **kwargs
-    ):
+    ) -> PaymentRequest:
         """Payment Request Resend Auth  # noqa: E501
 
         Payment Request Resend Auth  # noqa: E501
@@ -1012,7 +1030,6 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = \
-            payment_request_id
+        kwargs['payment_request_id'] = payment_request_id
         return self.resend_payment_request_auth_endpoint.call_with_http_info(**kwargs)
 

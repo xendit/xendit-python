@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.44.0
 """
 
 
@@ -7,15 +7,17 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.e_wallet_account import EWalletAccount
-from xendit.payment_method.model.e_wallet_channel_code import EWalletChannelCode
-from xendit.payment_method.model.e_wallet_channel_properties import EWalletChannelProperties
-from xendit.payment_method.model.e_wallet_parameters import EWalletParameters
+from xendit.payment_request.model.e_wallet_account import EWalletAccount
+from xendit.payment_request.model.e_wallet_all_of import EWalletAllOf
+from xendit.payment_request.model.e_wallet_channel_code import EWalletChannelCode
+from xendit.payment_request.model.e_wallet_channel_properties import EWalletChannelProperties
+from xendit.payment_request.model.e_wallet_parameters import EWalletParameters
 globals()['EWalletAccount'] = EWalletAccount
+globals()['EWalletAllOf'] = EWalletAllOf
 globals()['EWalletChannelCode'] = EWalletChannelCode
 globals()['EWalletChannelProperties'] = EWalletChannelProperties
 globals()['EWalletParameters'] = EWalletParameters
-from xendit.payment_method.model.e_wallet import EWallet
+from xendit.payment_request.model.e_wallet import EWallet
 
 
 class TestEWallet(unittest.TestCase):

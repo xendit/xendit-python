@@ -19,6 +19,7 @@ from xendit.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from typing import Optional, List # noqa: F401
 
 from xendit.balance_and_transaction.model import *  # noqa: F401,E501
 
@@ -229,15 +230,29 @@ class TransactionApi(object):
 
     def get_all_transactions(
         self,
+        for_user_id: Optional[str] = None,
+        types: Optional[List[TransactionTypes]] = None,
+        statuses: Optional[List[TransactionStatuses]] = None,
+        channel_categories: Optional[List[ChannelsCategories]] = None,
+        reference_id: Optional[str] = None,
+        product_id: Optional[str] = None,
+        account_identifier: Optional[str] = None,
+        amount: Optional[float] = None,
+        currency: Optional[Currency] = None,
+        created: Optional[DateRangeFilter] = None,
+        updated: Optional[DateRangeFilter] = None,
+        limit: Optional[float] = 10,
+        after_id: Optional[TransactionId] = None,
+        before_id: Optional[TransactionId] = None,
         **kwargs
-    ):
+    ) -> TransactionsResponse:
         """Get a list of transactions  # noqa: E501
 
         Get a list of all transactions based on filter and search parameters.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_all_transactions(async_req=True)
+        >>> thread = api.get_all_transactions(for_user_id, types, statuses, channel_categories, reference_id, product_id, account_identifier, amount, currency, created, updated, after_id, before_id, limit=10, async_req=True)
         >>> result = thread.get()
 
 
@@ -317,20 +332,49 @@ class TransactionApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        if types is not None:
+            kwargs['types'] = types
+        if statuses is not None:
+            kwargs['statuses'] = statuses
+        if channel_categories is not None:
+            kwargs['channel_categories'] = channel_categories
+        if reference_id is not None:
+            kwargs['reference_id'] = reference_id
+        if product_id is not None:
+            kwargs['product_id'] = product_id
+        if account_identifier is not None:
+            kwargs['account_identifier'] = account_identifier
+        if amount is not None:
+            kwargs['amount'] = amount
+        if currency is not None:
+            kwargs['currency'] = currency
+        if created is not None:
+            kwargs['created'] = created
+        if updated is not None:
+            kwargs['updated'] = updated
+        if limit is not None:
+            kwargs['limit'] = limit
+        if after_id is not None:
+            kwargs['after_id'] = after_id
+        if before_id is not None:
+            kwargs['before_id'] = before_id
         return self.get_all_transactions_endpoint.call_with_http_info(**kwargs)
 
     def get_transaction_by_id(
         self,
-        id,
+        id: TransactionId,
+        for_user_id: Optional[str] = None,
         **kwargs
-    ):
+    ) -> TransactionResponse:
         """Get a transaction based on its id  # noqa: E501
 
         Get single specific transaction by transaction id.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_by_id(id, async_req=True)
+        >>> thread = api.get_transaction_by_id(id, for_user_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -399,7 +443,8 @@ class TransactionApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['id'] = \
-            id
+        kwargs['id'] = id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         return self.get_transaction_by_id_endpoint.call_with_http_info(**kwargs)
 

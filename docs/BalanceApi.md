@@ -41,7 +41,7 @@ try:
     # Retrieves balances for a business, default to CASH type
     api_response = api_instance.get_balance(account_type=account_type, currency=currency, for_user_id=for_user_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling BalanceApi->get_balance: %s\n" % e)
 ```
 

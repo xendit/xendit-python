@@ -54,7 +54,7 @@ try:
     # Validate a payment method's linking OTP
     api_response = api_instance.auth_payment_method(payment_method_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->auth_payment_method: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -63,7 +63,7 @@ try:
     # Validate a payment method's linking OTP
     api_response = api_instance.auth_payment_method(payment_method_id, payment_method_auth_parameters=payment_method_auth_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->auth_payment_method: %s\n" % e)
 ```
 
@@ -133,7 +133,7 @@ try:
     # Creates payment method
     api_response = api_instance.create_payment_method(payment_method_parameters=payment_method_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->create_payment_method: %s\n" % e)
 ```
 
@@ -201,7 +201,7 @@ try:
     # Expires a payment method
     api_response = api_instance.expire_payment_method(payment_method_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->expire_payment_method: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -210,7 +210,7 @@ try:
     # Expires a payment method
     api_response = api_instance.expire_payment_method(payment_method_id, payment_method_expire_parameters=payment_method_expire_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->expire_payment_method: %s\n" % e)
 ```
 
@@ -275,7 +275,7 @@ try:
     # Get all payment channels
     api_response = api_instance.get_all_payment_channels(is_activated=is_activated, type=type)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_all_payment_channels: %s\n" % e)
 ```
 
@@ -341,7 +341,7 @@ try:
     # Get all payment methods by filters
     api_response = api_instance.get_all_payment_methods(id=id, type=type, status=status, reusability=reusability, customer_id=customer_id, reference_id=reference_id, after_id=after_id, before_id=before_id, limit=limit)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_all_payment_methods: %s\n" % e)
 ```
 
@@ -413,7 +413,7 @@ try:
     # Get payment method by ID
     api_response = api_instance.get_payment_method_by_id(payment_method_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_payment_method_by_id: %s\n" % e)
 ```
 
@@ -478,7 +478,7 @@ try:
     # Returns payments with matching PaymentMethodID.
     api_response = api_instance.get_payments_by_payment_method_id(payment_method_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_payments_by_payment_method_id: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -487,7 +487,7 @@ try:
     # Returns payments with matching PaymentMethodID.
     api_response = api_instance.get_payments_by_payment_method_id(payment_method_id, payment_request_id=payment_request_id, payment_method_id2=payment_method_id2, reference_id=reference_id, payment_method_type=payment_method_type, channel_code=channel_code, status=status, currency=currency, created_gte=created_gte, created_lte=created_lte, updated_gte=updated_gte, updated_lte=updated_lte, limit=limit)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_payments_by_payment_method_id: %s\n" % e)
 ```
 
@@ -565,7 +565,7 @@ try:
     # Patch payment methods
     api_response = api_instance.patch_payment_method(payment_method_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->patch_payment_method: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -574,7 +574,7 @@ try:
     # Patch payment methods
     api_response = api_instance.patch_payment_method(payment_method_id, payment_method_update_parameters=payment_method_update_parameters)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->patch_payment_method: %s\n" % e)
 ```
 
@@ -639,7 +639,7 @@ payment_method_id = "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str |
 try:
     # Makes payment with matching PaymentMethodID.
     api_instance.simulate_payment(payment_method_id)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->simulate_payment: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -647,7 +647,7 @@ except xendit.ApiException as e:
 try:
     # Makes payment with matching PaymentMethodID.
     api_instance.simulate_payment(payment_method_id, simulate_payment_request=simulate_payment_request)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->simulate_payment: %s\n" % e)
 ```
 

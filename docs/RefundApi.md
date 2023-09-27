@@ -43,7 +43,7 @@ refund_id = "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str |
 try:
     api_response = api_instance.cancel_refund(refund_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->cancel_refund: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -51,7 +51,7 @@ except xendit.ApiException as e:
 try:
     api_response = api_instance.cancel_refund(refund_id, idempotency_key=idempotency_key)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->cancel_refund: %s\n" % e)
 ```
 
@@ -116,7 +116,7 @@ api_instance = RefundApi(api_client)
 try:
     api_response = api_instance.create_refund(idempotency_key=idempotency_key, create_refund=create_refund)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->create_refund: %s\n" % e)
 ```
 
@@ -176,7 +176,7 @@ api_instance = RefundApi(api_client)
 try:
     api_response = api_instance.get_all_refunds()
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->get_all_refunds: %s\n" % e)
 ```
 
@@ -228,7 +228,7 @@ refund_id = "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str |
 try:
     api_response = api_instance.get_refund(refund_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->get_refund: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -236,7 +236,7 @@ except xendit.ApiException as e:
 try:
     api_response = api_instance.get_refund(refund_id, idempotency_key=idempotency_key)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->get_refund: %s\n" % e)
 ```
 

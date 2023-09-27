@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.44.0
 """
 
 
@@ -7,7 +7,7 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.e_wallet_account import EWalletAccount
+from xendit.payment_request.model.e_wallet_account import EWalletAccount
 
 
 class TestEWalletAccount(unittest.TestCase):

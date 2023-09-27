@@ -47,7 +47,7 @@ try:
     # Get a list of transactions
     api_response = api_instance.get_all_transactions(for_user_id=for_user_id, types=types, statuses=statuses, channel_categories=channel_categories, reference_id=reference_id, product_id=product_id, account_identifier=account_identifier, amount=amount, currency=currency, created=created, updated=updated, limit=limit, after_id=after_id, before_id=before_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling TransactionApi->get_all_transactions: %s\n" % e)
 ```
 
@@ -120,7 +120,7 @@ try:
     # Get a transaction based on its id
     api_response = api_instance.get_transaction_by_id(id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling TransactionApi->get_transaction_by_id: %s\n" % e)
 
 # example passing only required values which don't have defaults set
@@ -129,7 +129,7 @@ try:
     # Get a transaction based on its id
     api_response = api_instance.get_transaction_by_id(id, for_user_id=for_user_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling TransactionApi->get_transaction_by_id: %s\n" % e)
 ```
 

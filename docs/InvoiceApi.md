@@ -114,7 +114,7 @@ try:
     # Create an invoice
     api_response = api_instance.create_invoice(create_invoice_request)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->create_invoice: %s\n" % e)
 ```
 
@@ -174,7 +174,7 @@ try:
     # Manually expire an invoice
     api_response = api_instance.expire_invoice(invoice_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
 ```
 
@@ -233,7 +233,7 @@ try:
     # Get invoice by invoice id
     api_response = api_instance.get_invoice_by_id(invoice_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->get_invoice_by_id: %s\n" % e)
 ```
 
@@ -294,7 +294,7 @@ try:
     # Get all Invoices
     api_response = api_instance.get_invoices(external_id=external_id, statuses=statuses, limit=limit, created_after=created_after, created_before=created_before, paid_after=paid_after, paid_before=paid_before, expired_after=expired_after, expired_before=expired_before, last_invoice=last_invoice, client_types=client_types, payment_channels=payment_channels, on_demand_link=on_demand_link, recurring_payment_id=recurring_payment_id)
     pprint(api_response)
-except xendit.ApiException as e:
+except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->get_invoices: %s\n" % e)
 ```
 
