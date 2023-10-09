@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.qr_code_type import QrCodeType
 globals()['QrCodeType'] = QrCodeType
 
-
 def lazy_import():
     pass
 

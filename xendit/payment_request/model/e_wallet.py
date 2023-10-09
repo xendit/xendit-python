@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -34,7 +34,6 @@ globals()['EWalletAllOf'] = EWalletAllOf
 globals()['EWalletChannelCode'] = EWalletChannelCode
 globals()['EWalletChannelProperties'] = EWalletChannelProperties
 globals()['EWalletParameters'] = EWalletParameters
-
 
 def lazy_import():
     pass

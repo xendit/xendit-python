@@ -5,7 +5,7 @@
 The official Xendit Python SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Python.
 
-* Package version: 3.2.0
+* Package version: 3.3.0
 
 ## Requirements.
 
@@ -67,6 +67,7 @@ except xendit.XenditSdkException as e:
 Find detailed API information and examples for each of our product's by clicking the links below,
 
 * [Balance](docs/BalanceApi.md)
+* [Customer](docs/CustomerApi.md)
 * [Invoice](docs/InvoiceApi.md)
 * [PaymentMethod](docs/PaymentMethodApi.md)
 * [PaymentRequest](docs/PaymentRequestApi.md)

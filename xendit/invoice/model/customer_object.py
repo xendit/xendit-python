@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.address_object import AddressObject
 globals()['AddressObject'] = AddressObject
 
-
 def lazy_import():
     pass
 

@@ -1,11 +1,11 @@
-# xendit.payment_method.model.EWallet
+# xendit.payment_request.model.EWallet
 
 Ewallet Payment Method Details
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel_code** | [**EWalletChannelCode**](EWalletChannelCode.md) |  | 
+**channel_code** | [**EWalletChannelCode**](EWalletChannelCode.md) |  | [optional] 
 **channel_properties** | [**EWalletChannelProperties**](EWalletChannelProperties.md) |  | [optional] 
 **account** | [**EWalletAccount**](EWalletAccount.md) |  | [optional] 
 

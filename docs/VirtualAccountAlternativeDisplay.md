@@ -1,4 +1,4 @@
-# xendit.payment_method.model.VirtualAccountAlternativeDisplay
+# xendit.payment_request.model.VirtualAccountAlternativeDisplay
 
 Alternative Display Object
 

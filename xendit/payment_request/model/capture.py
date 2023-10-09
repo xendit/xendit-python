@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.payment_request.model.payment_method import PaymentMethod
 globals()['PaymentMethod'] = PaymentMethod
-
 
 def lazy_import():
     pass
@@ -264,10 +263,10 @@ class Capture(ModelNormal):
         captured_amount: float,
         status: str,
         payment_method: PaymentMethod,
-        failure_code: str,
-        customer_id: str,
-        metadata: dict,
-        channel_properties: dict,
+        failure_code: str | None,
+        customer_id: str | None,
+        metadata: dict | None,
+        channel_properties: dict | None,
         created: str,
         updated: str,
         *args, **kwargs

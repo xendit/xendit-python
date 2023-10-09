@@ -1,4 +1,4 @@
-# xendit.payment_method.model.OverTheCounterChannelCode
+# xendit.payment_request.model.OverTheCounterChannelCode
 
 Over The Counter Channel Code
 

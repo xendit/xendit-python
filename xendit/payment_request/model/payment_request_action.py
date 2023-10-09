@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -222,9 +221,9 @@ class PaymentRequestAction(ModelNormal):
     def __init__(self,
         action: str,
         url_type: str,
-        method: str,
-        url: str,
-        qr_code: str,
+        method: str | None,
+        url: str | None,
+        qr_code: str | None,
         *args, **kwargs
     ):  # noqa: E501
         """PaymentRequestAction - a model defined in OpenAPI

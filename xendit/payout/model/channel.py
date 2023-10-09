@@ -29,7 +29,6 @@ from xendit.payout.model.channel_category import ChannelCategory
 globals()['ChannelAmountLimits'] = ChannelAmountLimits
 globals()['ChannelCategory'] = ChannelCategory
 
-
 def lazy_import():
     pass
 

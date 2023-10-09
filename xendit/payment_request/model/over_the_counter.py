@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -32,7 +32,6 @@ globals()['OverTheCounterChannelCode'] = OverTheCounterChannelCode
 globals()['OverTheCounterChannelProperties'] = OverTheCounterChannelProperties
 globals()['OverTheCounterParameters'] = OverTheCounterParameters
 globals()['PaymentRequestCurrency'] = PaymentRequestCurrency
-
 
 def lazy_import():
     pass

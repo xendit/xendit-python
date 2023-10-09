@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.payment_request.model.payment_request_card_verification_results_three_dee_secure import PaymentRequestCardVerificationResultsThreeDeeSecure
 globals()['PaymentRequestCardVerificationResultsThreeDeeSecure'] = PaymentRequestCardVerificationResultsThreeDeeSecure
-
 
 def lazy_import():
     pass
@@ -201,7 +200,7 @@ class PaymentRequestCardVerificationResults(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self,
-        three_d_secure: PaymentRequestCardVerificationResultsThreeDeeSecure,
+        three_d_secure: PaymentRequestCardVerificationResultsThreeDeeSecure | None,
         cvv_result: str | None = None,
         address_verification_result: str | None = None,
         *args, **kwargs

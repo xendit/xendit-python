@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -28,7 +28,6 @@ from xendit.payment_method.model.virtual_account_channel_code import VirtualAcco
 from xendit.payment_method.model.virtual_account_channel_properties import VirtualAccountChannelProperties
 globals()['VirtualAccountChannelCode'] = VirtualAccountChannelCode
 globals()['VirtualAccountChannelProperties'] = VirtualAccountChannelProperties
-
 
 def lazy_import():
     pass

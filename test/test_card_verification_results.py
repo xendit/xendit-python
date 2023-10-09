@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -7,9 +7,9 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_request.model.card_verification_results_three_d_secure import CardVerificationResultsThreeDSecure
+from xendit.payment_method.model.card_verification_results_three_d_secure import CardVerificationResultsThreeDSecure
 globals()['CardVerificationResultsThreeDSecure'] = CardVerificationResultsThreeDSecure
-from xendit.payment_request.model.card_verification_results import CardVerificationResults
+from xendit.payment_method.model.card_verification_results import CardVerificationResults
 
 
 class TestCardVerificationResults(unittest.TestCase):

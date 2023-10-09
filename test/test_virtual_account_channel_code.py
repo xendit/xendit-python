@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -7,7 +7,7 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_request.model.virtual_account_channel_code import VirtualAccountChannelCode
+from xendit.payment_method.model.virtual_account_channel_code import VirtualAccountChannelCode
 
 
 class TestVirtualAccountChannelCode(unittest.TestCase):

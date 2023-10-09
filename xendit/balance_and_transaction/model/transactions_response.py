@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 3.4.2
+    The version of the XENDIT API: 3.4.3
 """
 
 
@@ -28,7 +28,6 @@ from xendit.balance_and_transaction.model.link_item import LinkItem
 from xendit.balance_and_transaction.model.transaction_response import TransactionResponse
 globals()['LinkItem'] = LinkItem
 globals()['TransactionResponse'] = TransactionResponse
-
 
 def lazy_import():
     pass

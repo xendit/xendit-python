@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.refund.model.refund import Refund
 globals()['Refund'] = Refund
 
-
 def lazy_import():
     pass
 

@@ -1,4 +1,4 @@
-# xendit.payment_method.model.DirectDebit
+# xendit.payment_request.model.DirectDebit
 
 Direct Debit Payment Method Details
 

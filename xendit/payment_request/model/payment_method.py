@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -42,7 +42,6 @@ globals()['PaymentMethodStatus'] = PaymentMethodStatus
 globals()['PaymentMethodType'] = PaymentMethodType
 globals()['QRCode'] = QRCode
 globals()['VirtualAccount'] = VirtualAccount
-
 
 def lazy_import():
     pass

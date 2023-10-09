@@ -1,4 +1,4 @@
-# xendit.payment_method.model.PaymentMethodReusability
+# xendit.payment_request.model.PaymentMethodReusability
 
 
 ## Properties

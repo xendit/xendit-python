@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**auth_payment_method**](PaymentMethodApi.md#auth_payment_method) | **POST** /v2/payment_methods/{paymentMethodId}/auth | Validate a payment method&#39;s linking OTP
 [**create_payment_method**](PaymentMethodApi.md#create_payment_method) | **POST** /v2/payment_methods | Creates payment method
 [**expire_payment_method**](PaymentMethodApi.md#expire_payment_method) | **POST** /v2/payment_methods/{paymentMethodId}/expire | Expires a payment method
-[**get_all_payment_channels**](PaymentMethodApi.md#get_all_payment_channels) | **GET** /v2/payment_methods/channels | Get all payment channels
 [**get_all_payment_methods**](PaymentMethodApi.md#get_all_payment_methods) | **GET** /v2/payment_methods | Get all payment methods by filters
 [**get_payment_method_by_id**](PaymentMethodApi.md#get_payment_method_by_id) | **GET** /v2/payment_methods/{paymentMethodId} | Get payment method by ID
 [**get_payments_by_payment_method_id**](PaymentMethodApi.md#get_payments_by_payment_method_id) | **GET** /v2/payment_methods/{paymentMethodId}/payments | Returns payments with matching PaymentMethodID.
@@ -236,69 +235,6 @@ Name | Type | Description  | Notes
 **403** | Forbidden due to permissions |  -  |
 **404** | Data not found |  -  |
 **503** | Service is unavailable due to dependencies |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_all_payment_channels**
-> PaymentChannelList get_all_payment_channels()
-
-Get all payment channels
-
-Get all payment channels
-
-### Example
-
-
-```python
-import time
-import xendit
-from xendit.apis import PaymentMethodApi
-from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
-from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
-from xendit.payment_method.model.payment_channel_list import PaymentChannelList
-from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
-from pprint import pprint
-
-# See configuration.py for a list of all supported configuration parameters.
-xendit.set_api_key('XENDIT API KEY')
-
-
-# Enter a context with an instance of the API client
-api_client = xendit.ApiClient()
-# Create an instance of the API class
-api_instance = PaymentMethodApi(api_client)
-
-# example passing only required values which don't have defaults set
-# and optional values
-try:
-    # Get all payment channels
-    api_response = api_instance.get_all_payment_channels(is_activated=is_activated, type=type)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling PaymentMethodApi->get_all_payment_channels: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **is_activated** | **bool**|  | [optional] if omitted the server will use the default value of True
- **type** | **str**|  | [optional]
-
-### Return type
-
-[**PaymentChannelList**](PaymentChannelList.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Request successful |  -  |
-**400** | Bad request |  -  |
-**403** | Forbidden due to permissions |  -  |
 **0** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

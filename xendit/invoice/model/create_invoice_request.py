@@ -33,7 +33,6 @@ globals()['InvoiceFee'] = InvoiceFee
 globals()['InvoiceItem'] = InvoiceItem
 globals()['NotificationPreference'] = NotificationPreference
 
-
 def lazy_import():
     pass
 

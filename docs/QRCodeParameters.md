@@ -1,11 +1,9 @@
-# xendit.payment_method.model.QRCodeParameters
+# xendit.payment_request.model.QRCodeParameters
 
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float, none_type** |  | [optional] 
-**currency** | **str** |  | [optional] 
 **channel_code** | [**QRCodeChannelCode**](QRCodeChannelCode.md) |  | [optional] 
 **channel_properties** | [**QRCodeChannelProperties**](QRCodeChannelProperties.md) |  | [optional] 
 

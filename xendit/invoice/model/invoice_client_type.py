@@ -25,7 +25,6 @@ from xendit.model_utils import (  # noqa: F401
 from xendit.exceptions import ApiAttributeError
 
 
-
 def lazy_import():
     pass
 

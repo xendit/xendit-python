@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.payout.model.channel_account_type import ChannelAccountType
 globals()['ChannelAccountType'] = ChannelAccountType
 
-
 def lazy_import():
     pass
 

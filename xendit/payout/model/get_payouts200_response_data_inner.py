@@ -31,7 +31,6 @@ globals()['DigitalPayoutChannelProperties'] = DigitalPayoutChannelProperties
 globals()['Payout'] = Payout
 globals()['ReceiptNotification'] = ReceiptNotification
 
-
 def lazy_import():
     pass
 

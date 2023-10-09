@@ -51,7 +51,6 @@ globals()['Paylater'] = Paylater
 globals()['QrCode'] = QrCode
 globals()['RetailOutlet'] = RetailOutlet
 
-
 def lazy_import():
     pass
 

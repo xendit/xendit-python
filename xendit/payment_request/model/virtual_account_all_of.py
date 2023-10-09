@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.payment_request.model.virtual_account_alternative_display import VirtualAccountAlternativeDisplay
 globals()['VirtualAccountAlternativeDisplay'] = VirtualAccountAlternativeDisplay
-
 
 def lazy_import():
     pass

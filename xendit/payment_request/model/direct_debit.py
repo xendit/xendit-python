@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -38,7 +38,6 @@ globals()['DirectDebitChannelProperties'] = DirectDebitChannelProperties
 globals()['DirectDebitDebitCard'] = DirectDebitDebitCard
 globals()['DirectDebitParameters'] = DirectDebitParameters
 globals()['DirectDebitType'] = DirectDebitType
-
 
 def lazy_import():
     pass

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 3.4.2
+    The version of the XENDIT API: 3.4.3
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.balance_and_transaction.model.transaction_types import TransactionTypes
 globals()['TransactionTypes'] = TransactionTypes
-
 
 def lazy_import():
     pass

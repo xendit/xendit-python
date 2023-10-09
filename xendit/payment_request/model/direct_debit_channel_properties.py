@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_request.model.direct_debit_channel_properties_debit_card imp
 globals()['DirectDebitChannelPropertiesBankAccount'] = DirectDebitChannelPropertiesBankAccount
 globals()['DirectDebitChannelPropertiesBankRedirect'] = DirectDebitChannelPropertiesBankRedirect
 globals()['DirectDebitChannelPropertiesDebitCard'] = DirectDebitChannelPropertiesDebitCard
-
 
 def lazy_import():
     pass

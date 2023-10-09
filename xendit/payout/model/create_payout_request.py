@@ -29,7 +29,6 @@ from xendit.payout.model.receipt_notification import ReceiptNotification
 globals()['DigitalPayoutChannelProperties'] = DigitalPayoutChannelProperties
 globals()['ReceiptNotification'] = ReceiptNotification
 
-
 def lazy_import():
     pass
 

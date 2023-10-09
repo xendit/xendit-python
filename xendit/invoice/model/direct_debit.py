@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.direct_debit_type import DirectDebitType
 globals()['DirectDebitType'] = DirectDebitType
 
-
 def lazy_import():
     pass
 

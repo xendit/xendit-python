@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -28,7 +28,6 @@ from xendit.payment_method.model.card_channel_properties import CardChannelPrope
 from xendit.payment_method.model.card_parameters_card_information import CardParametersCardInformation
 globals()['CardChannelProperties'] = CardChannelProperties
 globals()['CardParametersCardInformation'] = CardParametersCardInformation
-
 
 def lazy_import():
     pass

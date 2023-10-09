@@ -1,4 +1,4 @@
-# xendit.payment_method.model.OverTheCounterChannelProperties
+# xendit.payment_request.model.OverTheCounterChannelProperties
 
 Over The Counter Channel Properties
 

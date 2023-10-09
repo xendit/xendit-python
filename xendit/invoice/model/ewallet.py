@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.ewallet_type import EwalletType
 globals()['EwalletType'] = EwalletType
 
-
 def lazy_import():
     pass
 

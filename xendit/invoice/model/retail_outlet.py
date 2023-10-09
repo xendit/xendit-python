@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.retail_outlet_name import RetailOutletName
 globals()['RetailOutletName'] = RetailOutletName
 
-
 def lazy_import():
     pass
 

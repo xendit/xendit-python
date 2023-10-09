@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -34,7 +34,6 @@ globals()['VirtualAccountAlternativeDisplay'] = VirtualAccountAlternativeDisplay
 globals()['VirtualAccountChannelCode'] = VirtualAccountChannelCode
 globals()['VirtualAccountChannelProperties'] = VirtualAccountChannelProperties
 globals()['VirtualAccountParameters'] = VirtualAccountParameters
-
 
 def lazy_import():
     pass

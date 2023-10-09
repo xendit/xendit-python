@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():

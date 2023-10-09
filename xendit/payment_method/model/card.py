@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.89.1
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_method.model.tokenized_card_information import TokenizedCard
 globals()['CardChannelProperties'] = CardChannelProperties
 globals()['CardVerificationResults'] = CardVerificationResults
 globals()['TokenizedCardInformation'] = TokenizedCardInformation
-
 
 def lazy_import():
     pass
@@ -209,8 +208,8 @@ class Card(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self,
-        currency: str,
-        channel_properties: CardChannelProperties,
+        currency: str | None,
+        channel_properties: CardChannelProperties | None,
         card_information: TokenizedCardInformation | None = None,
         card_verification_results: CardVerificationResults | None = None,
         *args, **kwargs

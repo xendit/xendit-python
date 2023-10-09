@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 3.4.2
+    The version of the XENDIT API: 3.4.3
 """
 
 
@@ -36,7 +36,6 @@ globals()['FeeResponse'] = FeeResponse
 globals()['TransactionId'] = TransactionId
 globals()['TransactionResponseType'] = TransactionResponseType
 globals()['TransactionStatuses'] = TransactionStatuses
-
 
 def lazy_import():
     pass
@@ -281,8 +280,8 @@ class TransactionResponse(ModelNormal):
         type: TransactionResponseType,
         status: TransactionStatuses,
         channel_category: ChannelsCategories,
-        channel_code: str,
-        account_identifier: str,
+        channel_code: str | None,
+        account_identifier: str | None,
         reference_id: str,
         currency: Currency,
         amount: float,

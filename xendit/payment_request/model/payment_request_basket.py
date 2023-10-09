@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.44.1
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.payment_request.model.payment_request_basket_item import PaymentRequestBasketItem
 globals()['PaymentRequestBasketItem'] = PaymentRequestBasketItem
-
 
 def lazy_import():
     pass
