@@ -74,11 +74,11 @@ class ApiClient(object):
 
         # XENDIT headers
         self.default_headers['xendit-lib'] = 'python'
-        self.default_headers['xendit-lib-version'] = '3.3.0'
+        self.default_headers['xendit-lib-ver'] = '3.4.0'
             
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/3.3.0/python'
+        self.user_agent = 'OpenAPI-Generator/3.4.0/python'
 
     def __enter__(self):
         return self
@@ -806,10 +806,10 @@ class Endpoint(object):
         Example:
 
         api_instance = PaymentRequestApi()
-        api_instance.authorize_payment_request  # this is an instance of the class Endpoint
-        api_instance.authorize_payment_request()  # this invokes api_instance.authorize_payment_request.__call__()
+        api_instance.create_payment_request  # this is an instance of the class Endpoint
+        api_instance.create_payment_request()  # this invokes api_instance.create_payment_request.__call__()
         which then invokes the callable functions stored in that endpoint at
-        api_instance.authorize_payment_request.callable or self.callable in this class
+        api_instance.create_payment_request.callable or self.callable in this class
 
         """
         return self.callable(self, *args, **kwargs)

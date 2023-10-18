@@ -25,3 +25,16 @@ jobs:
           body: ${{ steps.parse-changelog.outputs.changelog }}
           draft: false
           prerelease: false
+
+  publish-pypi:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/xendit-python
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Publish a Python distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

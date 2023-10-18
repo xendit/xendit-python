@@ -44,6 +44,7 @@ class InvoiceApi(object):
             params_map={
                 'all': [
                     'create_invoice_request',
+                    'for_user_id',
                 ],
                 'required': [
                     'create_invoice_request',
@@ -63,11 +64,15 @@ class InvoiceApi(object):
                 'openapi_types': {
                     'create_invoice_request':
                         (CreateInvoiceRequest,),
+                    'for_user_id':
+                        (str,),
                 },
                 'attribute_map': {
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'create_invoice_request': 'body',
+                    'for_user_id': 'header',
                 },
                 'collection_format_map': {
                 }
@@ -79,55 +84,6 @@ class InvoiceApi(object):
                 'content_type': [
                     'application/json'
                 ]
-            },
-            api_client=api_client
-        )
-        self.expire_invoice_endpoint = _Endpoint(
-            settings={
-                'response_type': (Invoice,),
-                'auth': [],
-                'endpoint_path': '/invoices/{invoice_id}/expire!',
-                'operation_id': 'expire_invoice',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'invoice_id',
-                ],
-                'required': [
-                    'invoice_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'invoice_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'invoice_id': 'invoice_id',
-                },
-                'location_map': {
-                    'invoice_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
             },
             api_client=api_client
         )
@@ -143,6 +99,7 @@ class InvoiceApi(object):
             params_map={
                 'all': [
                     'invoice_id',
+                    'for_user_id',
                 ],
                 'required': [
                     'invoice_id',
@@ -162,12 +119,16 @@ class InvoiceApi(object):
                 'openapi_types': {
                     'invoice_id':
                         (str,),
+                    'for_user_id':
+                        (str,),
                 },
                 'attribute_map': {
                     'invoice_id': 'invoice_id',
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'invoice_id': 'path',
+                    'for_user_id': 'header',
                 },
                 'collection_format_map': {
                 }
@@ -191,6 +152,7 @@ class InvoiceApi(object):
             },
             params_map={
                 'all': [
+                    'for_user_id',
                     'external_id',
                     'statuses',
                     'limit',
@@ -220,6 +182,8 @@ class InvoiceApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
+                    'for_user_id':
+                        (str,),
                     'external_id':
                         (str,),
                     'statuses':
@@ -250,6 +214,7 @@ class InvoiceApi(object):
                         (str,),
                 },
                 'attribute_map': {
+                    'for_user_id': 'for-user-id',
                     'external_id': 'external_id',
                     'statuses': 'statuses',
                     'limit': 'limit',
@@ -266,6 +231,7 @@ class InvoiceApi(object):
                     'recurring_payment_id': 'recurring_payment_id',
                 },
                 'location_map': {
+                    'for_user_id': 'header',
                     'external_id': 'query',
                     'statuses': 'query',
                     'limit': 'query',
@@ -295,10 +261,65 @@ class InvoiceApi(object):
             },
             api_client=api_client
         )
+        self.expire_invoice_endpoint = _Endpoint(
+            settings={
+                'response_type': (Invoice,),
+                'auth': [],
+                'endpoint_path': '/invoices/{invoice_id}/expire!',
+                'operation_id': 'expire_invoice',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'invoice_id',
+                    'for_user_id',
+                ],
+                'required': [
+                    'invoice_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'invoice_id':
+                        (str,),
+                    'for_user_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'invoice_id': 'invoice_id',
+                    'for_user_id': 'for-user-id',
+                },
+                'location_map': {
+                    'invoice_id': 'path',
+                    'for_user_id': 'header',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
 
     def create_invoice(
         self,
         create_invoice_request: CreateInvoiceRequest,
+        for_user_id: Optional[str] = None,
         **kwargs
     ) -> Invoice:
         """Create an invoice  # noqa: E501
@@ -306,13 +327,14 @@ class InvoiceApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_invoice(create_invoice_request, async_req=True)
+        >>> thread = api.create_invoice(create_invoice_request, for_user_id, async_req=True)
         >>> result = thread.get()
 
         Args:
             create_invoice_request (CreateInvoiceRequest):
 
         Keyword Args:
+            for_user_id (str): Business ID of the sub-account merchant (XP feature). [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -375,92 +397,14 @@ class InvoiceApi(object):
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['create_invoice_request'] = create_invoice_request
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         return self.create_invoice_endpoint.call_with_http_info(**kwargs)
-
-    def expire_invoice(
-        self,
-        invoice_id: str,
-        **kwargs
-    ) -> Invoice:
-        """Manually expire an invoice  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.expire_invoice(invoice_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            invoice_id (str): Invoice ID to be expired
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            Invoice
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['invoice_id'] = invoice_id
-        return self.expire_invoice_endpoint.call_with_http_info(**kwargs)
 
     def get_invoice_by_id(
         self,
         invoice_id: str,
+        for_user_id: Optional[str] = None,
         **kwargs
     ) -> Invoice:
         """Get invoice by invoice id  # noqa: E501
@@ -468,13 +412,14 @@ class InvoiceApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_invoice_by_id(invoice_id, async_req=True)
+        >>> thread = api.get_invoice_by_id(invoice_id, for_user_id, async_req=True)
         >>> result = thread.get()
 
         Args:
             invoice_id (str): Invoice ID
 
         Keyword Args:
+            for_user_id (str): Business ID of the sub-account merchant (XP feature). [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -537,10 +482,13 @@ class InvoiceApi(object):
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['invoice_id'] = invoice_id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         return self.get_invoice_by_id_endpoint.call_with_http_info(**kwargs)
 
     def get_invoices(
         self,
+        for_user_id: Optional[str] = None,
         external_id: Optional[str] = None,
         statuses: Optional[List[InvoiceStatus]] = None,
         limit: Optional[float] = None,
@@ -562,11 +510,12 @@ class InvoiceApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_invoices(external_id, statuses, limit, created_after, created_before, paid_after, paid_before, expired_after, expired_before, last_invoice, client_types, payment_channels, on_demand_link, recurring_payment_id, async_req=True)
+        >>> thread = api.get_invoices(for_user_id, external_id, statuses, limit, created_after, created_before, paid_after, paid_before, expired_after, expired_before, last_invoice, client_types, payment_channels, on_demand_link, recurring_payment_id, async_req=True)
         >>> result = thread.get()
 
 
         Keyword Args:
+            for_user_id (str): Business ID of the sub-account merchant (XP feature). [optional]
             external_id (str): [optional]
             statuses ([InvoiceStatus]): [optional]
             limit (float): [optional]
@@ -642,6 +591,8 @@ class InvoiceApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         if external_id is not None:
             kwargs['external_id'] = external_id
         if statuses is not None:
@@ -671,4 +622,89 @@ class InvoiceApi(object):
         if recurring_payment_id is not None:
             kwargs['recurring_payment_id'] = recurring_payment_id
         return self.get_invoices_endpoint.call_with_http_info(**kwargs)
+
+    def expire_invoice(
+        self,
+        invoice_id: str,
+        for_user_id: Optional[str] = None,
+        **kwargs
+    ) -> Invoice:
+        """Manually expire an invoice  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.expire_invoice(invoice_id, for_user_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            invoice_id (str): Invoice ID to be expired
+
+        Keyword Args:
+            for_user_id (str): Business ID of the sub-account merchant (XP feature). [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            Invoice
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['invoice_id'] = invoice_id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        return self.expire_invoice_endpoint.call_with_http_info(**kwargs)
 

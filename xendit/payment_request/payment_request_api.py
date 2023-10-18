@@ -32,116 +32,6 @@ class PaymentRequestApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.authorize_payment_request_endpoint = _Endpoint(
-            settings={
-                'response_type': (PaymentRequest,),
-                'auth': [],
-                'endpoint_path': '/payment_requests/{paymentRequestId}/auth',
-                'operation_id': 'authorize_payment_request',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'payment_request_id',
-                    'payment_request_auth_parameters',
-                ],
-                'required': [
-                    'payment_request_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'payment_request_id':
-                        (str,),
-                    'payment_request_auth_parameters':
-                        (PaymentRequestAuthParameters,),
-                },
-                'attribute_map': {
-                    'payment_request_id': 'paymentRequestId',
-                },
-                'location_map': {
-                    'payment_request_id': 'path',
-                    'payment_request_auth_parameters': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
-        self.capture_payment_request_endpoint = _Endpoint(
-            settings={
-                'response_type': (Capture,),
-                'auth': [],
-                'endpoint_path': '/payment_requests/{paymentRequestId}/captures',
-                'operation_id': 'capture_payment_request',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'payment_request_id',
-                    'capture_parameters',
-                ],
-                'required': [
-                    'payment_request_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'payment_request_id':
-                        (str,),
-                    'capture_parameters':
-                        (CaptureParameters,),
-                },
-                'attribute_map': {
-                    'payment_request_id': 'paymentRequestId',
-                },
-                'location_map': {
-                    'payment_request_id': 'path',
-                    'capture_parameters': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
         self.create_payment_request_endpoint = _Endpoint(
             settings={
                 'response_type': (PaymentRequest,),
@@ -154,6 +44,7 @@ class PaymentRequestApi(object):
             params_map={
                 'all': [
                     'idempotency_key',
+                    'for_user_id',
                     'payment_request_parameters',
                 ],
                 'required': [],
@@ -172,14 +63,18 @@ class PaymentRequestApi(object):
                 'openapi_types': {
                     'idempotency_key':
                         (str,),
+                    'for_user_id':
+                        (str,),
                     'payment_request_parameters':
                         (PaymentRequestParameters,),
                 },
                 'attribute_map': {
                     'idempotency_key': 'idempotency-key',
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'idempotency_key': 'header',
+                    'for_user_id': 'header',
                     'payment_request_parameters': 'body',
                 },
                 'collection_format_map': {
@@ -195,81 +90,6 @@ class PaymentRequestApi(object):
             },
             api_client=api_client
         )
-        self.get_all_payment_requests_endpoint = _Endpoint(
-            settings={
-                'response_type': (PaymentRequestListResponse,),
-                'auth': [],
-                'endpoint_path': '/payment_requests',
-                'operation_id': 'get_all_payment_requests',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'reference_id',
-                    'id',
-                    'customer_id',
-                    'limit',
-                    'before_id',
-                    'after_id',
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'reference_id':
-                        ([str],),
-                    'id':
-                        ([str],),
-                    'customer_id':
-                        ([str],),
-                    'limit':
-                        (int,),
-                    'before_id':
-                        (str,),
-                    'after_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'reference_id': 'reference_id',
-                    'id': 'id',
-                    'customer_id': 'customer_id',
-                    'limit': 'limit',
-                    'before_id': 'before_id',
-                    'after_id': 'after_id',
-                },
-                'location_map': {
-                    'reference_id': 'query',
-                    'id': 'query',
-                    'customer_id': 'query',
-                    'limit': 'query',
-                    'before_id': 'query',
-                    'after_id': 'query',
-                },
-                'collection_format_map': {
-                    'reference_id': 'multi',
-                    'id': 'multi',
-                    'customer_id': 'multi',
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
         self.get_payment_request_by_id_endpoint = _Endpoint(
             settings={
                 'response_type': (PaymentRequest,),
@@ -282,6 +102,7 @@ class PaymentRequestApi(object):
             params_map={
                 'all': [
                     'payment_request_id',
+                    'for_user_id',
                 ],
                 'required': [
                     'payment_request_id',
@@ -301,12 +122,16 @@ class PaymentRequestApi(object):
                 'openapi_types': {
                     'payment_request_id':
                         (str,),
+                    'for_user_id':
+                        (str,),
                 },
                 'attribute_map': {
                     'payment_request_id': 'paymentRequestId',
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'payment_request_id': 'path',
+                    'for_user_id': 'header',
                 },
                 'collection_format_map': {
                 }
@@ -331,6 +156,7 @@ class PaymentRequestApi(object):
             params_map={
                 'all': [
                     'payment_request_id',
+                    'for_user_id',
                     'limit',
                 ],
                 'required': [
@@ -351,15 +177,19 @@ class PaymentRequestApi(object):
                 'openapi_types': {
                     'payment_request_id':
                         (str,),
+                    'for_user_id':
+                        (str,),
                     'limit':
                         (int,),
                 },
                 'attribute_map': {
                     'payment_request_id': 'paymentRequestId',
+                    'for_user_id': 'for-user-id',
                     'limit': 'limit',
                 },
                 'location_map': {
                     'payment_request_id': 'path',
+                    'for_user_id': 'header',
                     'limit': 'query',
                 },
                 'collection_format_map': {
@@ -373,18 +203,100 @@ class PaymentRequestApi(object):
             },
             api_client=api_client
         )
-        self.resend_payment_request_auth_endpoint = _Endpoint(
+        self.get_all_payment_requests_endpoint = _Endpoint(
             settings={
-                'response_type': (PaymentRequest,),
+                'response_type': (PaymentRequestListResponse,),
                 'auth': [],
-                'endpoint_path': '/payment_requests/{paymentRequestId}/auth/resend',
-                'operation_id': 'resend_payment_request_auth',
+                'endpoint_path': '/payment_requests',
+                'operation_id': 'get_all_payment_requests',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'for_user_id',
+                    'reference_id',
+                    'id',
+                    'customer_id',
+                    'limit',
+                    'before_id',
+                    'after_id',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'for_user_id':
+                        (str,),
+                    'reference_id':
+                        ([str],),
+                    'id':
+                        ([str],),
+                    'customer_id':
+                        ([str],),
+                    'limit':
+                        (int,),
+                    'before_id':
+                        (str,),
+                    'after_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'for_user_id': 'for-user-id',
+                    'reference_id': 'reference_id',
+                    'id': 'id',
+                    'customer_id': 'customer_id',
+                    'limit': 'limit',
+                    'before_id': 'before_id',
+                    'after_id': 'after_id',
+                },
+                'location_map': {
+                    'for_user_id': 'header',
+                    'reference_id': 'query',
+                    'id': 'query',
+                    'customer_id': 'query',
+                    'limit': 'query',
+                    'before_id': 'query',
+                    'after_id': 'query',
+                },
+                'collection_format_map': {
+                    'reference_id': 'multi',
+                    'id': 'multi',
+                    'customer_id': 'multi',
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.capture_payment_request_endpoint = _Endpoint(
+            settings={
+                'response_type': (Capture,),
+                'auth': [],
+                'endpoint_path': '/payment_requests/{paymentRequestId}/captures',
+                'operation_id': 'capture_payment_request',
                 'http_method': 'POST',
                 'servers': None,
             },
             params_map={
                 'all': [
                     'payment_request_id',
+                    'for_user_id',
+                    'capture_parameters',
                 ],
                 'required': [
                     'payment_request_id',
@@ -404,12 +316,135 @@ class PaymentRequestApi(object):
                 'openapi_types': {
                     'payment_request_id':
                         (str,),
+                    'for_user_id':
+                        (str,),
+                    'capture_parameters':
+                        (CaptureParameters,),
                 },
                 'attribute_map': {
                     'payment_request_id': 'paymentRequestId',
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'payment_request_id': 'path',
+                    'for_user_id': 'header',
+                    'capture_parameters': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.authorize_payment_request_endpoint = _Endpoint(
+            settings={
+                'response_type': (PaymentRequest,),
+                'auth': [],
+                'endpoint_path': '/payment_requests/{paymentRequestId}/auth',
+                'operation_id': 'authorize_payment_request',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'payment_request_id',
+                    'for_user_id',
+                    'payment_request_auth_parameters',
+                ],
+                'required': [
+                    'payment_request_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'payment_request_id':
+                        (str,),
+                    'for_user_id':
+                        (str,),
+                    'payment_request_auth_parameters':
+                        (PaymentRequestAuthParameters,),
+                },
+                'attribute_map': {
+                    'payment_request_id': 'paymentRequestId',
+                    'for_user_id': 'for-user-id',
+                },
+                'location_map': {
+                    'payment_request_id': 'path',
+                    'for_user_id': 'header',
+                    'payment_request_auth_parameters': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.resend_payment_request_auth_endpoint = _Endpoint(
+            settings={
+                'response_type': (PaymentRequest,),
+                'auth': [],
+                'endpoint_path': '/payment_requests/{paymentRequestId}/auth/resend',
+                'operation_id': 'resend_payment_request_auth',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'payment_request_id',
+                    'for_user_id',
+                ],
+                'required': [
+                    'payment_request_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'payment_request_id':
+                        (str,),
+                    'for_user_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'payment_request_id': 'paymentRequestId',
+                    'for_user_id': 'for-user-id',
+                },
+                'location_map': {
+                    'payment_request_id': 'path',
+                    'for_user_id': 'header',
                 },
                 'collection_format_map': {
                 }
@@ -423,181 +458,10 @@ class PaymentRequestApi(object):
             api_client=api_client
         )
 
-    def authorize_payment_request(
-        self,
-        payment_request_id: str,
-        payment_request_auth_parameters: Optional[PaymentRequestAuthParameters] = None,
-        **kwargs
-    ) -> PaymentRequest:
-        """Payment Request Authorize  # noqa: E501
-
-        Payment Request Authorize  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.authorize_payment_request(payment_request_id, payment_request_auth_parameters, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            payment_request_id (str):
-
-        Keyword Args:
-            payment_request_auth_parameters (PaymentRequestAuthParameters): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            PaymentRequest
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = payment_request_id
-        if payment_request_auth_parameters is not None:
-            kwargs['payment_request_auth_parameters'] = payment_request_auth_parameters
-        return self.authorize_payment_request_endpoint.call_with_http_info(**kwargs)
-
-    def capture_payment_request(
-        self,
-        payment_request_id: str,
-        capture_parameters: Optional[CaptureParameters] = None,
-        **kwargs
-    ) -> Capture:
-        """Payment Request Capture  # noqa: E501
-
-        Payment Request Capture  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.capture_payment_request(payment_request_id, capture_parameters, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            payment_request_id (str):
-
-        Keyword Args:
-            capture_parameters (CaptureParameters): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            Capture
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = payment_request_id
-        if capture_parameters is not None:
-            kwargs['capture_parameters'] = capture_parameters
-        return self.capture_payment_request_endpoint.call_with_http_info(**kwargs)
-
     def create_payment_request(
         self,
         idempotency_key: Optional[str] = None,
+        for_user_id: Optional[str] = None,
         payment_request_parameters: Optional[PaymentRequestParameters] = None,
         **kwargs
     ) -> PaymentRequest:
@@ -607,12 +471,13 @@ class PaymentRequestApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_payment_request(idempotency_key, payment_request_parameters, async_req=True)
+        >>> thread = api.create_payment_request(idempotency_key, for_user_id, payment_request_parameters, async_req=True)
         >>> result = thread.get()
 
 
         Keyword Args:
             idempotency_key (str): [optional]
+            for_user_id (str): [optional]
             payment_request_parameters (PaymentRequestParameters): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
@@ -677,12 +542,191 @@ class PaymentRequestApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         if idempotency_key is not None:
             kwargs['idempotency_key'] = idempotency_key
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         if payment_request_parameters is not None:
             kwargs['payment_request_parameters'] = payment_request_parameters
         return self.create_payment_request_endpoint.call_with_http_info(**kwargs)
 
+    def get_payment_request_by_id(
+        self,
+        payment_request_id: str,
+        for_user_id: Optional[str] = None,
+        **kwargs
+    ) -> PaymentRequest:
+        """Get payment request by ID  # noqa: E501
+
+        Get payment request by ID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_payment_request_by_id(payment_request_id, for_user_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            payment_request_id (str):
+
+        Keyword Args:
+            for_user_id (str): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PaymentRequest
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['payment_request_id'] = payment_request_id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        return self.get_payment_request_by_id_endpoint.call_with_http_info(**kwargs)
+
+    def get_payment_request_captures(
+        self,
+        payment_request_id: str,
+        for_user_id: Optional[str] = None,
+        limit: Optional[int] = None,
+        **kwargs
+    ) -> CaptureListResponse:
+        """Get Payment Request Capture  # noqa: E501
+
+        Get Payment Request Capture  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_payment_request_captures(payment_request_id, for_user_id, limit, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            payment_request_id (str):
+
+        Keyword Args:
+            for_user_id (str): [optional]
+            limit (int): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            CaptureListResponse
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['payment_request_id'] = payment_request_id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        if limit is not None:
+            kwargs['limit'] = limit
+        return self.get_payment_request_captures_endpoint.call_with_http_info(**kwargs)
+
     def get_all_payment_requests(
         self,
+        for_user_id: Optional[str] = None,
         reference_id: Optional[List[str]] = None,
         id: Optional[List[str]] = None,
         customer_id: Optional[List[str]] = None,
@@ -697,11 +741,12 @@ class PaymentRequestApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_all_payment_requests(reference_id, id, customer_id, limit, before_id, after_id, async_req=True)
+        >>> thread = api.get_all_payment_requests(for_user_id, reference_id, id, customer_id, limit, before_id, after_id, async_req=True)
         >>> result = thread.get()
 
 
         Keyword Args:
+            for_user_id (str): [optional]
             reference_id ([str]): [optional]
             id ([str]): [optional]
             customer_id ([str]): [optional]
@@ -769,6 +814,8 @@ class PaymentRequestApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         if reference_id is not None:
             kwargs['reference_id'] = reference_id
         if id is not None:
@@ -783,24 +830,118 @@ class PaymentRequestApi(object):
             kwargs['after_id'] = after_id
         return self.get_all_payment_requests_endpoint.call_with_http_info(**kwargs)
 
-    def get_payment_request_by_id(
+    def capture_payment_request(
         self,
         payment_request_id: str,
+        for_user_id: Optional[str] = None,
+        capture_parameters: Optional[CaptureParameters] = None,
         **kwargs
-    ) -> PaymentRequest:
-        """Get payment request by ID  # noqa: E501
+    ) -> Capture:
+        """Payment Request Capture  # noqa: E501
 
-        Get payment request by ID  # noqa: E501
+        Payment Request Capture  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_payment_request_by_id(payment_request_id, async_req=True)
+        >>> thread = api.capture_payment_request(payment_request_id, for_user_id, capture_parameters, async_req=True)
         >>> result = thread.get()
 
         Args:
             payment_request_id (str):
 
         Keyword Args:
+            for_user_id (str): [optional]
+            capture_parameters (CaptureParameters): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            Capture
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['payment_request_id'] = payment_request_id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        if capture_parameters is not None:
+            kwargs['capture_parameters'] = capture_parameters
+        return self.capture_payment_request_endpoint.call_with_http_info(**kwargs)
+
+    def authorize_payment_request(
+        self,
+        payment_request_id: str,
+        for_user_id: Optional[str] = None,
+        payment_request_auth_parameters: Optional[PaymentRequestAuthParameters] = None,
+        **kwargs
+    ) -> PaymentRequest:
+        """Payment Request Authorize  # noqa: E501
+
+        Payment Request Authorize  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.authorize_payment_request(payment_request_id, for_user_id, payment_request_auth_parameters, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            payment_request_id (str):
+
+        Keyword Args:
+            for_user_id (str): [optional]
+            payment_request_auth_parameters (PaymentRequestAuthParameters): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -863,97 +1004,16 @@ class PaymentRequestApi(object):
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['payment_request_id'] = payment_request_id
-        return self.get_payment_request_by_id_endpoint.call_with_http_info(**kwargs)
-
-    def get_payment_request_captures(
-        self,
-        payment_request_id: str,
-        limit: Optional[int] = None,
-        **kwargs
-    ) -> CaptureListResponse:
-        """Get Payment Request Capture  # noqa: E501
-
-        Get Payment Request Capture  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.get_payment_request_captures(payment_request_id, limit, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            payment_request_id (str):
-
-        Keyword Args:
-            limit (int): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            CaptureListResponse
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['payment_request_id'] = payment_request_id
-        if limit is not None:
-            kwargs['limit'] = limit
-        return self.get_payment_request_captures_endpoint.call_with_http_info(**kwargs)
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        if payment_request_auth_parameters is not None:
+            kwargs['payment_request_auth_parameters'] = payment_request_auth_parameters
+        return self.authorize_payment_request_endpoint.call_with_http_info(**kwargs)
 
     def resend_payment_request_auth(
         self,
         payment_request_id: str,
+        for_user_id: Optional[str] = None,
         **kwargs
     ) -> PaymentRequest:
         """Payment Request Resend Auth  # noqa: E501
@@ -962,13 +1022,14 @@ class PaymentRequestApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.resend_payment_request_auth(payment_request_id, async_req=True)
+        >>> thread = api.resend_payment_request_auth(payment_request_id, for_user_id, async_req=True)
         >>> result = thread.get()
 
         Args:
             payment_request_id (str):
 
         Keyword Args:
+            for_user_id (str): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1031,5 +1092,7 @@ class PaymentRequestApi(object):
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['payment_request_id'] = payment_request_id
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         return self.resend_payment_request_auth_endpoint.call_with_http_info(**kwargs)
 

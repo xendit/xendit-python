@@ -25,13 +25,6 @@ class TestInvoiceApi(unittest.TestCase):
         """
         pass
 
-    def test_expire_invoice(self):
-        """Test case for expire_invoice
-
-        Manually expire an invoice  # noqa: E501
-        """
-        pass
-
     def test_get_invoice_by_id(self):
         """Test case for get_invoice_by_id
 
@@ -43,6 +36,13 @@ class TestInvoiceApi(unittest.TestCase):
         """Test case for get_invoices
 
         Get all Invoices  # noqa: E501
+        """
+        pass
+
+    def test_expire_invoice(self):
+        """Test case for expire_invoice
+
+        Manually expire an invoice  # noqa: E501
         """
         pass
 

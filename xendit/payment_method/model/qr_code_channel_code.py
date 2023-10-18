@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.89.1
+    The version of the XENDIT API: 2.89.2
 """
 
 
@@ -56,6 +56,7 @@ class QRCodeChannelCode(ModelSimple):
             'RCBC': "RCBC",
             'PROMPTPAY': "PROMPTPAY",
             'LINKAJA': "LINKAJA",
+            'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
 
@@ -282,7 +283,10 @@ class QRCodeChannelCode(ModelSimple):
         self._path_to_item = _path_to_item
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
-        self.value = value
+        try:
+            self.value = value
+        except ValueError:
+            self.value = self.allowed_values[('value',)]['XENDIT_ENUM_DEFAULT_FALLBACK']
         if kwargs:
             raise ApiTypeError(
                 "Invalid named arguments=%s passed to %s. Remove those invalid named arguments." % (

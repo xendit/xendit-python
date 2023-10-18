@@ -1,11 +1,11 @@
-# xendit.refund.model.RefundList
+# xendit.refund.model.GetAllRefundsDefaultResponse
 
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **data** | [**[Refund]**](Refund.md) |  |  |
-| **has_more** | **bool** |  | [optional]  |
+| **error_code** | **str** |  | [optional]  |
+| **message** | **str** |  | [optional]  |
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

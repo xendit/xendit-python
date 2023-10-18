@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.89.1
+    The version of the XENDIT API: 2.89.2
 """
 
 
@@ -18,31 +18,10 @@ class TestPaymentMethodApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_auth_payment_method(self):
-        """Test case for auth_payment_method
-
-        Validate a payment method's linking OTP  # noqa: E501
-        """
-        pass
-
     def test_create_payment_method(self):
         """Test case for create_payment_method
 
         Creates payment method  # noqa: E501
-        """
-        pass
-
-    def test_expire_payment_method(self):
-        """Test case for expire_payment_method
-
-        Expires a payment method  # noqa: E501
-        """
-        pass
-
-    def test_get_all_payment_methods(self):
-        """Test case for get_all_payment_methods
-
-        Get all payment methods by filters  # noqa: E501
         """
         pass
 
@@ -64,6 +43,27 @@ class TestPaymentMethodApi(unittest.TestCase):
         """Test case for patch_payment_method
 
         Patch payment methods  # noqa: E501
+        """
+        pass
+
+    def test_get_all_payment_methods(self):
+        """Test case for get_all_payment_methods
+
+        Get all payment methods by filters  # noqa: E501
+        """
+        pass
+
+    def test_expire_payment_method(self):
+        """Test case for expire_payment_method
+
+        Expires a payment method  # noqa: E501
+        """
+        pass
+
+    def test_auth_payment_method(self):
+        """Test case for auth_payment_method
+
+        Validate a payment method's linking OTP  # noqa: E501
         """
         pass
 

@@ -69,7 +69,7 @@ class CustomerApi(object):
                         (CustomerRequest,),
                 },
                 'attribute_map': {
-                    'idempotency_key': 'IDEMPOTENCY-KEY',
+                    'idempotency_key': 'idempotency-key',
                     'for_user_id': 'for-user-id',
                 },
                 'location_map': {

@@ -18,17 +18,17 @@ class TestTransactionApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_get_all_transactions(self):
-        """Test case for get_all_transactions
-
-        Get a list of transactions  # noqa: E501
-        """
-        pass
-
     def test_get_transaction_by_id(self):
         """Test case for get_transaction_by_id
 
         Get a transaction based on its id  # noqa: E501
+        """
+        pass
+
+    def test_get_all_transactions(self):
+        """Test case for get_all_transactions
+
+        Get a list of transactions  # noqa: E501
         """
         pass
 

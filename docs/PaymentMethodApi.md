@@ -4,94 +4,15 @@ All URIs are relative to *https://api.xendit.co*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**auth_payment_method**](PaymentMethodApi.md#auth_payment_method) | **POST** /v2/payment_methods/{paymentMethodId}/auth | Validate a payment method&#39;s linking OTP
 [**create_payment_method**](PaymentMethodApi.md#create_payment_method) | **POST** /v2/payment_methods | Creates payment method
-[**expire_payment_method**](PaymentMethodApi.md#expire_payment_method) | **POST** /v2/payment_methods/{paymentMethodId}/expire | Expires a payment method
-[**get_all_payment_methods**](PaymentMethodApi.md#get_all_payment_methods) | **GET** /v2/payment_methods | Get all payment methods by filters
 [**get_payment_method_by_id**](PaymentMethodApi.md#get_payment_method_by_id) | **GET** /v2/payment_methods/{paymentMethodId} | Get payment method by ID
 [**get_payments_by_payment_method_id**](PaymentMethodApi.md#get_payments_by_payment_method_id) | **GET** /v2/payment_methods/{paymentMethodId}/payments | Returns payments with matching PaymentMethodID.
 [**patch_payment_method**](PaymentMethodApi.md#patch_payment_method) | **PATCH** /v2/payment_methods/{paymentMethodId} | Patch payment methods
+[**get_all_payment_methods**](PaymentMethodApi.md#get_all_payment_methods) | **GET** /v2/payment_methods | Get all payment methods by filters
+[**expire_payment_method**](PaymentMethodApi.md#expire_payment_method) | **POST** /v2/payment_methods/{paymentMethodId}/expire | Expires a payment method
+[**auth_payment_method**](PaymentMethodApi.md#auth_payment_method) | **POST** /v2/payment_methods/{paymentMethodId}/auth | Validate a payment method&#39;s linking OTP
 [**simulate_payment**](PaymentMethodApi.md#simulate_payment) | **POST** /v2/payment_methods/{paymentMethodId}/payments/simulate | Makes payment with matching PaymentMethodID.
 
-
-# **auth_payment_method**
-> PaymentMethod auth_payment_method(payment_method_id)
-
-Validate a payment method's linking OTP
-
-This endpoint validates a payment method linking OTP
-
-### Example
-
-
-```python
-import time
-import xendit
-from xendit.apis import PaymentMethodApi
-from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
-from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
-from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
-from xendit.payment_method.model.create_payment_method503_response import CreatePaymentMethod503Response
-from xendit.payment_method.model.payment_method import PaymentMethod
-from xendit.payment_method.model.create_payment_method409_response import CreatePaymentMethod409Response
-from xendit.payment_method.model.payment_method_auth_parameters import PaymentMethodAuthParameters
-from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
-from pprint import pprint
-
-# See configuration.py for a list of all supported configuration parameters.
-xendit.set_api_key('XENDIT API KEY')
-
-
-# Enter a context with an instance of the API client
-api_client = xendit.ApiClient()
-# Create an instance of the API class
-api_instance = PaymentMethodApi(api_client)
-payment_method_id = "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str | 
-
-# example passing only required values which don't have defaults set
-try:
-    # Validate a payment method's linking OTP
-    api_response = api_instance.auth_payment_method(payment_method_id)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling PaymentMethodApi->auth_payment_method: %s\n" % e)
-
-# example passing only required values which don't have defaults set
-# and optional values
-try:
-    # Validate a payment method's linking OTP
-    api_response = api_instance.auth_payment_method(payment_method_id, payment_method_auth_parameters=payment_method_auth_parameters)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling PaymentMethodApi->auth_payment_method: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **payment_method_id** | **str**|  |
- **payment_method_auth_parameters** | [**PaymentMethodAuthParameters**](PaymentMethodAuthParameters.md)|  | [optional]
-
-### Return type
-
-[**PaymentMethod**](PaymentMethod.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Request successful |  -  |
-**400** | Bad request |  -  |
-**403** | Forbidden due to permissions |  -  |
-**404** | Data not found |  -  |
-**409** | Request causes conflict |  -  |
-**503** | Service is unavailable due to dependencies |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_payment_method**
 > PaymentMethod create_payment_method()
@@ -130,7 +51,7 @@ api_instance = PaymentMethodApi(api_client)
 # and optional values
 try:
     # Creates payment method
-    api_response = api_instance.create_payment_method(payment_method_parameters=payment_method_parameters)
+    api_response = api_instance.create_payment_method(for_user_id=for_user_id, payment_method_parameters=payment_method_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->create_payment_method: %s\n" % e)
@@ -141,6 +62,7 @@ except xendit.XenditSdkException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **for_user_id** | **str**|  | [optional]
  **payment_method_parameters** | [**PaymentMethodParameters**](PaymentMethodParameters.md)|  | [optional]
 
 ### Return type
@@ -158,157 +80,6 @@ Name | Type | Description  | Notes
 **404** | Data not found |  -  |
 **409** | Request causes conflict |  -  |
 **503** | Service is unavailable due to dependencies |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **expire_payment_method**
-> PaymentMethod expire_payment_method(payment_method_id)
-
-Expires a payment method
-
-This endpoint expires a payment method and performs unlinking if necessary
-
-### Example
-
-
-```python
-import time
-import xendit
-from xendit.apis import PaymentMethodApi
-from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
-from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
-from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
-from xendit.payment_method.model.create_payment_method503_response import CreatePaymentMethod503Response
-from xendit.payment_method.model.payment_method import PaymentMethod
-from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
-from xendit.payment_method.model.payment_method_expire_parameters import PaymentMethodExpireParameters
-from pprint import pprint
-
-# See configuration.py for a list of all supported configuration parameters.
-xendit.set_api_key('XENDIT API KEY')
-
-
-# Enter a context with an instance of the API client
-api_client = xendit.ApiClient()
-# Create an instance of the API class
-api_instance = PaymentMethodApi(api_client)
-payment_method_id = "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str | 
-
-# example passing only required values which don't have defaults set
-try:
-    # Expires a payment method
-    api_response = api_instance.expire_payment_method(payment_method_id)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling PaymentMethodApi->expire_payment_method: %s\n" % e)
-
-# example passing only required values which don't have defaults set
-# and optional values
-try:
-    # Expires a payment method
-    api_response = api_instance.expire_payment_method(payment_method_id, payment_method_expire_parameters=payment_method_expire_parameters)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling PaymentMethodApi->expire_payment_method: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **payment_method_id** | **str**|  |
- **payment_method_expire_parameters** | [**PaymentMethodExpireParameters**](PaymentMethodExpireParameters.md)|  | [optional]
-
-### Return type
-
-[**PaymentMethod**](PaymentMethod.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Request successful |  -  |
-**400** | Bad request |  -  |
-**403** | Forbidden due to permissions |  -  |
-**404** | Data not found |  -  |
-**503** | Service is unavailable due to dependencies |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_all_payment_methods**
-> PaymentMethodList get_all_payment_methods()
-
-Get all payment methods by filters
-
-Get all payment methods by filters
-
-### Example
-
-
-```python
-import time
-import xendit
-from xendit.apis import PaymentMethodApi
-from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
-from xendit.payment_method.model.payment_method_status import PaymentMethodStatus
-from xendit.payment_method.model.payment_method_reusability import PaymentMethodReusability
-from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
-from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
-from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
-from xendit.payment_method.model.payment_method_list import PaymentMethodList
-from pprint import pprint
-
-# See configuration.py for a list of all supported configuration parameters.
-xendit.set_api_key('XENDIT API KEY')
-
-
-# Enter a context with an instance of the API client
-api_client = xendit.ApiClient()
-# Create an instance of the API class
-api_instance = PaymentMethodApi(api_client)
-
-# example passing only required values which don't have defaults set
-# and optional values
-try:
-    # Get all payment methods by filters
-    api_response = api_instance.get_all_payment_methods(id=id, type=type, status=status, reusability=reusability, customer_id=customer_id, reference_id=reference_id, after_id=after_id, before_id=before_id, limit=limit)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling PaymentMethodApi->get_all_payment_methods: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **[str]**|  | [optional]
- **type** | **[str]**|  | [optional]
- **status** | [**[PaymentMethodStatus]**](PaymentMethodStatus.md)|  | [optional]
- **reusability** | **PaymentMethodReusability**|  | [optional]
- **customer_id** | **str**|  | [optional]
- **reference_id** | **str**|  | [optional]
- **after_id** | **str**|  | [optional]
- **before_id** | **str**|  | [optional]
- **limit** | **int**|  | [optional]
-
-### Return type
-
-[**PaymentMethodList**](PaymentMethodList.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Request successful |  -  |
-**400** | Bad request |  -  |
-**403** | Forbidden due to permissions |  -  |
-**404** | Data not found |  -  |
 **0** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -351,6 +122,15 @@ try:
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_payment_method_by_id: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Get payment method by ID
+    api_response = api_instance.get_payment_method_by_id(payment_method_id, for_user_id=for_user_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentMethodApi->get_payment_method_by_id: %s\n" % e)
 ```
 
 
@@ -359,6 +139,7 @@ except xendit.XenditSdkException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payment_method_id** | **str**|  |
+ **for_user_id** | **str**|  | [optional]
 
 ### Return type
 
@@ -421,7 +202,7 @@ except xendit.XenditSdkException as e:
 # and optional values
 try:
     # Returns payments with matching PaymentMethodID.
-    api_response = api_instance.get_payments_by_payment_method_id(payment_method_id, payment_request_id=payment_request_id, payment_method_id2=payment_method_id2, reference_id=reference_id, payment_method_type=payment_method_type, channel_code=channel_code, status=status, currency=currency, created_gte=created_gte, created_lte=created_lte, updated_gte=updated_gte, updated_lte=updated_lte, limit=limit)
+    api_response = api_instance.get_payments_by_payment_method_id(payment_method_id, for_user_id=for_user_id, payment_request_id=payment_request_id, payment_method_id2=payment_method_id2, reference_id=reference_id, payment_method_type=payment_method_type, channel_code=channel_code, status=status, currency=currency, created_gte=created_gte, created_lte=created_lte, updated_gte=updated_gte, updated_lte=updated_lte, limit=limit)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->get_payments_by_payment_method_id: %s\n" % e)
@@ -433,6 +214,7 @@ except xendit.XenditSdkException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payment_method_id** | **str**|  |
+ **for_user_id** | **str**|  | [optional]
  **payment_request_id** | **[str]**|  | [optional]
  **payment_method_id2** | **[str]**|  | [optional]
  **reference_id** | **[str]**|  | [optional]
@@ -469,7 +251,7 @@ Name | Type | Description  | Notes
 
 Patch payment methods
 
-This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```.  This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.
+This endpoint is used to toggle the ```status``` of an e-Wallet or a Direct Debit payment method to ```ACTIVE``` or ```INACTIVE```. This is also used to update the details of an Over-the-Counter or a Virtual Account payment method.
 
 ### Example
 
@@ -508,7 +290,7 @@ except xendit.XenditSdkException as e:
 # and optional values
 try:
     # Patch payment methods
-    api_response = api_instance.patch_payment_method(payment_method_id, payment_method_update_parameters=payment_method_update_parameters)
+    api_response = api_instance.patch_payment_method(payment_method_id, for_user_id=for_user_id, payment_method_update_parameters=payment_method_update_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentMethodApi->patch_payment_method: %s\n" % e)
@@ -520,6 +302,7 @@ except xendit.XenditSdkException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payment_method_id** | **str**|  |
+ **for_user_id** | **str**|  | [optional]
  **payment_method_update_parameters** | [**PaymentMethodUpdateParameters**](PaymentMethodUpdateParameters.md)|  | [optional]
 
 ### Return type
@@ -535,6 +318,239 @@ Name | Type | Description  | Notes
 **400** | Bad request |  -  |
 **403** | Forbidden due to permissions |  -  |
 **404** | Data not found |  -  |
+**0** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_all_payment_methods**
+> PaymentMethodList get_all_payment_methods()
+
+Get all payment methods by filters
+
+Get all payment methods by filters
+
+### Example
+
+
+```python
+import time
+import xendit
+from xendit.apis import PaymentMethodApi
+from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
+from xendit.payment_method.model.payment_method_status import PaymentMethodStatus
+from xendit.payment_method.model.payment_method_reusability import PaymentMethodReusability
+from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
+from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
+from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
+from xendit.payment_method.model.payment_method_list import PaymentMethodList
+from pprint import pprint
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+# Create an instance of the API class
+api_instance = PaymentMethodApi(api_client)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Get all payment methods by filters
+    api_response = api_instance.get_all_payment_methods(for_user_id=for_user_id, id=id, type=type, status=status, reusability=reusability, customer_id=customer_id, reference_id=reference_id, after_id=after_id, before_id=before_id, limit=limit)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentMethodApi->get_all_payment_methods: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **for_user_id** | **str**|  | [optional]
+ **id** | **[str]**|  | [optional]
+ **type** | **[str]**|  | [optional]
+ **status** | [**[PaymentMethodStatus]**](PaymentMethodStatus.md)|  | [optional]
+ **reusability** | **PaymentMethodReusability**|  | [optional]
+ **customer_id** | **str**|  | [optional]
+ **reference_id** | **str**|  | [optional]
+ **after_id** | **str**|  | [optional]
+ **before_id** | **str**|  | [optional]
+ **limit** | **int**|  | [optional]
+
+### Return type
+
+[**PaymentMethodList**](PaymentMethodList.md)
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Request successful |  -  |
+**400** | Bad request |  -  |
+**403** | Forbidden due to permissions |  -  |
+**404** | Data not found |  -  |
+**0** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **expire_payment_method**
+> PaymentMethod expire_payment_method(payment_method_id)
+
+Expires a payment method
+
+This endpoint expires a payment method and performs unlinking if necessary
+
+### Example
+
+
+```python
+import time
+import xendit
+from xendit.apis import PaymentMethodApi
+from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
+from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
+from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
+from xendit.payment_method.model.create_payment_method503_response import CreatePaymentMethod503Response
+from xendit.payment_method.model.payment_method import PaymentMethod
+from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
+from xendit.payment_method.model.payment_method_expire_parameters import PaymentMethodExpireParameters
+from pprint import pprint
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+# Create an instance of the API class
+api_instance = PaymentMethodApi(api_client)
+payment_method_id = "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str | 
+
+# example passing only required values which don't have defaults set
+try:
+    # Expires a payment method
+    api_response = api_instance.expire_payment_method(payment_method_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentMethodApi->expire_payment_method: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Expires a payment method
+    api_response = api_instance.expire_payment_method(payment_method_id, for_user_id=for_user_id, payment_method_expire_parameters=payment_method_expire_parameters)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentMethodApi->expire_payment_method: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **payment_method_id** | **str**|  |
+ **for_user_id** | **str**|  | [optional]
+ **payment_method_expire_parameters** | [**PaymentMethodExpireParameters**](PaymentMethodExpireParameters.md)|  | [optional]
+
+### Return type
+
+[**PaymentMethod**](PaymentMethod.md)
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Request successful |  -  |
+**400** | Bad request |  -  |
+**403** | Forbidden due to permissions |  -  |
+**404** | Data not found |  -  |
+**503** | Service is unavailable due to dependencies |  -  |
+**0** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **auth_payment_method**
+> PaymentMethod auth_payment_method(payment_method_id)
+
+Validate a payment method's linking OTP
+
+This endpoint validates a payment method linking OTP
+
+### Example
+
+
+```python
+import time
+import xendit
+from xendit.apis import PaymentMethodApi
+from xendit.payment_method.model.get_all_payment_methods403_response import GetAllPaymentMethods403Response
+from xendit.payment_method.model.get_all_payment_methods400_response import GetAllPaymentMethods400Response
+from xendit.payment_method.model.get_all_payment_methods404_response import GetAllPaymentMethods404Response
+from xendit.payment_method.model.create_payment_method503_response import CreatePaymentMethod503Response
+from xendit.payment_method.model.payment_method import PaymentMethod
+from xendit.payment_method.model.create_payment_method409_response import CreatePaymentMethod409Response
+from xendit.payment_method.model.payment_method_auth_parameters import PaymentMethodAuthParameters
+from xendit.payment_method.model.get_all_payment_methods_default_response import GetAllPaymentMethodsDefaultResponse
+from pprint import pprint
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+# Create an instance of the API class
+api_instance = PaymentMethodApi(api_client)
+payment_method_id = "pm-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str | 
+
+# example passing only required values which don't have defaults set
+try:
+    # Validate a payment method's linking OTP
+    api_response = api_instance.auth_payment_method(payment_method_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentMethodApi->auth_payment_method: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Validate a payment method's linking OTP
+    api_response = api_instance.auth_payment_method(payment_method_id, for_user_id=for_user_id, payment_method_auth_parameters=payment_method_auth_parameters)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentMethodApi->auth_payment_method: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **payment_method_id** | **str**|  |
+ **for_user_id** | **str**|  | [optional]
+ **payment_method_auth_parameters** | [**PaymentMethodAuthParameters**](PaymentMethodAuthParameters.md)|  | [optional]
+
+### Return type
+
+[**PaymentMethod**](PaymentMethod.md)
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Request successful |  -  |
+**400** | Bad request |  -  |
+**403** | Forbidden due to permissions |  -  |
+**404** | Data not found |  -  |
+**409** | Request causes conflict |  -  |
+**503** | Service is unavailable due to dependencies |  -  |
 **0** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

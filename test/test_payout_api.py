@@ -18,13 +18,6 @@ class TestPayoutApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_cancel_payout(self):
-        """Test case for cancel_payout
-
-        API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.  # noqa: E501
-        """
-        pass
-
     def test_create_payout(self):
         """Test case for create_payout
 
@@ -50,6 +43,13 @@ class TestPayoutApi(unittest.TestCase):
         """Test case for get_payouts
 
         API to retrieve all matching payouts with reference ID  # noqa: E501
+        """
+        pass
+
+    def test_cancel_payout(self):
+        """Test case for cancel_payout
+
+        API to cancel requested payouts that have not yet been sent to partner banks and e-wallets. Cancellation is possible if the payout has not been sent out via our partner and when payout status is ACCEPTED.  # noqa: E501
         """
         pass
 

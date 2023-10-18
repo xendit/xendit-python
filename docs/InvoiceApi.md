@@ -5,9 +5,9 @@ All URIs are relative to *https://api.xendit.co*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_invoice**](InvoiceApi.md#create_invoice) | **POST** /v2/invoices/ | Create an invoice
-[**expire_invoice**](InvoiceApi.md#expire_invoice) | **POST** /invoices/{invoice_id}/expire! | Manually expire an invoice
 [**get_invoice_by_id**](InvoiceApi.md#get_invoice_by_id) | **GET** /v2/invoices/{invoice_id} | Get invoice by invoice id
 [**get_invoices**](InvoiceApi.md#get_invoices) | **GET** /v2/invoices | Get all Invoices
+[**expire_invoice**](InvoiceApi.md#expire_invoice) | **POST** /invoices/{invoice_id}/expire! | Manually expire an invoice
 
 
 # **create_invoice**
@@ -116,6 +116,15 @@ try:
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->create_invoice: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Create an invoice
+    api_response = api_instance.create_invoice(create_invoice_request, for_user_id=for_user_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->create_invoice: %s\n" % e)
 ```
 
 
@@ -124,6 +133,7 @@ except xendit.XenditSdkException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_invoice_request** | [**CreateInvoiceRequest**](CreateInvoiceRequest.md)|  |
+ **for_user_id** | **str**| Business ID of the sub-account merchant (XP feature) | [optional]
 
 ### Return type
 
@@ -139,64 +149,6 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **expire_invoice**
-> Invoice expire_invoice(invoice_id)
-
-Manually expire an invoice
-
-### Example
-
-
-```python
-import time
-import xendit
-from xendit.apis import InvoiceApi
-from xendit.invoice.model.invoice_not_found_error import InvoiceNotFoundError
-from xendit.invoice.model.invoice import Invoice
-from xendit.invoice.model.server_error import ServerError
-from pprint import pprint
-
-# See configuration.py for a list of all supported configuration parameters.
-xendit.set_api_key('XENDIT API KEY')
-
-
-# Enter a context with an instance of the API client
-api_client = xendit.ApiClient()
-# Create an instance of the API class
-api_instance = InvoiceApi(api_client)
-invoice_id = "5f4708b7bd394b0400b96276" # str | Invoice ID to be expired
-
-# example passing only required values which don't have defaults set
-try:
-    # Manually expire an invoice
-    api_response = api_instance.expire_invoice(invoice_id)
-    pprint(api_response)
-except xendit.XenditSdkException as e:
-    print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **invoice_id** | **str**| Invoice ID to be expired |
-
-### Return type
-
-[**Invoice**](Invoice.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**404** | Not found |  -  |
-**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -235,6 +187,15 @@ try:
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->get_invoice_by_id: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Get invoice by invoice id
+    api_response = api_instance.get_invoice_by_id(invoice_id, for_user_id=for_user_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->get_invoice_by_id: %s\n" % e)
 ```
 
 
@@ -243,6 +204,7 @@ except xendit.XenditSdkException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **invoice_id** | **str**| Invoice ID |
+ **for_user_id** | **str**| Business ID of the sub-account merchant (XP feature) | [optional]
 
 ### Return type
 
@@ -292,7 +254,7 @@ api_instance = InvoiceApi(api_client)
 # and optional values
 try:
     # Get all Invoices
-    api_response = api_instance.get_invoices(external_id=external_id, statuses=statuses, limit=limit, created_after=created_after, created_before=created_before, paid_after=paid_after, paid_before=paid_before, expired_after=expired_after, expired_before=expired_before, last_invoice=last_invoice, client_types=client_types, payment_channels=payment_channels, on_demand_link=on_demand_link, recurring_payment_id=recurring_payment_id)
+    api_response = api_instance.get_invoices(for_user_id=for_user_id, external_id=external_id, statuses=statuses, limit=limit, created_after=created_after, created_before=created_before, paid_after=paid_after, paid_before=paid_before, expired_after=expired_after, expired_before=expired_before, last_invoice=last_invoice, client_types=client_types, payment_channels=payment_channels, on_demand_link=on_demand_link, recurring_payment_id=recurring_payment_id)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->get_invoices: %s\n" % e)
@@ -303,6 +265,7 @@ except xendit.XenditSdkException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **for_user_id** | **str**| Business ID of the sub-account merchant (XP feature) | [optional]
  **external_id** | **str**|  | [optional]
  **statuses** | [**[InvoiceStatus]**](InvoiceStatus.md)|  | [optional]
  **limit** | **float**|  | [optional]
@@ -329,6 +292,74 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
+**500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **expire_invoice**
+> Invoice expire_invoice(invoice_id)
+
+Manually expire an invoice
+
+### Example
+
+
+```python
+import time
+import xendit
+from xendit.apis import InvoiceApi
+from xendit.invoice.model.invoice_not_found_error import InvoiceNotFoundError
+from xendit.invoice.model.invoice import Invoice
+from xendit.invoice.model.server_error import ServerError
+from pprint import pprint
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+# Create an instance of the API class
+api_instance = InvoiceApi(api_client)
+invoice_id = "5f4708b7bd394b0400b96276" # str | Invoice ID to be expired
+
+# example passing only required values which don't have defaults set
+try:
+    # Manually expire an invoice
+    api_response = api_instance.expire_invoice(invoice_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Manually expire an invoice
+    api_response = api_instance.expire_invoice(invoice_id, for_user_id=for_user_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **invoice_id** | **str**| Invoice ID to be expired |
+ **for_user_id** | **str**| Business ID of the sub-account merchant (XP feature) | [optional]
+
+### Return type
+
+[**Invoice**](Invoice.md)
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | Not found |  -  |
 **500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
