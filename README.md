@@ -48,7 +48,7 @@ You can sign up for a free Dashboard account [here](https://dashboard.xendit.co/
 
 ```python
 import xendit
-from xendit.apis import BalancesApi
+from xendit.apis import BalanceApi
 from pprint import pprint
 
 xendit.set_api_key('XENDIT_API_KEY')
@@ -56,7 +56,7 @@ xendit.set_api_key('XENDIT_API_KEY')
 client = xendit.ApiClient()
 
 try:
-    response = BalancesApi(client).get_balance('CASH')
+    response = BalanceApi(client).get_balance('CASH')
     pprint(response)
 except xendit.XenditSdkException as e:
     print("Exception when calling BalancesApi->get_balance: %s\n" % e)
