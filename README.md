@@ -1,11 +1,11 @@
-![Xendit Python SDK](docs/header.jpg "Xendit Pyton SDK")
+![Xendit Python SDK](images/header.jpg "Xendit Python SDK")
 
 # Xendit Python SDK
 
 The official Xendit Python SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Python.
 
-* Package version: 3.4.0
+* Package version: 3.6.0
 
 ## Requirements
 

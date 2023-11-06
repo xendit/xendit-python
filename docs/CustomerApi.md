@@ -1,25 +1,54 @@
-# xendit.apis.CustomerApi
+# CustomerApi
+
+
+You can use the APIs below to interface with Xendit's `CustomerApi`.
+To start using the API, you need to configure the secret key and initiate the client instance.
+
+```python
+import time
+import xendit
+from xendit.apis import CustomerApi
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+
+# Create an instance of the API class
+api_instance = CustomerApi(api_client)
+```
 
 All URIs are relative to *https://api.xendit.co*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**create_customer**](CustomerApi.md#create_customer) | **POST** /customers | Create Customer
-[**get_customer**](CustomerApi.md#get_customer) | **GET** /customers/{id} | Get Customer By ID
-[**get_customer_by_reference_id**](CustomerApi.md#get_customer_by_reference_id) | **GET** /customers | GET customers by reference id
-[**update_customer**](CustomerApi.md#update_customer) | **PATCH** /customers/{id} | Update End Customer Resource
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**create_customer**](CustomerApi.md#create_customer-function) | **POST** /customers | Create Customer |
+| [**get_customer**](CustomerApi.md#get_customer-function) | **GET** /customers/{id} | Get Customer By ID |
+| [**get_customer_by_reference_id**](CustomerApi.md#get_customer_by_reference_id-function) | **GET** /customers | GET customers by reference id |
+| [**update_customer**](CustomerApi.md#update_customer-function) | **PATCH** /customers/{id} | Update End Customer Resource |
 
 
-# **create_customer**
+# `create_customer()` Function
 > Customer create_customer()
 
 Create Customer
 
-Function to create a customer that you may use in your Invoice or Payment Requests. For detail explanations, see this link: https://developers.xendit.co/api-reference/#create-customer
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `create_customer` |
+| Request Parameters  |  [CreateCustomerRequestParams](#request-parameters--CreateCustomerRequestParams)	 |
+| Return Type  | [**Customer**](customer/Customer.md) |
 
-### Example
+### Request Parameters - CreateCustomerRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **idempotency_key** | **str**| |  |
+| **for_user_id** | **str**| |  |
+| **customer_request** | [**CustomerRequest**](customer/CustomerRequest.md)| |  |
 
+### Usage Example
 ```python
 import time
 import xendit
@@ -38,6 +67,79 @@ xendit.set_api_key('XENDIT API KEY')
 api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = CustomerApi(api_client)
+idempotency_key = "idempotency-123" # str | A unique key to prevent processing duplicate requests.
+for_user_id = "user-1" # str | The sub-account user-id that you want to make this transaction for.
+customer_request = CustomerRequest(
+        client_name="AirAsia Indonesia",
+        reference_id="reference_id_example",
+        type="INDIVIDUAL",
+        individual_detail=IndividualDetail(
+            given_names="given_names_example",
+            given_names_non_roman="given_names_non_roman_example",
+            middle_name="middle_name_example",
+            surname="surname_example",
+            surname_non_roman="surname_non_roman_example",
+            mother_maiden_name="mother_maiden_name_example",
+            gender="MALE",
+            date_of_birth="2017-07-21",
+            nationality=CountryCode("ID"),
+            place_of_birth="place_of_birth_example",
+            employment=EmploymentDetail(
+                employer_name="employer_name_example",
+                nature_of_business="nature_of_business_example",
+                role_description="role_description_example",
+            ),
+        ),
+        business_detail=BusinessDetail(
+            business_name="business_name_example",
+            business_type="CORPORATION",
+            date_of_registration="2017-07-21",
+            nature_of_business="nature_of_business_example",
+            business_domicile=CountryCode("ID"),
+        ),
+        description="description_example",
+        email="info@xendit.co",
+        mobile_number="+6281295412345",
+        phone_number="+6281295412345",
+        addresses=[
+            AddressRequest(
+                category="category_example",
+                country_code=CountryCode("ID"),
+                province_state="province_state_example",
+                city="city_example",
+                suburb="suburb_example",
+                postal_code="postal_code_example",
+                line_1="line_1_example",
+                line_2="line_2_example",
+                status=AddressStatus("ACTIVE"),
+                is_primary=False,
+            ),
+        ],
+        identity_accounts=[
+            IdentityAccountRequest(
+                type=IdentityAccountType("BANK_ACCOUNT"),
+                company="company_example",
+                description="description_example",
+                country=CountryCode("ID"),
+                properties=IdentityAccountRequestProperties(None),
+            ),
+        ],
+        kyc_documents=[
+            KYCDocumentRequest(
+                country=CountryCode("ID"),
+                type=KYCDocumentType("BIRTH_CERTIFICATE"),
+                sub_type=KYCDocumentSubType("NATIONAL_ID"),
+                document_name="KTP",
+                document_number="AA123467890",
+                expires_at="2017-07-21",
+                holder_name="John Doe",
+                document_images=[
+                    "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwc=",
+                ],
+            ),
+        ],
+        metadata={},
+    ) # CustomerRequest | Request object for end customer object
 
 # example passing only required values which don't have defaults set
 # and optional values
@@ -49,40 +151,25 @@ except xendit.XenditSdkException as e:
     print("Exception when calling CustomerApi->create_customer: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **idempotency_key** | **str**| A unique key to prevent processing duplicate requests. | [optional]
- **for_user_id** | **str**| The sub-account user-id that you want to make this transaction for. | [optional]
- **customer_request** | [**CustomerRequest**](CustomerRequest.md)| Request object for end customer object | [optional]
-
-### Return type
-
-[**Customer**](Customer.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Created End Customer |  -  |
-**400** | Various errors |  -  |
-**0** | Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_customer**
+# `get_customer()` Function
 > Customer get_customer(id)
 
 Get Customer By ID
 
-Retrieves a single customer object For detail explanations, see this link: https://developers.xendit.co/api-reference/#get-customer
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `get_customer` |
+| Request Parameters  |  [GetCustomerRequestParams](#request-parameters--GetCustomerRequestParams)	 |
+| Return Type  | [**Customer**](customer/Customer.md) |
 
-### Example
+### Request Parameters - GetCustomerRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **id** | **str** | ☑️ | |
+| **for_user_id** | **str**| |  |
 
+### Usage Example
 ```python
 import time
 import xendit
@@ -102,6 +189,7 @@ api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = CustomerApi(api_client)
 id = "d290f1ee-6c54-4b01-90e6-d701748f0851" # str | End customer resource id
+for_user_id = "user-1" # str | The sub-account user-id that you want to make this transaction for.
 
 # example passing only required values which don't have defaults set
 try:
@@ -121,40 +209,25 @@ except xendit.XenditSdkException as e:
     print("Exception when calling CustomerApi->get_customer: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| End customer resource id |
- **for_user_id** | **str**| The sub-account user-id that you want to make this transaction for. | [optional]
-
-### Return type
-
-[**Customer**](Customer.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | End Customer Resource |  -  |
-**400** | Various errors |  -  |
-**404** | Customer not found |  -  |
-**0** | Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_customer_by_reference_id**
+# `get_customer_by_reference_id()` Function
 > GetCustomerByReferenceID200Response get_customer_by_reference_id(reference_id)
 
 GET customers by reference id
 
-Retrieves an array with a customer object that matches the provided reference_id - the identifier provided by you For detail explanations, see this link: https://developers.xendit.co/api-reference/#get-customer-by-reference-id
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `get_customer_by_reference_id` |
+| Request Parameters  |  [GetCustomerByReferenceIdRequestParams](#request-parameters--GetCustomerByReferenceIdRequestParams)	 |
+| Return Type  | [**GetCustomerByReferenceID200Response**](customer/GetCustomerByReferenceID200Response.md) |
 
-### Example
+### Request Parameters - GetCustomerByReferenceIdRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **reference_id** | **str** | ☑️ | |
+| **for_user_id** | **str**| |  |
 
+### Usage Example
 ```python
 import time
 import xendit
@@ -173,6 +246,7 @@ api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = CustomerApi(api_client)
 reference_id = "reference_id_example" # str | Merchant's reference of end customer
+for_user_id = "user-1" # str | The sub-account user-id that you want to make this transaction for.
 
 # example passing only required values which don't have defaults set
 try:
@@ -192,39 +266,26 @@ except xendit.XenditSdkException as e:
     print("Exception when calling CustomerApi->get_customer_by_reference_id: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reference_id** | **str**| Merchant&#39;s reference of end customer |
- **for_user_id** | **str**| The sub-account user-id that you want to make this transaction for. | [optional]
-
-### Return type
-
-[**GetCustomerByReferenceID200Response**](GetCustomerByReferenceID200Response.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | End Customers |  -  |
-**400** | Various errors |  -  |
-**0** | Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_customer**
+# `update_customer()` Function
 > Customer update_customer(id)
 
 Update End Customer Resource
 
-Function to update an existing customer. For a detailed explanation For detail explanations, see this link: https://developers.xendit.co/api-reference/#update-customer
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `update_customer` |
+| Request Parameters  |  [UpdateCustomerRequestParams](#request-parameters--UpdateCustomerRequestParams)	 |
+| Return Type  | [**Customer**](customer/Customer.md) |
 
-### Example
+### Request Parameters - UpdateCustomerRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **id** | **str** | ☑️ | |
+| **for_user_id** | **str**| |  |
+| **patch_customer** | [**PatchCustomer**](customer/PatchCustomer.md)| |  |
 
+### Usage Example
 ```python
 import time
 import xendit
@@ -244,6 +305,78 @@ api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = CustomerApi(api_client)
 id = "d290f1ee-6c54-4b01-90e6-d701748f0851" # str | End customer resource id
+for_user_id = "user-1" # str | The sub-account user-id that you want to make this transaction for.
+patch_customer = PatchCustomer(
+        client_name="AirAsia Indonesia",
+        reference_id="reference_id_example",
+        individual_detail=IndividualDetail(
+            given_names="given_names_example",
+            given_names_non_roman="given_names_non_roman_example",
+            middle_name="middle_name_example",
+            surname="surname_example",
+            surname_non_roman="surname_non_roman_example",
+            mother_maiden_name="mother_maiden_name_example",
+            gender="MALE",
+            date_of_birth="2017-07-21",
+            nationality=CountryCode("ID"),
+            place_of_birth="place_of_birth_example",
+            employment=EmploymentDetail(
+                employer_name="employer_name_example",
+                nature_of_business="nature_of_business_example",
+                role_description="role_description_example",
+            ),
+        ),
+        business_detail=BusinessDetail(
+            business_name="business_name_example",
+            business_type="CORPORATION",
+            date_of_registration="2017-07-21",
+            nature_of_business="nature_of_business_example",
+            business_domicile=CountryCode("ID"),
+        ),
+        description="description_example",
+        email="info@xendit.co",
+        mobile_number="+6281295412345",
+        phone_number="+6281295412345",
+        metadata={},
+        addresses=[
+            AddressRequest(
+                category="category_example",
+                country_code=CountryCode("ID"),
+                province_state="province_state_example",
+                city="city_example",
+                suburb="suburb_example",
+                postal_code="postal_code_example",
+                line_1="line_1_example",
+                line_2="line_2_example",
+                status=AddressStatus("ACTIVE"),
+                is_primary=False,
+            ),
+        ],
+        identity_accounts=[
+            IdentityAccountRequest(
+                type=IdentityAccountType("BANK_ACCOUNT"),
+                company="company_example",
+                description="description_example",
+                country=CountryCode("ID"),
+                properties=IdentityAccountRequestProperties(None),
+            ),
+        ],
+        kyc_documents=[
+            KYCDocumentRequest(
+                country=CountryCode("ID"),
+                type=KYCDocumentType("BIRTH_CERTIFICATE"),
+                sub_type=KYCDocumentSubType("NATIONAL_ID"),
+                document_name="KTP",
+                document_number="AA123467890",
+                expires_at="2017-07-21",
+                holder_name="John Doe",
+                document_images=[
+                    "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwc=",
+                ],
+            ),
+        ],
+        status=EndCustomerStatus("ACTIVE"),
+    ) # PatchCustomer | Update Request for end customer object
 
 # example passing only required values which don't have defaults set
 try:
@@ -263,27 +396,4 @@ except xendit.XenditSdkException as e:
     print("Exception when calling CustomerApi->update_customer: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| End customer resource id |
- **for_user_id** | **str**| The sub-account user-id that you want to make this transaction for. | [optional]
- **patch_customer** | [**PatchCustomer**](PatchCustomer.md)| Update Request for end customer object | [optional]
-
-### Return type
-
-[**Customer**](Customer.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Updated End Customer |  -  |
-**400** | Various errors |  -  |
-**0** | Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
+[[Back to README]](../README.md)

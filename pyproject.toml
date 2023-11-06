@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "xendit-python"
+version = "3.6.0"
+description = "Xendit REST API Client for Python - Invoice, Payment Request, Payment Method, Refund, Balance, Transaction, Customer, and Payout Services https://xendit.github.io/apireference/"
+authors = ["DevX Team <devx@xendit.co>"]
+license = "MIT"
+repository = "https://github.com/xendit/xendit-python"
+readme = "README.md"
+keywords = ["xendit", "sdk"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10"
+]
+packages = [
+    { include = "xendit" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.23.0"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+pytest = "^5.4.3"
+flake8 = "^3.8.3"
+pytest-mock = "^3.1.1"
+pre-commit = "^2.5.1"
+responses = "^0.10.15"
+pytest-cov = "^2.10.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0a5"]
+build-backend = "poetry.core.masonry.api"

@@ -1,23 +1,54 @@
-# xendit.apis.RefundApi
+# RefundApi
+
+
+You can use the APIs below to interface with Xendit's `RefundApi`.
+To start using the API, you need to configure the secret key and initiate the client instance.
+
+```python
+import time
+import xendit
+from xendit.apis import RefundApi
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+
+# Create an instance of the API class
+api_instance = RefundApi(api_client)
+```
 
 All URIs are relative to *https://api.xendit.co*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**create_refund**](RefundApi.md#create_refund) | **POST** /refunds | 
-[**get_refund**](RefundApi.md#get_refund) | **GET** /refunds/{refundID} | 
-[**get_all_refunds**](RefundApi.md#get_all_refunds) | **GET** /refunds | 
-[**cancel_refund**](RefundApi.md#cancel_refund) | **POST** /refunds/{refundID}/cancel | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**create_refund**](RefundApi.md#create_refund-function) | **POST** /refunds |  |
+| [**get_refund**](RefundApi.md#get_refund-function) | **GET** /refunds/{refundID} |  |
+| [**get_all_refunds**](RefundApi.md#get_all_refunds-function) | **GET** /refunds |  |
+| [**cancel_refund**](RefundApi.md#cancel_refund-function) | **POST** /refunds/{refundID}/cancel |  |
 
 
-# **create_refund**
+# `create_refund()` Function
 > Refund create_refund()
 
 
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `create_refund` |
+| Request Parameters  |  [CreateRefundRequestParams](#request-parameters--CreateRefundRequestParams)	 |
+| Return Type  | [**Refund**](refund/Refund.md) |
 
+### Request Parameters - CreateRefundRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **idempotency_key** | **str**| |  |
+| **for_user_id** | **str**| |  |
+| **create_refund** | [**CreateRefund**](refund/CreateRefund.md)| |  |
+
+### Usage Example
 ```python
 import time
 import xendit
@@ -40,6 +71,17 @@ xendit.set_api_key('XENDIT API KEY')
 api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = RefundApi(api_client)
+idempotency_key = "9797b5a6-54ad-4511-80a4-ec451346808b" # str 
+for_user_id = "5f9a3fbd571a1c4068aa40ce" # str 
+create_refund = CreateRefund(
+        payment_request_id="pr-3ece8615-41b7-4983-a3f0-a037430b6036",
+        invoice_id="7a2c81d4f9e052a870bf37d2",
+        reference_id="order-1234",
+        amount=1500,
+        currency="PHP",
+        reason="CANCELLATION",
+        metadata={},
+    ) # CreateRefund 
 
 # example passing only required values which don't have defaults set
 # and optional values
@@ -50,42 +92,26 @@ except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->create_refund: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **idempotency_key** | **str**|  | [optional]
- **for_user_id** | **str**|  | [optional]
- **create_refund** | [**CreateRefund**](CreateRefund.md)|  | [optional]
-
-### Return type
-
-[**Refund**](Refund.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad request |  -  |
-**403** | Forbidden due to permissions |  -  |
-**404** | Data not found |  -  |
-**409** | Request causes conflict |  -  |
-**503** | Service is unavailable due to dependencies |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_refund**
+# `get_refund()` Function
 > Refund get_refund(refund_id)
 
 
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `get_refund` |
+| Request Parameters  |  [GetRefundRequestParams](#request-parameters--GetRefundRequestParams)	 |
+| Return Type  | [**Refund**](refund/Refund.md) |
 
+### Request Parameters - GetRefundRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **refund_id** | **str** | ☑️ | |
+| **idempotency_key** | **str**| |  |
+| **for_user_id** | **str**| |  |
+
+### Usage Example
 ```python
 import time
 import xendit
@@ -102,7 +128,9 @@ xendit.set_api_key('XENDIT API KEY')
 api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = RefundApi(api_client)
-refund_id = "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str | 
+refund_id = "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str 
+idempotency_key = "9797b5a6-54ad-4511-80a4-ec451346808b" # str 
+for_user_id = "5f9a3fbd571a1c4068aa40ce" # str 
 
 # example passing only required values which don't have defaults set
 try:
@@ -120,37 +148,31 @@ except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->get_refund: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **refund_id** | **str**|  |
- **idempotency_key** | **str**|  | [optional]
- **for_user_id** | **str**|  | [optional]
-
-### Return type
-
-[**Refund**](Refund.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_all_refunds**
+# `get_all_refunds()` Function
 > RefundList get_all_refunds()
 
 
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `get_all_refunds` |
+| Request Parameters  |  [GetAllRefundsRequestParams](#request-parameters--GetAllRefundsRequestParams)	 |
+| Return Type  | [**RefundList**](refund/RefundList.md) |
 
+### Request Parameters - GetAllRefundsRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **for_user_id** | **str**| |  |
+| **payment_request_id** | **str**| |  |
+| **invoice_id** | **str**| |  |
+| **payment_method_type** | **str**| |  |
+| **channel_code** | **str**| |  |
+| **limit** | **float**| |  |
+| **after_id** | **str**| |  |
+| **before_id** | **str**| |  |
+
+### Usage Example
 ```python
 import time
 import xendit
@@ -167,6 +189,14 @@ xendit.set_api_key('XENDIT API KEY')
 api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = RefundApi(api_client)
+for_user_id = "5f9a3fbd571a1c4068aa40ce" # str 
+payment_request_id = "payment_request_id_example" # str 
+invoice_id = "invoice_id_example" # str 
+payment_method_type = "payment_method_type_example" # str 
+channel_code = "channel_code_example" # str 
+limit = 3.14 # float 
+after_id = "after_id_example" # str 
+before_id = "before_id_example" # str 
 
 # example passing only required values which don't have defaults set
 # and optional values
@@ -177,42 +207,26 @@ except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->get_all_refunds: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **for_user_id** | **str**|  | [optional]
- **payment_request_id** | **str**|  | [optional]
- **invoice_id** | **str**|  | [optional]
- **payment_method_type** | **str**|  | [optional]
- **channel_code** | **str**|  | [optional]
- **limit** | **float**|  | [optional]
- **after_id** | **str**|  | [optional]
- **before_id** | **str**|  | [optional]
-
-### Return type
-
-[**RefundList**](RefundList.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **cancel_refund**
+# `cancel_refund()` Function
 > Refund cancel_refund(refund_id)
 
 
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `cancel_refund` |
+| Request Parameters  |  [CancelRefundRequestParams](#request-parameters--CancelRefundRequestParams)	 |
+| Return Type  | [**Refund**](refund/Refund.md) |
 
+### Request Parameters - CancelRefundRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **refund_id** | **str** | ☑️ | |
+| **idempotency_key** | **str**| |  |
+| **for_user_id** | **str**| |  |
+
+### Usage Example
 ```python
 import time
 import xendit
@@ -232,7 +246,9 @@ xendit.set_api_key('XENDIT API KEY')
 api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = RefundApi(api_client)
-refund_id = "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str | 
+refund_id = "rfd-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str 
+idempotency_key = "9797b5a6-54ad-4511-80a4-ec451346808b" # str 
+for_user_id = "5f9a3fbd571a1c4068aa40ce" # str 
 
 # example passing only required values which don't have defaults set
 try:
@@ -250,29 +266,4 @@ except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->cancel_refund: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **refund_id** | **str**|  |
- **idempotency_key** | **str**|  | [optional]
- **for_user_id** | **str**|  | [optional]
-
-### Return type
-
-[**Refund**](Refund.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad request |  -  |
-**403** | Forbidden due to permissions |  -  |
-**404** | Data not found |  -  |
-**0** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
+[[Back to README]](../README.md)

@@ -1,12 +1,12 @@
 """
-    The version of the XENDIT API: 1.44.1
+    The version of the XENDIT API: 1.45.1
 """
 
 
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "xendit"
-VERSION = "3.4.0"
+VERSION = "3.6.0"
 # To install the library, run the following
 #
 # python setup.py install

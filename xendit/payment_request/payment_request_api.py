@@ -3,7 +3,7 @@
 
     This API is used for Payment Requests  # noqa: E501
 
-    The version of the OpenAPI document: 1.44.1
+    The version of the OpenAPI document: 1.45.1
 """
 
 import re  # noqa: F401

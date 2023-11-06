@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.89.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -55,6 +55,7 @@ class PaymentMethodCountry(ModelSimple):
             'VN': "VN",
             'TH': "TH",
             'MY': "MY",
+            'US': "US",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -107,10 +108,10 @@ class PaymentMethodCountry(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str):, must be one of ["PH", "ID", "VN", "TH", "MY", ]  # noqa: E501
+            args[0] (str):, must be one of ["PH", "ID", "VN", "TH", "MY", "US", ]  # noqa: E501
 
         Keyword Args:
-            value (str):, must be one of ["PH", "ID", "VN", "TH", "MY", ]  # noqa: E501
+            value (str):, must be one of ["PH", "ID", "VN", "TH", "MY", "US", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -203,10 +204,10 @@ class PaymentMethodCountry(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str):, must be one of ["PH", "ID", "VN", "TH", "MY", ]  # noqa: E501
+            args[0] (str):, must be one of ["PH", "ID", "VN", "TH", "MY", "US", ]  # noqa: E501
 
         Keyword Args:
-            value (str):, must be one of ["PH", "ID", "VN", "TH", "MY", ]  # noqa: E501
+            value (str):, must be one of ["PH", "ID", "VN", "TH", "MY", "US", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

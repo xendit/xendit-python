@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.89.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -87,6 +87,7 @@ class DirectDebitChannelProperties(ModelNormal):
             'email': (str, none_type, none_type),  # noqa: E501
             'identity_document_number': (str, none_type, none_type),  # noqa: E501
             'require_auth': (bool, none_type, none_type),  # noqa: E501
+            'account_number': (str, none_type, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -103,6 +104,7 @@ class DirectDebitChannelProperties(ModelNormal):
         'email': 'email',  # noqa: E501
         'identity_document_number': 'identity_document_number',  # noqa: E501
         'require_auth': 'require_auth',  # noqa: E501
+        'account_number': 'account_number',  # noqa: E501
     }
 
     read_only_vars = {
@@ -154,6 +156,7 @@ class DirectDebitChannelProperties(ModelNormal):
             email (str, none_type): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
             identity_document_number (str, none_type): Identity number of the customer registered to the partner channel. [optional]  # noqa: E501
             require_auth (bool, none_type): [optional]  # noqa: E501
+            account_number (str, none_type): Account number of the customer. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -216,6 +219,7 @@ class DirectDebitChannelProperties(ModelNormal):
         email: str | None = None,
         identity_document_number: str | None = None,
         require_auth: bool | None = None,
+        account_number: str | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """DirectDebitChannelProperties - a model defined in OpenAPI
@@ -260,6 +264,7 @@ class DirectDebitChannelProperties(ModelNormal):
             email (str, none_type): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
             identity_document_number (str, none_type): Identity number of the customer registered to the partner channel. [optional]  # noqa: E501
             require_auth (bool, none_type): [optional]  # noqa: E501
+            account_number (str, none_type): Account number of the customer. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -307,6 +312,8 @@ class DirectDebitChannelProperties(ModelNormal):
             self.identity_document_number = identity_document_number
         if require_auth is not None:
             self.require_auth = require_auth
+        if account_number is not None:
+            self.account_number = account_number
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

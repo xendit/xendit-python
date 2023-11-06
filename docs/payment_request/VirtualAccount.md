@@ -1,0 +1,21 @@
+# VirtualAccount
+> xendit.payment_request.model.VirtualAccount
+
+Virtual Account Payment Method Details
+
+## Properties
+| Name | Type | Required | Description | Examples |
+|------------|:-------------:|:-------------:|-------------|:-------------:|
+| **channel_code** | [**VirtualAccountChannelCode**](VirtualAccountChannelCode.md) | ☑️ |  |  | |
+| **channel_properties** | [**VirtualAccountChannelProperties**](VirtualAccountChannelProperties.md) | ☑️ |  |  | |
+| **min_amount** | **float, none_type** | |   |  |
+| **max_amount** | **float, none_type** | |   |  |
+| **amount** | **float, none_type** | |   |  |
+| **currency** | [**PaymentRequestCurrency**](PaymentRequestCurrency.md) | |   |  |
+| **alternative_display_types** | **[str]** | | Alternative display requested for the virtual account  |  |
+| **alternative_displays** | [**[VirtualAccountAlternativeDisplay]**](VirtualAccountAlternativeDisplay.md) | |   |  |
+
+
+[[Back to README]](../../README.md)
+
+
