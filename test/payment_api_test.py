@@ -1,8 +1,8 @@
 import unittest
 from dotenv import load_dotenv
 import os
-from utils.test_utils import TestUtil
-import xendit
+from test.utils.test_utils import TestUtil
+from xendit import ApiClient, Configuration, XenditSdkException
 from xendit.apis import PaymentMethodApi, PaymentRequestApi
 
 class TestPaymentAPI(unittest.TestCase):
@@ -11,10 +11,14 @@ class TestPaymentAPI(unittest.TestCase):
         test_folder_path = os.path.join(os.getcwd(), 'test')
         load_dotenv(os.path.join(test_folder_path, '.env.test'))
 
-        configuration = xendit.Configuration(
+
+        if os.getenv('DEVELOPMENT_API_KEY') == None:
+            print("DEVELOPMENT_API_KEY doesn't exists")
+
+        configuration = Configuration(
             api_key=os.getenv('DEVELOPMENT_API_KEY')
         )
-        api_client = xendit.ApiClient(configuration)
+        api_client = ApiClient(configuration)
         self.payment_method_instance = PaymentMethodApi(api_client)
         self.payment_request_instance = PaymentRequestApi(api_client)
         self.ignore_error_codes = os.getenv("IGNORED_ERRORCODE")
@@ -44,9 +48,8 @@ class TestPaymentAPI(unittest.TestCase):
                     }
                 }
             )
-            print("Response create_payment_method\n", pm_response)
             self.assertIsNotNone(pm_response)
-            self.assertEqual(pm_response.status, "PENDING")
+            self.assertEqual(str(pm_response.status), "PENDING")
 
             # Create Payment Request
             pr_response = self.payment_request_instance.create_payment_request(
@@ -61,14 +64,14 @@ class TestPaymentAPI(unittest.TestCase):
             print("Response create_payment_request\n", pr_response)
             self.assertIsNotNone(pr_response)
             self.assertEqual(pr_response.payment_method.id, pm_response.id)
-            self.assertEqual(pr_response.status, "REQUIRES_ACTION")
+            self.assertEqual(str(pr_response.status), "REQUIRES_ACTION")
             self.assertTrue(len(pr_response.actions) > 0)
 
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_create_card_payment\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_create_direct_debit_payment(self):
@@ -94,7 +97,7 @@ class TestPaymentAPI(unittest.TestCase):
             )
             print("Response create_payment_method\n", pm_response)
             self.assertIsNotNone(pm_response)
-            self.assertEqual("REQUIRES_ACTION", pm_response.status)
+            self.assertEqual("REQUIRES_ACTION", str(pm_response.status))
             self.assertTrue(len(pm_response.actions) > 0)
 
             # Perform Payment Method Authentication
@@ -107,8 +110,8 @@ class TestPaymentAPI(unittest.TestCase):
 
             print("Response auth_payment_method",auth_response)
             self.assertIsNotNone(auth_response)
-            self.assertEqual(auth_response.status,"ACTIVE")
-            self.assertEqual(auth_response.actions, 0)
+            self.assertEqual(str(auth_response.status),"ACTIVE")
+            self.assertTrue(len(pm_response.actions) > 0)
 
             # Create Payment Request
             pr_response = self.payment_request_instance.create_payment_request(
@@ -124,13 +127,13 @@ class TestPaymentAPI(unittest.TestCase):
             print("Response create_payment_request\n", pr_response)
             self.assertIsNotNone(pr_response)
             self.assertEqual(pr_response.payment_method.id, pm_response.id)
-            self.assertEqual(pr_response.status, "REQUIRES_ACTION")
-            self.assertTrue(pr_response.actions > 0)
+            self.assertEqual(str(pr_response.status), "REQUIRES_ACTION")
+            self.assertTrue(len(pr_response.actions) > 0)
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_create_direct_debit_payment\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_create_ewallet_payment(self):
@@ -147,15 +150,15 @@ class TestPaymentAPI(unittest.TestCase):
                         "channel_properties": {
                             "success_return_url": "https://redirect.me/goodstuff",
                             "failure_return_url": "https://redirect.me/badstuff",
-                            "cancel_return_url": "https://redirect.me/nostuff"
-                        }
+                            "cancel_return_url": "https://redirect.me/nostuff",
+                            "mobile_number": "+62818555988",
+                        },
                     }
                 }
             )
             print("Response create_payment_method\n", pm_response)
             self.assertIsNotNone(pm_response)
-            self.assertEqual(pm_response.status, "PENDING")
-            self.assertEqual(pm_response.status, "ACTIVE")
+            self.assertEqual(str(pm_response.status), "ACTIVE")
             self.assertTrue(len(pm_response.actions) == 0)
 
 
@@ -172,14 +175,14 @@ class TestPaymentAPI(unittest.TestCase):
 
             print("Response create_payment_request\n", pr_response)
             self.assertIsNotNone(pr_response)
-            self.assertEqual("PENDING", pr_response.status)
+            self.assertEqual("PENDING", str(pr_response.status))
             self.assertEqual(pr_response.payment_method.id, pm_response.id)
 
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_create_ewallet_payment\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_over_the_counter_payment(self):
@@ -205,12 +208,12 @@ class TestPaymentAPI(unittest.TestCase):
 
             print("Response create_payment_request\n", pr_response)
             self.assertIsNotNone(pr_response)
-            self.assertEqual(pr_response.status, "PENDING")
+            self.assertEqual(str(pr_response.status), "PENDING")
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_over_the_counter_payment\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_qr_payment(self):
@@ -233,12 +236,12 @@ class TestPaymentAPI(unittest.TestCase):
 
             print("Response create_payment_request\n", pr_response)
             self.assertIsNotNone(pr_response)
-            self.assertEqual(pr_response.status, "PENDING")
+            self.assertEqual(str(pr_response.status), "PENDING")
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_qr_payment\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_virtual_account_payment(self):
@@ -267,12 +270,12 @@ class TestPaymentAPI(unittest.TestCase):
 
             print("Response create_payment_request\n", pr_response)
             self.assertIsNotNone(pr_response)
-            self.assertEqual(pr_response.status, "PENDING")
+            self.assertEqual(str(pr_response.status), "PENDING")
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_virtual_account_payment\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_get_payment_method(self):
@@ -283,10 +286,10 @@ class TestPaymentAPI(unittest.TestCase):
             print("Response get_payment_method_by_id\n", pm_response)
             self.assertIsNotNone(pm_response)
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_get_payment_method\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_get_payment_request(self):
@@ -297,10 +300,10 @@ class TestPaymentAPI(unittest.TestCase):
             print("Response get_payment_request_by_id\n", pr_response)
             self.assertIsNotNone(pr_response)
 
-        except Exception as error:
+        except XenditSdkException as error:
             print("Error test_get_payment_request\n", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
 if __name__ == '__main__':

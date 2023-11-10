@@ -1,11 +1,11 @@
 
 import unittest
-from dotenv import load_dotenv
 import os
-import xendit
+import sys
+from xendit import Configuration, ApiClient, XenditSdkException
 from xendit.apis import InvoiceApi
-
-from utils.test_utils import TestUtil
+from test.utils.test_utils import TestUtil
+from dotenv import load_dotenv
 
 class TestInvoiceAPI(unittest.TestCase):
 
@@ -13,10 +13,13 @@ class TestInvoiceAPI(unittest.TestCase):
         test_folder_path = os.path.join(os.getcwd(), 'test')
         load_dotenv(os.path.join(test_folder_path, '.env.test'))
 
-        configuration = xendit.Configuration(
+        if os.getenv('DEVELOPMENT_API_KEY') == None:
+            print("DEVELOPMENT_API_KEY doesn't exists")
+
+        configuration = Configuration(
             api_key=os.getenv('DEVELOPMENT_API_KEY')
         )
-        api_client = xendit.ApiClient(configuration)
+        api_client = ApiClient(configuration)
         self.invoice_api_instance = InvoiceApi(api_client)
         self.ignore_error_codes = os.getenv("IGNORED_ERRORCODE")
 
@@ -28,24 +31,27 @@ class TestInvoiceAPI(unittest.TestCase):
                 'amount': 1000,
             })
 
+            print("test_create_invoice Resp", response)
             self.assertIsNotNone(response)
             self.assertEqual(response['amount'], 1000)
-            self.assertEqual(response['externalId'], external_id)
-        except Exception as error:
+            self.assertEqual(response['external_id'], external_id)
+            self.assertEqual(str(response['status']), "PENDING")
+        except XenditSdkException as error:
             print("test_create_invoice", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
     def test_get_invoice_by_id(self):
         try:
             response = self.invoice_api_instance.get_invoice_by_id("654a103b5e6dfa587b6025c3")
 
+            print("test_get_invoice_by_id Resp", response)
             self.assertIsNotNone(response)
-        except Exception as error:
+        except XenditSdkException as error:
             print("test_get_invoice_by_id", error)
 
-            if type(error) == xendit.XenditSdkException and error.errorCode not in self.ignore_error_codes:
+            if error.errorCode not in self.ignore_error_codes:
                 raise error
 
 
