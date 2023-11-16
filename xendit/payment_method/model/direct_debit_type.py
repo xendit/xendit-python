@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -54,6 +53,7 @@ class DirectDebitType(ModelSimple):
             'DEBIT_CARD': "DEBIT_CARD",
             'BANK_ACCOUNT': "BANK_ACCOUNT",
             'BANK_REDIRECT': "BANK_REDIRECT",
+            'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
 
@@ -280,7 +280,10 @@ class DirectDebitType(ModelSimple):
         self._path_to_item = _path_to_item
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
-        self.value = value
+        try:
+            self.value = value
+        except ValueError:
+            self.value = self.allowed_values[('value',)]['XENDIT_ENUM_DEFAULT_FALLBACK']
         if kwargs:
             raise ApiTypeError(
                 "Invalid named arguments=%s passed to %s. Remove those invalid named arguments." % (

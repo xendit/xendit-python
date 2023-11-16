@@ -25,7 +25,6 @@ from xendit.model_utils import (  # noqa: F401
 from xendit.exceptions import ApiAttributeError
 
 
-
 def lazy_import():
     pass
 
@@ -61,6 +60,7 @@ class EwalletType(ModelSimple):
             'ASTRAPAY': "ASTRAPAY",
             'NEXCASH': "NEXCASH",
             'JENIUSPAY': "JENIUSPAY",
+            'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
 
@@ -287,7 +287,10 @@ class EwalletType(ModelSimple):
         self._path_to_item = _path_to_item
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
-        self.value = value
+        try:
+            self.value = value
+        except ValueError:
+            self.value = self.allowed_values[('value',)]['XENDIT_ENUM_DEFAULT_FALLBACK']
         if kwargs:
             raise ApiTypeError(
                 "Invalid named arguments=%s passed to %s. Remove those invalid named arguments." % (

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_request.model.direct_debit_type import DirectDebitType
 globals()['DirectDebitBankAccount'] = DirectDebitBankAccount
 globals()['DirectDebitDebitCard'] = DirectDebitDebitCard
 globals()['DirectDebitType'] = DirectDebitType
-
 
 def lazy_import():
     pass

@@ -1,0 +1,27 @@
+# IdentityAccountType
+> xendit.customer.model.IdentityAccountType
+
+
+
+## Enum
+
+
+    * `BANK_ACCOUNT` (value: `"BANK_ACCOUNT"`)
+
+    * `EWALLET` (value: `"EWALLET"`)
+
+    * `CREDIT_CARD` (value: `"CREDIT_CARD"`)
+
+    * `PAY_LATER` (value: `"PAY_LATER"`)
+
+    * `OTC` (value: `"OTC"`)
+
+    * `QR_CODE` (value: `"QR_CODE"`)
+
+    * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
+
+If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.
+
+[[Back to README]](../../README.md)
+
+

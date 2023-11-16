@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -54,6 +53,7 @@ class PaymentRequestInitiator(ModelSimple):
             'None': None,
             'CUSTOMER': "CUSTOMER",
             'MERCHANT': "MERCHANT",
+            'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
 
@@ -280,7 +280,10 @@ class PaymentRequestInitiator(ModelSimple):
         self._path_to_item = _path_to_item
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
-        self.value = value
+        try:
+            self.value = value
+        except ValueError:
+            self.value = self.allowed_values[('value',)]['XENDIT_ENUM_DEFAULT_FALLBACK']
         if kwargs:
             raise ApiTypeError(
                 "Invalid named arguments=%s passed to %s. Remove those invalid named arguments." % (

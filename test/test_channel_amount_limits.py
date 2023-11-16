@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.0.0
 """
 
 
@@ -7,9 +7,7 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_method.model.channel_amount_limits_all_of import ChannelAmountLimitsAllOf
-globals()['ChannelAmountLimitsAllOf'] = ChannelAmountLimitsAllOf
-from xendit.payment_method.model.channel_amount_limits import ChannelAmountLimits
+from xendit.payout.model.channel_amount_limits import ChannelAmountLimits
 
 
 class TestChannelAmountLimits(unittest.TestCase):

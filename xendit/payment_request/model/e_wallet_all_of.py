@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.payment_request.model.e_wallet_account import EWalletAccount
 globals()['EWalletAccount'] = EWalletAccount
-
 
 def lazy_import():
     pass

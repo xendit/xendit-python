@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -28,7 +28,6 @@ from xendit.payment_method.model.over_the_counter_channel_code import OverTheCou
 from xendit.payment_method.model.over_the_counter_channel_properties import OverTheCounterChannelProperties
 globals()['OverTheCounterChannelCode'] = OverTheCounterChannelCode
 globals()['OverTheCounterChannelProperties'] = OverTheCounterChannelProperties
-
 
 def lazy_import():
     pass

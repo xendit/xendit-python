@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.2.3
+    The version of the XENDIT API: 1.3.3
 """
 
 
@@ -18,14 +18,14 @@ class TestRefundApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_cancel_refund(self):
-        """Test case for cancel_refund
+    def test_create_refund(self):
+        """Test case for create_refund
 
         """
         pass
 
-    def test_create_refund(self):
-        """Test case for create_refund
+    def test_get_refund(self):
+        """Test case for get_refund
 
         """
         pass
@@ -36,8 +36,8 @@ class TestRefundApi(unittest.TestCase):
         """
         pass
 
-    def test_get_refund(self):
-        """Test case for get_refund
+    def test_cancel_refund(self):
+        """Test case for cancel_refund
 
         """
         pass

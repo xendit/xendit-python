@@ -1,0 +1,36 @@
+# BankCode
+> xendit.invoice.model.BankCode
+
+Representing the available bank channels used for invoice-related transactions.
+
+
+## Enum
+
+
+    * `BCA` (value: `"BCA"`)
+
+    * `BNI` (value: `"BNI"`)
+
+    * `BRI` (value: `"BRI"`)
+
+    * `MANDIRI` (value: `"MANDIRI"`)
+
+    * `PERMATA` (value: `"PERMATA"`)
+
+    * `BSI` (value: `"BSI"`)
+
+    * `BJB` (value: `"BJB"`)
+
+    * `SAHABAT_SAMPOERNA` (value: `"SAHABAT_SAMPOERNA"`)
+
+    * `CIMB` (value: `"CIMB"`)
+
+    * `BNC` (value: `"BNC"`)
+
+    * `XenditEnumDefaultFallback` (value: `UNKNOWN_ENUM_VALUE`)
+
+If you encounter `UNKNOWN_ENUM_VALUE`, it means that this ENUM is unavailable in your current SDK version. Please upgrade to get the newest ENUM.
+
+[[Back to README]](../../README.md)
+
+

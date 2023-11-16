@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.paylater_type import PaylaterType
 globals()['PaylaterType'] = PaylaterType
 
-
 def lazy_import():
     pass
 

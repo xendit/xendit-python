@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_method.model.qr_code_parameters import QRCodeParameters
 globals()['QRCodeChannelCode'] = QRCodeChannelCode
 globals()['QRCodeChannelProperties'] = QRCodeChannelProperties
 globals()['QRCodeParameters'] = QRCodeParameters
-
 
 def lazy_import():
     pass

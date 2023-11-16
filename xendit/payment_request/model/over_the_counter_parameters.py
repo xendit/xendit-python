@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_request.model.payment_request_currency import PaymentRequest
 globals()['OverTheCounterChannelCode'] = OverTheCounterChannelCode
 globals()['OverTheCounterChannelProperties'] = OverTheCounterChannelProperties
 globals()['PaymentRequestCurrency'] = PaymentRequestCurrency
-
 
 def lazy_import():
     pass

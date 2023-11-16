@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.2.3
+    The version of the XENDIT API: 1.3.3
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.refund.model.refund import Refund
 globals()['Refund'] = Refund
-
 
 def lazy_import():
     pass

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_method.model.e_wallet_channel_properties import EWalletChann
 globals()['EWalletAccount'] = EWalletAccount
 globals()['EWalletChannelCode'] = EWalletChannelCode
 globals()['EWalletChannelProperties'] = EWalletChannelProperties
-
 
 def lazy_import():
     pass

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -84,6 +83,7 @@ class DirectDebitDebitCard(ModelNormal):
             'card_last_four': (str, none_type, none_type),  # noqa: E501
             'card_expiry': (str, none_type, none_type),  # noqa: E501
             'email': (str, none_type, none_type),  # noqa: E501
+            'account_number': (str, none_type, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -96,6 +96,7 @@ class DirectDebitDebitCard(ModelNormal):
         'card_last_four': 'card_last_four',  # noqa: E501
         'card_expiry': 'card_expiry',  # noqa: E501
         'email': 'email',  # noqa: E501
+        'account_number': 'account_number',  # noqa: E501
     }
 
     read_only_vars = {
@@ -143,6 +144,7 @@ class DirectDebitDebitCard(ModelNormal):
             card_last_four (str, none_type): Last four digits of the debit card. [optional]  # noqa: E501
             card_expiry (str, none_type): Expiry month and year of the debit card (in MM/YY format). [optional]  # noqa: E501
             email (str, none_type): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
+            account_number (str, none_type): Account number of the customer. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -201,6 +203,7 @@ class DirectDebitDebitCard(ModelNormal):
         card_last_four: str | None = None,
         card_expiry: str | None = None,
         email: str | None = None,
+        account_number: str | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """DirectDebitDebitCard - a model defined in OpenAPI
@@ -241,6 +244,7 @@ class DirectDebitDebitCard(ModelNormal):
             card_last_four (str, none_type): Last four digits of the debit card. [optional]  # noqa: E501
             card_expiry (str, none_type): Expiry month and year of the debit card (in MM/YY format). [optional]  # noqa: E501
             email (str, none_type): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
+            account_number (str, none_type): Account number of the customer. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -280,6 +284,8 @@ class DirectDebitDebitCard(ModelNormal):
             self.card_expiry = card_expiry
         if email is not None:
             self.email = email
+        if account_number is not None:
+            self.account_number = account_number
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

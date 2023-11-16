@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.invoice.model.notification_channel import NotificationChannel
 globals()['NotificationChannel'] = NotificationChannel
 
-
 def lazy_import():
     pass
 

@@ -1,11 +1,11 @@
 # flake8: noqa
 
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.45.1
 """
 
 
-__version__ = "3.2.0"
+__version__ = "3.6.0"
 
 # import ApiClient
 from xendit.api_client import ApiClient

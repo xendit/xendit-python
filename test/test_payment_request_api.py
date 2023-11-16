@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -18,31 +18,10 @@ class TestPaymentRequestApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_authorize_payment_request(self):
-        """Test case for authorize_payment_request
-
-        Payment Request Authorize  # noqa: E501
-        """
-        pass
-
-    def test_capture_payment_request(self):
-        """Test case for capture_payment_request
-
-        Payment Request Capture  # noqa: E501
-        """
-        pass
-
     def test_create_payment_request(self):
         """Test case for create_payment_request
 
         Create Payment Request  # noqa: E501
-        """
-        pass
-
-    def test_get_all_payment_requests(self):
-        """Test case for get_all_payment_requests
-
-        Get all payment requests by filter  # noqa: E501
         """
         pass
 
@@ -57,6 +36,27 @@ class TestPaymentRequestApi(unittest.TestCase):
         """Test case for get_payment_request_captures
 
         Get Payment Request Capture  # noqa: E501
+        """
+        pass
+
+    def test_get_all_payment_requests(self):
+        """Test case for get_all_payment_requests
+
+        Get all payment requests by filter  # noqa: E501
+        """
+        pass
+
+    def test_capture_payment_request(self):
+        """Test case for capture_payment_request
+
+        Payment Request Capture  # noqa: E501
+        """
+        pass
+
+    def test_authorize_payment_request(self):
+        """Test case for authorize_payment_request
+
+        Payment Request Authorize  # noqa: E501
         """
         pass
 

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -26,7 +26,6 @@ from xendit.exceptions import ApiAttributeError
 
 from xendit.payment_method.model.virtual_account_channel_properties_patch import VirtualAccountChannelPropertiesPatch
 globals()['VirtualAccountChannelPropertiesPatch'] = VirtualAccountChannelPropertiesPatch
-
 
 def lazy_import():
     pass

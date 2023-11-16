@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -30,7 +30,6 @@ from xendit.payment_request.model.direct_debit_type import DirectDebitType
 globals()['DirectDebitChannelCode'] = DirectDebitChannelCode
 globals()['DirectDebitChannelProperties'] = DirectDebitChannelProperties
 globals()['DirectDebitType'] = DirectDebitType
-
 
 def lazy_import():
     pass
@@ -207,7 +206,7 @@ class DirectDebitParameters(ModelNormal):
     @convert_js_args_to_python_args
     def __init__(self,
         channel_code: DirectDebitChannelCode,
-        channel_properties: DirectDebitChannelProperties,
+        channel_properties: DirectDebitChannelProperties | None,
         type: DirectDebitType | None = None,
         *args, **kwargs
     ):  # noqa: E501

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -32,7 +32,6 @@ globals()['OverTheCounterUpdateParameters'] = OverTheCounterUpdateParameters
 globals()['PaymentMethodReusability'] = PaymentMethodReusability
 globals()['PaymentMethodStatus'] = PaymentMethodStatus
 globals()['VirtualAccountUpdateParameters'] = VirtualAccountUpdateParameters
-
 
 def lazy_import():
     pass

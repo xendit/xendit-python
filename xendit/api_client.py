@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -74,11 +74,11 @@ class ApiClient(object):
 
         # XENDIT headers
         self.default_headers['xendit-lib'] = 'python'
-        self.default_headers['xendit-lib-version'] = '3.2.0'
+        self.default_headers['xendit-lib-ver'] = '3.6.0'
             
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/3.2.0/python'
+        self.user_agent = 'OpenAPI-Generator/3.6.0/python'
 
     def __enter__(self):
         return self
@@ -805,11 +805,11 @@ class Endpoint(object):
         """ This method is invoked when endpoints are called
         Example:
 
-        api_instance = PaymentMethodApi()
-        api_instance.auth_payment_method  # this is an instance of the class Endpoint
-        api_instance.auth_payment_method()  # this invokes api_instance.auth_payment_method.__call__()
+        api_instance = PaymentRequestApi()
+        api_instance.create_payment_request  # this is an instance of the class Endpoint
+        api_instance.create_payment_request()  # this invokes api_instance.create_payment_request.__call__()
         which then invokes the callable functions stored in that endpoint at
-        api_instance.auth_payment_method.callable or self.callable in this class
+        api_instance.create_payment_request.callable or self.callable in this class
 
         """
         return self.callable(self, *args, **kwargs)

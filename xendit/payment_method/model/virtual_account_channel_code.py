@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.87.2
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -66,6 +65,8 @@ class VirtualAccountChannelCode(ModelSimple):
             'WOORI': "WOORI",
             'MSB': "MSB",
             'STANDARD_CHARTERED': "STANDARD_CHARTERED",
+            'AMBANK': "AMBANK",
+            'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
 
@@ -117,10 +118,10 @@ class VirtualAccountChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", ]  # noqa: E501
+            args[0] (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", "AMBANK", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", ]  # noqa: E501
+            value (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", "AMBANK", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -213,10 +214,10 @@ class VirtualAccountChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", ]  # noqa: E501
+            args[0] (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", "AMBANK", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", ]  # noqa: E501
+            value (str): Virtual Account Channel Code., must be one of ["BCA", "BJB", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "CIMB", "SAHABAT_SAMPOERNA", "ARTAJASA", "PV", "VIETCAPITAL", "WOORI", "MSB", "STANDARD_CHARTERED", "AMBANK", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -292,7 +293,10 @@ class VirtualAccountChannelCode(ModelSimple):
         self._path_to_item = _path_to_item
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
-        self.value = value
+        try:
+            self.value = value
+        except ValueError:
+            self.value = self.allowed_values[('value',)]['XENDIT_ENUM_DEFAULT_FALLBACK']
         if kwargs:
             raise ApiTypeError(
                 "Invalid named arguments=%s passed to %s. Remove those invalid named arguments." % (

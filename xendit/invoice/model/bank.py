@@ -29,7 +29,6 @@ from xendit.invoice.model.bank_code import BankCode
 globals()['AlternativeDisplayItem'] = AlternativeDisplayItem
 globals()['BankCode'] = BankCode
 
-
 def lazy_import():
     pass
 

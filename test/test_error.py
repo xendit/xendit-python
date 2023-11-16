@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.0.0
 """
 
 
@@ -7,7 +7,7 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_request.model.error import Error
+from xendit.customer.model.error import Error
 
 
 class TestError(unittest.TestCase):

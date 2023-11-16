@@ -29,7 +29,6 @@ from xendit.payout.model.get_payouts200_response_links import GetPayouts200Respo
 globals()['GetPayouts200ResponseDataInner'] = GetPayouts200ResponseDataInner
 globals()['GetPayouts200ResponseLinks'] = GetPayouts200ResponseLinks
 
-
 def lazy_import():
     pass
 

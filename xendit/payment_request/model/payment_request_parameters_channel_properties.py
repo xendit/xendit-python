@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -28,7 +28,6 @@ from xendit.payment_request.model.payment_request_channel_properties import Paym
 from xendit.payment_request.model.payment_request_parameters_channel_properties_all_of import PaymentRequestParametersChannelPropertiesAllOf
 globals()['PaymentRequestChannelProperties'] = PaymentRequestChannelProperties
 globals()['PaymentRequestParametersChannelPropertiesAllOf'] = PaymentRequestParametersChannelPropertiesAllOf
-
 
 def lazy_import():
     pass

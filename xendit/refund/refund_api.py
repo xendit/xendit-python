@@ -3,7 +3,7 @@
 
     This API is used for the unified refund service  # noqa: E501
 
-    The version of the OpenAPI document: 1.2.3
+    The version of the OpenAPI document: 1.3.3
 """
 
 import re  # noqa: F401
@@ -32,60 +32,6 @@ class RefundApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.cancel_refund_endpoint = _Endpoint(
-            settings={
-                'response_type': (Refund,),
-                'auth': [],
-                'endpoint_path': '/refunds/{refundID}/cancel',
-                'operation_id': 'cancel_refund',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'refund_id',
-                    'idempotency_key',
-                ],
-                'required': [
-                    'refund_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'refund_id':
-                        (str,),
-                    'idempotency_key':
-                        (str,),
-                },
-                'attribute_map': {
-                    'refund_id': 'refundID',
-                    'idempotency_key': 'idempotency-key',
-                },
-                'location_map': {
-                    'refund_id': 'path',
-                    'idempotency_key': 'header',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
         self.create_refund_endpoint = _Endpoint(
             settings={
                 'response_type': (Refund,),
@@ -98,6 +44,7 @@ class RefundApi(object):
             params_map={
                 'all': [
                     'idempotency_key',
+                    'for_user_id',
                     'create_refund',
                 ],
                 'required': [],
@@ -116,14 +63,18 @@ class RefundApi(object):
                 'openapi_types': {
                     'idempotency_key':
                         (str,),
+                    'for_user_id':
+                        (str,),
                     'create_refund':
                         (CreateRefund,),
                 },
                 'attribute_map': {
                     'idempotency_key': 'idempotency-key',
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'idempotency_key': 'header',
+                    'for_user_id': 'header',
                     'create_refund': 'body',
                 },
                 'collection_format_map': {
@@ -136,48 +87,6 @@ class RefundApi(object):
                 'content_type': [
                     'application/json'
                 ]
-            },
-            api_client=api_client
-        )
-        self.get_all_refunds_endpoint = _Endpoint(
-            settings={
-                'response_type': (RefundList,),
-                'auth': [],
-                'endpoint_path': '/refunds/',
-                'operation_id': 'get_all_refunds',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
             },
             api_client=api_client
         )
@@ -194,6 +103,7 @@ class RefundApi(object):
                 'all': [
                     'refund_id',
                     'idempotency_key',
+                    'for_user_id',
                 ],
                 'required': [
                     'refund_id',
@@ -215,14 +125,159 @@ class RefundApi(object):
                         (str,),
                     'idempotency_key':
                         (str,),
+                    'for_user_id':
+                        (str,),
                 },
                 'attribute_map': {
                     'refund_id': 'refundID',
                     'idempotency_key': 'idempotency-key',
+                    'for_user_id': 'for-user-id',
                 },
                 'location_map': {
                     'refund_id': 'path',
                     'idempotency_key': 'header',
+                    'for_user_id': 'header',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_all_refunds_endpoint = _Endpoint(
+            settings={
+                'response_type': (RefundList,),
+                'auth': [],
+                'endpoint_path': '/refunds',
+                'operation_id': 'get_all_refunds',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'for_user_id',
+                    'payment_request_id',
+                    'invoice_id',
+                    'payment_method_type',
+                    'channel_code',
+                    'limit',
+                    'after_id',
+                    'before_id',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'for_user_id':
+                        (str,),
+                    'payment_request_id':
+                        (str,),
+                    'invoice_id':
+                        (str,),
+                    'payment_method_type':
+                        (str,),
+                    'channel_code':
+                        (str,),
+                    'limit':
+                        (float,),
+                    'after_id':
+                        (str,),
+                    'before_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'for_user_id': 'for-user-id',
+                    'payment_request_id': 'payment_request_id',
+                    'invoice_id': 'invoice_id',
+                    'payment_method_type': 'payment_method_type',
+                    'channel_code': 'channel_code',
+                    'limit': 'limit',
+                    'after_id': 'after_id',
+                    'before_id': 'before_id',
+                },
+                'location_map': {
+                    'for_user_id': 'header',
+                    'payment_request_id': 'query',
+                    'invoice_id': 'query',
+                    'payment_method_type': 'query',
+                    'channel_code': 'query',
+                    'limit': 'query',
+                    'after_id': 'query',
+                    'before_id': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.cancel_refund_endpoint = _Endpoint(
+            settings={
+                'response_type': (Refund,),
+                'auth': [],
+                'endpoint_path': '/refunds/{refundID}/cancel',
+                'operation_id': 'cancel_refund',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'refund_id',
+                    'idempotency_key',
+                    'for_user_id',
+                ],
+                'required': [
+                    'refund_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'refund_id':
+                        (str,),
+                    'idempotency_key':
+                        (str,),
+                    'for_user_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'refund_id': 'refundID',
+                    'idempotency_key': 'idempotency-key',
+                    'for_user_id': 'for-user-id',
+                },
+                'location_map': {
+                    'refund_id': 'path',
+                    'idempotency_key': 'header',
+                    'for_user_id': 'header',
                 },
                 'collection_format_map': {
                 }
@@ -236,94 +291,10 @@ class RefundApi(object):
             api_client=api_client
         )
 
-    def cancel_refund(
-        self,
-        refund_id: str,
-        idempotency_key: Optional[str] = None,
-        **kwargs
-    ) -> Refund:
-        """cancel_refund  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.cancel_refund(refund_id, idempotency_key, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            refund_id (str):
-
-        Keyword Args:
-            idempotency_key (str): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            Refund
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['refund_id'] = refund_id
-        if idempotency_key is not None:
-            kwargs['idempotency_key'] = idempotency_key
-        return self.cancel_refund_endpoint.call_with_http_info(**kwargs)
-
     def create_refund(
         self,
         idempotency_key: Optional[str] = None,
+        for_user_id: Optional[str] = None,
         create_refund: Optional[CreateRefund] = None,
         **kwargs
     ) -> Refund:
@@ -332,12 +303,13 @@ class RefundApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_refund(idempotency_key, create_refund, async_req=True)
+        >>> thread = api.create_refund(idempotency_key, for_user_id, create_refund, async_req=True)
         >>> result = thread.get()
 
 
         Keyword Args:
             idempotency_key (str): [optional]
+            for_user_id (str): [optional]
             create_refund (CreateRefund): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
@@ -402,91 +374,17 @@ class RefundApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         if idempotency_key is not None:
             kwargs['idempotency_key'] = idempotency_key
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         if create_refund is not None:
             kwargs['create_refund'] = create_refund
         return self.create_refund_endpoint.call_with_http_info(**kwargs)
-
-    def get_all_refunds(
-        self,
-        **kwargs
-    ) -> RefundList:
-        """get_all_refunds  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.get_all_refunds(async_req=True)
-        >>> result = thread.get()
-
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            RefundList
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        return self.get_all_refunds_endpoint.call_with_http_info(**kwargs)
 
     def get_refund(
         self,
         refund_id: str,
         idempotency_key: Optional[str] = None,
+        for_user_id: Optional[str] = None,
         **kwargs
     ) -> Refund:
         """get_refund  # noqa: E501
@@ -494,7 +392,7 @@ class RefundApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_refund(refund_id, idempotency_key, async_req=True)
+        >>> thread = api.get_refund(refund_id, idempotency_key, for_user_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -502,6 +400,7 @@ class RefundApi(object):
 
         Keyword Args:
             idempotency_key (str): [optional]
+            for_user_id (str): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -566,5 +465,205 @@ class RefundApi(object):
         kwargs['refund_id'] = refund_id
         if idempotency_key is not None:
             kwargs['idempotency_key'] = idempotency_key
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
         return self.get_refund_endpoint.call_with_http_info(**kwargs)
+
+    def get_all_refunds(
+        self,
+        for_user_id: Optional[str] = None,
+        payment_request_id: Optional[str] = None,
+        invoice_id: Optional[str] = None,
+        payment_method_type: Optional[str] = None,
+        channel_code: Optional[str] = None,
+        limit: Optional[float] = None,
+        after_id: Optional[str] = None,
+        before_id: Optional[str] = None,
+        **kwargs
+    ) -> RefundList:
+        """get_all_refunds  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_all_refunds(for_user_id, payment_request_id, invoice_id, payment_method_type, channel_code, limit, after_id, before_id, async_req=True)
+        >>> result = thread.get()
+
+
+        Keyword Args:
+            for_user_id (str): [optional]
+            payment_request_id (str): [optional]
+            invoice_id (str): [optional]
+            payment_method_type (str): [optional]
+            channel_code (str): [optional]
+            limit (float): [optional]
+            after_id (str): [optional]
+            before_id (str): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            RefundList
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        if payment_request_id is not None:
+            kwargs['payment_request_id'] = payment_request_id
+        if invoice_id is not None:
+            kwargs['invoice_id'] = invoice_id
+        if payment_method_type is not None:
+            kwargs['payment_method_type'] = payment_method_type
+        if channel_code is not None:
+            kwargs['channel_code'] = channel_code
+        if limit is not None:
+            kwargs['limit'] = limit
+        if after_id is not None:
+            kwargs['after_id'] = after_id
+        if before_id is not None:
+            kwargs['before_id'] = before_id
+        return self.get_all_refunds_endpoint.call_with_http_info(**kwargs)
+
+    def cancel_refund(
+        self,
+        refund_id: str,
+        idempotency_key: Optional[str] = None,
+        for_user_id: Optional[str] = None,
+        **kwargs
+    ) -> Refund:
+        """cancel_refund  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.cancel_refund(refund_id, idempotency_key, for_user_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            refund_id (str):
+
+        Keyword Args:
+            idempotency_key (str): [optional]
+            for_user_id (str): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            Refund
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['refund_id'] = refund_id
+        if idempotency_key is not None:
+            kwargs['idempotency_key'] = idempotency_key
+        if for_user_id is not None:
+            kwargs['for_user_id'] = for_user_id
+        return self.cancel_refund_endpoint.call_with_http_info(**kwargs)
 

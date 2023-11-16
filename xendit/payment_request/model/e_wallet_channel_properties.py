@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -99,7 +98,7 @@ class EWalletChannelProperties(ModelNormal):
             'failure_return_url': (str, none_type),  # noqa: E501
             'cancel_return_url': (str, none_type),  # noqa: E501
             'redeem_points': (str, none_type),  # noqa: E501
-            'mobilenumber': (str, none_type),  # noqa: E501
+            'mobile_number': (str, none_type),  # noqa: E501
             'cashtag': (str, none_type),  # noqa: E501
         }
 
@@ -113,7 +112,7 @@ class EWalletChannelProperties(ModelNormal):
         'failure_return_url': 'failure_return_url',  # noqa: E501
         'cancel_return_url': 'cancel_return_url',  # noqa: E501
         'redeem_points': 'redeem_points',  # noqa: E501
-        'mobilenumber': 'mobile:number',  # noqa: E501
+        'mobile_number': 'mobile_number',  # noqa: E501
         'cashtag': 'cashtag',  # noqa: E501
     }
 
@@ -162,7 +161,7 @@ class EWalletChannelProperties(ModelNormal):
             failure_return_url (str): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cancel_return_url (str): URL where the end-customer is redirected if the authorization cancelled. [optional]  # noqa: E501
             redeem_points (str): REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.. [optional]  # noqa: E501
-            mobilenumber (str): [optional]  # noqa: E501
+            mobile_number (str): [optional]  # noqa: E501
             cashtag (str): [optional]  # noqa: E501
         """
 
@@ -222,7 +221,7 @@ class EWalletChannelProperties(ModelNormal):
         failure_return_url: str | None = None,
         cancel_return_url: str | None = None,
         redeem_points: str | None = None,
-        mobilenumber: str | None = None,
+        mobile_number: str | None = None,
         cashtag: str | None = None,
         *args, **kwargs
     ):  # noqa: E501
@@ -264,7 +263,7 @@ class EWalletChannelProperties(ModelNormal):
             failure_return_url (str): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cancel_return_url (str): URL where the end-customer is redirected if the authorization cancelled. [optional]  # noqa: E501
             redeem_points (str): REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.. [optional]  # noqa: E501
-            mobilenumber (str): [optional]  # noqa: E501
+            mobile_number (str): [optional]  # noqa: E501
             cashtag (str): [optional]  # noqa: E501
         """
 
@@ -305,8 +304,8 @@ class EWalletChannelProperties(ModelNormal):
             self.cancel_return_url = cancel_return_url
         if redeem_points is not None:
             self.redeem_points = redeem_points
-        if mobilenumber is not None:
-            self.mobilenumber = mobilenumber
+        if mobile_number is not None:
+            self.mobile_number = mobile_number
         if cashtag is not None:
             self.cashtag = cashtag
         for var_name, var_value in kwargs.items():

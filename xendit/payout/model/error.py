@@ -27,7 +27,6 @@ from xendit.exceptions import ApiAttributeError
 from xendit.payout.model.error_errors_inner import ErrorErrorsInner
 globals()['ErrorErrorsInner'] = ErrorErrorsInner
 
-
 def lazy_import():
     pass
 

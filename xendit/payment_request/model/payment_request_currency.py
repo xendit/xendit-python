@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -23,7 +23,6 @@ from xendit.model_utils import (  # noqa: F401
     OpenApiModel
 )
 from xendit.exceptions import ApiAttributeError
-
 
 
 def lazy_import():
@@ -56,6 +55,8 @@ class PaymentRequestCurrency(ModelSimple):
             'VND': "VND",
             'THB': "THB",
             'MYR': "MYR",
+            'USD': "USD",
+            'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
 
@@ -107,10 +108,10 @@ class PaymentRequestCurrency(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", ]  # noqa: E501
+            args[0] (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", "USD", ]  # noqa: E501
 
         Keyword Args:
-            value (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", ]  # noqa: E501
+            value (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", "USD", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -203,10 +204,10 @@ class PaymentRequestCurrency(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", ]  # noqa: E501
+            args[0] (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", "USD", ]  # noqa: E501
 
         Keyword Args:
-            value (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", ]  # noqa: E501
+            value (str):, must be one of ["IDR", "PHP", "VND", "THB", "MYR", "USD", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -282,7 +283,10 @@ class PaymentRequestCurrency(ModelSimple):
         self._path_to_item = _path_to_item
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
-        self.value = value
+        try:
+            self.value = value
+        except ValueError:
+            self.value = self.allowed_values[('value',)]['XENDIT_ENUM_DEFAULT_FALLBACK']
         if kwargs:
             raise ApiTypeError(
                 "Invalid named arguments=%s passed to %s. Remove those invalid named arguments." % (

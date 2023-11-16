@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 2.91.2
 """
 
 
@@ -7,7 +7,7 @@ import sys
 import unittest
 
 import xendit
-from xendit.payment_request.model.payment_method_type import PaymentMethodType
+from xendit.payment_method.model.payment_method_type import PaymentMethodType
 
 
 class TestPaymentMethodType(unittest.TestCase):

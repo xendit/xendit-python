@@ -1,22 +1,60 @@
-# xendit.apis.InvoiceApi
+# InvoiceApi
+
+
+You can use the APIs below to interface with Xendit's `InvoiceApi`.
+To start using the API, you need to configure the secret key and initiate the client instance.
+
+```python
+import time
+import xendit
+from xendit.apis import InvoiceApi
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+
+# Create an instance of the API class
+api_instance = InvoiceApi(api_client)
+```
 
 All URIs are relative to *https://api.xendit.co*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**create_invoice**](InvoiceApi.md#create_invoice) | **POST** /v2/invoices/ | Create an invoice
-[**expire_invoice**](InvoiceApi.md#expire_invoice) | **POST** /invoices/{invoice_id}/expire! | Manually expire an invoice
-[**get_invoice_by_id**](InvoiceApi.md#get_invoice_by_id) | **GET** /v2/invoices/{invoice_id} | Get invoice by invoice id
-[**get_invoices**](InvoiceApi.md#get_invoices) | **GET** /v2/invoices | Get all Invoices
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**create_invoice**](InvoiceApi.md#create_invoice-function) | **POST** /v2/invoices/ | Create an invoice |
+| [**get_invoice_by_id**](InvoiceApi.md#get_invoice_by_id-function) | **GET** /v2/invoices/{invoice_id} | Get invoice by invoice id |
+| [**get_invoices**](InvoiceApi.md#get_invoices-function) | **GET** /v2/invoices | Get all Invoices |
+| [**expire_invoice**](InvoiceApi.md#expire_invoice-function) | **POST** /invoices/{invoice_id}/expire! | Manually expire an invoice |
 
 
-# **create_invoice**
+# `create_invoice()` Function
 > Invoice create_invoice(create_invoice_request)
 
 Create an invoice
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `create_invoice` |
+| Request Parameters  |  [CreateInvoiceRequestParams](#request-parameters--CreateInvoiceRequestParams)	 |
+| Return Type  | [**Invoice**](invoice/Invoice.md) |
 
+### Request Parameters - CreateInvoiceRequestParams
+
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **create_invoice_request** | [**CreateInvoiceRequest**](invoice/CreateInvoiceRequest.md) | ☑️ | |
+| **for_user_id** | **str**| |  |
+
+### Usage Example
+#### Create Invoice Request
 
 ```python
 import time
@@ -107,7 +145,8 @@ create_invoice_request = CreateInvoiceRequest(
                 value=3.14,
             ),
         ],
-    ) # CreateInvoiceRequest | 
+    ) # CreateInvoiceRequest 
+for_user_id = "62efe4c33e45694d63f585f8" # str | Business ID of the sub-account merchant (XP feature)
 
 # example passing only required values which don't have defaults set
 try:
@@ -116,98 +155,36 @@ try:
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->create_invoice: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_invoice_request** | [**CreateInvoiceRequest**](CreateInvoiceRequest.md)|  |
-
-### Return type
-
-[**Invoice**](Invoice.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **expire_invoice**
-> Invoice expire_invoice(invoice_id)
-
-Manually expire an invoice
-
-### Example
-
-
-```python
-import time
-import xendit
-from xendit.apis import InvoiceApi
-from xendit.invoice.model.invoice_not_found_error import InvoiceNotFoundError
-from xendit.invoice.model.invoice import Invoice
-from xendit.invoice.model.server_error import ServerError
-from pprint import pprint
-
-# See configuration.py for a list of all supported configuration parameters.
-xendit.set_api_key('XENDIT API KEY')
-
-
-# Enter a context with an instance of the API client
-api_client = xendit.ApiClient()
-# Create an instance of the API class
-api_instance = InvoiceApi(api_client)
-invoice_id = "5f4708b7bd394b0400b96276" # str | Invoice ID to be expired
 
 # example passing only required values which don't have defaults set
+# and optional values
 try:
-    # Manually expire an invoice
-    api_response = api_instance.expire_invoice(invoice_id)
+    # Create an invoice
+    api_response = api_instance.create_invoice(create_invoice_request, for_user_id=for_user_id)
     pprint(api_response)
 except xendit.XenditSdkException as e:
-    print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
+    print("Exception when calling InvoiceApi->create_invoice: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **invoice_id** | **str**| Invoice ID to be expired |
-
-### Return type
-
-[**Invoice**](Invoice.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**404** | Not found |  -  |
-**500** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_invoice_by_id**
+# `get_invoice_by_id()` Function
 > Invoice get_invoice_by_id(invoice_id)
 
 Get invoice by invoice id
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `get_invoice_by_id` |
+| Request Parameters  |  [GetInvoiceByIdRequestParams](#request-parameters--GetInvoiceByIdRequestParams)	 |
+| Return Type  | [**Invoice**](invoice/Invoice.md) |
 
+### Request Parameters - GetInvoiceByIdRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **invoice_id** | **str** | ☑️ | |
+| **for_user_id** | **str**| |  |
+
+### Usage Example
 ```python
 import time
 import xendit
@@ -227,6 +204,7 @@ api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = InvoiceApi(api_client)
 invoice_id = "62efe4c33e45294d63f585f2" # str | Invoice ID
+for_user_id = "62efe4c33e45694d63f585f8" # str | Business ID of the sub-account merchant (XP feature)
 
 # example passing only required values which don't have defaults set
 try:
@@ -235,39 +213,49 @@ try:
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->get_invoice_by_id: %s\n" % e)
+
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Get invoice by invoice id
+    api_response = api_instance.get_invoice_by_id(invoice_id, for_user_id=for_user_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->get_invoice_by_id: %s\n" % e)
 ```
 
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **invoice_id** | **str**| Invoice ID |
-
-### Return type
-
-[**Invoice**](Invoice.md)
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**404** | Not found |  -  |
-**500** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_invoices**
+# `get_invoices()` Function
 > [Invoice] get_invoices()
 
 Get all Invoices
 
-### Example
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `get_invoices` |
+| Request Parameters  |  [GetInvoicesRequestParams](#request-parameters--GetInvoicesRequestParams)	 |
+| Return Type  | [**[Invoice]**](invoice/Invoice.md) |
 
+### Request Parameters - GetInvoicesRequestParams
 
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **for_user_id** | **str**| |  |
+| **external_id** | **str**| |  |
+| **statuses** | [**[InvoiceStatus]**](invoice/InvoiceStatus.md)| |  |
+| **limit** | **float**| |  |
+| **created_after** | **datetime**| |  |
+| **created_before** | **datetime**| |  |
+| **paid_after** | **datetime**| |  |
+| **paid_before** | **datetime**| |  |
+| **expired_after** | **datetime**| |  |
+| **expired_before** | **datetime**| |  |
+| **last_invoice** | **str**| |  |
+| **client_types** | [**[InvoiceClientType]**](invoice/InvoiceClientType.md)| |  |
+| **payment_channels** | **[str]**| |  |
+| **on_demand_link** | **str**| |  |
+| **recurring_payment_id** | **str**| |  |
+
+### Usage Example
 ```python
 import time
 import xendit
@@ -287,49 +275,91 @@ xendit.set_api_key('XENDIT API KEY')
 api_client = xendit.ApiClient()
 # Create an instance of the API class
 api_instance = InvoiceApi(api_client)
+for_user_id = "62efe4c33e45694d63f585f8" # str | Business ID of the sub-account merchant (XP feature)
+external_id = "test-external" # str 
+statuses = [
+        InvoiceStatus("["PENDING","SETTLED"]"),
+    ] # [InvoiceStatus] 
+limit = 10 # float 
+created_after = dateutil_parser('2016-08-29T09:12:33.001Z') # datetime 
+created_before = dateutil_parser('2016-08-29T09:12:33.001Z') # datetime 
+paid_after = dateutil_parser('2016-08-29T09:12:33.001Z') # datetime 
+paid_before = dateutil_parser('2016-08-29T09:12:33.001Z') # datetime 
+expired_after = dateutil_parser('2016-08-29T09:12:33.001Z') # datetime 
+expired_before = dateutil_parser('2016-08-29T09:12:33.001Z') # datetime 
+last_invoice = "62efe4c33e45294d63f585f2" # str 
+client_types = [
+        InvoiceClientType("["API_GATEWAY","DASHBOARD"]"),
+    ] # [InvoiceClientType] 
+payment_channels = ["BNI","BRI"] # [str] 
+on_demand_link = "test-link" # str 
+recurring_payment_id = "62efe4c33e45294d63f585f2" # str 
 
 # example passing only required values which don't have defaults set
 # and optional values
 try:
     # Get all Invoices
-    api_response = api_instance.get_invoices(external_id=external_id, statuses=statuses, limit=limit, created_after=created_after, created_before=created_before, paid_after=paid_after, paid_before=paid_before, expired_after=expired_after, expired_before=expired_before, last_invoice=last_invoice, client_types=client_types, payment_channels=payment_channels, on_demand_link=on_demand_link, recurring_payment_id=recurring_payment_id)
+    api_response = api_instance.get_invoices(for_user_id=for_user_id, external_id=external_id, statuses=statuses, limit=limit, created_after=created_after, created_before=created_before, paid_after=paid_after, paid_before=paid_before, expired_after=expired_after, expired_before=expired_before, last_invoice=last_invoice, client_types=client_types, payment_channels=payment_channels, on_demand_link=on_demand_link, recurring_payment_id=recurring_payment_id)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling InvoiceApi->get_invoices: %s\n" % e)
 ```
 
+# `expire_invoice()` Function
+> Invoice expire_invoice(invoice_id)
 
-### Parameters
+Manually expire an invoice
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | [optional]
- **statuses** | [**[InvoiceStatus]**](InvoiceStatus.md)|  | [optional]
- **limit** | **float**|  | [optional]
- **created_after** | **datetime**|  | [optional]
- **created_before** | **datetime**|  | [optional]
- **paid_after** | **datetime**|  | [optional]
- **paid_before** | **datetime**|  | [optional]
- **expired_after** | **datetime**|  | [optional]
- **expired_before** | **datetime**|  | [optional]
- **last_invoice** | **str**|  | [optional]
- **client_types** | [**[InvoiceClientType]**](InvoiceClientType.md)|  | [optional]
- **payment_channels** | **[str]**|  | [optional]
- **on_demand_link** | **str**|  | [optional]
- **recurring_payment_id** | **str**|  | [optional]
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `expire_invoice` |
+| Request Parameters  |  [ExpireInvoiceRequestParams](#request-parameters--ExpireInvoiceRequestParams)	 |
+| Return Type  | [**Invoice**](invoice/Invoice.md) |
 
-### Return type
+### Request Parameters - ExpireInvoiceRequestParams
 
-[**[Invoice]**](Invoice.md)
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **invoice_id** | **str** | ☑️ | |
+| **for_user_id** | **str**| |  |
+
+### Usage Example
+```python
+import time
+import xendit
+from xendit.apis import InvoiceApi
+from xendit.invoice.model.invoice_not_found_error import InvoiceNotFoundError
+from xendit.invoice.model.invoice import Invoice
+from xendit.invoice.model.server_error import ServerError
+from pprint import pprint
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
 
 
-### HTTP response details
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+# Create an instance of the API class
+api_instance = InvoiceApi(api_client)
+invoice_id = "5f4708b7bd394b0400b96276" # str | Invoice ID to be expired
+for_user_id = "62efe4c33e45694d63f585f8" # str | Business ID of the sub-account merchant (XP feature)
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**500** | Internal server error |  -  |
+# example passing only required values which don't have defaults set
+try:
+    # Manually expire an invoice
+    api_response = api_instance.expire_invoice(invoice_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+# example passing only required values which don't have defaults set
+# and optional values
+try:
+    # Manually expire an invoice
+    api_response = api_instance.expire_invoice(invoice_id, for_user_id=for_user_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling InvoiceApi->expire_invoice: %s\n" % e)
+```
 
+[[Back to README]](../README.md)

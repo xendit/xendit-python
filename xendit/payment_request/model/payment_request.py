@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.44.0
+    The version of the XENDIT API: 1.45.1
 """
 
 
@@ -44,7 +44,6 @@ globals()['PaymentRequestCurrency'] = PaymentRequestCurrency
 globals()['PaymentRequestInitiator'] = PaymentRequestInitiator
 globals()['PaymentRequestShippingInformation'] = PaymentRequestShippingInformation
 globals()['PaymentRequestStatus'] = PaymentRequestStatus
-
 
 def lazy_import():
     pass
