@@ -1,4 +1,4 @@
-![Xendit Python SDK](docs/header.jpg "Xendit Pyton SDK")
+![Xendit Python SDK](docs/header.jpg "Xendit Python SDK")
 
 # Xendit Python SDK
 
