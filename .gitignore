@@ -67,3 +67,6 @@ target/
 
 .vscode/
 test.py
+
+# virtual environment
+xendit-python
