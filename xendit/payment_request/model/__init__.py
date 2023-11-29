@@ -36,10 +36,13 @@ from xendit.payment_request.model.e_wallet_channel_code import EWalletChannelCod
 from xendit.payment_request.model.e_wallet_channel_properties import EWalletChannelProperties
 from xendit.payment_request.model.e_wallet_parameters import EWalletParameters
 from xendit.payment_request.model.error import Error
+from xendit.payment_request.model.invoice_partner_metadata import InvoicePartnerMetadata
 from xendit.payment_request.model.over_the_counter import OverTheCounter
 from xendit.payment_request.model.over_the_counter_channel_code import OverTheCounterChannelCode
 from xendit.payment_request.model.over_the_counter_channel_properties import OverTheCounterChannelProperties
 from xendit.payment_request.model.over_the_counter_parameters import OverTheCounterParameters
+from xendit.payment_request.model.payment_callback import PaymentCallback
+from xendit.payment_request.model.payment_callback_data import PaymentCallbackData
 from xendit.payment_request.model.payment_method import PaymentMethod
 from xendit.payment_request.model.payment_method_parameters import PaymentMethodParameters
 from xendit.payment_request.model.payment_method_reusability import PaymentMethodReusability

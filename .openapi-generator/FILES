@@ -3,6 +3,7 @@
 .gitignore
 LICENSE
 README.md
+docs/Configuration.md
 docs/PaymentRequestApi.md
 docs/payment_request/Capture.md
 docs/payment_request/CaptureList.md
@@ -31,10 +32,13 @@ docs/payment_request/EWalletChannelCode.md
 docs/payment_request/EWalletChannelProperties.md
 docs/payment_request/EWalletParameters.md
 docs/payment_request/Error.md
+docs/payment_request/InvoicePartnerMetadata.md
 docs/payment_request/OverTheCounter.md
 docs/payment_request/OverTheCounterChannelCode.md
 docs/payment_request/OverTheCounterChannelProperties.md
 docs/payment_request/OverTheCounterParameters.md
+docs/payment_request/PaymentCallback.md
+docs/payment_request/PaymentCallbackData.md
 docs/payment_request/PaymentMethod.md
 docs/payment_request/PaymentMethodParameters.md
 docs/payment_request/PaymentMethodReusability.md
@@ -84,6 +88,9 @@ test/test_direct_debit_channel_properties_bank_account.py
 test/test_direct_debit_channel_properties_bank_redirect.py
 test/test_direct_debit_channel_properties_debit_card.py
 test/test_e_wallet_all_of.py
+test/test_invoice_partner_metadata.py
+test/test_payment_callback.py
+test/test_payment_callback_data.py
 test/test_payment_request.py
 test/test_payment_request_action.py
 test/test_payment_request_api.py
@@ -142,10 +149,13 @@ xendit/payment_request/model/e_wallet_channel_code.py
 xendit/payment_request/model/e_wallet_channel_properties.py
 xendit/payment_request/model/e_wallet_parameters.py
 xendit/payment_request/model/error.py
+xendit/payment_request/model/invoice_partner_metadata.py
 xendit/payment_request/model/over_the_counter.py
 xendit/payment_request/model/over_the_counter_channel_code.py
 xendit/payment_request/model/over_the_counter_channel_properties.py
 xendit/payment_request/model/over_the_counter_parameters.py
+xendit/payment_request/model/payment_callback.py
+xendit/payment_request/model/payment_callback_data.py
 xendit/payment_request/model/payment_method.py
 xendit/payment_request/model/payment_method_parameters.py
 xendit/payment_request/model/payment_method_reusability.py

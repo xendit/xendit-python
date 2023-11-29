@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 3.5.0
+    The version of the XENDIT API: 3.5.2
 """
 
 

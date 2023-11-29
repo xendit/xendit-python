@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.3.3
+    The version of the XENDIT API: 1.3.4
 """
 
 
@@ -61,6 +61,7 @@ class CreateRefund400Response(ModelNormal):
             'PARTIAL_REFUND_NOT_SUPPORTED': "PARTIAL_REFUND_NOT_SUPPORTED",
             'REFUND_NOT_SUPPORTED': "REFUND_NOT_SUPPORTED",
             'TRANSACTION_NOT_FOUND': "TRANSACTION_NOT_FOUND",
+            'REFUND_IN_PROGRESS': "REFUND_IN_PROGRESS",
         },
     }
 

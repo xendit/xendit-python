@@ -266,4 +266,51 @@ except xendit.XenditSdkException as e:
     print("Exception when calling RefundApi->cancel_refund: %s\n" % e)
 ```
 
+
+## Callback Objects
+Use the following callback objects provided by Xendit to receive callbacks (also known as webhooks) that Xendit sends you on events, such as successful payments. Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+### RefundCallback Object
+>Callback for successful or failed Refunds made via the Payments API
+
+Model Documentation: [RefundCallback](/RefundCallback.md)
+#### Usage Example
+Note that the example is meant to illustrate the contents of the callback object -- you will not need to instantiate these objects in practice
+```python
+import xendit
+from xendit.refund.model import RefundCallback
+import json
+from pprint import pprint
+
+refund_callback_obj = {
+  "event" : "refund.succeeded",
+  "business_id" : "5f27a14a9bf05c73dd040bc8",
+  "created" : "2020-08-29T09:12:33.001Z",
+  "data" : {
+    "id" : "rfd-6f4a377d-a201-437f-9119-f8b00cbbe857",
+    "payment_id" : "ddpy-3cd658ae-25b9-4659-aa36-596ae41a809f",
+    "invoice_id" : null,
+    "amount" : 10000,
+    "payment_method_type" : "DIRECT_DEBIT",
+    "channel_code" : "BPI",
+    "currency" : "PHP",
+    "status" : "SUCCEEDED",
+    "reason" : "CANCELLATION",
+    "reference_id" : "b2756a1e-e6cd-4352-9a68-0483aa2b6a2",
+    "failure_code" : null,
+    "refund_fee_amount" : null,
+    "created" : "2020-08-30T09:12:33.001Z",
+    "updated" : "2020-08-30T09:12:33.001Z",
+    "metadata" : null
+  }
+}
+refund_callback_json = json.dumps(refund_callback_obj)
+```
+
+You may then use the callback object in your webhook or callback handler like so,
+```python
+def SimulateRefundCallback(refund_callback_json) {
+    callback_obj = RefundCallback(**json.loads(refund_callback_json))
+    // do things here with the callback
+}
+```
 [[Back to README]](../README.md)

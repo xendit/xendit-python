@@ -3,7 +3,7 @@
 
     This API is used for the unified refund service  # noqa: E501
 
-    The version of the OpenAPI document: 1.3.3
+    The version of the OpenAPI document: 1.3.4
 """
 
 import re  # noqa: F401

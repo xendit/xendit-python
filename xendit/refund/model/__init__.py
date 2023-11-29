@@ -17,4 +17,6 @@ from xendit.refund.model.create_refund409_response import CreateRefund409Respons
 from xendit.refund.model.create_refund503_response import CreateRefund503Response
 from xendit.refund.model.get_all_refunds_default_response import GetAllRefundsDefaultResponse
 from xendit.refund.model.refund import Refund
+from xendit.refund.model.refund_callback import RefundCallback
+from xendit.refund.model.refund_callback_data import RefundCallbackData
 from xendit.refund.model.refund_list import RefundList

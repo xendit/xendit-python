@@ -44,6 +44,7 @@ from xendit.payment_method.model.over_the_counter_update_parameters import OverT
 from xendit.payment_method.model.payment_method import PaymentMethod
 from xendit.payment_method.model.payment_method_action import PaymentMethodAction
 from xendit.payment_method.model.payment_method_auth_parameters import PaymentMethodAuthParameters
+from xendit.payment_method.model.payment_method_callback import PaymentMethodCallback
 from xendit.payment_method.model.payment_method_country import PaymentMethodCountry
 from xendit.payment_method.model.payment_method_expire_parameters import PaymentMethodExpireParameters
 from xendit.payment_method.model.payment_method_list import PaymentMethodList
