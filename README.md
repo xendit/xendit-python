@@ -5,7 +5,7 @@
 The official Xendit Python SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Python.
 
-* Package version: 3.7.0
+- Package version: 3.7.0
 
 ## Requirements
 
@@ -20,23 +20,37 @@ Install directly from Xendit's Github Repository:
 ```sh
 pip install git+https://github.com/xendit/xendit-python.git
 ```
+
 (you may need to run `pip` with root permission: `sudo pip install git+https://github.com/xendit/xendit-python.git`)
 
 Then import the package:
+
 ```python
 import xendit
 ```
 
-### Setuptools
+### Poetry
 
-Install via [Setuptools](http://pypi.python.org/pypi/setuptools).
+We recomend using poetry as a package manager & virtual environment for your project.
+
+Install via [Poetry](https://python-poetry.org/).
+
+but if your project not using poetry, you can install the package using pip
 
 ```sh
-python setup.py install --user
+# build .whl python package
+# this command will create .whl file in dist directory
+poetry build
 ```
-(or `sudo python setup.py install` to install the package for all users)
+
+after that install the package using pip
+
+```sh
+python -m pip install /directory/to/xendit_python-3.7.0-py3-none-any.whl
+```
 
 Then import the package:
+
 ```python
 import xendit
 ```
@@ -66,18 +80,18 @@ except xendit.XenditSdkException as e:
 
 Find detailed API information and examples for each of our product's by clicking the links below,
 
-* [Invoice](docs/InvoiceApi.md)
-* [PaymentRequest](docs/PaymentRequestApi.md)
-* [PaymentMethod](docs/PaymentMethodApi.md)
-* [Refund](docs/RefundApi.md)
-* [Balance](docs/BalanceApi.md)
-* [Transaction](docs/TransactionApi.md)
-* [Customer](docs/CustomerApi.md)
-* [Payout](docs/PayoutApi.md)
+- [Invoice](docs/InvoiceApi.md)
+- [PaymentRequest](docs/PaymentRequestApi.md)
+- [PaymentMethod](docs/PaymentMethodApi.md)
+- [Refund](docs/RefundApi.md)
+- [Balance](docs/BalanceApi.md)
+- [Transaction](docs/TransactionApi.md)
+- [Customer](docs/CustomerApi.md)
+- [Payout](docs/PayoutApi.md)
 
-All URIs are relative to *https://api.xendit.co*.  For more information about our API, please refer to *https://developers.xendit.co/*.
+All URIs are relative to *https://api.xendit.co*. For more information about our API, please refer to *https://developers.xendit.co/*.
 
 Further Reading
 
-* [Xendit Docs](https://docs.xendit.co/)
-* [Xendit API Reference](https://developers.xendit.co/)
+- [Xendit Docs](https://docs.xendit.co/)
+- [Xendit API Reference](https://developers.xendit.co/)
