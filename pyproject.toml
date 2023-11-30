@@ -10,15 +10,15 @@ keywords = ["xendit", "sdk"]
 classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.10"
+    "Programming Language :: Python :: 3.10",
 ]
-packages = [
-    { include = "xendit" }
-]
+packages = [{ include = "xendit" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 requests = "^2.23.0"
+python-dateutil = "^2.8.2"
+urllib3 = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"
