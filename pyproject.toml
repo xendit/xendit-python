@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xendit-python"
-version = "3.7.0"
+version = "4.0.0"
 description = "Xendit REST API Client for Python - Invoice, Payment Request, Payment Method, Refund, Balance, Transaction, Customer, and Payout Services https://xendit.github.io/apireference/"
 authors = ["DevX Team <devx@xendit.co>"]
 license = "MIT"
