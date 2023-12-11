@@ -19,7 +19,7 @@ Represents the actual funds transaction/attempt made to a payment method
 | **customer_id** | **str, none_type** | |   |  |
 | **channel_properties** | [**PaymentRequestChannelProperties**](PaymentRequestChannelProperties.md) | |   |  |
 | **payment_detail** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type** | |   |  |
-| **failure_code** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type** | |   |  |
+| **failure_code** | **str, none_type** | |   |  |
 | **metadata** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type** | |   |  |
 
 

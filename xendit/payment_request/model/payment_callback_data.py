@@ -98,7 +98,7 @@ class PaymentCallbackData(ModelNormal):
             'customer_id': (str, none_type, none_type),  # noqa: E501
             'channel_properties': (PaymentRequestChannelProperties, none_type),  # noqa: E501
             'payment_detail': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type, none_type),  # noqa: E501
-            'failure_code': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type, none_type),  # noqa: E501
+            'failure_code': (str, none_type, none_type),  # noqa: E501
             'metadata': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type, none_type),  # noqa: E501
         }
 
@@ -181,7 +181,7 @@ class PaymentCallbackData(ModelNormal):
             customer_id (str, none_type): [optional]  # noqa: E501
             channel_properties (PaymentRequestChannelProperties): [optional]  # noqa: E501
             payment_detail ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type): [optional]  # noqa: E501
-            failure_code ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type): [optional]  # noqa: E501
+            failure_code (str, none_type): [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type): [optional]  # noqa: E501
         """
 
@@ -259,7 +259,7 @@ class PaymentCallbackData(ModelNormal):
         customer_id: str | None = None,
         channel_properties: PaymentRequestChannelProperties | None = None,
         payment_detail: dict | None = None,
-        failure_code: dict | None = None,
+        failure_code: str | None = None,
         metadata: dict | None = None,
         *args, **kwargs
     ):  # noqa: E501
@@ -312,7 +312,7 @@ class PaymentCallbackData(ModelNormal):
             customer_id (str, none_type): [optional]  # noqa: E501
             channel_properties (PaymentRequestChannelProperties): [optional]  # noqa: E501
             payment_detail ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type): [optional]  # noqa: E501
-            failure_code ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type): [optional]  # noqa: E501
+            failure_code (str, none_type): [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type): [optional]  # noqa: E501
         """
 
