@@ -80,7 +80,7 @@ class RefundCallbackData(ModelNormal):
         """
         return {
             'id': (str,),  # noqa: E501
-            'payment_request_id': (str,),  # noqa: E501
+            'payment_id': (str,),  # noqa: E501
             'payment_method_type': (str,),  # noqa: E501
             'amount': (float,),  # noqa: E501
             'channel_code': (str,),  # noqa: E501
@@ -104,7 +104,7 @@ class RefundCallbackData(ModelNormal):
 
     attribute_map = {
         'id': 'id',  # noqa: E501
-        'payment_request_id': 'payment_request_id',  # noqa: E501
+        'payment_id': 'payment_id',  # noqa: E501
         'payment_method_type': 'payment_method_type',  # noqa: E501
         'amount': 'amount',  # noqa: E501
         'channel_code': 'channel_code',  # noqa: E501
@@ -128,12 +128,12 @@ class RefundCallbackData(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, payment_request_id, payment_method_type, amount, channel_code, status, reason, country, currency, created, updated, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, id, payment_id, payment_method_type, amount, channel_code, status, reason, country, currency, created, updated, *args, **kwargs):  # noqa: E501
         """RefundCallbackData - a model defined in OpenAPI
 
         Args:
             id (str):
-            payment_request_id (str):
+            payment_id (str):
             payment_method_type (str):
             amount (float):
             channel_code (str):
@@ -214,7 +214,7 @@ class RefundCallbackData(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.id = id
-        self.payment_request_id = payment_request_id
+        self.payment_id = payment_id
         self.payment_method_type = payment_method_type
         self.amount = amount
         self.channel_code = channel_code
@@ -246,7 +246,7 @@ class RefundCallbackData(ModelNormal):
     @convert_js_args_to_python_args
     def __init__(self,
         id: str,
-        payment_request_id: str,
+        payment_id: str,
         payment_method_type: str,
         amount: float,
         channel_code: str,
@@ -267,7 +267,7 @@ class RefundCallbackData(ModelNormal):
 
         Args:
             id (str):
-            payment_request_id (str):
+            payment_id (str):
             payment_method_type (str):
             amount (float):
             channel_code (str):
@@ -347,7 +347,7 @@ class RefundCallbackData(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.id = id
-        self.payment_request_id = payment_request_id
+        self.payment_id = payment_id
         self.payment_method_type = payment_method_type
         self.amount = amount
         self.channel_code = channel_code

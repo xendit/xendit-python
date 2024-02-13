@@ -6,7 +6,7 @@
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
 | **id** | **str** | ☑️ |  |  | |
-| **payment_request_id** | **str** | ☑️ |  |  | |
+| **payment_id** | **str** | ☑️ |  |  | |
 | **payment_method_type** | **str** | ☑️ |  |  | |
 | **amount** | **float** | ☑️ |  |  | |
 | **channel_code** | **str** | ☑️ |  |  | |
