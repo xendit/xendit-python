@@ -8,7 +8,6 @@ An object representing notification preferences for different invoice events.
 |------------|:-------------:|:-------------:|-------------|:-------------:|
 | **invoice_created** | [**[NotificationChannel]**](NotificationChannel.md) | | Notification channels for when an invoice is created.  |  |
 | **invoice_reminder** | [**[NotificationChannel]**](NotificationChannel.md) | | Notification channels for invoice reminders.  |  |
-| **invoice_expired** | [**[NotificationChannel]**](NotificationChannel.md) | | Notification channels for expired invoices.  |  |
 | **invoice_paid** | [**[NotificationChannel]**](NotificationChannel.md) | | Notification channels for when an invoice is paid.  |  |
 
 

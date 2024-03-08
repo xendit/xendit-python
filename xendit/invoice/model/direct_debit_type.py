@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.6.0
+    The version of the XENDIT API: 1.7.6
 """
 
 
@@ -69,6 +69,45 @@ class DirectDebitType(ModelSimple):
             'DD_CHINABANK': "DD_CHINABANK",
             'BA_CHINABANK': "BA_CHINABANK",
             'DC_CHINABANK': "DC_CHINABANK",
+            'DD_PUBLIC_FPX': "DD_PUBLIC_FPX",
+            'DD_AMBANK_FPX': "DD_AMBANK_FPX",
+            'DD_KFH_FPX': "DD_KFH_FPX",
+            'DD_AGRO_FPX': "DD_AGRO_FPX",
+            'DD_AFFIN_FPX': "DD_AFFIN_FPX",
+            'DD_ALLIANCE_FPX': "DD_ALLIANCE_FPX",
+            'DD_MUAMALAT_FPX': "DD_MUAMALAT_FPX",
+            'DD_HLB_FPX': "DD_HLB_FPX",
+            'DD_ISLAM_FPX': "DD_ISLAM_FPX",
+            'DD_RAKYAT_FPX': "DD_RAKYAT_FPX",
+            'DD_CIMB_FPX': "DD_CIMB_FPX",
+            'DD_UOB_FPX': "DD_UOB_FPX",
+            'DD_BOC_FPX': "DD_BOC_FPX",
+            'DD_BSN_FPX': "DD_BSN_FPX",
+            'DD_OCBC_FPX': "DD_OCBC_FPX",
+            'DD_HSBC_FPX': "DD_HSBC_FPX",
+            'DD_SCH_FPX': "DD_SCH_FPX",
+            'DD_MAYB2U_FPX': "DD_MAYB2U_FPX",
+            'DD_RHB_FPX': "DD_RHB_FPX",
+            'DD_UOB_FPX_BUSINESS': "DD_UOB_FPX_BUSINESS",
+            'DD_AGRO_FPX_BUSINESS': "DD_AGRO_FPX_BUSINESS",
+            'DD_ALLIANCE_FPX_BUSINESS': "DD_ALLIANCE_FPX_BUSINESS",
+            'DD_AMBANK_FPX_BUSINESS': "DD_AMBANK_FPX_BUSINESS",
+            'DD_ISLAM_FPX_BUSINESS': "DD_ISLAM_FPX_BUSINESS",
+            'DD_MUAMALAT_FPX_BUSINESS': "DD_MUAMALAT_FPX_BUSINESS",
+            'DD_HLB_FPX_BUSINESS': "DD_HLB_FPX_BUSINESS",
+            'DD_HSBC_FPX_BUSINESS': "DD_HSBC_FPX_BUSINESS",
+            'DD_RAKYAT_FPX_BUSINESS': "DD_RAKYAT_FPX_BUSINESS",
+            'DD_KFH_FPX_BUSINESS': "DD_KFH_FPX_BUSINESS",
+            'DD_OCBC_FPX_BUSINESS': "DD_OCBC_FPX_BUSINESS",
+            'DD_PUBLIC_FPX_BUSINESS': "DD_PUBLIC_FPX_BUSINESS",
+            'DD_RHB_FPX_BUSINESS': "DD_RHB_FPX_BUSINESS",
+            'DD_SCH_FPX_BUSINESS': "DD_SCH_FPX_BUSINESS",
+            'DD_CITIBANK_FPX_BUSINESS': "DD_CITIBANK_FPX_BUSINESS",
+            'DD_BNP_FPX_BUSINESS': "DD_BNP_FPX_BUSINESS",
+            'DD_DEUTSCHE_FPX_BUSINESS': "DD_DEUTSCHE_FPX_BUSINESS",
+            'DD_MAYB2E_FPX_BUSINESS': "DD_MAYB2E_FPX_BUSINESS",
+            'DD_CIMB_FPX_BUSINESS': "DD_CIMB_FPX_BUSINESS",
+            'DD_AFFIN_FPX_BUSINESS': "DD_AFFIN_FPX_BUSINESS",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -121,10 +160,10 @@ class DirectDebitType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", ]  # noqa: E501
+            args[0] (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", "DD_PUBLIC_FPX", "DD_AMBANK_FPX", "DD_KFH_FPX", "DD_AGRO_FPX", "DD_AFFIN_FPX", "DD_ALLIANCE_FPX", "DD_MUAMALAT_FPX", "DD_HLB_FPX", "DD_ISLAM_FPX", "DD_RAKYAT_FPX", "DD_CIMB_FPX", "DD_UOB_FPX", "DD_BOC_FPX", "DD_BSN_FPX", "DD_OCBC_FPX", "DD_HSBC_FPX", "DD_SCH_FPX", "DD_MAYB2U_FPX", "DD_RHB_FPX", "DD_UOB_FPX_BUSINESS", "DD_AGRO_FPX_BUSINESS", "DD_ALLIANCE_FPX_BUSINESS", "DD_AMBANK_FPX_BUSINESS", "DD_ISLAM_FPX_BUSINESS", "DD_MUAMALAT_FPX_BUSINESS", "DD_HLB_FPX_BUSINESS", "DD_HSBC_FPX_BUSINESS", "DD_RAKYAT_FPX_BUSINESS", "DD_KFH_FPX_BUSINESS", "DD_OCBC_FPX_BUSINESS", "DD_PUBLIC_FPX_BUSINESS", "DD_RHB_FPX_BUSINESS", "DD_SCH_FPX_BUSINESS", "DD_CITIBANK_FPX_BUSINESS", "DD_BNP_FPX_BUSINESS", "DD_DEUTSCHE_FPX_BUSINESS", "DD_MAYB2E_FPX_BUSINESS", "DD_CIMB_FPX_BUSINESS", "DD_AFFIN_FPX_BUSINESS", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", ]  # noqa: E501
+            value (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", "DD_PUBLIC_FPX", "DD_AMBANK_FPX", "DD_KFH_FPX", "DD_AGRO_FPX", "DD_AFFIN_FPX", "DD_ALLIANCE_FPX", "DD_MUAMALAT_FPX", "DD_HLB_FPX", "DD_ISLAM_FPX", "DD_RAKYAT_FPX", "DD_CIMB_FPX", "DD_UOB_FPX", "DD_BOC_FPX", "DD_BSN_FPX", "DD_OCBC_FPX", "DD_HSBC_FPX", "DD_SCH_FPX", "DD_MAYB2U_FPX", "DD_RHB_FPX", "DD_UOB_FPX_BUSINESS", "DD_AGRO_FPX_BUSINESS", "DD_ALLIANCE_FPX_BUSINESS", "DD_AMBANK_FPX_BUSINESS", "DD_ISLAM_FPX_BUSINESS", "DD_MUAMALAT_FPX_BUSINESS", "DD_HLB_FPX_BUSINESS", "DD_HSBC_FPX_BUSINESS", "DD_RAKYAT_FPX_BUSINESS", "DD_KFH_FPX_BUSINESS", "DD_OCBC_FPX_BUSINESS", "DD_PUBLIC_FPX_BUSINESS", "DD_RHB_FPX_BUSINESS", "DD_SCH_FPX_BUSINESS", "DD_CITIBANK_FPX_BUSINESS", "DD_BNP_FPX_BUSINESS", "DD_DEUTSCHE_FPX_BUSINESS", "DD_MAYB2E_FPX_BUSINESS", "DD_CIMB_FPX_BUSINESS", "DD_AFFIN_FPX_BUSINESS", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -217,10 +256,10 @@ class DirectDebitType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", ]  # noqa: E501
+            args[0] (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", "DD_PUBLIC_FPX", "DD_AMBANK_FPX", "DD_KFH_FPX", "DD_AGRO_FPX", "DD_AFFIN_FPX", "DD_ALLIANCE_FPX", "DD_MUAMALAT_FPX", "DD_HLB_FPX", "DD_ISLAM_FPX", "DD_RAKYAT_FPX", "DD_CIMB_FPX", "DD_UOB_FPX", "DD_BOC_FPX", "DD_BSN_FPX", "DD_OCBC_FPX", "DD_HSBC_FPX", "DD_SCH_FPX", "DD_MAYB2U_FPX", "DD_RHB_FPX", "DD_UOB_FPX_BUSINESS", "DD_AGRO_FPX_BUSINESS", "DD_ALLIANCE_FPX_BUSINESS", "DD_AMBANK_FPX_BUSINESS", "DD_ISLAM_FPX_BUSINESS", "DD_MUAMALAT_FPX_BUSINESS", "DD_HLB_FPX_BUSINESS", "DD_HSBC_FPX_BUSINESS", "DD_RAKYAT_FPX_BUSINESS", "DD_KFH_FPX_BUSINESS", "DD_OCBC_FPX_BUSINESS", "DD_PUBLIC_FPX_BUSINESS", "DD_RHB_FPX_BUSINESS", "DD_SCH_FPX_BUSINESS", "DD_CITIBANK_FPX_BUSINESS", "DD_BNP_FPX_BUSINESS", "DD_DEUTSCHE_FPX_BUSINESS", "DD_MAYB2E_FPX_BUSINESS", "DD_CIMB_FPX_BUSINESS", "DD_AFFIN_FPX_BUSINESS", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", ]  # noqa: E501
+            value (str): Representing the available Direct Debit channels used for invoice-related transactions.., must be one of ["BA_BRI", "DC_BRI", "DD_BRI", "DD_MANDIRI", "BA_BPI", "DC_BPI", "DD_BPI", "BA_UBP", "DC_UBP", "DD_UBP", "BCA_KLIKPAY", "BA_BCA_KLIKPAY", "DC_BCA_KLIKPAY", "DD_BCA_KLIKPAY", "DD_BDO_EPAY", "DD_RCBC", "DD_CHINABANK", "BA_CHINABANK", "DC_CHINABANK", "DD_PUBLIC_FPX", "DD_AMBANK_FPX", "DD_KFH_FPX", "DD_AGRO_FPX", "DD_AFFIN_FPX", "DD_ALLIANCE_FPX", "DD_MUAMALAT_FPX", "DD_HLB_FPX", "DD_ISLAM_FPX", "DD_RAKYAT_FPX", "DD_CIMB_FPX", "DD_UOB_FPX", "DD_BOC_FPX", "DD_BSN_FPX", "DD_OCBC_FPX", "DD_HSBC_FPX", "DD_SCH_FPX", "DD_MAYB2U_FPX", "DD_RHB_FPX", "DD_UOB_FPX_BUSINESS", "DD_AGRO_FPX_BUSINESS", "DD_ALLIANCE_FPX_BUSINESS", "DD_AMBANK_FPX_BUSINESS", "DD_ISLAM_FPX_BUSINESS", "DD_MUAMALAT_FPX_BUSINESS", "DD_HLB_FPX_BUSINESS", "DD_HSBC_FPX_BUSINESS", "DD_RAKYAT_FPX_BUSINESS", "DD_KFH_FPX_BUSINESS", "DD_OCBC_FPX_BUSINESS", "DD_PUBLIC_FPX_BUSINESS", "DD_RHB_FPX_BUSINESS", "DD_SCH_FPX_BUSINESS", "DD_CITIBANK_FPX_BUSINESS", "DD_BNP_FPX_BUSINESS", "DD_DEUTSCHE_FPX_BUSINESS", "DD_MAYB2E_FPX_BUSINESS", "DD_CIMB_FPX_BUSINESS", "DD_AFFIN_FPX_BUSINESS", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

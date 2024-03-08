@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.6.0
+    The version of the XENDIT API: 1.7.6
 """
 
 
@@ -60,6 +60,7 @@ class InvoicePaymentMethod(ModelSimple):
             'DIRECT_DEBIT': "DIRECT_DEBIT",
             'BANK_TRANSFER': "BANK_TRANSFER",
             'PAYLATER': "PAYLATER",
+            'CRYPTOCURRENCY': "CRYPTOCURRENCY",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -112,10 +113,10 @@ class InvoicePaymentMethod(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", ]  # noqa: E501
+            args[0] (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", "CRYPTOCURRENCY", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", ]  # noqa: E501
+            value (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", "CRYPTOCURRENCY", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -208,10 +209,10 @@ class InvoicePaymentMethod(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", ]  # noqa: E501
+            args[0] (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", "CRYPTOCURRENCY", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", ]  # noqa: E501
+            value (str): Representing the payment method used for an invoice.., must be one of ["POOL", "CALLBACK_VIRTUAL_ACCOUNT", "CREDIT_CARD", "RETAIL_OUTLET", "QR_CODE", "QRIS", "EWALLET", "DIRECT_DEBIT", "BANK_TRANSFER", "PAYLATER", "CRYPTOCURRENCY", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

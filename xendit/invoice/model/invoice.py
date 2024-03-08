@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.6.0
+    The version of the XENDIT API: 1.7.6
 """
 
 
@@ -25,6 +25,7 @@ from xendit.model_utils import (  # noqa: F401
 from xendit.exceptions import ApiAttributeError
 
 from xendit.invoice.model.bank import Bank
+from xendit.invoice.model.channel_properties import ChannelProperties
 from xendit.invoice.model.customer_object import CustomerObject
 from xendit.invoice.model.direct_debit import DirectDebit
 from xendit.invoice.model.ewallet import Ewallet
@@ -38,6 +39,7 @@ from xendit.invoice.model.paylater import Paylater
 from xendit.invoice.model.qr_code import QrCode
 from xendit.invoice.model.retail_outlet import RetailOutlet
 globals()['Bank'] = Bank
+globals()['ChannelProperties'] = ChannelProperties
 globals()['CustomerObject'] = CustomerObject
 globals()['DirectDebit'] = DirectDebit
 globals()['Ewallet'] = Ewallet
@@ -140,6 +142,7 @@ class Invoice(ModelNormal):
             'customer': (CustomerObject, none_type),  # noqa: E501
             'customer_notification_preference': (NotificationPreference, none_type),  # noqa: E501
             'fees': ([InvoiceFee], none_type),  # noqa: E501
+            'channel_properties': (ChannelProperties, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -181,6 +184,7 @@ class Invoice(ModelNormal):
         'customer': 'customer',  # noqa: E501
         'customer_notification_preference': 'customer_notification_preference',  # noqa: E501
         'fees': 'fees',  # noqa: E501
+        'channel_properties': 'channel_properties',  # noqa: E501
     }
 
     read_only_vars = {
@@ -259,6 +263,7 @@ class Invoice(ModelNormal):
             customer (CustomerObject): [optional]  # noqa: E501
             customer_notification_preference (NotificationPreference): [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
+            channel_properties (ChannelProperties): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -363,6 +368,7 @@ class Invoice(ModelNormal):
         customer: CustomerObject | None = None,
         customer_notification_preference: NotificationPreference | None = None,
         fees: list | None = None,
+        channel_properties: ChannelProperties | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """Invoice - a model defined in OpenAPI
@@ -434,6 +440,7 @@ class Invoice(ModelNormal):
             customer (CustomerObject): [optional]  # noqa: E501
             customer_notification_preference (NotificationPreference): [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
+            channel_properties (ChannelProperties): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -514,6 +521,8 @@ class Invoice(ModelNormal):
             self.customer_notification_preference = customer_notification_preference
         if fees is not None:
             self.fees = fees
+        if channel_properties is not None:
+            self.channel_properties = channel_properties
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

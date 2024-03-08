@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.6.0
+    The version of the XENDIT API: 1.7.6
 """
 
 
@@ -85,7 +85,6 @@ class NotificationPreference(ModelNormal):
         return {
             'invoice_created': ([NotificationChannel], none_type),  # noqa: E501
             'invoice_reminder': ([NotificationChannel], none_type),  # noqa: E501
-            'invoice_expired': ([NotificationChannel], none_type),  # noqa: E501
             'invoice_paid': ([NotificationChannel], none_type),  # noqa: E501
         }
 
@@ -97,7 +96,6 @@ class NotificationPreference(ModelNormal):
     attribute_map = {
         'invoice_created': 'invoice_created',  # noqa: E501
         'invoice_reminder': 'invoice_reminder',  # noqa: E501
-        'invoice_expired': 'invoice_expired',  # noqa: E501
         'invoice_paid': 'invoice_paid',  # noqa: E501
     }
 
@@ -144,7 +142,6 @@ class NotificationPreference(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             invoice_created ([NotificationChannel]): Notification channels for when an invoice is created.. [optional]  # noqa: E501
             invoice_reminder ([NotificationChannel]): Notification channels for invoice reminders.. [optional]  # noqa: E501
-            invoice_expired ([NotificationChannel]): Notification channels for expired invoices.. [optional]  # noqa: E501
             invoice_paid ([NotificationChannel]): Notification channels for when an invoice is paid.. [optional]  # noqa: E501
         """
 
@@ -202,7 +199,6 @@ class NotificationPreference(ModelNormal):
     def __init__(self,
         invoice_created: list | None = None,
         invoice_reminder: list | None = None,
-        invoice_expired: list | None = None,
         invoice_paid: list | None = None,
         *args, **kwargs
     ):  # noqa: E501
@@ -242,7 +238,6 @@ class NotificationPreference(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             invoice_created ([NotificationChannel]): Notification channels for when an invoice is created.. [optional]  # noqa: E501
             invoice_reminder ([NotificationChannel]): Notification channels for invoice reminders.. [optional]  # noqa: E501
-            invoice_expired ([NotificationChannel]): Notification channels for expired invoices.. [optional]  # noqa: E501
             invoice_paid ([NotificationChannel]): Notification channels for when an invoice is paid.. [optional]  # noqa: E501
         """
 
@@ -279,8 +274,6 @@ class NotificationPreference(ModelNormal):
             self.invoice_created = invoice_created
         if invoice_reminder is not None:
             self.invoice_reminder = invoice_reminder
-        if invoice_expired is not None:
-            self.invoice_expired = invoice_expired
         if invoice_paid is not None:
             self.invoice_paid = invoice_paid
         for var_name, var_value in kwargs.items():

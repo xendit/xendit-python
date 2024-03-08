@@ -111,9 +111,6 @@ create_invoice_request = CreateInvoiceRequest(
             invoice_reminder=[
                 NotificationChannel("email"),
             ],
-            invoice_expired=[
-                NotificationChannel("email"),
-            ],
             invoice_paid=[
                 NotificationChannel("email"),
             ],
@@ -145,6 +142,13 @@ create_invoice_request = CreateInvoiceRequest(
                 value=3.14,
             ),
         ],
+        channel_properties=ChannelProperties(
+            cards=ChannelPropertiesCards(
+                allowed_bins=[
+                    "allowed_bins_example",
+                ],
+            ),
+        ),
     ) # CreateInvoiceRequest 
 for_user_id = "62efe4c33e45694d63f585f0" # str | Business ID of the sub-account merchant (XP feature)
 

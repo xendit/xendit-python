@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.6.0
+    The version of the XENDIT API: 1.7.6
 """
 
 
@@ -24,10 +24,12 @@ from xendit.model_utils import (  # noqa: F401
 )
 from xendit.exceptions import ApiAttributeError
 
+from xendit.invoice.model.channel_properties import ChannelProperties
 from xendit.invoice.model.customer_object import CustomerObject
 from xendit.invoice.model.invoice_fee import InvoiceFee
 from xendit.invoice.model.invoice_item import InvoiceItem
 from xendit.invoice.model.notification_preference import NotificationPreference
+globals()['ChannelProperties'] = ChannelProperties
 globals()['CustomerObject'] = CustomerObject
 globals()['InvoiceFee'] = InvoiceFee
 globals()['InvoiceItem'] = InvoiceItem
@@ -109,6 +111,7 @@ class CreateInvoiceRequest(ModelNormal):
             'reminder_time_unit': (str, none_type),  # noqa: E501
             'items': ([InvoiceItem], none_type),  # noqa: E501
             'fees': ([InvoiceFee], none_type),  # noqa: E501
+            'channel_properties': (ChannelProperties, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -137,6 +140,7 @@ class CreateInvoiceRequest(ModelNormal):
         'reminder_time_unit': 'reminder_time_unit',  # noqa: E501
         'items': 'items',  # noqa: E501
         'fees': 'fees',  # noqa: E501
+        'channel_properties': 'channel_properties',  # noqa: E501
     }
 
     read_only_vars = {
@@ -202,6 +206,7 @@ class CreateInvoiceRequest(ModelNormal):
             reminder_time_unit (str): The unit of the reminder time.. [optional]  # noqa: E501
             items ([InvoiceItem]): An array of items included in the invoice.. [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
+            channel_properties (ChannelProperties): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -278,6 +283,7 @@ class CreateInvoiceRequest(ModelNormal):
         reminder_time_unit: str | None = None,
         items: list | None = None,
         fees: list | None = None,
+        channel_properties: ChannelProperties | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """CreateInvoiceRequest - a model defined in OpenAPI
@@ -336,6 +342,7 @@ class CreateInvoiceRequest(ModelNormal):
             reminder_time_unit (str): The unit of the reminder time.. [optional]  # noqa: E501
             items ([InvoiceItem]): An array of items included in the invoice.. [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
+            channel_properties (ChannelProperties): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -405,6 +412,8 @@ class CreateInvoiceRequest(ModelNormal):
             self.items = items
         if fees is not None:
             self.fees = fees
+        if channel_properties is not None:
+            self.channel_properties = channel_properties
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

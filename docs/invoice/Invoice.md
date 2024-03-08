@@ -39,6 +39,7 @@ An object representing details for an invoice.
 | **customer** | [**CustomerObject**](CustomerObject.md) | |   |  |
 | **customer_notification_preference** | [**NotificationPreference**](NotificationPreference.md) | |   |  |
 | **fees** | [**[InvoiceFee]**](InvoiceFee.md) | | An array of fees associated with the invoice.  |  |
+| **channel_properties** | [**ChannelProperties**](ChannelProperties.md) | |   |  |
 
 
 [[Back to README]](../../README.md)

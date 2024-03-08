@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.6.0
+    The version of the XENDIT API: 1.7.6
 """
 
 
@@ -60,6 +60,8 @@ class BankCode(ModelSimple):
             'SAHABAT_SAMPOERNA': "SAHABAT_SAMPOERNA",
             'CIMB': "CIMB",
             'BNC': "BNC",
+            'HANA': "HANA",
+            'MUAMALAT': "MUAMALAT",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -112,10 +114,10 @@ class BankCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", ]  # noqa: E501
+            args[0] (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", "HANA", "MUAMALAT", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", ]  # noqa: E501
+            value (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", "HANA", "MUAMALAT", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -208,10 +210,10 @@ class BankCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", ]  # noqa: E501
+            args[0] (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", "HANA", "MUAMALAT", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", ]  # noqa: E501
+            value (str): Representing the available bank channels used for invoice-related transactions.., must be one of ["BCA", "BNI", "BRI", "MANDIRI", "PERMATA", "BSI", "BJB", "SAHABAT_SAMPOERNA", "CIMB", "BNC", "HANA", "MUAMALAT", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
