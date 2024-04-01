@@ -5,9 +5,10 @@
 ## Properties
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
-| **currency** | [**PaymentRequestCurrency**](PaymentRequestCurrency.md) | ☑️ |  |  | |
 | **channel_properties** | [**CardChannelProperties**](CardChannelProperties.md) | ☑️ |  |  | |
-| **card_information** | [**CardInformation**](CardInformation.md) | ☑️ |  |  | |
+| **channel_code** | [**CardChannelCode**](CardChannelCode.md) | |   |  |
+| **currency** | [**PaymentRequestCurrency**](PaymentRequestCurrency.md) | |   |  |
+| **card_information** | [**CardInformation**](CardInformation.md) | |   |  |
 | **card_verification_results** | [**CardVerificationResults**](CardVerificationResults.md) | |   |  |
 
 

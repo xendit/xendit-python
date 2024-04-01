@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -24,10 +24,12 @@ from xendit.model_utils import (  # noqa: F401
 )
 from xendit.exceptions import ApiAttributeError
 
+from xendit.payment_request.model.card_channel_code import CardChannelCode
 from xendit.payment_request.model.card_channel_properties import CardChannelProperties
 from xendit.payment_request.model.card_information import CardInformation
 from xendit.payment_request.model.card_verification_results import CardVerificationResults
 from xendit.payment_request.model.payment_request_currency import PaymentRequestCurrency
+globals()['CardChannelCode'] = CardChannelCode
 globals()['CardChannelProperties'] = CardChannelProperties
 globals()['CardInformation'] = CardInformation
 globals()['CardVerificationResults'] = CardVerificationResults
@@ -89,9 +91,10 @@ class Card(ModelNormal):
         """
         lazy_import()
         return {
-            'currency': (PaymentRequestCurrency,),  # noqa: E501
             'channel_properties': (CardChannelProperties,),  # noqa: E501
-            'card_information': (CardInformation,),  # noqa: E501
+            'channel_code': (CardChannelCode, none_type),  # noqa: E501
+            'currency': (PaymentRequestCurrency, none_type),  # noqa: E501
+            'card_information': (CardInformation, none_type),  # noqa: E501
             'card_verification_results': (CardVerificationResults, none_type),  # noqa: E501
         }
 
@@ -101,8 +104,9 @@ class Card(ModelNormal):
 
 
     attribute_map = {
-        'currency': 'currency',  # noqa: E501
         'channel_properties': 'channel_properties',  # noqa: E501
+        'channel_code': 'channel_code',  # noqa: E501
+        'currency': 'currency',  # noqa: E501
         'card_information': 'card_information',  # noqa: E501
         'card_verification_results': 'card_verification_results',  # noqa: E501
     }
@@ -114,13 +118,11 @@ class Card(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, currency, channel_properties, card_information, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, channel_properties, *args, **kwargs):  # noqa: E501
         """Card - a model defined in OpenAPI
 
         Args:
-            currency (PaymentRequestCurrency):
             channel_properties (CardChannelProperties):
-            card_information (CardInformation):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -153,6 +155,9 @@ class Card(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            channel_code (CardChannelCode): [optional]  # noqa: E501
+            currency (PaymentRequestCurrency): [optional]  # noqa: E501
+            card_information (CardInformation): [optional]  # noqa: E501
             card_verification_results (CardVerificationResults): [optional]  # noqa: E501
         """
 
@@ -187,9 +192,7 @@ class Card(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.currency = currency
         self.channel_properties = channel_properties
-        self.card_information = card_information
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -211,18 +214,17 @@ class Card(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self,
-        currency: PaymentRequestCurrency,
         channel_properties: CardChannelProperties,
-        card_information: CardInformation,
+        channel_code: CardChannelCode | None = None,
+        currency: PaymentRequestCurrency | None = None,
+        card_information: CardInformation | None = None,
         card_verification_results: CardVerificationResults | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """Card - a model defined in OpenAPI
 
         Args:
-            currency (PaymentRequestCurrency):
             channel_properties (CardChannelProperties):
-            card_information (CardInformation):
 
 
         Keyword Args:
@@ -256,6 +258,9 @@ class Card(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            channel_code (CardChannelCode): [optional]  # noqa: E501
+            currency (PaymentRequestCurrency): [optional]  # noqa: E501
+            card_information (CardInformation): [optional]  # noqa: E501
             card_verification_results (CardVerificationResults): [optional]  # noqa: E501
         """
 
@@ -288,9 +293,13 @@ class Card(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.currency = currency
         self.channel_properties = channel_properties
-        self.card_information = card_information
+        if channel_code is not None:
+            self.channel_code = channel_code
+        if currency is not None:
+            self.currency = currency
+        if card_information is not None:
+            self.card_information = card_information
         if card_verification_results is not None:
             self.card_verification_results = card_verification_results
         for var_name, var_value in kwargs.items():

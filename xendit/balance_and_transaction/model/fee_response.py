@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 3.5.2
+    The version of the XENDIT API: 5.4.0
 """
 
 
@@ -58,6 +58,7 @@ class FeeResponse(ModelNormal):
             'COMPLETED': "COMPLETED",
             'CANCELED': "CANCELED",
             'REVERSED': "REVERSED",
+            'NOT_APPLICABLE': "NOT_APPLICABLE",
         },
     }
 

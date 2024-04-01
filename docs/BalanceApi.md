@@ -43,6 +43,7 @@ Retrieves balances for a business, default to CASH type
 |-------------|:-------------:|:-------------:|-------------|
 | **account_type** | **str**| | "CASH" |
 | **currency** | **str**| |  |
+| **at_timestamp** | **datetime**| |  |
 | **for_user_id** | **str**| |  |
 
 ### Usage Example
@@ -65,13 +66,14 @@ api_client = xendit.ApiClient()
 api_instance = BalanceApi(api_client)
 account_type = "CASH" # str | The selected balance type
 currency = "IDR" # str | Currency for filter for customers with multi currency accounts
+at_timestamp = dateutil_parser('2020-06-19T00:00:00+07:00') # datetime | The timestamp you want to use as the limit for balance retrieval
 for_user_id = "5dbf20d7c8eb0c0896f811b6" # str | The sub-account user-id that you want to make this transaction for. This header is only used if you have access to xenPlatform. See xenPlatform for more information
 
 # example passing only required values which don't have defaults set
 # and optional values
 try:
     # Retrieves balances for a business, default to CASH type
-    api_response = api_instance.get_balance(account_type=account_type, currency=currency, for_user_id=for_user_id)
+    api_response = api_instance.get_balance(account_type=account_type, currency=currency, at_timestamp=at_timestamp, for_user_id=for_user_id)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling BalanceApi->get_balance: %s\n" % e)

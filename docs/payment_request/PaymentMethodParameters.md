@@ -9,6 +9,7 @@
 | **reusability** | [**PaymentMethodReusability**](PaymentMethodReusability.md) | ☑️ |  |  | |
 | **description** | **str, none_type** | |   |  |
 | **reference_id** | **str** | |   |  |
+| **card** | [**CardParameters**](CardParameters.md) | |   |  |
 | **direct_debit** | [**DirectDebitParameters**](DirectDebitParameters.md) | |   |  |
 | **ewallet** | [**EWalletParameters**](EWalletParameters.md) | |   |  |
 | **over_the_counter** | [**OverTheCounterParameters**](OverTheCounterParameters.md) | |   |  |

@@ -30,6 +30,7 @@ All URIs are relative to *https://api.xendit.co*
 | [**capture_payment_request**](PaymentRequestApi.md#capture_payment_request-function) | **POST** /payment_requests/{paymentRequestId}/captures | Payment Request Capture |
 | [**authorize_payment_request**](PaymentRequestApi.md#authorize_payment_request-function) | **POST** /payment_requests/{paymentRequestId}/auth | Payment Request Authorize |
 | [**resend_payment_request_auth**](PaymentRequestApi.md#resend_payment_request_auth-function) | **POST** /payment_requests/{paymentRequestId}/auth/resend | Payment Request Resend Auth |
+| [**simulate_payment_request_payment**](PaymentRequestApi.md#simulate_payment_request_payment-function) | **POST** /payment_requests/{paymentRequestId}/payments/simulate | Payment Request Simulate Payment |
 
 
 # `create_payment_request()` Function
@@ -633,6 +634,51 @@ try:
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->resend_payment_request_auth: %s\n" % e)
+```
+
+# `simulate_payment_request_payment()` Function
+> PaymentSimulation simulate_payment_request_payment(payment_request_id)
+
+Payment Request Simulate Payment
+
+| Name          |    Value 	     |
+|--------------------|:-------------:|
+| Function Name | `simulate_payment_request_payment` |
+| Request Parameters  |  [SimulatePaymentRequestPaymentRequestParams](#request-parameters--SimulatePaymentRequestPaymentRequestParams)	 |
+| Return Type  | [**PaymentSimulation**](payment_request/PaymentSimulation.md) |
+
+### Request Parameters - SimulatePaymentRequestPaymentRequestParams
+
+| Name | Type | Required | Default |
+|-------------|:-------------:|:-------------:|-------------|
+| **payment_request_id** | **str** | ☑️ | |
+
+### Usage Example
+```python
+import time
+import xendit
+from xendit.apis import PaymentRequestApi
+from xendit.payment_request.model.payment_simulation import PaymentSimulation
+from xendit.payment_request.model.error import Error
+from pprint import pprint
+
+# See configuration.py for a list of all supported configuration parameters.
+xendit.set_api_key('XENDIT API KEY')
+
+
+# Enter a context with an instance of the API client
+api_client = xendit.ApiClient()
+# Create an instance of the API class
+api_instance = PaymentRequestApi(api_client)
+payment_request_id = "pr-1fdaf346-dd2e-4b6c-b938-124c7167a822" # str 
+
+# example passing only required values which don't have defaults set
+try:
+    # Payment Request Simulate Payment
+    api_response = api_instance.simulate_payment_request_payment(payment_request_id)
+    pprint(api_response)
+except xendit.XenditSdkException as e:
+    print("Exception when calling PaymentRequestApi->simulate_payment_request_payment: %s\n" % e)
 ```
 
 

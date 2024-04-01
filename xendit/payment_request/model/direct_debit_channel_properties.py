@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -87,6 +87,7 @@ class DirectDebitChannelProperties(ModelComposed):
         """
         lazy_import()
         return {
+            'email': (str, none_type),  # noqa: E501
             'mobile_number': (str, none_type),  # noqa: E501
             'success_return_url': (str, none_type),  # noqa: E501
             'failure_return_url': (str, none_type),  # noqa: E501
@@ -94,7 +95,6 @@ class DirectDebitChannelProperties(ModelComposed):
             'account_number': (str, none_type),  # noqa: E501
             'card_last_four': (str, none_type),  # noqa: E501
             'card_expiry': (str, none_type),  # noqa: E501
-            'email': (str, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -103,6 +103,7 @@ class DirectDebitChannelProperties(ModelComposed):
 
 
     attribute_map = {
+        'email': 'email',  # noqa: E501
         'mobile_number': 'mobile_number',  # noqa: E501
         'success_return_url': 'success_return_url',  # noqa: E501
         'failure_return_url': 'failure_return_url',  # noqa: E501
@@ -110,7 +111,6 @@ class DirectDebitChannelProperties(ModelComposed):
         'account_number': 'account_number',  # noqa: E501
         'card_last_four': 'card_last_four',  # noqa: E501
         'card_expiry': 'card_expiry',  # noqa: E501
-        'email': 'email',  # noqa: E501
     }
 
     read_only_vars = {
@@ -152,6 +152,7 @@ class DirectDebitChannelProperties(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            email (str): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
             mobile_number (str): Mobile number of the customer registered to the partner channel. [optional]  # noqa: E501
             success_return_url (str): [optional]  # noqa: E501
             failure_return_url (str): [optional]  # noqa: E501
@@ -159,7 +160,6 @@ class DirectDebitChannelProperties(ModelComposed):
             account_number (str): [optional]  # noqa: E501
             card_last_four (str): Last four digits of the debit card. [optional]  # noqa: E501
             card_expiry (str): Expiry month and year of the debit card (in MM/YY format). [optional]  # noqa: E501
-            email (str): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -265,6 +265,7 @@ class DirectDebitChannelProperties(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            email (str): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
             mobile_number (str): Mobile number of the customer registered to the partner channel. [optional]  # noqa: E501
             success_return_url (str): [optional]  # noqa: E501
             failure_return_url (str): [optional]  # noqa: E501
@@ -272,7 +273,6 @@ class DirectDebitChannelProperties(ModelComposed):
             account_number (str): [optional]  # noqa: E501
             card_last_four (str): Last four digits of the debit card. [optional]  # noqa: E501
             card_expiry (str): Expiry month and year of the debit card (in MM/YY format). [optional]  # noqa: E501
-            email (str): Email address of the customer that is registered to the partner channel. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

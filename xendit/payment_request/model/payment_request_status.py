@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -58,6 +58,7 @@ class PaymentRequestStatus(ModelSimple):
             'VOIDED': "VOIDED",
             'UNKNOWN': "UNKNOWN",
             'AWAITING_CAPTURE': "AWAITING_CAPTURE",
+            'EXPIRED': "EXPIRED",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -110,10 +111,10 @@ class PaymentRequestStatus(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", ]  # noqa: E501
+            args[0] (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", "EXPIRED", ]  # noqa: E501
 
         Keyword Args:
-            value (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", ]  # noqa: E501
+            value (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", "EXPIRED", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -206,10 +207,10 @@ class PaymentRequestStatus(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", ]  # noqa: E501
+            args[0] (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", "EXPIRED", ]  # noqa: E501
 
         Keyword Args:
-            value (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", ]  # noqa: E501
+            value (str):, must be one of ["PENDING", "REQUIRES_ACTION", "CANCELED", "SUCCEEDED", "FAILED", "VOIDED", "UNKNOWN", "AWAITING_CAPTURE", "EXPIRED", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

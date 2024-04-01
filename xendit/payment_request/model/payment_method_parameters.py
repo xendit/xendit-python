@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -24,6 +24,7 @@ from xendit.model_utils import (  # noqa: F401
 )
 from xendit.exceptions import ApiAttributeError
 
+from xendit.payment_request.model.card_parameters import CardParameters
 from xendit.payment_request.model.direct_debit_parameters import DirectDebitParameters
 from xendit.payment_request.model.e_wallet_parameters import EWalletParameters
 from xendit.payment_request.model.over_the_counter_parameters import OverTheCounterParameters
@@ -31,6 +32,7 @@ from xendit.payment_request.model.payment_method_reusability import PaymentMetho
 from xendit.payment_request.model.payment_method_type import PaymentMethodType
 from xendit.payment_request.model.qr_code_parameters import QRCodeParameters
 from xendit.payment_request.model.virtual_account_parameters import VirtualAccountParameters
+globals()['CardParameters'] = CardParameters
 globals()['DirectDebitParameters'] = DirectDebitParameters
 globals()['EWalletParameters'] = EWalletParameters
 globals()['OverTheCounterParameters'] = OverTheCounterParameters
@@ -99,6 +101,7 @@ class PaymentMethodParameters(ModelNormal):
             'reusability': (PaymentMethodReusability,),  # noqa: E501
             'description': (str, none_type, none_type),  # noqa: E501
             'reference_id': (str, none_type),  # noqa: E501
+            'card': (CardParameters, none_type),  # noqa: E501
             'direct_debit': (DirectDebitParameters, none_type),  # noqa: E501
             'ewallet': (EWalletParameters, none_type),  # noqa: E501
             'over_the_counter': (OverTheCounterParameters, none_type),  # noqa: E501
@@ -116,6 +119,7 @@ class PaymentMethodParameters(ModelNormal):
         'reusability': 'reusability',  # noqa: E501
         'description': 'description',  # noqa: E501
         'reference_id': 'reference_id',  # noqa: E501
+        'card': 'card',  # noqa: E501
         'direct_debit': 'direct_debit',  # noqa: E501
         'ewallet': 'ewallet',  # noqa: E501
         'over_the_counter': 'over_the_counter',  # noqa: E501
@@ -170,6 +174,7 @@ class PaymentMethodParameters(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             description (str, none_type): [optional]  # noqa: E501
             reference_id (str): [optional]  # noqa: E501
+            card (CardParameters): [optional]  # noqa: E501
             direct_debit (DirectDebitParameters): [optional]  # noqa: E501
             ewallet (EWalletParameters): [optional]  # noqa: E501
             over_the_counter (OverTheCounterParameters): [optional]  # noqa: E501
@@ -235,6 +240,7 @@ class PaymentMethodParameters(ModelNormal):
         reusability: PaymentMethodReusability,
         description: str | None = None,
         reference_id: str | None = None,
+        card: CardParameters | None = None,
         direct_debit: DirectDebitParameters | None = None,
         ewallet: EWalletParameters | None = None,
         over_the_counter: OverTheCounterParameters | None = None,
@@ -282,6 +288,7 @@ class PaymentMethodParameters(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             description (str, none_type): [optional]  # noqa: E501
             reference_id (str): [optional]  # noqa: E501
+            card (CardParameters): [optional]  # noqa: E501
             direct_debit (DirectDebitParameters): [optional]  # noqa: E501
             ewallet (EWalletParameters): [optional]  # noqa: E501
             over_the_counter (OverTheCounterParameters): [optional]  # noqa: E501
@@ -324,6 +331,8 @@ class PaymentMethodParameters(ModelNormal):
             self.description = description
         if reference_id is not None:
             self.reference_id = reference_id
+        if card is not None:
+            self.card = card
         if direct_debit is not None:
             self.direct_debit = direct_debit
         if ewallet is not None:

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -79,6 +79,7 @@ class DirectDebitChannelPropertiesBankRedirect(ModelNormal):
                 and the value is attribute type.
         """
         return {
+            'email': (str, none_type),  # noqa: E501
             'mobile_number': (str, none_type),  # noqa: E501
             'success_return_url': (str, none_type),  # noqa: E501
             'failure_return_url': (str, none_type),  # noqa: E501
@@ -90,6 +91,7 @@ class DirectDebitChannelPropertiesBankRedirect(ModelNormal):
 
 
     attribute_map = {
+        'email': 'email',  # noqa: E501
         'mobile_number': 'mobile_number',  # noqa: E501
         'success_return_url': 'success_return_url',  # noqa: E501
         'failure_return_url': 'failure_return_url',  # noqa: E501
@@ -136,6 +138,7 @@ class DirectDebitChannelPropertiesBankRedirect(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            email (str): [optional]  # noqa: E501
             mobile_number (str): Mobile number of the customer that is registered to channel. [optional]  # noqa: E501
             success_return_url (str): [optional]  # noqa: E501
             failure_return_url (str): [optional]  # noqa: E501
@@ -193,6 +196,7 @@ class DirectDebitChannelPropertiesBankRedirect(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self,
+        email: str | None = None,
         mobile_number: str | None = None,
         success_return_url: str | None = None,
         failure_return_url: str | None = None,
@@ -232,6 +236,7 @@ class DirectDebitChannelPropertiesBankRedirect(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            email (str): [optional]  # noqa: E501
             mobile_number (str): Mobile number of the customer that is registered to channel. [optional]  # noqa: E501
             success_return_url (str): [optional]  # noqa: E501
             failure_return_url (str): [optional]  # noqa: E501
@@ -266,6 +271,8 @@ class DirectDebitChannelPropertiesBankRedirect(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
+        if email is not None:
+            self.email = email
         if mobile_number is not None:
             self.mobile_number = mobile_number
         if success_return_url is not None:

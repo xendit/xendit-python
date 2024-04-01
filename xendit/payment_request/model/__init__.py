@@ -14,8 +14,10 @@ from xendit.payment_request.model.capture_list import CaptureList
 from xendit.payment_request.model.capture_list_response import CaptureListResponse
 from xendit.payment_request.model.capture_parameters import CaptureParameters
 from xendit.payment_request.model.card import Card
+from xendit.payment_request.model.card_channel_code import CardChannelCode
 from xendit.payment_request.model.card_channel_properties import CardChannelProperties
 from xendit.payment_request.model.card_information import CardInformation
+from xendit.payment_request.model.card_parameters import CardParameters
 from xendit.payment_request.model.card_verification_results import CardVerificationResults
 from xendit.payment_request.model.card_verification_results_three_d_secure import CardVerificationResultsThreeDSecure
 from xendit.payment_request.model.direct_debit import DirectDebit
@@ -66,6 +68,7 @@ from xendit.payment_request.model.payment_request_parameters_channel_properties 
 from xendit.payment_request.model.payment_request_parameters_channel_properties_all_of import PaymentRequestParametersChannelPropertiesAllOf
 from xendit.payment_request.model.payment_request_shipping_information import PaymentRequestShippingInformation
 from xendit.payment_request.model.payment_request_status import PaymentRequestStatus
+from xendit.payment_request.model.payment_simulation import PaymentSimulation
 from xendit.payment_request.model.qr_code import QRCode
 from xendit.payment_request.model.qr_code_channel_code import QRCodeChannelCode
 from xendit.payment_request.model.qr_code_channel_properties import QRCodeChannelProperties

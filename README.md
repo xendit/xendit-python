@@ -5,7 +5,7 @@
 The official Xendit Python SDK provides a simple and convenient way to call Xendit's REST API
 in applications written in Python.
 
-* Package version: 4.3.0
+* Package version: 5.0.0
 
 ## Requirements
 

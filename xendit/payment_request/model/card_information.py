@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -86,16 +86,18 @@ class CardInformation(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'token_id': (str,),  # noqa: E501
-            'masked_card_number': (str,),  # noqa: E501
-            'expiry_month': (str,),  # noqa: E501
-            'expiry_year': (str,),  # noqa: E501
+            'token_id': (str, none_type),  # noqa: E501
+            'masked_card_number': (str, none_type),  # noqa: E501
+            'expiry_month': (str, none_type),  # noqa: E501
+            'expiry_year': (str, none_type),  # noqa: E501
             'cardholder_name': (str, none_type, none_type),  # noqa: E501
             'fingerprint': (str, none_type),  # noqa: E501
             'type': (str, none_type),  # noqa: E501
             'network': (str, none_type),  # noqa: E501
             'country': (str, none_type),  # noqa: E501
             'issuer': (str, none_type),  # noqa: E501
+            'card_number': (str, none_type),  # noqa: E501
+            'one_time_token': (str, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -114,6 +116,8 @@ class CardInformation(ModelNormal):
         'network': 'network',  # noqa: E501
         'country': 'country',  # noqa: E501
         'issuer': 'issuer',  # noqa: E501
+        'card_number': 'card_number',  # noqa: E501
+        'one_time_token': 'one_time_token',  # noqa: E501
     }
 
     read_only_vars = {
@@ -123,14 +127,8 @@ class CardInformation(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, token_id, masked_card_number, expiry_month, expiry_year, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, *args, **kwargs):  # noqa: E501
         """CardInformation - a model defined in OpenAPI
-
-        Args:
-            token_id (str):
-            masked_card_number (str): 1st 6 and last 4 digits of the card
-            expiry_month (str): Card expiry month in MM format
-            expiry_year (str): Card expiry month in YY format
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -163,12 +161,18 @@ class CardInformation(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            token_id (str): [optional]  # noqa: E501
+            masked_card_number (str): 1st 6 and last 4 digits of the card. [optional]  # noqa: E501
+            expiry_month (str): Card expiry month in MM format. [optional]  # noqa: E501
+            expiry_year (str): Card expiry month in YY format. [optional]  # noqa: E501
             cardholder_name (str, none_type): Cardholder name. [optional]  # noqa: E501
             fingerprint (str): [optional]  # noqa: E501
             type (str): [optional]  # noqa: E501
             network (str): [optional]  # noqa: E501
             country (str): [optional]  # noqa: E501
             issuer (str): [optional]  # noqa: E501
+            card_number (str): [optional]  # noqa: E501
+            one_time_token (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -202,10 +206,6 @@ class CardInformation(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.token_id = token_id
-        self.masked_card_number = masked_card_number
-        self.expiry_month = expiry_month
-        self.expiry_year = expiry_year
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -227,25 +227,21 @@ class CardInformation(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self,
-        token_id: str,
-        masked_card_number: str,
-        expiry_month: str,
-        expiry_year: str,
+        token_id: str | None = None,
+        masked_card_number: str | None = None,
+        expiry_month: str | None = None,
+        expiry_year: str | None = None,
         cardholder_name: str | None = None,
         fingerprint: str | None = None,
         type: str | None = None,
         network: str | None = None,
         country: str | None = None,
         issuer: str | None = None,
+        card_number: str | None = None,
+        one_time_token: str | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """CardInformation - a model defined in OpenAPI
-
-        Args:
-            token_id (str):
-            masked_card_number (str): 1st 6 and last 4 digits of the card
-            expiry_month (str): Card expiry month in MM format
-            expiry_year (str): Card expiry month in YY format
 
 
         Keyword Args:
@@ -279,12 +275,18 @@ class CardInformation(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            token_id (str): [optional]  # noqa: E501
+            masked_card_number (str): 1st 6 and last 4 digits of the card. [optional]  # noqa: E501
+            expiry_month (str): Card expiry month in MM format. [optional]  # noqa: E501
+            expiry_year (str): Card expiry month in YY format. [optional]  # noqa: E501
             cardholder_name (str, none_type): Cardholder name. [optional]  # noqa: E501
             fingerprint (str): [optional]  # noqa: E501
             type (str): [optional]  # noqa: E501
             network (str): [optional]  # noqa: E501
             country (str): [optional]  # noqa: E501
             issuer (str): [optional]  # noqa: E501
+            card_number (str): [optional]  # noqa: E501
+            one_time_token (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -316,10 +318,14 @@ class CardInformation(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.token_id = token_id
-        self.masked_card_number = masked_card_number
-        self.expiry_month = expiry_month
-        self.expiry_year = expiry_year
+        if token_id is not None:
+            self.token_id = token_id
+        if masked_card_number is not None:
+            self.masked_card_number = masked_card_number
+        if expiry_month is not None:
+            self.expiry_month = expiry_month
+        if expiry_year is not None:
+            self.expiry_year = expiry_year
         if cardholder_name is not None:
             self.cardholder_name = cardholder_name
         if fingerprint is not None:
@@ -332,6 +338,10 @@ class CardInformation(ModelNormal):
             self.country = country
         if issuer is not None:
             self.issuer = issuer
+        if card_number is not None:
+            self.card_number = card_number
+        if one_time_token is not None:
+            self.one_time_token = one_time_token
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

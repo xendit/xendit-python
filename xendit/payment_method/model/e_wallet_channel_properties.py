@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.91.2
+    The version of the XENDIT API: 2.99.0
 """
 
 
@@ -71,6 +71,11 @@ class EWalletChannelProperties(ModelNormal):
                 'pattern': r'^\S{1,255}:\/\/\S{0,1000}$',  # noqa: E501
             },
         },
+        ('pending_return_url',): {
+            'regex': {
+                'pattern': r'^\S{1,255}:\/\/\S{0,1000}$',  # noqa: E501
+            },
+        },
         ('cashtag',): {
             'regex': {
                 'pattern': r'^[$][a-zA-Z0-9_]{3,15}$',  # noqa: E501
@@ -102,6 +107,7 @@ class EWalletChannelProperties(ModelNormal):
             'success_return_url': (str, none_type),  # noqa: E501
             'failure_return_url': (str, none_type),  # noqa: E501
             'cancel_return_url': (str, none_type),  # noqa: E501
+            'pending_return_url': (str, none_type),  # noqa: E501
             'mobile_number': (str, none_type),  # noqa: E501
             'redeem_points': (str, none_type),  # noqa: E501
             'cashtag': (str, none_type),  # noqa: E501
@@ -116,6 +122,7 @@ class EWalletChannelProperties(ModelNormal):
         'success_return_url': 'success_return_url',  # noqa: E501
         'failure_return_url': 'failure_return_url',  # noqa: E501
         'cancel_return_url': 'cancel_return_url',  # noqa: E501
+        'pending_return_url': 'pending_return_url',  # noqa: E501
         'mobile_number': 'mobile_number',  # noqa: E501
         'redeem_points': 'redeem_points',  # noqa: E501
         'cashtag': 'cashtag',  # noqa: E501
@@ -165,6 +172,7 @@ class EWalletChannelProperties(ModelNormal):
             success_return_url (str): URL where the end-customer is redirected if the authorization is successful. [optional]  # noqa: E501
             failure_return_url (str): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cancel_return_url (str): URL where the end-customer is redirected if the authorization cancelled. [optional]  # noqa: E501
+            pending_return_url (str): URL where the end-customer is redirected if the authorization is pending. [optional]  # noqa: E501
             mobile_number (str): Mobile number of customer in E.164 format (e.g. +628123123123). For OVO one time payment use only.. [optional]  # noqa: E501
             redeem_points (str): REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.. [optional]  # noqa: E501
             cashtag (str): Available for JENIUSPAY only. [optional]  # noqa: E501
@@ -225,6 +233,7 @@ class EWalletChannelProperties(ModelNormal):
         success_return_url: str | None = None,
         failure_return_url: str | None = None,
         cancel_return_url: str | None = None,
+        pending_return_url: str | None = None,
         mobile_number: str | None = None,
         redeem_points: str | None = None,
         cashtag: str | None = None,
@@ -267,6 +276,7 @@ class EWalletChannelProperties(ModelNormal):
             success_return_url (str): URL where the end-customer is redirected if the authorization is successful. [optional]  # noqa: E501
             failure_return_url (str): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cancel_return_url (str): URL where the end-customer is redirected if the authorization cancelled. [optional]  # noqa: E501
+            pending_return_url (str): URL where the end-customer is redirected if the authorization is pending. [optional]  # noqa: E501
             mobile_number (str): Mobile number of customer in E.164 format (e.g. +628123123123). For OVO one time payment use only.. [optional]  # noqa: E501
             redeem_points (str): REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.. [optional]  # noqa: E501
             cashtag (str): Available for JENIUSPAY only. [optional]  # noqa: E501
@@ -307,6 +317,8 @@ class EWalletChannelProperties(ModelNormal):
             self.failure_return_url = failure_return_url
         if cancel_return_url is not None:
             self.cancel_return_url = cancel_return_url
+        if pending_return_url is not None:
+            self.pending_return_url = pending_return_url
         if mobile_number is not None:
             self.mobile_number = mobile_number
         if redeem_points is not None:

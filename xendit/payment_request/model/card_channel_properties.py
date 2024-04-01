@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.45.2
+    The version of the XENDIT API: 1.59.0
 """
 
 
@@ -94,6 +94,7 @@ class CardChannelProperties(ModelNormal):
             'failure_return_url': (str, none_type, none_type),  # noqa: E501
             'cardonfile_type': (str, none_type, none_type),  # noqa: E501
             'merchant_id_tag': (str, none_type),  # noqa: E501
+            'expires_at': (datetime, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -107,6 +108,7 @@ class CardChannelProperties(ModelNormal):
         'failure_return_url': 'failure_return_url',  # noqa: E501
         'cardonfile_type': 'cardonfile_type',  # noqa: E501
         'merchant_id_tag': 'merchant_id_tag',  # noqa: E501
+        'expires_at': 'expires_at',  # noqa: E501
     }
 
     read_only_vars = {
@@ -155,6 +157,7 @@ class CardChannelProperties(ModelNormal):
             failure_return_url (str, none_type): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cardonfile_type (str, none_type): Type of “credential-on-file” / “card-on-file” payment being made. Indicate that this payment uses a previously linked Payment Method for charging.. [optional]  # noqa: E501
             merchant_id_tag (str): Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use. [optional]  # noqa: E501
+            expires_at (datetime): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -214,6 +217,7 @@ class CardChannelProperties(ModelNormal):
         failure_return_url: str | None = None,
         cardonfile_type: str | None = None,
         merchant_id_tag: str | None = None,
+        expires_at: datetime | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """CardChannelProperties - a model defined in OpenAPI
@@ -255,6 +259,7 @@ class CardChannelProperties(ModelNormal):
             failure_return_url (str, none_type): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cardonfile_type (str, none_type): Type of “credential-on-file” / “card-on-file” payment being made. Indicate that this payment uses a previously linked Payment Method for charging.. [optional]  # noqa: E501
             merchant_id_tag (str): Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use. [optional]  # noqa: E501
+            expires_at (datetime): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -296,6 +301,8 @@ class CardChannelProperties(ModelNormal):
             self.cardonfile_type = cardonfile_type
         if merchant_id_tag is not None:
             self.merchant_id_tag = merchant_id_tag
+        if expires_at is not None:
+            self.expires_at = expires_at
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

@@ -10,8 +10,10 @@ docs/payment_request/CaptureList.md
 docs/payment_request/CaptureListResponse.md
 docs/payment_request/CaptureParameters.md
 docs/payment_request/Card.md
+docs/payment_request/CardChannelCode.md
 docs/payment_request/CardChannelProperties.md
 docs/payment_request/CardInformation.md
+docs/payment_request/CardParameters.md
 docs/payment_request/CardVerificationResults.md
 docs/payment_request/CardVerificationResultsThreeDSecure.md
 docs/payment_request/DirectDebit.md
@@ -62,6 +64,7 @@ docs/payment_request/PaymentRequestParametersChannelProperties.md
 docs/payment_request/PaymentRequestParametersChannelPropertiesAllOf.md
 docs/payment_request/PaymentRequestShippingInformation.md
 docs/payment_request/PaymentRequestStatus.md
+docs/payment_request/PaymentSimulation.md
 docs/payment_request/QRCode.md
 docs/payment_request/QRCodeChannelCode.md
 docs/payment_request/QRCodeChannelProperties.md
@@ -110,6 +113,7 @@ test/test_payment_request_parameters_channel_properties.py
 test/test_payment_request_parameters_channel_properties_all_of.py
 test/test_payment_request_shipping_information.py
 test/test_payment_request_status.py
+test/test_payment_simulation.py
 tmp/payment_request.api.py
 tmp/payment_request.model.py
 tox.ini
@@ -127,8 +131,10 @@ xendit/payment_request/model/capture_list.py
 xendit/payment_request/model/capture_list_response.py
 xendit/payment_request/model/capture_parameters.py
 xendit/payment_request/model/card.py
+xendit/payment_request/model/card_channel_code.py
 xendit/payment_request/model/card_channel_properties.py
 xendit/payment_request/model/card_information.py
+xendit/payment_request/model/card_parameters.py
 xendit/payment_request/model/card_verification_results.py
 xendit/payment_request/model/card_verification_results_three_d_secure.py
 xendit/payment_request/model/direct_debit.py
@@ -179,6 +185,7 @@ xendit/payment_request/model/payment_request_parameters_channel_properties.py
 xendit/payment_request/model/payment_request_parameters_channel_properties_all_of.py
 xendit/payment_request/model/payment_request_shipping_information.py
 xendit/payment_request/model/payment_request_status.py
+xendit/payment_request/model/payment_simulation.py
 xendit/payment_request/model/qr_code.py
 xendit/payment_request/model/qr_code_channel_code.py
 xendit/payment_request/model/qr_code_channel_properties.py

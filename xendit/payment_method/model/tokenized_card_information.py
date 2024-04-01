@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.91.2
+    The version of the XENDIT API: 2.99.0
 """
 
 
@@ -79,16 +79,18 @@ class TokenizedCardInformation(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'token_id': (str,),  # noqa: E501
-            'masked_card_number': (str,),  # noqa: E501
-            'expiry_month': (str,),  # noqa: E501
-            'expiry_year': (str,),  # noqa: E501
-            'fingerprint': (str,),  # noqa: E501
-            'type': (str,),  # noqa: E501
-            'network': (str,),  # noqa: E501
-            'country': (str,),  # noqa: E501
-            'issuer': (str,),  # noqa: E501
+            'token_id': (str, none_type),  # noqa: E501
+            'masked_card_number': (str, none_type),  # noqa: E501
             'cardholder_name': (str, none_type, none_type),  # noqa: E501
+            'expiry_month': (str, none_type),  # noqa: E501
+            'expiry_year': (str, none_type),  # noqa: E501
+            'fingerprint': (str, none_type),  # noqa: E501
+            'type': (str, none_type),  # noqa: E501
+            'network': (str, none_type),  # noqa: E501
+            'country': (str, none_type),  # noqa: E501
+            'issuer': (str, none_type),  # noqa: E501
+            'card_number': (str, none_type),  # noqa: E501
+            'one_time_token': (str, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -99,6 +101,7 @@ class TokenizedCardInformation(ModelNormal):
     attribute_map = {
         'token_id': 'token_id',  # noqa: E501
         'masked_card_number': 'masked_card_number',  # noqa: E501
+        'cardholder_name': 'cardholder_name',  # noqa: E501
         'expiry_month': 'expiry_month',  # noqa: E501
         'expiry_year': 'expiry_year',  # noqa: E501
         'fingerprint': 'fingerprint',  # noqa: E501
@@ -106,7 +109,8 @@ class TokenizedCardInformation(ModelNormal):
         'network': 'network',  # noqa: E501
         'country': 'country',  # noqa: E501
         'issuer': 'issuer',  # noqa: E501
-        'cardholder_name': 'cardholder_name',  # noqa: E501
+        'card_number': 'card_number',  # noqa: E501
+        'one_time_token': 'one_time_token',  # noqa: E501
     }
 
     read_only_vars = {
@@ -116,19 +120,8 @@ class TokenizedCardInformation(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, token_id, masked_card_number, expiry_month, expiry_year, fingerprint, type, network, country, issuer, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(cls, *args, **kwargs):  # noqa: E501
         """TokenizedCardInformation - a model defined in OpenAPI
-
-        Args:
-            token_id (str):
-            masked_card_number (str): 1st 6 and last 4 digits of the card
-            expiry_month (str): Card expiry month in MM format
-            expiry_year (str): Card expiry month in YY format
-            fingerprint (str): Xendit-generated identifier for the unique card number. Multiple payment method objects can be created for the same account - e.g. if the user first creates a one-time payment request, and then later on creates a multiple-use payment method using the same account.   The fingerprint helps to identify the unique account being used.
-            type (str): Whether the card is a credit or debit card
-            network (str): Card network - VISA, MASTERCARD, JCB, AMEX, DISCOVER, BCA
-            country (str): Country where the card was issued ISO 3166-1 Alpha-2
-            issuer (str): Issuer of the card, most often an issuing bank For example, “BCA”, “MANDIRI”
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -161,7 +154,18 @@ class TokenizedCardInformation(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            token_id (str): [optional]  # noqa: E501
+            masked_card_number (str): 1st 6 and last 4 digits of the card. [optional]  # noqa: E501
             cardholder_name (str, none_type): Cardholder name is optional but recommended for 3DS 2 / AVS verification. [optional]  # noqa: E501
+            expiry_month (str): Card expiry month in MM format. [optional]  # noqa: E501
+            expiry_year (str): Card expiry month in YY format. [optional]  # noqa: E501
+            fingerprint (str): Xendit-generated identifier for the unique card number. Multiple payment method objects can be created for the same account - e.g. if the user first creates a one-time payment request, and then later on creates a multiple-use payment method using the same account.   The fingerprint helps to identify the unique account being used.. [optional]  # noqa: E501
+            type (str): Whether the card is a credit or debit card. [optional]  # noqa: E501
+            network (str): Card network - VISA, MASTERCARD, JCB, AMEX, DISCOVER, BCA. [optional]  # noqa: E501
+            country (str): Country where the card was issued ISO 3166-1 Alpha-2. [optional]  # noqa: E501
+            issuer (str): Issuer of the card, most often an issuing bank For example, “BCA”, “MANDIRI”. [optional]  # noqa: E501
+            card_number (str): [optional]  # noqa: E501
+            one_time_token (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -195,15 +199,6 @@ class TokenizedCardInformation(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.token_id = token_id
-        self.masked_card_number = masked_card_number
-        self.expiry_month = expiry_month
-        self.expiry_year = expiry_year
-        self.fingerprint = fingerprint
-        self.type = type
-        self.network = network
-        self.country = country
-        self.issuer = issuer
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -225,30 +220,21 @@ class TokenizedCardInformation(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self,
-        token_id: str,
-        masked_card_number: str,
-        expiry_month: str,
-        expiry_year: str,
-        fingerprint: str,
-        type: str,
-        network: str,
-        country: str,
-        issuer: str,
+        token_id: str | None = None,
+        masked_card_number: str | None = None,
         cardholder_name: str | None = None,
+        expiry_month: str | None = None,
+        expiry_year: str | None = None,
+        fingerprint: str | None = None,
+        type: str | None = None,
+        network: str | None = None,
+        country: str | None = None,
+        issuer: str | None = None,
+        card_number: str | None = None,
+        one_time_token: str | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """TokenizedCardInformation - a model defined in OpenAPI
-
-        Args:
-            token_id (str):
-            masked_card_number (str): 1st 6 and last 4 digits of the card
-            expiry_month (str): Card expiry month in MM format
-            expiry_year (str): Card expiry month in YY format
-            fingerprint (str): Xendit-generated identifier for the unique card number. Multiple payment method objects can be created for the same account - e.g. if the user first creates a one-time payment request, and then later on creates a multiple-use payment method using the same account.   The fingerprint helps to identify the unique account being used.
-            type (str): Whether the card is a credit or debit card
-            network (str): Card network - VISA, MASTERCARD, JCB, AMEX, DISCOVER, BCA
-            country (str): Country where the card was issued ISO 3166-1 Alpha-2
-            issuer (str): Issuer of the card, most often an issuing bank For example, “BCA”, “MANDIRI”
 
 
         Keyword Args:
@@ -282,7 +268,18 @@ class TokenizedCardInformation(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            token_id (str): [optional]  # noqa: E501
+            masked_card_number (str): 1st 6 and last 4 digits of the card. [optional]  # noqa: E501
             cardholder_name (str, none_type): Cardholder name is optional but recommended for 3DS 2 / AVS verification. [optional]  # noqa: E501
+            expiry_month (str): Card expiry month in MM format. [optional]  # noqa: E501
+            expiry_year (str): Card expiry month in YY format. [optional]  # noqa: E501
+            fingerprint (str): Xendit-generated identifier for the unique card number. Multiple payment method objects can be created for the same account - e.g. if the user first creates a one-time payment request, and then later on creates a multiple-use payment method using the same account.   The fingerprint helps to identify the unique account being used.. [optional]  # noqa: E501
+            type (str): Whether the card is a credit or debit card. [optional]  # noqa: E501
+            network (str): Card network - VISA, MASTERCARD, JCB, AMEX, DISCOVER, BCA. [optional]  # noqa: E501
+            country (str): Country where the card was issued ISO 3166-1 Alpha-2. [optional]  # noqa: E501
+            issuer (str): Issuer of the card, most often an issuing bank For example, “BCA”, “MANDIRI”. [optional]  # noqa: E501
+            card_number (str): [optional]  # noqa: E501
+            one_time_token (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -314,17 +311,30 @@ class TokenizedCardInformation(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.token_id = token_id
-        self.masked_card_number = masked_card_number
-        self.expiry_month = expiry_month
-        self.expiry_year = expiry_year
-        self.fingerprint = fingerprint
-        self.type = type
-        self.network = network
-        self.country = country
-        self.issuer = issuer
+        if token_id is not None:
+            self.token_id = token_id
+        if masked_card_number is not None:
+            self.masked_card_number = masked_card_number
         if cardholder_name is not None:
             self.cardholder_name = cardholder_name
+        if expiry_month is not None:
+            self.expiry_month = expiry_month
+        if expiry_year is not None:
+            self.expiry_year = expiry_year
+        if fingerprint is not None:
+            self.fingerprint = fingerprint
+        if type is not None:
+            self.type = type
+        if network is not None:
+            self.network = network
+        if country is not None:
+            self.country = country
+        if issuer is not None:
+            self.issuer = issuer
+        if card_number is not None:
+            self.card_number = card_number
+        if one_time_token is not None:
+            self.one_time_token = one_time_token
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
