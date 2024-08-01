@@ -17,6 +17,7 @@ from xendit.payment_request.model.card import Card
 from xendit.payment_request.model.card_channel_code import CardChannelCode
 from xendit.payment_request.model.card_channel_properties import CardChannelProperties
 from xendit.payment_request.model.card_information import CardInformation
+from xendit.payment_request.model.card_installment_configuration import CardInstallmentConfiguration
 from xendit.payment_request.model.card_parameters import CardParameters
 from xendit.payment_request.model.card_verification_results import CardVerificationResults
 from xendit.payment_request.model.card_verification_results_three_d_secure import CardVerificationResultsThreeDSecure

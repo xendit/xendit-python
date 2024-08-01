@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.59.0
+    The version of the XENDIT API: 1.70.0
 """
 
 
@@ -75,6 +75,11 @@ class PaymentRequestParametersChannelProperties(ModelComposed):
                 'pattern': r'^\S{1,255}:\/\/\S{0,1000}$',  # noqa: E501
             },
         },
+        ('pending_return_url',): {
+            'regex': {
+                'pattern': r'^\S{1,255}:\/\/\S{0,1000}$',  # noqa: E501
+            },
+        },
     }
 
     @cached_property
@@ -103,6 +108,7 @@ class PaymentRequestParametersChannelProperties(ModelComposed):
             'success_return_url': (str, none_type),  # noqa: E501
             'failure_return_url': (str, none_type),  # noqa: E501
             'cancel_return_url': (str, none_type),  # noqa: E501
+            'pending_return_url': (str, none_type),  # noqa: E501
             'redeem_points': (str, none_type),  # noqa: E501
             'require_auth': (bool, none_type),  # noqa: E501
             'merchant_id_tag': (str, none_type),  # noqa: E501
@@ -119,6 +125,7 @@ class PaymentRequestParametersChannelProperties(ModelComposed):
         'success_return_url': 'success_return_url',  # noqa: E501
         'failure_return_url': 'failure_return_url',  # noqa: E501
         'cancel_return_url': 'cancel_return_url',  # noqa: E501
+        'pending_return_url': 'pending_return_url',  # noqa: E501
         'redeem_points': 'redeem_points',  # noqa: E501
         'require_auth': 'require_auth',  # noqa: E501
         'merchant_id_tag': 'merchant_id_tag',  # noqa: E501
@@ -168,6 +175,7 @@ class PaymentRequestParametersChannelProperties(ModelComposed):
             success_return_url (str): URL where the end-customer is redirected if the authorization is successful. [optional]  # noqa: E501
             failure_return_url (str): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cancel_return_url (str): URL where the end-customer is redirected if the authorization cancelled. [optional]  # noqa: E501
+            pending_return_url (str): URL where the end-customer is redirected if the authorization is pending. [optional]  # noqa: E501
             redeem_points (str): REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.. [optional]  # noqa: E501
             require_auth (bool): Toggle used to require end-customer to input undergo OTP validation before completing a payment. OTP will always be required for transactions greater than 1,000,000 IDR. For BRI tokenized payment use only.. [optional]  # noqa: E501
             merchant_id_tag (str): Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use . [optional]  # noqa: E501
@@ -281,6 +289,7 @@ class PaymentRequestParametersChannelProperties(ModelComposed):
             success_return_url (str): URL where the end-customer is redirected if the authorization is successful. [optional]  # noqa: E501
             failure_return_url (str): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cancel_return_url (str): URL where the end-customer is redirected if the authorization cancelled. [optional]  # noqa: E501
+            pending_return_url (str): URL where the end-customer is redirected if the authorization is pending. [optional]  # noqa: E501
             redeem_points (str): REDEEM_NONE will not use any point, REDEEM_ALL will use all available points before cash balance is used. For OVO and ShopeePay tokenized payment use only.. [optional]  # noqa: E501
             require_auth (bool): Toggle used to require end-customer to input undergo OTP validation before completing a payment. OTP will always be required for transactions greater than 1,000,000 IDR. For BRI tokenized payment use only.. [optional]  # noqa: E501
             merchant_id_tag (str): Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use . [optional]  # noqa: E501

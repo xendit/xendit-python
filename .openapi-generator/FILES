@@ -13,6 +13,7 @@ docs/payment_request/Card.md
 docs/payment_request/CardChannelCode.md
 docs/payment_request/CardChannelProperties.md
 docs/payment_request/CardInformation.md
+docs/payment_request/CardInstallmentConfiguration.md
 docs/payment_request/CardParameters.md
 docs/payment_request/CardVerificationResults.md
 docs/payment_request/CardVerificationResultsThreeDSecure.md
@@ -134,6 +135,7 @@ xendit/payment_request/model/card.py
 xendit/payment_request/model/card_channel_code.py
 xendit/payment_request/model/card_channel_properties.py
 xendit/payment_request/model/card_information.py
+xendit/payment_request/model/card_installment_configuration.py
 xendit/payment_request/model/card_parameters.py
 xendit/payment_request/model/card_verification_results.py
 xendit/payment_request/model/card_verification_results_three_d_secure.py

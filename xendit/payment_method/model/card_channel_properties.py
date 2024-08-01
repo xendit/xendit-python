@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.99.0
+    The version of the XENDIT API: 2.128.0
 """
 
 
@@ -24,6 +24,8 @@ from xendit.model_utils import (  # noqa: F401
 )
 from xendit.exceptions import ApiAttributeError
 
+from xendit.payment_method.model.card_installment_configuration import CardInstallmentConfiguration
+globals()['CardInstallmentConfiguration'] = CardInstallmentConfiguration
 
 def lazy_import():
     pass
@@ -80,6 +82,7 @@ class CardChannelProperties(ModelNormal):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
+        lazy_import()
         return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = True
@@ -94,12 +97,15 @@ class CardChannelProperties(ModelNormal):
             openapi_types (dict): The key is attribute name
                 and the value is attribute type.
         """
+        lazy_import()
         return {
             'skip_three_d_secure': (bool, none_type, none_type),  # noqa: E501
             'success_return_url': (str, none_type, none_type),  # noqa: E501
             'failure_return_url': (str, none_type, none_type),  # noqa: E501
             'cardonfile_type': (str, none_type, none_type),  # noqa: E501
             'expires_at': (datetime, none_type),  # noqa: E501
+            'installment_configuration': (CardInstallmentConfiguration, none_type),  # noqa: E501
+            'merchant_id_tag': (str, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -113,6 +119,8 @@ class CardChannelProperties(ModelNormal):
         'failure_return_url': 'failure_return_url',  # noqa: E501
         'cardonfile_type': 'cardonfile_type',  # noqa: E501
         'expires_at': 'expires_at',  # noqa: E501
+        'installment_configuration': 'installment_configuration',  # noqa: E501
+        'merchant_id_tag': 'merchant_id_tag',  # noqa: E501
     }
 
     read_only_vars = {
@@ -161,6 +169,8 @@ class CardChannelProperties(ModelNormal):
             failure_return_url (str, none_type): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cardonfile_type (str, none_type): Type of “credential-on-file” / “card-on-file” payment being made. Indicate that this payment uses a previously linked Payment Method for charging.. [optional]  # noqa: E501
             expires_at (datetime): [optional]  # noqa: E501
+            installment_configuration (CardInstallmentConfiguration): [optional]  # noqa: E501
+            merchant_id_tag (str): Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -220,6 +230,8 @@ class CardChannelProperties(ModelNormal):
         failure_return_url: str | None = None,
         cardonfile_type: str | None = None,
         expires_at: datetime | None = None,
+        installment_configuration: CardInstallmentConfiguration | None = None,
+        merchant_id_tag: str | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """CardChannelProperties - a model defined in OpenAPI
@@ -261,6 +273,8 @@ class CardChannelProperties(ModelNormal):
             failure_return_url (str, none_type): URL where the end-customer is redirected if the authorization failed. [optional]  # noqa: E501
             cardonfile_type (str, none_type): Type of “credential-on-file” / “card-on-file” payment being made. Indicate that this payment uses a previously linked Payment Method for charging.. [optional]  # noqa: E501
             expires_at (datetime): [optional]  # noqa: E501
+            installment_configuration (CardInstallmentConfiguration): [optional]  # noqa: E501
+            merchant_id_tag (str): Tag for a Merchant ID that you want to associate this payment with. For merchants using their own MIDs to specify which MID they want to use. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -302,6 +316,10 @@ class CardChannelProperties(ModelNormal):
             self.cardonfile_type = cardonfile_type
         if expires_at is not None:
             self.expires_at = expires_at
+        if installment_configuration is not None:
+            self.installment_configuration = installment_configuration
+        if merchant_id_tag is not None:
+            self.merchant_id_tag = merchant_id_tag
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

@@ -50,6 +50,7 @@ Create Payment Request
 |-------------|:-------------:|:-------------:|-------------|
 | **idempotency_key** | **str**| |  |
 | **for_user_id** | **str**| |  |
+| **with_split_rule** | **str**| |  |
 | **payment_request_parameters** | [**PaymentRequestParameters**](payment_request/PaymentRequestParameters.md)| |  |
 
 ### Usage Example
@@ -74,6 +75,7 @@ api_client = xendit.ApiClient()
 api_instance = PaymentRequestApi(api_client)
 idempotency_key = "5f9a3fbd571a1c4068aa40ce" # str 
 for_user_id = "5f9a3fbd571a1c4068aa40cf" # str 
+with_split_rule = "splitru_c676f55d-a9e0-47f2-b672-77564d57a40b" # str 
 payment_request_parameters = {
   "reference_id" : "example-ref-1234",
   "amount" : 15000,
@@ -95,7 +97,7 @@ payment_request_parameters = {
 # and optional values
 try:
     # Create Payment Request
-    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, payment_request_parameters=payment_request_parameters)
+    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, with_split_rule=with_split_rule, payment_request_parameters=payment_request_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->create_payment_request: %s\n" % e)
@@ -121,6 +123,7 @@ api_client = xendit.ApiClient()
 api_instance = PaymentRequestApi(api_client)
 idempotency_key = "5f9a3fbd571a1c4068aa40ce" # str 
 for_user_id = "5f9a3fbd571a1c4068aa40cf" # str 
+with_split_rule = "splitru_c676f55d-a9e0-47f2-b672-77564d57a40b" # str 
 payment_request_parameters = {
   "reference_id" : "example-ref-1234",
   "amount" : 15000,
@@ -141,7 +144,7 @@ payment_request_parameters = {
 # and optional values
 try:
     # Create Payment Request
-    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, payment_request_parameters=payment_request_parameters)
+    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, with_split_rule=with_split_rule, payment_request_parameters=payment_request_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->create_payment_request: %s\n" % e)
@@ -167,6 +170,7 @@ api_client = xendit.ApiClient()
 api_instance = PaymentRequestApi(api_client)
 idempotency_key = "5f9a3fbd571a1c4068aa40ce" # str 
 for_user_id = "5f9a3fbd571a1c4068aa40cf" # str 
+with_split_rule = "splitru_c676f55d-a9e0-47f2-b672-77564d57a40b" # str 
 payment_request_parameters = {
   "reference_id" : "example-ref-1234",
   "currency" : "IDR",
@@ -193,7 +197,7 @@ payment_request_parameters = {
 # and optional values
 try:
     # Create Payment Request
-    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, payment_request_parameters=payment_request_parameters)
+    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, with_split_rule=with_split_rule, payment_request_parameters=payment_request_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->create_payment_request: %s\n" % e)
@@ -219,6 +223,7 @@ api_client = xendit.ApiClient()
 api_instance = PaymentRequestApi(api_client)
 idempotency_key = "5f9a3fbd571a1c4068aa40ce" # str 
 for_user_id = "5f9a3fbd571a1c4068aa40cf" # str 
+with_split_rule = "splitru_c676f55d-a9e0-47f2-b672-77564d57a40b" # str 
 payment_request_parameters = {
   "reference_id" : "example-ref-1234",
   "amount" : 1500,
@@ -233,7 +238,7 @@ payment_request_parameters = {
 # and optional values
 try:
     # Create Payment Request
-    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, payment_request_parameters=payment_request_parameters)
+    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, with_split_rule=with_split_rule, payment_request_parameters=payment_request_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->create_payment_request: %s\n" % e)
@@ -259,6 +264,7 @@ api_client = xendit.ApiClient()
 api_instance = PaymentRequestApi(api_client)
 idempotency_key = "5f9a3fbd571a1c4068aa40ce" # str 
 for_user_id = "5f9a3fbd571a1c4068aa40cf" # str 
+with_split_rule = "splitru_c676f55d-a9e0-47f2-b672-77564d57a40b" # str 
 payment_request_parameters = {
   "reference_id" : "example-ref-1234",
   "amount" : 15000,
@@ -273,7 +279,7 @@ payment_request_parameters = {
 # and optional values
 try:
     # Create Payment Request
-    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, payment_request_parameters=payment_request_parameters)
+    api_response = api_instance.create_payment_request(idempotency_key=idempotency_key, for_user_id=for_user_id, with_split_rule=with_split_rule, payment_request_parameters=payment_request_parameters)
     pprint(api_response)
 except xendit.XenditSdkException as e:
     print("Exception when calling PaymentRequestApi->create_payment_request: %s\n" % e)

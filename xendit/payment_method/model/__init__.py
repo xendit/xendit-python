@@ -13,6 +13,7 @@ from xendit.payment_method.model.billing_information import BillingInformation
 from xendit.payment_method.model.card import Card
 from xendit.payment_method.model.card_channel_code import CardChannelCode
 from xendit.payment_method.model.card_channel_properties import CardChannelProperties
+from xendit.payment_method.model.card_installment_configuration import CardInstallmentConfiguration
 from xendit.payment_method.model.card_parameters import CardParameters
 from xendit.payment_method.model.card_parameters_card_information import CardParametersCardInformation
 from xendit.payment_method.model.card_verification_results import CardVerificationResults

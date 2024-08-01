@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.99.0
+    The version of the XENDIT API: 2.128.0
 """
 
 
@@ -64,6 +64,9 @@ class PaymentMethodUpdateParameters(ModelNormal):
     }
 
     validations = {
+        ('reference_id',): {
+            'max_length': 255,
+        },
     }
 
     @cached_property

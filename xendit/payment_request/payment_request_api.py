@@ -3,7 +3,7 @@
 
     This API is used for Payment Requests  # noqa: E501
 
-    The version of the OpenAPI document: 1.59.0
+    The version of the OpenAPI document: 1.70.0
 """
 
 import re  # noqa: F401
@@ -45,6 +45,7 @@ class PaymentRequestApi(object):
                 'all': [
                     'idempotency_key',
                     'for_user_id',
+                    'with_split_rule',
                     'payment_request_parameters',
                 ],
                 'required': [],
@@ -65,16 +66,20 @@ class PaymentRequestApi(object):
                         (str,),
                     'for_user_id':
                         (str,),
+                    'with_split_rule':
+                        (str,),
                     'payment_request_parameters':
                         (PaymentRequestParameters,),
                 },
                 'attribute_map': {
                     'idempotency_key': 'idempotency-key',
                     'for_user_id': 'for-user-id',
+                    'with_split_rule': 'with-split-rule',
                 },
                 'location_map': {
                     'idempotency_key': 'header',
                     'for_user_id': 'header',
+                    'with_split_rule': 'header',
                     'payment_request_parameters': 'body',
                 },
                 'collection_format_map': {
@@ -511,6 +516,7 @@ class PaymentRequestApi(object):
         self,
         idempotency_key: Optional[str] = None,
         for_user_id: Optional[str] = None,
+        with_split_rule: Optional[str] = None,
         payment_request_parameters: Optional[PaymentRequestParameters] = None,
         **kwargs
     ) -> PaymentRequest:
@@ -520,13 +526,14 @@ class PaymentRequestApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_payment_request(idempotency_key, for_user_id, payment_request_parameters, async_req=True)
+        >>> thread = api.create_payment_request(idempotency_key, for_user_id, with_split_rule, payment_request_parameters, async_req=True)
         >>> result = thread.get()
 
 
         Keyword Args:
             idempotency_key (str): [optional]
             for_user_id (str): [optional]
+            with_split_rule (str): [optional]
             payment_request_parameters (PaymentRequestParameters): [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
@@ -593,6 +600,8 @@ class PaymentRequestApi(object):
             kwargs['idempotency_key'] = idempotency_key
         if for_user_id is not None:
             kwargs['for_user_id'] = for_user_id
+        if with_split_rule is not None:
+            kwargs['with_split_rule'] = with_split_rule
         if payment_request_parameters is not None:
             kwargs['payment_request_parameters'] = payment_request_parameters
         return self.create_payment_request_endpoint.call_with_http_info(**kwargs)

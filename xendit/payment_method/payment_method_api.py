@@ -3,7 +3,7 @@
 
     This API is used for Payment Method Service v2  # noqa: E501
 
-    The version of the OpenAPI document: 2.99.0
+    The version of the OpenAPI document: 2.128.0
 """
 
 import re  # noqa: F401

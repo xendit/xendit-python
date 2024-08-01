@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.59.0
+    The version of the XENDIT API: 1.70.0
 """
 
 
@@ -74,11 +74,11 @@ class ApiClient(object):
 
         # XENDIT headers
         self.default_headers['xendit-lib'] = 'python'
-        self.default_headers['xendit-lib-ver'] = '5.0.0'
+        self.default_headers['xendit-lib-ver'] = '6.0.0'
             
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/5.0.0/python'
+        self.user_agent = 'OpenAPI-Generator/6.0.0/python'
 
     def __enter__(self):
         return self

@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 2.99.0
+    The version of the XENDIT API: 2.128.0
 """
 
 
@@ -57,6 +57,7 @@ class QRCodeChannelCode(ModelSimple):
             'PROMPTPAY': "PROMPTPAY",
             'LINKAJA': "LINKAJA",
             'XENDIT': "XENDIT",
+            'QRPH': "QRPH",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -109,10 +110,10 @@ class QRCodeChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", ]  # noqa: E501
+            args[0] (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", "QRPH", ]  # noqa: E501
 
         Keyword Args:
-            value (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", ]  # noqa: E501
+            value (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", "QRPH", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -205,10 +206,10 @@ class QRCodeChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", ]  # noqa: E501
+            args[0] (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", "QRPH", ]  # noqa: E501
 
         Keyword Args:
-            value (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", ]  # noqa: E501
+            value (str): QR Code Channel Code., must be one of ["QRIS", "DANA", "RCBC", "PROMPTPAY", "LINKAJA", "XENDIT", "QRPH", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

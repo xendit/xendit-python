@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.59.0
+    The version of the XENDIT API: 1.70.0
 """
 
 
@@ -50,7 +50,13 @@ class CardChannelCode(ModelSimple):
 
     allowed_values = {
         ('value',): {
+            'BAY_CARD_INSTALLMENT': "BAY_CARD_INSTALLMENT",
+            'BBL_CARD_INSTALLMENT': "BBL_CARD_INSTALLMENT",
             'GPN': "GPN",
+            'KBANK_CARD_INSTALLMENT': "KBANK_CARD_INSTALLMENT",
+            'KTB_CARD_INSTALLMENT': "KTB_CARD_INSTALLMENT",
+            'SCB_CARD_INSTALLMENT': "SCB_CARD_INSTALLMENT",
+            'TTB_CARD_INSTALLMENT': "TTB_CARD_INSTALLMENT",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -103,10 +109,10 @@ class CardChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Card Channel Code. if omitted defaults to "GPN", must be one of ["GPN", ]  # noqa: E501
+            args[0] (str): Card Channel Code., must be one of ["BAY_CARD_INSTALLMENT", "BBL_CARD_INSTALLMENT", "GPN", "KBANK_CARD_INSTALLMENT", "KTB_CARD_INSTALLMENT", "SCB_CARD_INSTALLMENT", "TTB_CARD_INSTALLMENT", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Card Channel Code. if omitted defaults to "GPN", must be one of ["GPN", ]  # noqa: E501
+            value (str): Card Channel Code., must be one of ["BAY_CARD_INSTALLMENT", "BBL_CARD_INSTALLMENT", "GPN", "KBANK_CARD_INSTALLMENT", "KTB_CARD_INSTALLMENT", "SCB_CARD_INSTALLMENT", "TTB_CARD_INSTALLMENT", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -147,7 +153,11 @@ class CardChannelCode(ModelSimple):
             args = list(args)
             value = args.pop(0)
         else:
-            value = "GPN"
+            raise ApiTypeError(
+                "value is required, but not passed in args or kwargs and doesn't have default",
+                path_to_item=_path_to_item,
+                valid_classes=(self.__class__,),
+            )
 
         _check_type = kwargs.pop('_check_type', True)
         _spec_property_naming = kwargs.pop('_spec_property_naming', False)
@@ -195,10 +205,10 @@ class CardChannelCode(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Card Channel Code. if omitted defaults to "GPN", must be one of ["GPN", ]  # noqa: E501
+            args[0] (str): Card Channel Code., must be one of ["BAY_CARD_INSTALLMENT", "BBL_CARD_INSTALLMENT", "GPN", "KBANK_CARD_INSTALLMENT", "KTB_CARD_INSTALLMENT", "SCB_CARD_INSTALLMENT", "TTB_CARD_INSTALLMENT", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Card Channel Code. if omitted defaults to "GPN", must be one of ["GPN", ]  # noqa: E501
+            value (str): Card Channel Code., must be one of ["BAY_CARD_INSTALLMENT", "BBL_CARD_INSTALLMENT", "GPN", "KBANK_CARD_INSTALLMENT", "KTB_CARD_INSTALLMENT", "SCB_CARD_INSTALLMENT", "TTB_CARD_INSTALLMENT", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -241,7 +251,11 @@ class CardChannelCode(ModelSimple):
             args = list(args)
             value = args.pop(0)
         else:
-            value = "GPN"
+            raise ApiTypeError(
+                "value is required, but not passed in args or kwargs and doesn't have default",
+                path_to_item=_path_to_item,
+                valid_classes=(self.__class__,),
+            )
 
         _check_type = kwargs.pop('_check_type', True)
         _spec_property_naming = kwargs.pop('_spec_property_naming', False)
