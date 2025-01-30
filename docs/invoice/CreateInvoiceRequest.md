@@ -22,11 +22,12 @@ An object representing for an invoice creation request.
 | **should_authenticate_credit_card** | **bool** | | Indicates whether credit card authentication is required.  |  |
 | **currency** | **str** | | The currency of the invoice.  |  |
 | **reminder_time** | **float** | | The reminder time.  |  |
-| **local** | **str** | | The local.  |  |
+| **locale** | **str** | | The default language to display.  |  |
 | **reminder_time_unit** | **str** | | The unit of the reminder time.  |  |
 | **items** | [**[InvoiceItem]**](InvoiceItem.md) | | An array of items included in the invoice.  |  |
 | **fees** | [**[InvoiceFee]**](InvoiceFee.md) | | An array of fees associated with the invoice.  |  |
 | **channel_properties** | [**ChannelProperties**](ChannelProperties.md) | |   |  |
+| **metadata** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | | A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.  |  |
 
 
 [[Back to README]](../../README.md)

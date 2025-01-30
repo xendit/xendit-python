@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.7.6
+    The version of the XENDIT API: 1.8.7
 """
 
 
@@ -143,6 +143,7 @@ class Invoice(ModelNormal):
             'customer_notification_preference': (NotificationPreference, none_type),  # noqa: E501
             'fees': ([InvoiceFee], none_type),  # noqa: E501
             'channel_properties': (ChannelProperties, none_type),  # noqa: E501
+            'metadata': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -185,6 +186,7 @@ class Invoice(ModelNormal):
         'customer_notification_preference': 'customer_notification_preference',  # noqa: E501
         'fees': 'fees',  # noqa: E501
         'channel_properties': 'channel_properties',  # noqa: E501
+        'metadata': 'metadata',  # noqa: E501
     }
 
     read_only_vars = {
@@ -264,6 +266,7 @@ class Invoice(ModelNormal):
             customer_notification_preference (NotificationPreference): [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
             channel_properties (ChannelProperties): [optional]  # noqa: E501
+            metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -369,6 +372,7 @@ class Invoice(ModelNormal):
         customer_notification_preference: NotificationPreference | None = None,
         fees: list | None = None,
         channel_properties: ChannelProperties | None = None,
+        metadata: dict | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """Invoice - a model defined in OpenAPI
@@ -441,6 +445,7 @@ class Invoice(ModelNormal):
             customer_notification_preference (NotificationPreference): [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
             channel_properties (ChannelProperties): [optional]  # noqa: E501
+            metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -523,6 +528,8 @@ class Invoice(ModelNormal):
             self.fees = fees
         if channel_properties is not None:
             self.channel_properties = channel_properties
+        if metadata is not None:
+            self.metadata = metadata
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

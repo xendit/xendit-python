@@ -16,6 +16,8 @@ from xendit.invoice.model.bank import Bank
 from xendit.invoice.model.bank_code import BankCode
 from xendit.invoice.model.channel_properties import ChannelProperties
 from xendit.invoice.model.channel_properties_cards import ChannelPropertiesCards
+from xendit.invoice.model.channel_properties_cards_installment_configuration import ChannelPropertiesCardsInstallmentConfiguration
+from xendit.invoice.model.channel_properties_cards_installment_configuration_allowed_terms_inner import ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner
 from xendit.invoice.model.create_invoice_request import CreateInvoiceRequest
 from xendit.invoice.model.customer_object import CustomerObject
 from xendit.invoice.model.direct_debit import DirectDebit

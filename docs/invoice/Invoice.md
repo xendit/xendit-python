@@ -40,6 +40,7 @@ An object representing details for an invoice.
 | **customer_notification_preference** | [**NotificationPreference**](NotificationPreference.md) | |   |  |
 | **fees** | [**[InvoiceFee]**](InvoiceFee.md) | | An array of fees associated with the invoice.  |  |
 | **channel_properties** | [**ChannelProperties**](ChannelProperties.md) | |   |  |
+| **metadata** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | | A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.  |  |
 
 
 [[Back to README]](../../README.md)

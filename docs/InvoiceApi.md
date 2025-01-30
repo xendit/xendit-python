@@ -124,7 +124,7 @@ create_invoice_request = CreateInvoiceRequest(
         should_authenticate_credit_card=True,
         currency="currency_example",
         reminder_time=3.14,
-        local="local_example",
+        locale="locale_example",
         reminder_time_unit="reminder_time_unit_example",
         items=[
             InvoiceItem(
@@ -147,8 +147,20 @@ create_invoice_request = CreateInvoiceRequest(
                 allowed_bins=[
                     "allowed_bins_example",
                 ],
+                installment_configuration=ChannelPropertiesCardsInstallmentConfiguration(
+                    allow_full_payment=True,
+                    allowed_terms=[
+                        ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(
+                            issuer="issuer_example",
+                            allowed_terms=[
+                                3.14,
+                            ],
+                        ),
+                    ],
+                ),
             ),
         ),
+        metadata={},
     ) # CreateInvoiceRequest 
 for_user_id = "62efe4c33e45694d63f585f0" # str | Business ID of the sub-account merchant (XP feature)
 

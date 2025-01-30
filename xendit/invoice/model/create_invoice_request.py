@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.7.6
+    The version of the XENDIT API: 1.8.7
 """
 
 
@@ -66,6 +66,9 @@ class CreateInvoiceRequest(ModelNormal):
     }
 
     validations = {
+        ('metadata',): {
+            'max_properties': 50,
+        },
     }
 
     @cached_property
@@ -107,11 +110,12 @@ class CreateInvoiceRequest(ModelNormal):
             'should_authenticate_credit_card': (bool, none_type),  # noqa: E501
             'currency': (str, none_type),  # noqa: E501
             'reminder_time': (float, none_type),  # noqa: E501
-            'local': (str, none_type),  # noqa: E501
+            'locale': (str, none_type),  # noqa: E501
             'reminder_time_unit': (str, none_type),  # noqa: E501
             'items': ([InvoiceItem], none_type),  # noqa: E501
             'fees': ([InvoiceFee], none_type),  # noqa: E501
             'channel_properties': (ChannelProperties, none_type),  # noqa: E501
+            'metadata': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -136,11 +140,12 @@ class CreateInvoiceRequest(ModelNormal):
         'should_authenticate_credit_card': 'should_authenticate_credit_card',  # noqa: E501
         'currency': 'currency',  # noqa: E501
         'reminder_time': 'reminder_time',  # noqa: E501
-        'local': 'local',  # noqa: E501
+        'locale': 'locale',  # noqa: E501
         'reminder_time_unit': 'reminder_time_unit',  # noqa: E501
         'items': 'items',  # noqa: E501
         'fees': 'fees',  # noqa: E501
         'channel_properties': 'channel_properties',  # noqa: E501
+        'metadata': 'metadata',  # noqa: E501
     }
 
     read_only_vars = {
@@ -202,11 +207,12 @@ class CreateInvoiceRequest(ModelNormal):
             should_authenticate_credit_card (bool): Indicates whether credit card authentication is required.. [optional]  # noqa: E501
             currency (str): The currency of the invoice.. [optional]  # noqa: E501
             reminder_time (float): The reminder time.. [optional]  # noqa: E501
-            local (str): The local.. [optional]  # noqa: E501
+            locale (str): The default language to display.. [optional]  # noqa: E501
             reminder_time_unit (str): The unit of the reminder time.. [optional]  # noqa: E501
             items ([InvoiceItem]): An array of items included in the invoice.. [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
             channel_properties (ChannelProperties): [optional]  # noqa: E501
+            metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -279,11 +285,12 @@ class CreateInvoiceRequest(ModelNormal):
         should_authenticate_credit_card: bool | None = None,
         currency: str | None = None,
         reminder_time: float | None = None,
-        local: str | None = None,
+        locale: str | None = None,
         reminder_time_unit: str | None = None,
         items: list | None = None,
         fees: list | None = None,
         channel_properties: ChannelProperties | None = None,
+        metadata: dict | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """CreateInvoiceRequest - a model defined in OpenAPI
@@ -338,11 +345,12 @@ class CreateInvoiceRequest(ModelNormal):
             should_authenticate_credit_card (bool): Indicates whether credit card authentication is required.. [optional]  # noqa: E501
             currency (str): The currency of the invoice.. [optional]  # noqa: E501
             reminder_time (float): The reminder time.. [optional]  # noqa: E501
-            local (str): The local.. [optional]  # noqa: E501
+            locale (str): The default language to display.. [optional]  # noqa: E501
             reminder_time_unit (str): The unit of the reminder time.. [optional]  # noqa: E501
             items ([InvoiceItem]): An array of items included in the invoice.. [optional]  # noqa: E501
             fees ([InvoiceFee]): An array of fees associated with the invoice.. [optional]  # noqa: E501
             channel_properties (ChannelProperties): [optional]  # noqa: E501
+            metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A free-format JSON for additional information that you may use. Object can be up to 50 keys, with key names up to 40 characters long and values up to 500 characters long.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -404,8 +412,8 @@ class CreateInvoiceRequest(ModelNormal):
             self.currency = currency
         if reminder_time is not None:
             self.reminder_time = reminder_time
-        if local is not None:
-            self.local = local
+        if locale is not None:
+            self.locale = locale
         if reminder_time_unit is not None:
             self.reminder_time_unit = reminder_time_unit
         if items is not None:
@@ -414,6 +422,8 @@ class CreateInvoiceRequest(ModelNormal):
             self.fees = fees
         if channel_properties is not None:
             self.channel_properties = channel_properties
+        if metadata is not None:
+            self.metadata = metadata
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

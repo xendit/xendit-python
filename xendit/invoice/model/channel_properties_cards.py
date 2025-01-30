@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.7.6
+    The version of the XENDIT API: 1.8.7
 """
 
 
@@ -24,6 +24,8 @@ from xendit.model_utils import (  # noqa: F401
 )
 from xendit.exceptions import ApiAttributeError
 
+from xendit.invoice.model.channel_properties_cards_installment_configuration import ChannelPropertiesCardsInstallmentConfiguration
+globals()['ChannelPropertiesCardsInstallmentConfiguration'] = ChannelPropertiesCardsInstallmentConfiguration
 
 def lazy_import():
     pass
@@ -64,6 +66,7 @@ class ChannelPropertiesCards(ModelNormal):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
+        lazy_import()
         return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
@@ -78,8 +81,10 @@ class ChannelPropertiesCards(ModelNormal):
             openapi_types (dict): The key is attribute name
                 and the value is attribute type.
         """
+        lazy_import()
         return {
             'allowed_bins': ([str], none_type),  # noqa: E501
+            'installment_configuration': (ChannelPropertiesCardsInstallmentConfiguration, none_type),  # noqa: E501
         }
 
     @cached_property
@@ -89,6 +94,7 @@ class ChannelPropertiesCards(ModelNormal):
 
     attribute_map = {
         'allowed_bins': 'allowed_bins',  # noqa: E501
+        'installment_configuration': 'installment_configuration',  # noqa: E501
     }
 
     read_only_vars = {
@@ -133,6 +139,7 @@ class ChannelPropertiesCards(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             allowed_bins ([str]): An array of allowed BINs (6 or 8 digits) for credit card payments.. [optional]  # noqa: E501
+            installment_configuration (ChannelPropertiesCardsInstallmentConfiguration): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -188,6 +195,7 @@ class ChannelPropertiesCards(ModelNormal):
     @convert_js_args_to_python_args
     def __init__(self,
         allowed_bins: list | None = None,
+        installment_configuration: ChannelPropertiesCardsInstallmentConfiguration | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """ChannelPropertiesCards - a model defined in OpenAPI
@@ -225,6 +233,7 @@ class ChannelPropertiesCards(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             allowed_bins ([str]): An array of allowed BINs (6 or 8 digits) for credit card payments.. [optional]  # noqa: E501
+            installment_configuration (ChannelPropertiesCardsInstallmentConfiguration): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -258,6 +267,8 @@ class ChannelPropertiesCards(ModelNormal):
 
         if allowed_bins is not None:
             self.allowed_bins = allowed_bins
+        if installment_configuration is not None:
+            self.installment_configuration = installment_configuration
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

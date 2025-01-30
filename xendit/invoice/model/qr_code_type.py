@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.7.6
+    The version of the XENDIT API: 1.8.7
 """
 
 
@@ -52,6 +52,7 @@ class QrCodeType(ModelSimple):
         ('value',): {
             'QRIS': "QRIS",
             'PROMPTPAY': "PROMPTPAY",
+            'QRPH': "QRPH",
             'XENDIT_ENUM_DEFAULT_FALLBACK': 'UNKNOWN_ENUM_VALUE',
         },
     }
@@ -104,10 +105,10 @@ class QrCodeType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", ]  # noqa: E501
+            args[0] (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", "QRPH", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", ]  # noqa: E501
+            value (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", "QRPH", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -200,10 +201,10 @@ class QrCodeType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", ]  # noqa: E501
+            args[0] (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", "QRPH", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", ]  # noqa: E501
+            value (str): Representing the available QR Code channels used for invoice-related transactions.., must be one of ["QRIS", "PROMPTPAY", "QRPH", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
