@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.8.7
+    The version of the XENDIT API: 1.8.8
 """
 
 
@@ -80,7 +80,7 @@ class ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(ModelNorma
         """
         return {
             'issuer': (str, none_type),  # noqa: E501
-            'allowed_terms': ([float], none_type),  # noqa: E501
+            'terms': ([float], none_type),  # noqa: E501
         }
 
     @cached_property
@@ -90,7 +90,7 @@ class ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(ModelNorma
 
     attribute_map = {
         'issuer': 'issuer',  # noqa: E501
-        'allowed_terms': 'allowed_terms',  # noqa: E501
+        'terms': 'terms',  # noqa: E501
     }
 
     read_only_vars = {
@@ -135,7 +135,7 @@ class ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(ModelNorma
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             issuer (str): The bank code of the installment provider / issuer. [optional]  # noqa: E501
-            allowed_terms ([float]): An array containing list of installment tenor available to choose. [optional]  # noqa: E501
+            terms ([float]): An array containing list of installment tenor available to choose. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -191,7 +191,7 @@ class ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(ModelNorma
     @convert_js_args_to_python_args
     def __init__(self,
         issuer: str | None = None,
-        allowed_terms: list | None = None,
+        terms: list | None = None,
         *args, **kwargs
     ):  # noqa: E501
         """ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner - a model defined in OpenAPI
@@ -229,7 +229,7 @@ class ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(ModelNorma
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             issuer (str): The bank code of the installment provider / issuer. [optional]  # noqa: E501
-            allowed_terms ([float]): An array containing list of installment tenor available to choose. [optional]  # noqa: E501
+            terms ([float]): An array containing list of installment tenor available to choose. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -263,8 +263,8 @@ class ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(ModelNorma
 
         if issuer is not None:
             self.issuer = issuer
-        if allowed_terms is not None:
-            self.allowed_terms = allowed_terms
+        if terms is not None:
+            self.terms = terms
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

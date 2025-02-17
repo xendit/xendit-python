@@ -3,7 +3,7 @@
 
     xendit-invoice-service descriptions  # noqa: E501
 
-    The version of the OpenAPI document: 1.8.7
+    The version of the OpenAPI document: 1.8.8
 """
 
 import re  # noqa: F401

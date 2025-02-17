@@ -6,7 +6,7 @@
 | Name | Type | Required | Description | Examples |
 |------------|:-------------:|:-------------:|-------------|:-------------:|
 | **issuer** | **str** | | The bank code of the installment provider / issuer  |  |
-| **allowed_terms** | **[float]** | | An array containing list of installment tenor available to choose  |  |
+| **terms** | **[float]** | | An array containing list of installment tenor available to choose  |  |
 
 
 [[Back to README]](../../README.md)

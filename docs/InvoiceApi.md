@@ -152,7 +152,7 @@ create_invoice_request = CreateInvoiceRequest(
                     allowed_terms=[
                         ChannelPropertiesCardsInstallmentConfigurationAllowedTermsInner(
                             issuer="issuer_example",
-                            allowed_terms=[
+                            terms=[
                                 3.14,
                             ],
                         ),
