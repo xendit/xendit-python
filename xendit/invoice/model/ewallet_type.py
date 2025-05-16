@@ -1,5 +1,5 @@
 """
-    The version of the XENDIT API: 1.8.8
+    The version of the XENDIT API: 1.9.0
 """
 
 
@@ -51,6 +51,7 @@ class EwalletType(ModelSimple):
     allowed_values = {
         ('value',): {
             'OVO': "OVO",
+            'GOPAY': "GOPAY",
             'DANA': "DANA",
             'LINKAJA': "LINKAJA",
             'PAYMAYA': "PAYMAYA",
@@ -121,10 +122,10 @@ class EwalletType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
+            args[0] (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "GOPAY", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
+            value (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "GOPAY", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -217,10 +218,10 @@ class EwalletType(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
+            args[0] (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "GOPAY", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
+            value (str): Representing the available eWallet channels used for invoice-related transactions.., must be one of ["OVO", "GOPAY", "DANA", "LINKAJA", "PAYMAYA", "SHOPEEPAY", "GCASH", "GRABPAY", "ASTRAPAY", "NEXCASH", "JENIUSPAY", "MOMO", "ZALOPAY", "VIETTELPAY", "VNPTWALLET", "APPOTA", "LINEPAY", "TRUEMONEY", "WECHATPAY", "TOUCHNGO", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
