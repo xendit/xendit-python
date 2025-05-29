@@ -5,7 +5,7 @@
 """
 
 
-__version__ = "6.4.0"
+__version__ = "7.0.0"
 
 # import ApiClient
 from xendit.api_client import ApiClient

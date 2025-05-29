@@ -98,7 +98,7 @@ class CreateInvoiceRequest(ModelNormal):
             'amount': (float,),  # noqa: E501
             'payer_email': (str, none_type),  # noqa: E501
             'description': (str, none_type),  # noqa: E501
-            'invoice_duration': (str, none_type),  # noqa: E501
+            'invoice_duration': (float, none_type),  # noqa: E501
             'callback_virtual_account_id': (str, none_type),  # noqa: E501
             'should_send_email': (bool, none_type),  # noqa: E501
             'customer': (CustomerObject, none_type),  # noqa: E501
@@ -195,7 +195,7 @@ class CreateInvoiceRequest(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             payer_email (str): The email address of the payer.. [optional]  # noqa: E501
             description (str): A description of the payment.. [optional]  # noqa: E501
-            invoice_duration (str): The duration of the invoice.. [optional]  # noqa: E501
+            invoice_duration (float): The duration of the invoice in seconds.. [optional]  # noqa: E501
             callback_virtual_account_id (str): The ID of the callback virtual account.. [optional]  # noqa: E501
             should_send_email (bool): Indicates whether email notifications should be sent.. [optional]  # noqa: E501
             customer (CustomerObject): [optional]  # noqa: E501
@@ -273,7 +273,7 @@ class CreateInvoiceRequest(ModelNormal):
         amount: float,
         payer_email: str | None = None,
         description: str | None = None,
-        invoice_duration: str | None = None,
+        invoice_duration: float | None = None,
         callback_virtual_account_id: str | None = None,
         should_send_email: bool | None = None,
         customer: CustomerObject | None = None,
@@ -333,7 +333,7 @@ class CreateInvoiceRequest(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             payer_email (str): The email address of the payer.. [optional]  # noqa: E501
             description (str): A description of the payment.. [optional]  # noqa: E501
-            invoice_duration (str): The duration of the invoice.. [optional]  # noqa: E501
+            invoice_duration (float): The duration of the invoice in seconds.. [optional]  # noqa: E501
             callback_virtual_account_id (str): The ID of the callback virtual account.. [optional]  # noqa: E501
             should_send_email (bool): Indicates whether email notifications should be sent.. [optional]  # noqa: E501
             customer (CustomerObject): [optional]  # noqa: E501
